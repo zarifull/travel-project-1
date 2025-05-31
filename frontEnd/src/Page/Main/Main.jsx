@@ -35,7 +35,7 @@ function Main() {
         <Route path="/tour-card" element={<TourCard />} />
         <Route path="/tour-details/:id" element={<TourDetails tours={tours} />} />
         <Route path="/edit-tour/:id" element={<EditTour tours={tours} />} />
-        <Route path="/delete-tour/:id" element={<DeleteTour tours={tours} />} />
+        {/* <Route path="/delete-tour/:id" element={<DeleteTour tours={tours} />} /> */}
       </Routes>
     </div>
   );

@@ -230,6 +230,7 @@ const AddTour = () => {
               </li>
             ))}
               </ul>
+              {errors.startDates&& <p className="error-message addTour-error">{errors.startDates}</p>}
 
             </div>
 
@@ -317,6 +318,8 @@ const AddTour = () => {
                 </li>
               ))}
             </ul>
+            {errors.includes && <p className="error-message addTour-error">{errors.includes}</p>}
+
           </div>
 
 

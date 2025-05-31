@@ -1,51 +1,122 @@
-.edit-tour-container {
-    max-width: 600px;
-    margin: auto;
-    padding: 2rem;
-    background: #fff;
-    box-shadow: 0 0 12px rgba(0,0,0,0.1);
-    border-radius: 10px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+.edit-tour {
+  padding: 40px 20px;
+  background-color: #f7f7f7;
+  min-height: 100vh;
+  font-family: "Poppins";
+}
+
+.edit-tour .container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.edit-tour h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 28px;
+  color:#f08c00;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-form label {
+  margin: 10px 0 4px;
+  font-weight: 600;
+  color: #f08c00;
+}
+
+.edit-form input,
+.edit-form textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 0.5px solid #f08c00;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+  color: #0056b3;
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus {
+  border-color: #007bff;
+}
+
+.edit-form button {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #f08c00;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.edit-form button:hover {
+  background-color: #007bff;
+  color: #f7f7f7;
+}
+
+.success {
+  margin-top: 15px;
+  color: #f7f7f7;
+  font-weight: bold;
+}
+
+.error {
+  margin-top: 15px;
+  color: red;
+  font-weight: bold;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}
+
+/* ðŸ“± Responsive styles */
+@media (max-width: 768px) {
+  .edit-tour .container {
+    padding: 20px;
   }
-  
-  .edit-form label {
-    display: block;
-    margin-top: 1rem;
-    font-weight: bold;
-  }
-  
+
   .edit-form input,
   .edit-form textarea {
-    width: 100%;
-    padding: 0.7rem;
-    margin-top: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    font-size: 15px;
   }
-  
+
+  .edit-tour h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .edit-tour .container {
+    padding: 15px;
+  }
+
+  .edit-form input,
+  .edit-form textarea {
+    font-size: 14px;
+  }
+
   .edit-form button {
-    margin-top: 1.5rem;
-    padding: 0.8rem 1.5rem;
-    background-color: #0077ff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
+    padding: 10px;
+    font-size: 15px;
   }
-  
-  .success {
-    color: green;
-    margin-top: 1rem;
+
+  .edit-tour h2 {
+    font-size: 22px;
   }
-  
-  .error {
-    color: red;
-    margin-top: 1rem;
-  }
-  
-  .loading {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #555;
-  }
-  
+}

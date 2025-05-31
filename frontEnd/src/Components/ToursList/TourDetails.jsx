@@ -2,12 +2,12 @@ import React, { useEffect, useState , useRef} from 'react';
 import './TourDetails.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FaLocationDot } from "react-icons/fa6";
-import { MdOutlineSettings } from "react-icons/md";import { Link } from 'react-router-dom';
+import { MdOutlineSettings } from "react-icons/md";
 import { RiFileEditFill } from "react-icons/ri";
 import { RiDeleteBin5Fill } from "react-icons/ri";
-
+import axios from 'axios';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -18,6 +18,8 @@ const TourDetails = ({ tours }) => {
   const { id } = useParams();
   const [openMenu,setOpenMenu]=useState(false);
   const crudRef = useRef(null);
+  const navigate = useNavigate();
+
 
   useEffect(()=>{
     const handleClickOutside = (event) =>{
@@ -40,6 +42,21 @@ const TourDetails = ({ tours }) => {
   }
 
 
+
+  
+  const handleDelete = async () => {
+    const confirmed = window.confirm('Are you sure you want to delete this tour?');
+    if (!confirmed) return;
+  
+    try {
+      const response = await axios.delete(`http://localhost:7070/api/tours/${tour._id}`);
+      alert(response.data.message);
+      navigate('/tours'); // go to tours list after successful deletion
+    } catch (error) {
+      alert('Delete failed: ' + (error.response?.data?.message || error.message));
+    }
+  };
+  
 
   return (
     <section className="tour-details">
@@ -74,15 +91,22 @@ const TourDetails = ({ tours }) => {
           </div>
 
           <menu className="detail-crud">
-            <button className="crud-btn">
+            <div className="crud-btn">
             <MdOutlineSettings  onClick={()=> setOpenMenu(!openMenu)} />
             {openMenu && (
               <div className="crud-links">
                   <Link className='crud-link' to={`/edit-tour/${tour._id}`}><RiFileEditFill  /> </Link>
-                  <Link className='crud-link'  to={`/delete-tour/${tour._id}`}><RiDeleteBin5Fill  /> </Link>
+                  <Link
+                        className="crud-link delete-btn"
+                        onClick={handleDelete}
+                        title="Delete Tour"
+                        
+                      >
+                        <RiDeleteBin5Fill />
+                      </Link>
               </div>
             )}
-            </button>
+            </div>
           </menu>
       
           <div className="detail-info">
