@@ -1,0 +1,19 @@
+# node_modules & build output
+node_modules/
+dist/
+build/
+
+# macOS жана кэш файлдар
+.DS_Store
+.cache/
+
+# environment variables
+.env
+
+# лог файлдар
+*.log
+
+# editor файлдар
+.vscode/
+.idea/
+

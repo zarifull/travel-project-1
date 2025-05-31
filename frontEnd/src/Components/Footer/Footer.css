@@ -1,0 +1,71 @@
+footer{
+    text-align: center;
+    min-height: 10vh;
+    
+}
+.footer-parts{
+   display: grid;
+   grid-template-columns: repeat(3,1fr);
+  padding: 1em 0;
+  
+}
+.footer-part{
+   
+}
+.footer-part1{
+    font-family: "Poppins";
+    font-weight: 500;
+    text-align: left;
+    margin-left: 100px;
+}
+.part1-prg{
+    color: #f08c00;
+}
+.footer-part2{
+    font-family: "Poppins";
+    font-weight: 400;
+    
+}
+.footer-part2 ul{
+    /* display: grid;
+    grid-template-columns: repeat(4,1fr); */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1rem;
+   
+
+}
+.part2-ul li{
+    list-style: none;
+    color: hsla(212, 100%, 14%, 1);
+    
+}
+.footer-part3{
+  display: flex;
+  justify-content: center;
+  gap: 3em;
+    font-size: 1.1rem;
+    
+}
+.footer-last{
+    color: hsla(213, 13%, 47%, 1);
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1rem;
+    font-family: "Poppins";
+    font-weight: 400;
+    padding: 1.5em 0;
+    fill:  hsla(213, 13%, 47%, 1);
+}
+.part3-icon{
+    border: 1px solid hsla(213, 13%, 47%, 1) ;
+    border-radius: 50%;
+    padding: 10px;
+    
+}
+.part2-ul, .part2-link, ul li{
+    color: #495057;
+    text-decoration: none;
+    font-size: 1rem;
+}

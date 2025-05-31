@@ -1,0 +1,93 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+nav{
+    width: 100%;
+   position: fixed;
+   z-index: 11;
+
+}
+.nav-block{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+
+}
+.logo-block{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-decoration: none;
+}
+.logo{
+    max-width: 7%;
+    height: 0 auto;
+    border-radius: 50%;
+    margin-top: 0.5% ;
+}
+.logo-theme{
+    color: #f08c00;
+    font-family: "Poppins";
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-left: 0.5%;
+    
+}
+
+
+.nav-box .nav-btn{
+ border: none;
+ background: transparent;
+cursor: pointer;
+padding: 1rem; 
+font-size: 1.2rem;
+} 
+
+.nav-box{
+    display: flex;
+    justify-content: space-evenly;
+}
+.addTour-icon{
+    font-size: 1.4rem;
+    padding: 0.5em;
+    color: #000;
+}
+.menu {
+    position: relative;
+  }
+  
+  .menu-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: hsla(28, 76%, 55%, 0.35) 0px 5px 15px;
+    padding: 10px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+   
+   
+    
+  }
+  
+  .menu-links {
+    display: block;
+    padding: 10px 30px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.3s;
+    color: #f08c00;
+  font-weight: 500;
+    font-family: "Poppins";
+  }
+  
+  .menu-links:hover {
+    background-color: #fab005;
+   color: #fff;
+   border-radius: 10px;
+  }
+  

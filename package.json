@@ -1,0 +1,15 @@
+{
+  "name": "fulstack-app",
+  "version": "1.0.0",
+  "scripts": {
+    "frontEnd": "npm run dev --prefix frontEnd",
+    "server": "npm run start --prefix server",
+    "start": "concurrently \"npm run server\" \"npm run frontEnd\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "swiper": "^11.2.6"
+  }
+}

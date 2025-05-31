@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+.tour-card {
+    width: 70%;
+    min-height: auto 0;
+  }
+  
+  .tours-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: center;
+    background: #fff;
+    border-radius: 2em;
+    padding: 2em 2em;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .part1 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .boxImgFirst {
+    width: 50%;
+    height: 250px;
+    border-radius: 5%;
+    object-fit: cover;
+  }
+  
+  .boxImgSecond {
+    position: absolute;
+    top: 1em;
+    right: 4em;
+    width: 30%;
+    /* border-radius: 50px 0 50px 50px; */
+    border-radius: 5%;
+    border: 3px solid #fff;
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .part2 {
+    text-align: start;
+    padding: 1em;
+  }
+  .card-part1, .card-part2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .parts-prg2.tour-lefts{
+    font-weight: 700;
+    background: linear-gradient(90deg, rgba(24, 100, 171, 1) 0%, rgba(230, 119, 0, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .parts-prg {
+    font-family: "Poppins", sans-serif;
+    color: hsla(260, 7%, 33%, 1);
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 0.5em;
+  }
+  
+  .parts-prg2 {
+    font-family: "Poppins", sans-serif;
+    color: hsla(260, 7%, 33%, 1);
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 1em;
+  }
+  
+  .parts-link {
+    /* color: hsla(266, 100%, 50%, 1); */
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color:  #1971c2;
+    font-family: "Poppins";
+  }
+  .parts-link:hover {
+    color: hsla(266, 100%, 40%, 1);
+  }
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .boxImgSecond {
+      width: 40%;
+      right: 1em;
+      top: 1em;
+    }
+  
+    .parts-prg {
+      font-size: 1.6rem;
+    }
+  
+    .parts-prg2 {
+      font-size: 0.9rem;
+    }
+  }
+  
