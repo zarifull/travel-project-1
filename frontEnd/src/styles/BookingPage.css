@@ -1,0 +1,82 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+.booking-area{
+  width: 90%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em 1em;
+  font-family: "poppins";
+}
+.booking-container {
+   width: 100%;
+    /* margin: 30px auto; */
+    /* padding: 30px; */
+    border-radius: 15px;
+    background-color: #ffffff;
+    border: 10px solid #f1f3f5;
+    padding: 2em;
+    /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); */
+  }
+  
+  .booking-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: hsl(179, 66%, 52%);
+    
+  }
+  
+  .booking-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .booking-form input,
+  .booking-form select,
+  .booking-form textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border 0.3s;
+    text-align: center;
+    
+  }
+  
+  .booking-form input:focus,
+  .booking-form select:focus,
+  .booking-form textarea:focus {
+   color: hsl(31, 91%, 44%);
+    outline: none;
+    background-color: none;
+    font-weight: 500;
+  }
+  
+  .booking-form textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .booking-form button {
+    background-color: hsl(179, 72%, 57%);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .booking-form button:hover {
+    background-color: hsl(174, 100%, 74%);
+  }
+  .booking-img img{
+    width: 70%;
+    margin-left: 12em;
+  }

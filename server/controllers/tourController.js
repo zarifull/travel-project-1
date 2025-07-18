@@ -1,5 +1,6 @@
 import Tour from "../models/tour.model.js";
 
+
 export const createTour = async (req, res) => {
   try {
 
@@ -51,12 +52,45 @@ export const createTour = async (req, res) => {
 
 export const getAllTours = async (req, res) => {
   try {
-    const tours = await Tour.find();
-    res.status(200).json(tours);
+    const keyword = req.query.keyword || "";
+    const page = parseInt(req.query.page) || 1;
+    const limit = Math.min(parseInt(req.query.limit) || 5, 100);
+    const skip = (page - 1) * limit;
+
+    const searchFilter = keyword
+      ? {
+          $or: [
+            { title: { $regex: keyword, $options: 'i' } },
+            { location: { $regex: keyword, $options: 'i' } },
+            { description: { $regex: keyword, $options: 'i' } },
+            { includes: { $regex: keyword, $options: 'i' } },
+            { highlights: { $regex: keyword, $options: 'i' } },
+            { category: { $regex: keyword, $options: 'i' } }
+          ]
+        }
+      : {};
+
+    const total = await Tour.countDocuments(searchFilter);
+    const tours = await Tour.find(searchFilter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    res.status(200).json({
+      success: true,
+      total,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      data: tours
+    });
+
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("❌ Error in getAllTours:", err.message);
+    res.status(500).json({ success: false, message: 'Server error', error: err.message });
   }
 };
+
+
 
 export const getTourById = async (req, res) => {
   try {
@@ -94,3 +128,27 @@ export const deleteTour = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 };
+
+
+export const rateTour = async (req, res) => {
+  const { tourId } = req.params;
+  const { rating } = req.body;
+
+  if (!rating || rating < 1 || rating > 5)
+    return res.status(400).json({ message: 'Invalid rating value' });
+
+  try {
+    const tour = await Tour.findById(tourId);
+    if (!tour) return res.status(404).json({ message: 'Tour not found' });
+    console.log('Received tourId:', tourId);
+    tour.ratings.push(rating);
+    await tour.save();
+
+    res.status(200).json({ message: 'Rating submitted', ratings: tour.ratings });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+  
+
+};
+

@@ -1,0 +1,32 @@
+.profile-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .bookings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  
+  .booking-card {
+    background: white;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    border-radius: 12px;
+  }
+  
+  .cancel-btn {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .cancel-btn:hover {
+    background: #b71c1c;
+  }
+  

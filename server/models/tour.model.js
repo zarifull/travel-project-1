@@ -50,6 +50,10 @@ const tourSchema = new mongoose.Schema(
       type: [String],
       required: true
     },
+    ratings: {
+      type: [Number],
+      default: [],
+    },
     createdAt: {
       type: Date,
       default: Date.now

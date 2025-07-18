@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+.navbar {
+  font-family: "Poppins";
+    padding: 10px 10px;
+    /* background-color: #1976d2; */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    border-radius: 55%;
+    
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50% !important;
+    border-bottom: 0.3rem  solid #f59f00;
+    border-top: 0.3rem  solid #1976d2;
+    background-color: #fff;    
+    color: radial-gradient(circle, #1975D1 , #F59F00 50%); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px hsla(0, 0%, 0%, 0.15);
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 100;
+    min-width: 180px;
+  
+  }
+  
+  .dropdown .user-info {
+    margin-bottom: 10px;
+  }
+  
+  .logout-button {
+    background-color: #f59f00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    
+  }
+  
+  .login-register-button {
+    padding: 8px 16px;
+    /* background-color: #1976d2; */
+    color: red;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .modal-switch {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: #1976d2;
+    cursor: pointer;
+    
+  }
+  .register-modal{
+  
+  }
+  .user-icon{
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+  }
+  

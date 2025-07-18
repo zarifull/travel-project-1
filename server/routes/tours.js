@@ -1,6 +1,6 @@
 import express from 'express';
 import upload from '../utils/storage.js'; // Your multer cloudinary setup
-import { getAllTours, createTour, updateTour, getTourById, deleteTour } from '../controllers/tourController.js';
+import { getAllTours, createTour, updateTour, getTourById, deleteTour, rateTour } from '../controllers/tourController.js';
 
 const router = express.Router();
 
@@ -18,5 +18,7 @@ router.put('/:id', updateTour);
 
 // DELETE route to delete a tour by ID
 router.delete('/:id', deleteTour);
+
+router.post('/:tourId/rate', rateTour);
 
 export default router;
