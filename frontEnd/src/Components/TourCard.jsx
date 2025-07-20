@@ -9,9 +9,6 @@ import { useNavigate } from 'react-router-dom';
 const TourCard = ({ tour }) => {
   const navigate = useNavigate();
 
-  const handleBookNow = () => {
-    navigate(`/book/${tour._id}`);
-  };
   return (
     <section className="tour-card">
       <div className="tours-boxes">

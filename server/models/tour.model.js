@@ -23,6 +23,11 @@ const tourSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Узактыгы көрсөтүлүшү керек"],
     },
+    maxGuests: {
+      type: Number,
+      required: [true, "Канча конок кабыл алынат көрсөтүлүшү керек"],
+      min: [1, "Кеминде 1 конок болушу керек"]
+    },    
     location: {
       type: String,
       required: [true, "Жайгашкан жери көрсөтүлүшү керек"]

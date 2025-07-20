@@ -16,8 +16,9 @@ const StarRating = ({ tourId, tour }) => {
       setRatings(response.data.ratings);
       setSubmitted(true);
     } catch (err) {
-      console.error('Submit failed:', err);
-    }
+      console.error('Submit failed:', err.response?.data || err.message);
+      alert('Rating failed. Please try again later.');
+    }    
   };
 
   const averageRating =

@@ -14,6 +14,7 @@ const EditTour = () => {
     description: "",
     duration: "",
     location: "",
+    maxGuests: "",
     category: "",
     isPopular: false,
     includes: [""],
@@ -79,6 +80,16 @@ const EditTour = () => {
     }));
   };
 
+// add this function inside component
+const removeArrayItem = (field, index) => {
+  setFormData((prev) => {
+    const newArray = [...prev[field]];
+    newArray.splice(index, 1);
+    return { ...prev, [field]: newArray };
+  });
+};
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -91,7 +102,7 @@ const EditTour = () => {
       });
       alert("Your Tour was Updated")
       setSuccess(true);
-      navigate("/tours");
+      navigate("/tour-list");
     } catch (err) {
       alert("your Tour was not Updated")
       setError("Failed to update tour.");
@@ -118,6 +129,10 @@ const EditTour = () => {
           <label>Duration (days):</label>
           <input name="duration" value={formData.duration} onChange={handleChange} type="number" required />
 
+          <label>Max Guests (person):</label>
+          <input name="maxGuests" value={formData.maxGuests} onChange={handleChange} type="number" required />
+
+
           <label>Location:</label>
           <input name="location" value={formData.location} onChange={handleChange} required />
 
@@ -138,37 +153,46 @@ const EditTour = () => {
           </label>
 
           <label>Includes:</label>
-          {formData.includes.map((item, index) => (
-            <input
-              key={index}
-              value={item}
-              onChange={(e) => handleArrayChange(e, index, "includes")}
-              placeholder="e.g. Free breakfast"
-            />
-          ))}
-          <button type="button" onClick={() => addArrayItem("includes")}>+ Add Include</button>
+            {formData.includes.map((item, index) => (
+              <div  key={index} className="array-item">
+                <input
+                  value={item}
+                  onChange={(e) => handleArrayChange(e, index, "includes")}
+                  placeholder="e.g. Free breakfast"
+                  style={{width:'90%'}}
+                />
+                <button type="button" onClick={() => removeArrayItem("includes", index)}>x</button>
+              </div>
+            ))}
+            <button type="button" onClick={() => addArrayItem("includes")}>+ Add Include</button>
 
-          <label>Start Dates:</label>
-          {formData.startDates.map((date, index) => (
-            <input
-              key={index}
-              type="date"
-              value={date}
-              onChange={(e) => handleArrayChange(e, index, "startDates")}
-            />
-          ))}
-          <button type="button" onClick={() => addArrayItem("startDates")}>+ Add Date</button>
+            <label>Start Dates:</label>
+            {formData.startDates.map((date, index) => (
+              <div key={index} className="array-item">
+                <input
+                  type="date"
+                  value={date}
+                  onChange={(e) => handleArrayChange(e, index, "startDates")}
+                  style={{width:'90%'}}
+                />
+                <button type="button" onClick={() => removeArrayItem("startDates", index)}>x</button>
+              </div>
+            ))}
+            <button type="button" onClick={() => addArrayItem("startDates")}>+ Add Date</button>
 
-          <label>Image URLs:</label>
-          {formData.imageUrls.map((url, index) => (
-            <input
-              key={index}
-              value={url}
-              onChange={(e) => handleArrayChange(e, index, "imageUrls")}
-              placeholder="https://example.com/image.jpg"
-            />
-          ))}
-          <button type="button" onClick={() => addArrayItem("imageUrls")}>+ Add Image</button>
+            <label>Image URLs:</label>
+            {formData.imageUrls.map((url, index) => (
+              <div key={index} className="array-item">
+                <input
+                  value={url}
+                  onChange={(e) => handleArrayChange(e, index, "imageUrls")}
+                  style={{width:'90%'}}
+                />
+                <button type="button" onClick={() => removeArrayItem("imageUrls", index)}>x</button>
+              </div>
+            ))}
+            <button type="button" onClick={() => addArrayItem("imageUrls")}>+ Add Image</button>
+
 
           <button type="submit">Update Tour</button>
           {success && <p className="success">Tour updated successfully!</p>}

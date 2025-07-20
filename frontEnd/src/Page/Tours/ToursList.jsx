@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import TourCard from '../../Components/TourCard';
 import '../../styles/ToursList.css';
 import SearchBox from './SearchBox';
+import { useLocation } from 'react-router-dom';
+
 
 const ToursList = ({ tours }) => {
   const [filteredTours, setFilteredTours] = useState([]);
+  const location = useLocation();
+const initialTours = location.state?.tours || tours; // read from state if available
+
 
   useEffect(() => {
     if (tours?.data && Array.isArray(tours.data)) {
@@ -15,10 +20,20 @@ const ToursList = ({ tours }) => {
       setFilteredTours([]);
     }
   }, [tours]);
+
+  useEffect(() => {
+    if (initialTours?.data && Array.isArray(initialTours.data)) {
+      setFilteredTours(initialTours.data);
+    } else if (Array.isArray(initialTours)) {
+      setFilteredTours(initialTours);
+    } else {
+      setFilteredTours([]);
+    }
+  }, [initialTours]);
   
   const handleSearch = (query) => {
     const lowerQuery = query.toLowerCase();
-    const allTours = Array.isArray(tours.data) ? tours.data : tours;
+    const allTours = Array.isArray(initialTours?.data) ? initialTours.data : initialTours;
   
     const results = allTours.filter(tour =>
       tour.title.toLowerCase().includes(lowerQuery)
@@ -26,7 +41,7 @@ const ToursList = ({ tours }) => {
   
     setFilteredTours(results);
   };
-
+  
 
   return (
     <section className="tour-list">

@@ -19,6 +19,6 @@ router.put('/:id', updateTour);
 // DELETE route to delete a tour by ID
 router.delete('/:id', deleteTour);
 
-router.post('/:tourId/rate', rateTour);
+router.post('/:id/rate', rateTour);
 
 export default router;

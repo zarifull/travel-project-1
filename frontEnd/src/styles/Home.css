@@ -343,7 +343,7 @@
   justify-content: center;
 }
 
-.tour-card {
+.bookingsResult-card {
   width: 280px;
   background: #f8f9fa;
   border-radius: 1rem;
@@ -352,12 +352,12 @@
   text-align: left;
 }
 
-.tour-card h3 {
+.bookingsResult-card h3 {
   color: #1976d2;
   margin-bottom: 0.5rem;
 }
 
-.tour-card p {
+.bookingsResult-card p {
   margin: 0.3rem 0;
   font-size: 0.95rem;
 }

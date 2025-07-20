@@ -16,3 +16,10 @@ This project is a full-stack web application with registration and booking featu
    ```bash
    npm install
 3. you can start npm start
+
+## ✨ New Feature: Tour Booking Search
+
+- Users can now search for tours by destination and date on the Home page.
+- Matching tours are displayed on the Tours List page after clicking the search button.
+- Smooth navigation is implemented using React Router state.
+

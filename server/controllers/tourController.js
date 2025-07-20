@@ -52,25 +52,47 @@ export const createTour = async (req, res) => {
 
 export const getAllTours = async (req, res) => {
   try {
-    const keyword = req.query.keyword || "";
-    const page = parseInt(req.query.page) || 1;
-    const limit = Math.min(parseInt(req.query.limit) || 5, 100);
-    const skip = (page - 1) * limit;
+    const {
+      keyword = '',
+      destination = '',
+      guests,
+      date,
+      page = 1,
+      limit: rawLimit,
+    } = req.query;
 
-    const searchFilter = keyword
-      ? {
-          $or: [
-            { title: { $regex: keyword, $options: 'i' } },
-            { location: { $regex: keyword, $options: 'i' } },
-            { description: { $regex: keyword, $options: 'i' } },
-            { includes: { $regex: keyword, $options: 'i' } },
-            { highlights: { $regex: keyword, $options: 'i' } },
-            { category: { $regex: keyword, $options: 'i' } }
-          ]
-        }
-      : {};
+    const limit = parseInt(rawLimit) || 100;
+    const skip = (parseInt(page) - 1) * limit;
+
+    // Build dynamic filter object
+    const searchFilter = {};
+
+    if (keyword) {
+      searchFilter.$or = [
+        { title: { $regex: keyword, $options: 'i' } },
+        { location: { $regex: keyword, $options: 'i' } },
+        { description: { $regex: keyword, $options: 'i' } },
+        { includes: { $regex: keyword, $options: 'i' } },
+        { highlights: { $regex: keyword, $options: 'i' } },
+        { category: { $regex: keyword, $options: 'i' } },
+      ];
+    }
+
+    if (destination) {
+      searchFilter.location = { $regex: destination, $options: 'i' };
+    }
+
+    if (guests) {
+      searchFilter.maxGroupSize = { $gte: parseInt(guests) };
+    }
+
+    // Optional: handle filtering by tour date
+    if (date) {
+      searchFilter.date = date; // or more advanced date range filtering
+    }
 
     const total = await Tour.countDocuments(searchFilter);
+
     const tours = await Tour.find(searchFilter)
       .sort({ createdAt: -1 })
       .skip(skip)
@@ -79,9 +101,9 @@ export const getAllTours = async (req, res) => {
     res.status(200).json({
       success: true,
       total,
-      currentPage: page,
+      currentPage: parseInt(page),
       totalPages: Math.ceil(total / limit),
-      data: tours
+      data: tours,
     });
 
   } catch (err) {
@@ -89,6 +111,7 @@ export const getAllTours = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error', error: err.message });
   }
 };
+
 
 
 
@@ -131,24 +154,32 @@ export const deleteTour = async (req, res) => {
 
 
 export const rateTour = async (req, res) => {
-  const { tourId } = req.params;
+  const { id } = req.params;
   const { rating } = req.body;
 
-  if (!rating || rating < 1 || rating > 5)
+  if (!rating || rating < 1 || rating > 5) {
     return res.status(400).json({ message: 'Invalid rating value' });
+  }
 
   try {
-    const tour = await Tour.findById(tourId);
+    const tour = await Tour.findById(id);
     if (!tour) return res.status(404).json({ message: 'Tour not found' });
-    console.log('Received tourId:', tourId);
+
+    // Defensive fallback
+    if (!Array.isArray(tour.ratings)) {
+      tour.ratings = [];
+    }
+
     tour.ratings.push(rating);
     await tour.save();
 
     res.status(200).json({ message: 'Rating submitted', ratings: tour.ratings });
   } catch (err) {
+    console.error('🔥 Server crash on rating:', err);
     res.status(500).json({ message: 'Server error' });
   }
-  
-
 };
+
+
+
 

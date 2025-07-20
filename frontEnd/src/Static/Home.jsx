@@ -13,8 +13,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaArrowRightLong } from "react-icons/fa6";
 import RatingResult from '../Components/RatingResult';
-import { useAuth } from '../Context/AuthContext';
-import TourCard from '../Components/TourCard'
+import TourCard from '../Components/TourCard';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Home({tour,tourId, pricePerGuest}) {
@@ -26,6 +27,8 @@ function Home({tour,tourId, pricePerGuest}) {
   const [guests, setGuests] = useState(1);
   const [showResults, setShowResults] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
 
   const fetchTours = useCallback(async () => {
     try {
@@ -41,21 +44,43 @@ function Home({tour,tourId, pricePerGuest}) {
     fetchTours();
   }, [fetchTours]);
 
+
+const handleBooking = async () => {
+  setLoading(true);
+  setShowResults(false);
+
+  try {
+    const res = await fetch('http://localhost:7070/api/tours?limit=1000');
+    const data = await res.json();
+
+    const filtered = data.data.filter((tour) => {
+      const matchesDestination = destination
+        ? tour.location?.toLowerCase().includes(destination.toLowerCase())
+        : true;
+
+      const matchesDate = date
+        ? Array.isArray(tour.startDates) &&
+          tour.startDates.some((start) => start?.startsWith(date))
+        : true;
+
+      return matchesDestination && matchesDate;
+    });
+
+    // Navigate to the tour list page and send filtered tours as state
+    navigate('/tour-list', { state: { tours: filtered } });
+
+  } catch (err) {
+    console.error('Search error:', err);
+  } finally {
+    setLoading(false);
+  }
+};
+
   
-  const handleBooking = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get(`http://localhost:7070/api/tours?destination=${destination}&date=${date}&guests=${guests}`);
-      setTours(res.data.data || []);
-      setShowResults(true);
-    } catch (err) {
-      console.error("Search failed:", err.message);
-      setTours([]);
-      setShowResults(true);
-    } finally {
-      setLoading(false);
-    }
-  };
+  
+  
+  
+
   return (
     <div className="home">
       <div className="container">
@@ -114,24 +139,16 @@ function Home({tour,tourId, pricePerGuest}) {
 
       {loading && <p style={{ textAlign: 'center', color: '#5c7cfa' }}>Searching tours...</p>}
 
-      {showResults && (
-        <div className="tour-results">
-          {tours.length > 0 ? (
-            tours.map((tour) => (
-              <div key={tour._id} className="tour-card">
-                <h3>{tour.title}</h3>
-                <p><strong>Location:</strong> {tour.location}</p>
-                <p><strong>Date:</strong> {tour.date}</p>
-                <p><strong>Price:</strong> ${tour.price}</p>
-                <button className="view-btn">View Details</button>
-              </div>
-            ))
-          ) : (
-            <p style={{ textAlign: 'center', marginTop: '1rem' }}>No tours found for your search.</p>
-          )}
-        </div>
-      )}
+      {showResults && tours.length > 0 && (
+          <div className="tour-results">
+            {tours.map((tour) => (
+              <TourCard key={tour._id} tour={tour} />
+            ))}
+          </div>
+        )}
+
     </div>
+
           
 
           <div className="header-photos">

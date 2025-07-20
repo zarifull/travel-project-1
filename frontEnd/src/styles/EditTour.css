@@ -26,10 +26,11 @@
 .edit-form {
   display: flex;
   flex-direction: column;
+  gap: 0.3em;
 }
 
 .edit-form label {
-  margin: 10px 0 4px;
+  margin: 10px 0 4px 10px;
   font-weight: 600;
   color: #f08c00;
 }
@@ -84,7 +85,9 @@
   font-size: 18px;
   color: #666;
 }
-
+.array-item{
+  width: 100%;
+}
 /* ðŸ“± Responsive styles */
 @media (max-width: 768px) {
   .edit-tour .container {

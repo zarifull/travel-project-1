@@ -22,7 +22,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-   gap: 2em;
+   gap: 1em;
  }
  .form-group{
  display: grid;
@@ -51,8 +51,8 @@
   color: #5c7cfa;
   text-align: center;
 }
-  .form-group[type="text"]:focus,
-  .form-group[type="number"]:focus,
+  .form-group [type="text"]:focus,
+  .form-group [type="number"]:focus,
   .form-group textarea:focus {
     border-color: #4c8bf5;
     box-shadow: 0 0 10px rgba(76, 139, 245, 0.3);

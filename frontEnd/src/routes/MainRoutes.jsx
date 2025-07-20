@@ -23,16 +23,18 @@ import PrivateRoute from './Privateroute';
 import MyProfile from '../Page/Profile/MyProfile';
 import MyBookings from '../Page/Profile/MyBookings';
 import BookingPage from '../Static/BookinPage';
+import SearchForm from '../Components/SearchForm';
 
 function Main({ user, setUser }) {
   const [tours, setTours] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:7070/api/tours')
+    fetch('http://localhost:7070/api/tours?limit=1000')
       .then((res) => res.json())
       .then((data) => setTours(data.data))
       .catch((err) => console.log('Турларды алуу ката:', err));
   }, []);
+  
 
   return (
     <>
@@ -60,6 +62,7 @@ function Main({ user, setUser }) {
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="/booking-page/:tourId" element={<BookingPage/>} />
+        <Route path="/search-form" element={<SearchForm/>} />
         
 
 

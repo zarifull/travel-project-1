@@ -17,6 +17,7 @@ const AddTour = () => {
   const[isPopular,setIsPopular]=useState(false);
   const [includes, setIncludes] = useState([]);
   const [startDates, setStartDates] = useState([]);
+  const [maxGuests, setMaxGuests] = useState('');
 
 
   const validateForm = () => {
@@ -61,6 +62,14 @@ const AddTour = () => {
       newErrors.location = 'Жайгашкан жери керек';
       isValid = false;
     }
+    if (!maxGuests) {
+      newErrors.maxGuests = 'Коноктар саны керек';
+      isValid = false;
+    } else if (isNaN(maxGuests) || Number(maxGuests) < 1) {
+      newErrors.maxGuests = 'Конуктар саны туура эмес';
+      isValid = false;
+    }
+    
     if(!category.trim()){
       newErrors.category = 'Категория жазыныз';
       isValid = false
@@ -101,6 +110,7 @@ const AddTour = () => {
           formData.append('includes', JSON.stringify(includes));
           formData.append('startDates', JSON.stringify(startDates));
           formData.append('isPopular', isPopular ? "true" : "false");
+          formData.append('maxGuests', Number(maxGuests));
 
 
           imageFile.forEach((file) => {
@@ -245,6 +255,19 @@ const AddTour = () => {
             />
             {errors.location && <p className="error-message addTour-error">{errors.location}</p>}
           </div>
+
+         <div className="form-group">
+            <label htmlFor="maxGuests">Max Guests :</label>
+            <input
+              type="number"
+              id="maxGuests"
+              value={maxGuests}
+              onChange={(e) => setMaxGuests(e.target.value)}
+              min={1}
+            />
+            {errors.maxGuests && <p className="error-message addTour-error">{errors.maxGuests}</p>}
+          </div>
+
 
           <div className="form-group">
             <label htmlFor="category">Category :</label>

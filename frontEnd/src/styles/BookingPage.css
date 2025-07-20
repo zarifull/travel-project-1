@@ -12,13 +12,9 @@
 }
 .booking-container {
    width: 100%;
-    /* margin: 30px auto; */
-    /* padding: 30px; */
-    border-radius: 15px;
     background-color: #ffffff;
     border: 10px solid #f1f3f5;
     padding: 2em;
-    /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); */
   }
   
   .booking-title {
@@ -45,16 +41,15 @@
     font-size: 16px;
     transition: border 0.3s;
     text-align: center;
-    
   }
   
   .booking-form input:focus,
   .booking-form select:focus,
   .booking-form textarea:focus {
    color: hsl(31, 91%, 44%);
-    outline: none;
-    background-color: none;
     font-weight: 500;
+    border-color: hsl(179, 66%, 52%);
+    outline: none;
   }
   
   .booking-form textarea {

@@ -13,7 +13,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import StarRating from '../../Components/StarRating';
 import RatingResult from '../../Components/RatingResult';
-import bookingButton from '../../Assets/bookingButton.png'
 
 
 const TourDetails = ({ tours }) => {
@@ -147,15 +146,17 @@ const TourDetails = ({ tours }) => {
 
             <p className='detail-box detail-ispopular'><strong>Popular:</strong> {tour.isPopular ? '👍 👍 👍 👍 👍' : '👎 👎 👎'}
             </p>
+            <p className='detail-box detail-category'><strong>Max Guests:</strong> {tour.maxGuests}</p>
+
 
           </div>
           <div className="detailLast-box">
           <div className='stars-rating'>
-              <p><StarRating tourId={tour._id} tour={tour}/></p>
+              <StarRating tourId={tour._id} tour={tour}/>
           </div>
          <div className="tour-booking">
          <button onClick={handleBookNow}>
-         <i class="fa-solid fa-suitcase-rolling"></i> Book Now </button>
+         <i className="fa-solid fa-suitcase-rolling"></i> Book Now </button>
          </div>
          </div>
         </section>
