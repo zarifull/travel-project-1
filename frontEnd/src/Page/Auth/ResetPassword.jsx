@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "../../styles/ResetPassword.css";
+import axiosInstance from '../../api/axiosInstance';
+ import "../../styles/ResetPassword.css";
 import { useNavigate } from "react-router-dom";
 
 function ResetPassword() {
@@ -29,7 +29,7 @@ function ResetPassword() {
     }
 
     try {
-      const res = await axios.post("http://localhost:7070/api/users/reset-password", {
+      const res = await axiosInstance.post("/users/reset-password", {
         email,
         newPassword,
       });

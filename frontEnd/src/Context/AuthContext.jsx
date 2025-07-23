@@ -7,13 +7,28 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
-  // Load user and token from localStorage on page refresh
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    const savedToken = localStorage.getItem("token");
-    if (savedUser) setUser(JSON.parse(savedUser));
-    if (savedToken) setToken(savedToken);
+    const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem("token");
+  
+    try {
+      if (storedUser && storedUser !== "undefined") {
+        setUser(JSON.parse(storedUser));
+      } else {
+        setUser(null);
+      }
+      if (storedToken) {
+        setToken(storedToken);
+      }
+    } catch (err) {
+      console.error("Invalid JSON in localStorage user:", err);
+      setUser(null);
+      setToken(null);
+    }
+    
   }, []);
+  
+  
 
   // Login handler - expect userData and token passed from login response
   const login = (userData, authToken) => {

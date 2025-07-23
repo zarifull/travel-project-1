@@ -76,11 +76,6 @@ const handleBooking = async () => {
   }
 };
 
-  
-  
-  
-  
-
   return (
     <div className="home">
       <div className="container">

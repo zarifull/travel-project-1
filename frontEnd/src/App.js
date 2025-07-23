@@ -8,11 +8,19 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
+    try {
+      const savedUser = localStorage.getItem("user" || null);
+      if (savedUser && savedUser !== "undefined") {
+        setUser(JSON.parse(savedUser));
+      } else {
+        setUser(null); // fallback
+      }
+    } catch (error) {
+      console.error("Failed to parse user from localStorage:", error);
+      setUser(null);
     }
   }, []);
+  
 
   return (
     <div className="App">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/Login.css";
 
@@ -13,7 +13,7 @@ function EnterOtp() {
     if (!otp || !email) return alert("Missing OTP or email.");
     
     try {
-      await axios.post("http://localhost:7070/api/users/verify-otp", { email, otp });
+      await axiosInstance.post("/users/verify-otp", { email, otp });
       alert("OTP verified. You can now reset your password.");
       navigate("/password-success");
     } catch (error) {

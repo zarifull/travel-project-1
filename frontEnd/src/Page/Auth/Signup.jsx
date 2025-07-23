@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosInstance from '../../api/axiosInstance';
 import { useNavigate } from "react-router-dom";
 import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
@@ -18,7 +18,7 @@ function Signup({ setUser }) {
     if (!name || !email || !password) return alert("Fill in all fields.");
   
     try {
-      const res = await axios.post("http://localhost:7070/api/users/register", {
+      const res = await axiosInstance.post("/users/register", {
         name,
         email,
         password,
@@ -36,6 +36,9 @@ function Signup({ setUser }) {
         alert("Signup failed: " + (error.response?.data?.message || "Server error."));
       }
     }
+    console.log("Password", password);
+console.log("Email", email);
+
   };
   
 

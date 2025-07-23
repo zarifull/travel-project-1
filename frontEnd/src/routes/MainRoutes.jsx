@@ -59,7 +59,7 @@ function Main({ user, setUser }) {
         <Route path="/profile" element={<Profile />} />
         <Route path="/auth/reset-password" element={<ResetPassword />} />
         <Route path="/auth/verify-otp" element={<VerifyOtp />} />
-        <Route path="/my-profile" element={<MyProfile />} />
+        <Route path="/my-profile" element={<MyProfile  setUser={setUser}  />} />
         <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="/booking-page/:tourId" element={<BookingPage/>} />
         <Route path="/search-form" element={<SearchForm/>} />

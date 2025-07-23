@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from '../../api/axiosInstance';
 import "../../styles/VerifyOtp.css";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +13,7 @@ function VerifyOtp() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:7070/api/users/verify-otp", {
+      const res = await axiosInstance.post("/users/verify-otp", {
         email,
         otp,
       });

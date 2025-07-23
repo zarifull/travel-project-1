@@ -1,38 +1,46 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import '../../styles/Login.css'; 
 import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
+import axiosInstance from '../../api/axiosInstance'
+import { useAuth } from "../../Context/AuthContext";
 
-function Login({ setUser }) {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword,setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async () => {
     if (!email || !password) return alert("Fill in all fields.");
-
+  
     try {
-      const res = await axios.post("http://localhost:7070/api/users/login", {
-        email,
-        password,
+      const res = await axiosInstance.post("/users/login", {
+        email: email.trim(),
+        password: password.trim(),
       });
-      console.log("Password",password);
-      console.log("Email",email);
-
-
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-      localStorage.setItem("token", res.data.token);
-      setUser(res.data.user);
+  
+      // console.log("Login response data:", res.data);
+  
+      // Adapt here: construct user from res.data fields
+      const userData = {
+        name: res.data.name,
+        email: res.data.email,
+      };
+  
+      // login(userData, res.data.token);
+  
       alert("Login successful!");
-      navigate("/"); // Go to homepage or dashboard
+      navigate("/");
+  
     } catch (error) {
-      alert("Login failed: " + error.response?.data?.message || "Server error.");
+      console.log("Login failed:", error.response?.data?.message || "Server error.");
     }
   };
+  
 
   return (
     <div className="auth-block">
@@ -45,9 +53,9 @@ function Login({ setUser }) {
         value={email}
         className="auth-inp"
       />
-            <div style={{ position: "relative" }}>
+      <div style={{ position: "relative" }}>
       <input
-        type="password"
+        type={showPassword ? "text" : "password"}
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}

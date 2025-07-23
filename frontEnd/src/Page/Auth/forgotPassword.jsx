@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Login.css";
 
@@ -11,7 +11,7 @@ function ForgotPassword() {
     if (!email) return alert("Please enter your email.");
   
     try {
-      await axios.post("http://localhost:7070/api/users/forgot-password", { email });
+      await axiosInstance.post("/users/forgot-password", { email });
       localStorage.setItem("resetEmail", email); // ✅ Save for later steps
       alert("OTP sent to your email.");
       navigate("/auth/verify-otp");

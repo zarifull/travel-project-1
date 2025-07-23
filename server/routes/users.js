@@ -1,22 +1,22 @@
-// routes/userRoutes.js
 import express from 'express';
-import { registerUser, loginUser, 
-    sendOtpToEmail, resetPassword,verifyOtp, getProfile } from '../controllers/userController.js';
+import {
+  signupUser, loginUser, resetPassword,
+  verifyOtp, sendOtpToEmail, getProfile,
+  updateUser, updatePassword
+} from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/register', registerUser);
+router.post('/register', signupUser);
 router.post('/login', loginUser);
-router.post("/forgot-password", sendOtpToEmail);
-router.post("/reset-password", resetPassword);
-router.post("/verify-otp",verifyOtp);
-router.get('/profile', protect, getProfile);
+router.post('/forgot-password', sendOtpToEmail);
+router.post('/verify-otp', verifyOtp);
+router.post('/reset-password', resetPassword);
 
-router.get("/test", (req, res) => {
-    res.send("User route working ✅");
-    console.log("Hi from SERVER");
-  });
-  
+// Profile (GET + PUT)
+router.get('/me', protect, getProfile);
+router.put('/:id', updateUser);
+router.put('/password/:id', updatePassword);
 
 export default router;

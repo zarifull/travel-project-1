@@ -153,32 +153,38 @@ export const deleteTour = async (req, res) => {
 };
 
 
+
 export const rateTour = async (req, res) => {
-  const { id } = req.params;
-  const { rating } = req.body;
-
-  if (!rating || rating < 1 || rating > 5) {
-    return res.status(400).json({ message: 'Invalid rating value' });
-  }
-
   try {
-    const tour = await Tour.findById(id);
-    if (!tour) return res.status(404).json({ message: 'Tour not found' });
+    const { id } = req.params;
+    const { rating } = req.body;
 
-    // Defensive fallback
-    if (!Array.isArray(tour.ratings)) {
-      tour.ratings = [];
+    if (!rating || typeof rating !== 'number') {
+      return res.status(400).json({ message: 'Rating must be a number' });
     }
+
+    const tour = await Tour.findById(id);
+    if (!tour) {
+      return res.status(404).json({ message: 'Tour not found' });
+    }
+
+    // Ensure tour.ratings is an array
+    tour.ratings = tour.ratings || [];
 
     tour.ratings.push(rating);
     await tour.save();
 
-    res.status(200).json({ message: 'Rating submitted', ratings: tour.ratings });
-  } catch (err) {
-    console.error('🔥 Server crash on rating:', err);
+    res.status(200).json({ message: 'Rating added', ratings: tour.ratings });
+  } catch (error) {
+    console.error('Rating error:', error);  // Check terminal for full stack trace
     res.status(500).json({ message: 'Server error' });
   }
+  console.log('REQ.PARAMS:', req.params);
+console.log('REQ.BODY:', req.body);
+console.log('FOUND TOUR:', tour);
+
 };
+
 
 
 

@@ -11,7 +11,7 @@ const UserIcon = () => {
   const dropdownRef = useRef();
   const navigate = useNavigate();
 
-  const { user, logout } = useAuth(); // ✅ use `logout` from context
+  const { user, logout,token } = useAuth(); // ✅ use `logout` from context
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -28,13 +28,16 @@ const UserIcon = () => {
     logout(); // ✅ use context logout
     navigate("/login");
   };
+  // console.log("👤 UserIcon user:", user);
+  // console.log("✅ AuthContext user:", user);
+  // console.log("✅ AuthContext token:", token);
 
   return (
     <div className="navbar">
       {user ? (
         <div ref={dropdownRef} style={{ position: "relative" }}>
           <div className="avatar" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-            {user.name?.[0]?.toUpperCase() || "U"}
+          {(user?.name && user.name[0]?.toUpperCase()) || user?.email?.[0]?.toUpperCase() || "U"}
           </div>
 
           {isDropdownOpen && (
