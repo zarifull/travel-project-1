@@ -12,7 +12,7 @@ function Login() {
   const [showPassword,setShowPassword] = useState(false);
 
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login,user } = useAuth();
 
   const handleLogin = async () => {
     if (!email || !password) return alert("Fill in all fields.");
@@ -22,16 +22,16 @@ function Login() {
         email: email.trim(),
         password: password.trim(),
       });
-  
-      // console.log("Login response data:", res.data);
+
   
       // Adapt here: construct user from res.data fields
       const userData = {
+        _id: res.data._id,
         name: res.data.name,
         email: res.data.email,
       };
   
-      // login(userData, res.data.token);
+      login(userData, res.data.token);
   
       alert("Login successful!");
       navigate("/");
@@ -40,7 +40,8 @@ function Login() {
       console.log("Login failed:", error.response?.data?.message || "Server error.");
     }
   };
-  
+  console.log("📌 Current User: ", user);
+
 
   return (
     <div className="auth-block">

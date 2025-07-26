@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from '../../api/axiosInstance';
  import "../../styles/ResetPassword.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 function ResetPassword() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,8 @@ function ResetPassword() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+
+  const { user,otp,login } = useAuth();
   // ✅ Check localStorage on mount
   useEffect(() => {
     const storedEmail = localStorage.getItem("resetEmail");
@@ -32,16 +35,32 @@ function ResetPassword() {
       const res = await axiosInstance.post("/users/reset-password", {
         email,
         newPassword,
+        otp
       });
+      
+      // ✅ Save user and token if returned
+      if (res.data.user && res.data.token) {
+        login(res.data.user, res.data.token); // from useAuth()
+      }
+      // console.log("Saved user after password reset:", res.data.user);
 
-      localStorage.removeItem("resetEmail");
+      // localStorage.removeItem("resetEmail");
+      // localStorage.removeItem("token"); // 🧼 cleanup
+      // localStorage.removeItem("user");  // optional
+
       alert("✅ Password reset successful! You can now log in.");
+      console.log("Resetting password for:", email);
       navigate("/login");
     } catch (err) {
       console.error("❌ Reset error:", err);
       setMessage(err.response?.data?.message || "Something went wrong.");
     }
+    
   };
+
+
+console.log("Saved user after password reset:", user);
+
 
   return (
     <div className="auth-block">

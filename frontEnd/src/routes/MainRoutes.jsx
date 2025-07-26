@@ -54,7 +54,7 @@ function Main({ user, setUser }) {
         <Route path="/signup" element={<Signup setUser={setUser} />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/enter-otp" element={<EnterOtp />} />
+        {/* <Route path="/enter-otp" element={<EnterOtp />} /> */}
         <Route path="/password-success" element={<PasswordSuccess />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/auth/reset-password" element={<ResetPassword />} />

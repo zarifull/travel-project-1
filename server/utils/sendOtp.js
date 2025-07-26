@@ -1,8 +1,14 @@
+import transporter from "./mailer.js";
 
 const sendOtp = async (email, otp) => {
-    console.log(`OTP for ${email}: ${otp}`);
-    // Integrate real email service like nodemailer or SendGrid if needed.
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Your OTP Code",
+    text: `Your OTP is: ${otp}. It will expire in 10 minutes.`,
   };
-  
-  export default sendOtp;
-  
+
+  await transporter.sendMail(mailOptions);
+};
+
+export default sendOtp;

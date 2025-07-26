@@ -32,8 +32,14 @@ function VerifyOtp() {
 
   useEffect(() => {
     const savedEmail = localStorage.getItem("resetEmail");
-    if (savedEmail) setEmail(savedEmail);
+    if (savedEmail) {
+      setEmail(savedEmail);
+    } else {
+      alert("⚠️ No email found. Please go back and enter your email.");
+      navigate("/auth/forgot-password");
+    }
   }, []);
+  
   
 
   return (

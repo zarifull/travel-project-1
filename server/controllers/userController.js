@@ -15,6 +15,11 @@ export const signupUser = async (req, res) => {
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ message: "Email already exists" });
 
+    const isValidDomain = await isEmailDomainValid(email);
+    if (!isValidDomain) {
+      return res.status(400).json({ message: "Invalid email domain" });
+    }
+
     const newUser = new User({ name, email, password }); // ← raw password
     await newUser.save(); // ← Mongoose hashes it here
 
@@ -34,25 +39,27 @@ export const loginUser = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).json({ message: "Invalid email or password" });
 
-    // ✅ Generate token
     const token = jwt.sign(
       { id: user._id, email: user.email },
-      process.env.JWT_SECRET || "your_secret_key", // Use a strong secret in .env
+      process.env.JWT_SECRET || "your_secret_key",
       { expiresIn: "7d" }
     );
 
-    // ✅ Return token and user info
+    await user.save();
+
     return res.status(200).json({
+      user: {
+        _id: user._id.toString(), // ✅ critical fix
+        name: user.name,
+        email: user.email,
+      },
       token,
-      name: user.name,
-      email: user.email
     });
-    
+
   } catch (error) {
     res.status(500).json({ message: "Login failed", error });
   }
 };
-
 
 
 export const getProfile = async (req, res) => {
@@ -65,9 +72,6 @@ export const getProfile = async (req, res) => {
   }
 };
 
-/**
- * UPDATE PROFILE (name/email)
- */
 export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -86,30 +90,30 @@ export const updateUser = async (req, res) => {
   }
 };
 
-/**
- * UPDATE PASSWORD
- */
 export const updatePassword = async (req, res) => {
   try {
     const { id } = req.params;
     const { password } = req.body;
 
-    if (!password)
+    if (!password) {
       return res.status(400).json({ message: "Password is required" });
+    }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    await User.findByIdAndUpdate(id, { password: hashedPassword });
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.password = password; // ✅ plain text is okay here, because save() will hash it
+    await user.save();        // ✅ triggers your pre-save hook
 
     res.json({ message: "✅ Password updated successfully" });
   } catch (err) {
-    console.error("Password update error:", err);
+    console.error("❌ Password update error:", err);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-/**
- * SEND OTP (for forgot password)
- */
 export const sendOtpToEmail = async (req, res) => {
   const { email } = req.body;
 
@@ -138,17 +142,27 @@ export const sendOtpToEmail = async (req, res) => {
   }
 };
 
-/**
- * VERIFY OTP
- */
+
 export const verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
 
   try {
     const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-    if (!user.otp || user.otp !== otp || user.otpExpires < Date.now()) {
+    console.log("User found:", user.email);
+    console.log("User.otp:", user.otp);
+    console.log("User.otpExpires:", user.otpExpires);
+    console.log("Provided OTP:", otp);
+
+    if (
+      !user.otp ||
+      user.otp !== otp ||
+      !user.otpExpires ||
+      user.otpExpires < Date.now()
+    ) {
       return res.status(400).json({ message: "Invalid or expired OTP" });
     }
 
@@ -158,14 +172,12 @@ export const verifyOtp = async (req, res) => {
 
     res.status(200).json({ message: "OTP verified successfully" });
   } catch (err) {
-    console.error("OTP verify error:", err);
+    console.error("❌ OTP verify error:", err);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-/**
- * RESET PASSWORD (after OTP verified)
- */
+
 export const resetPassword = async (req, res) => {
   const { email, newPassword } = req.body;
 
@@ -173,8 +185,7 @@ export const resetPassword = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
+    user.password = newPassword;
     user.otp = null;
     user.otpExpires = null;
     await user.save();
@@ -184,4 +195,5 @@ export const resetPassword = async (req, res) => {
     console.error("Reset error:", err);
     res.status(500).json({ message: "Failed to reset password" });
   }
+
 };

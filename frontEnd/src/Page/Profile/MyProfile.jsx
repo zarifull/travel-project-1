@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useAuth } from '../../Context/AuthContext';
-import axios from '../../api/axiosInstance';
+import axios from 'axios';
 import '../../styles/MyProfile.css';
+import axiosInstance from '../../api/axiosInstance';
 
 function MyProfile() {
-  const { user, setUser } = useAuth();
+  const { user, setUser,token } = useAuth();
+  const [showPassword,setShowPassword] = useState(false);
+
 
   const [formData, setFormData] = useState({
     username: user?.name || '',
@@ -25,6 +28,28 @@ function MyProfile() {
     }));
   };
 
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        username: user.name || '',
+        email: user.email || '',
+      });
+    }
+  }, [user]);
+    
+  if (!user || !user._id) {
+    return (
+      <div className="auth-block">
+        <div className="profile-container">
+          <h2>My Profile</h2>
+          <p className="message">{message}</p>
+        </div>
+      </div>
+    );
+  }
+  
+  console.log("token:",token);
+  
   const handlePasswordChange = (e) => {
     setPasswordData(prev => ({
       ...prev,
@@ -36,33 +61,46 @@ function MyProfile() {
     e.preventDefault();
     setMessage('');
   
+    if (!user || !user._id) {
+      setMessage("❌ Cannot update profile. User not found.");
+      return;
+    }
+  
     try {
-      const userUpdateRes = await axios.put(`/users/${user._id}`, {
+      console.log("➡️ Sending profile update for:", user._id);
+      const userUpdateRes = await axiosInstance.put(`/users/${user._id}`, {
         username: formData.username,
         email: formData.email,
       });
   
-      setUser(userUpdateRes.data.updatedUser); // Update auth context
+      setUser(userUpdateRes.data.updatedUser);
   
-      // ✅ 2. Update password (only if filled)
       if (passwordData.newPassword || passwordData.confirmPassword) {
         if (passwordData.newPassword !== passwordData.confirmPassword) {
           return setMessage('❌ Passwords do not match');
         }
   
-        await axios.put(`/users/${user._id}/password`, {
+        await axiosInstance.put(`/users/${user._id}/password`, {
           password: passwordData.newPassword
         });
       }
   
       setMessage('✅ Profile updated successfully!');
     } catch (error) {
-      console.error(error);
+      console.error("❌ Profile update failed:", error);
       setMessage('❌ Update failed. Please try again.');
     }
   };
+    
   
+  if (!user || !user._id) {
+    setMessage("❌ You must be logged in to update your profile.");
+    return;
+  }
   
+  console.log("✅ AuthContext user:", user);
+console.log("✅ AuthContext token:", token);
+
 
 
   return (
