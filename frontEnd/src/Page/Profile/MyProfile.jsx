@@ -1,6 +1,5 @@
 import React, { useState ,useEffect} from 'react';
 import { useAuth } from '../../Context/AuthContext';
-import axios from 'axios';
 import '../../styles/MyProfile.css';
 import axiosInstance from '../../api/axiosInstance';
 
@@ -48,7 +47,7 @@ function MyProfile() {
     );
   }
   
-  console.log("token:",token);
+  // console.log("token:",token);
   
   const handlePasswordChange = (e) => {
     setPasswordData(prev => ({
@@ -68,21 +67,25 @@ function MyProfile() {
   
     try {
       console.log("➡️ Sending profile update for:", user._id);
-      const userUpdateRes = await axiosInstance.put(`/users/${user._id}`, {
+  
+      // ✅ Update name/email
+      const userUpdateRes = await axiosInstance.put(`/users/profile/${user._id}`, {
         username: formData.username,
         email: formData.email,
       });
+      
   
       setUser(userUpdateRes.data.updatedUser);
   
+      // ✅ Update password only if fields are filled
       if (passwordData.newPassword || passwordData.confirmPassword) {
         if (passwordData.newPassword !== passwordData.confirmPassword) {
           return setMessage('❌ Passwords do not match');
         }
   
-        await axiosInstance.put(`/users/${user._id}/password`, {
+        await axiosInstance.put(`/users/password/${user._id}`, {
           password: passwordData.newPassword
-        });
+        });        
       }
   
       setMessage('✅ Profile updated successfully!');
@@ -91,6 +94,8 @@ function MyProfile() {
       setMessage('❌ Update failed. Please try again.');
     }
   };
+  
+  
     
   
   if (!user || !user._id) {
@@ -98,8 +103,8 @@ function MyProfile() {
     return;
   }
   
-  console.log("✅ AuthContext user:", user);
-console.log("✅ AuthContext token:", token);
+//   console.log("✅ AuthContext user:", user);
+// console.log("✅ AuthContext token:", token);
 
 
 
@@ -149,6 +154,10 @@ console.log("✅ AuthContext token:", token);
           </label>
 
           <button type="submit">Save Changes</button>
+          {/* <p><strong>ID:</strong> {user?._id}</p>
+          <p><strong>Name:</strong> {user?.name}</p>
+          <p><strong>Email:</strong> {user?.email}</p> */}
+
         </form>
         {message && <p className="message">{message}</p>}
       </div>

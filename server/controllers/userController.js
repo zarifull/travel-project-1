@@ -49,7 +49,7 @@ export const loginUser = async (req, res) => {
 
     return res.status(200).json({
       user: {
-        _id: user._id.toString(), // ✅ critical fix
+        _id: user._id,
         name: user.name,
         email: user.email,
       },
@@ -71,24 +71,24 @@ export const getProfile = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
 export const updateUser = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { username, email } = req.body;
-
     const updatedUser = await User.findByIdAndUpdate(
-      id,
-      { name: username, email },
+      req.params.id,
+      {
+        name: req.body.username, // ✅ map 'username' from frontend to 'name' in DB
+        email: req.body.email,
+      },
       { new: true }
     );
 
-    res.json({ updatedUser });
-  } catch (err) {
-    console.error("Update error:", err);
-    res.status(500).json({ message: "Server error" });
+    res.status(200).json({ updatedUser });
+  } catch (error) {
+    console.error("❌ Failed to update user:", error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 export const updatePassword = async (req, res) => {
   try {

@@ -8,14 +8,12 @@ import ToursList from '../Page/Tours/ToursList';
 import Advertisment from '../Static/Advertisment';
 import AddTour from '../Page/Tours/AddTour';
 import TourDetails from '../Page/Tours/TourDetails';
-import TourCard from '../Components/TourCard';
 import EditTour from '../Page/Tours/EditTour';
 import SearchBox from '../Page/Tours/SearchBox';
 import Signup from '../Page/Auth/Signup';
 import Login from '../Page/Auth/Login';
 import Profile from '../Static/Profile';
 import ForgotPassword from '../Page/Auth/forgotPassword';
-import EnterOtp from '../Page/Auth/EnterOtp';
 import PasswordSuccess from '../Page/Auth/PasswordSucces';
 import ResetPassword from '../Page/Auth/ResetPassword';
 import VerifyOtp from '../Page/Auth/VerifyOtp';
@@ -48,13 +46,11 @@ function Main({ user, setUser }) {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/add-tour" element={<AddTour />} />
-        <Route path="/tour-card" element={<TourCard />} />
         <Route path="/tour-details/:id" element={<TourDetails tours={tours} />} />
         <Route path="/edit-tour/:id" element={<EditTour tours={tours} />} />
         <Route path="/signup" element={<Signup setUser={setUser} />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        {/* <Route path="/enter-otp" element={<EnterOtp />} /> */}
         <Route path="/password-success" element={<PasswordSuccess />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/auth/reset-password" element={<ResetPassword />} />

@@ -31,8 +31,10 @@ function Login() {
         email: res.data.email,
       };
   
-      login(userData, res.data.token);
-  
+      // login(userData, res.data.token);
+      
+        // console.log("📦 Login response:", res.data);
+
       alert("Login successful!");
       navigate("/");
   
@@ -40,7 +42,7 @@ function Login() {
       console.log("Login failed:", error.response?.data?.message || "Server error.");
     }
   };
-  console.log("📌 Current User: ", user);
+  // console.log("📌 Current User: ", user);
 
 
   return (

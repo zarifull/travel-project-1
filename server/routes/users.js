@@ -16,7 +16,8 @@ router.post('/reset-password', resetPassword);
 
 // Profile (GET + PUT)
 router.get('/me', protect, getProfile);
-router.put('/:id', updateUser);
-router.put('/password/:id', updatePassword);
+router.put('/profile/:id', updateUser);         // for updating name/email
+router.put('/password/:id', updatePassword);    // for updating password
+
 
 export default router;
