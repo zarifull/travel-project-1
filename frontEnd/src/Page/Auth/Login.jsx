@@ -22,26 +22,17 @@ function Login() {
         email: email.trim(),
         password: password.trim(),
       });
-
   
-      // Adapt here: construct user from res.data fields
-      const userData = {
-        _id: res.data._id,
-        name: res.data.name,
-        email: res.data.email,
-      };
+      const userData = res.data.user; // ✅ Correctly extract
+      login(userData, res.data.token);
   
-      // login(userData, res.data.token);
-      
-        // console.log("📦 Login response:", res.data);
-
       alert("Login successful!");
       navigate("/");
-  
     } catch (error) {
       console.log("Login failed:", error.response?.data?.message || "Server error.");
     }
   };
+  
   // console.log("📌 Current User: ", user);
 
 

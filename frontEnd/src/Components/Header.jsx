@@ -64,7 +64,7 @@ function Header() {
                   <Link to='/about-us' className='menu-links'>About Us</Link>
                   <Link to='/my-profile' className='menu-links'>my profile</Link>
                   <Link to='/my-bookings' className='menu-links'>my bookings</Link>
-                  <Link to='/booking-form' className='menu-links'>Booking form</Link>
+                  <Link to='/admin/dashboard' className='menu-links'>Admin</Link>
             </div>
                     )}
               </button>

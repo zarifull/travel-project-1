@@ -59,7 +59,7 @@ function ResetPassword() {
   };
 
 
-console.log("Saved user after password reset:", user);
+// console.log("Saved user after password reset:", user);
 
 
   return (

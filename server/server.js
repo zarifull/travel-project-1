@@ -7,6 +7,7 @@ import users from './routes/users.js';
 import helmet from 'helmet';
 import sanitizeRequest from './middleware/sanitize.js';
 import bookings from './routes/bookings.js';
+import admin from './routes/admin.js'
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 app.use('/api/tours', tours);
 app.use('/api/users', users);
 app.use('/api/bookings',bookings);
+app.use('/api/admin', admin); 
 
 mongoose.connect(process.env.MONGODB)
   .then(() => {

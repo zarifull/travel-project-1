@@ -89,7 +89,6 @@ export const updateUser = async (req, res) => {
   }
 };
 
-
 export const updatePassword = async (req, res) => {
   try {
     const { id } = req.params;
@@ -197,3 +196,19 @@ export const resetPassword = async (req, res) => {
   }
 
 };
+
+// controller
+export const promoteToAdmin = async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate(
+      { email: req.body.email },
+      { role: "admin", isAdmin: true }, // ✅ also set isAdmin to true
+      { new: true }
+    );    
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json({ message: "User promoted to admin", user });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+

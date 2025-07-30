@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please add a password'],
   },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
   otp: String,
   otpExpires: Date,
 }, { timestamps: true });
