@@ -18,11 +18,12 @@ import PasswordSuccess from '../Page/Auth/PasswordSucces';
 import ResetPassword from '../Page/Auth/ResetPassword';
 import VerifyOtp from '../Page/Auth/VerifyOtp';
 import PrivateRoute from './Privateroute';
-import MyProfile from '../Page/Profile/MyProfile';
-import MyBookings from '../Page/Profile/MyBookings';
+import UserProfile from '../Page/User/UserProfile';
+import UserBookings from '../Page/User/UserBookings';
 import BookingPage from '../Static/BookinPage';
 import SearchForm from '../Components/SearchForm';
 import AdminDashboard from '../Page/Admin/AdminDashboard';
+import AdminUsers from '../Page/Admin/AdminUsers';
 
 function Main({ user, setUser }) {
   const [tours, setTours] = useState([]);
@@ -56,11 +57,12 @@ function Main({ user, setUser }) {
         <Route path="/profile" element={<Profile />} />
         <Route path="/auth/reset-password" element={<ResetPassword />} />
         <Route path="/auth/verify-otp" element={<VerifyOtp />} />
-        <Route path="/my-profile" element={<MyProfile  setUser={setUser}  />} />
-        <Route path="/my-bookings" element={<MyBookings />} />
+        <Route path="/my-profile" element={<UserProfile  setUser={setUser}  />} />
+        <Route path="/my-bookings" element={<UserBookings />} />
         <Route path="/booking-page/:tourId" element={<BookingPage/>} />
         <Route path="/search-form" element={<SearchForm/>} />
-        <Route path="/admin/dashboard" element={<AdminDashboard/>} />
+        <Route path="/admin/dashboard" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
+        <Route path="/admin/users" element={<PrivateRoute><AdminUsers /></PrivateRoute>} />
         
 
 

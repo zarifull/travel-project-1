@@ -34,13 +34,21 @@ export const loginUser = async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-    if (!user) return res.status(401).json({ message: "Invalid email or password" });
+    if (!user)
+      return res.status(401).json({ message: "Invalid email or password" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ message: "Invalid email or password" });
+    if (!isMatch)
+      return res.status(401).json({ message: "Invalid email or password" });
 
+    // ✅ Include role and isAdmin in the token
     const token = jwt.sign(
-      { id: user._id, email: user.email },
+      {
+        id: user._id,
+        email: user.email,
+        role: user.role,         // ✅ important
+        isAdmin: user.isAdmin,   // optional but helpful
+      },
       process.env.JWT_SECRET || "your_secret_key",
       { expiresIn: "7d" }
     );
@@ -52,6 +60,8 @@ export const loginUser = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
+        isAdmin: user.isAdmin,
       },
       token,
     });
@@ -195,20 +205,5 @@ export const resetPassword = async (req, res) => {
     res.status(500).json({ message: "Failed to reset password" });
   }
 
-};
-
-// controller
-export const promoteToAdmin = async (req, res) => {
-  try {
-    const user = await User.findOneAndUpdate(
-      { email: req.body.email },
-      { role: "admin", isAdmin: true }, // ✅ also set isAdmin to true
-      { new: true }
-    );    
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.json({ message: "User promoted to admin", user });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
 };
 

@@ -5,9 +5,12 @@ import '../styles/Header.css';
 import { FiMenu, FiUser,} from "react-icons/fi";
 import { TbCopyPlusFilled } from "react-icons/tb";
 import UserIcon from './UserIcon';
+import { useAuth } from '../Context/AuthContext';
 
 function Header() {
   const navRef = useRef();
+
+  const { user } = useAuth();
 
   const [openModal,setOpenModal] = useState(false)
 
@@ -24,6 +27,9 @@ function Header() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  console.log("User from context:", user);
+
   return (
  
     <div className="header">
@@ -31,25 +37,25 @@ function Header() {
         <nav ref={navRef}>
           <div className="nav-block">
           <div className="nav-logo">
-            <Link to='#'  className='logo-block' >
+            <Link to='/'  className='logo-block' >
               <img className='logo' src={logo} alt="Logo" />
               <span className='logo-theme'>Batken Travels</span>
             </Link>
           </div>
         <div className="add-tours">
-          <Link to='/Add-tour' className='addTour-icon'>
+          {/* <Link to='/Add-tour' className='addTour-icon'>
           <TbCopyPlusFilled />
-          </Link>
-        </div>
-        <div className="nav-box">
-          {/* <div className="user-modal">
-              <button className='nav-btn'
-                onClick={()=> setOpenModal(true)} >
-                <i className="fa-solid fa-user"></i>
-              </button>
-            <Modal open={openModal} onClose={()=> setOpenModal(false)}/>
-          </div> */}
+          </Link> */}
 
+            {user?.role === 'admin' && (
+              <Link to='/admin/dashboard' className='menu-links'>Admin dashboard</Link>
+            )}
+
+
+        </div>
+
+        <div className="nav-box">
+  
             <div className="nav-user">
               <UserIcon />
             </div>
@@ -64,7 +70,7 @@ function Header() {
                   <Link to='/about-us' className='menu-links'>About Us</Link>
                   <Link to='/my-profile' className='menu-links'>my profile</Link>
                   <Link to='/my-bookings' className='menu-links'>my bookings</Link>
-                  <Link to='/admin/dashboard' className='menu-links'>Admin</Link>
+                  <Link to='/admin/dashboard' className='menu-links'>Admin dashboard</Link>
             </div>
                     )}
               </button>

@@ -2,7 +2,7 @@ import express from 'express';
 import {
   signupUser, loginUser, resetPassword,
   verifyOtp, sendOtpToEmail, getProfile,
-  updateUser, updatePassword,promoteToAdmin,
+  updateUser, updatePassword
 } from '../controllers/userController.js';
 import { protect,isAdmin } from '../middleware/authMiddleware.js';
 
@@ -18,7 +18,6 @@ router.post('/reset-password', resetPassword);
 router.get('/me', protect, getProfile);
 router.put('/profile/:id', updateUser);         // for updating name/email
 router.put('/password/:id', updatePassword);    // for updating password
-router.put("/promote", protect, isAdmin, promoteToAdmin);
 
 
 export default router;
