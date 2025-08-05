@@ -146,13 +146,13 @@ const handleBooking = async () => {
 
           
 
-          <div className="header-photos">
-            <img src={balon} alt="balon" className='header-imges img-balon'  />
-            <img src={camera} alt="camera" className='header-imges img-camera' />
-            <img src={plane} alt="plane"  className='header-imges img-plane'/>
-            <img src={coffee} alt="coffee" className='header-imges img-coffee' />
-            <img src={directionBoard} alt="direction board" className='header-imges img-dsn' />
-            <img src={durbu} alt="durbu"className='header-imges img-durbu' />
+          <div className="home-floating">
+            <img src={balon} alt="balon" className='floating-imges img-balon'  />
+            <img src={camera} alt="camera" className='floating-imges img-camera' />
+            <img src={plane} alt="plane"  className='floating-imges img-plane'/>
+            <img src={coffee} alt="coffee" className='floating-imges img-coffee' />
+            <img src={directionBoard} alt="direction board" className='floating-imges img-drn' />
+            <img src={durbu} alt="durbu"className='floating-imges img-durbu' />
           </div>
 
           <section className="tour-pagination">

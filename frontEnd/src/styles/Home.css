@@ -1,24 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 .home {
-    width: 100vw;
-    min-height: 100vh;
-    font-family: "Poppins";
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: "Poppins",;
+  position: relative;
+  /* background-color: #1976d2; */
 }
+
+
 .home-image{
     background-image: url(../Assets/mainPhoto.png);
   background-repeat: no-repeat;
-  background-position: 50% -4%;
+  background-position: center top;
+  /* background-size: auto; */
     width: 100%;
-  height: 95vh;
+  height: 100vh;
+  /* background-color: #1976d2; */
+}
+.booking{
+  max-width: 65%;
+  margin: auto; 
+  position: absolute; 
+ top: 19em;
+ right: 13em;
+   z-index: 1;
 }
 
-.booking{
-    max-width: 65%;
-    margin: auto; 
-    position: absolute; 
-   top: 19em;
-   right: 13em;
-     z-index: 1;
-}
 .booking-theme{
     max-width: 200px;
     padding: 5px;
@@ -154,39 +162,47 @@
     font-size: 1rem;
     max-width: 80%;
 }
-.img-balon{
+.floating-imges{
     position: absolute;
-    bottom: 33em;
-    right: 1em;
-    padding: 10px;
+    z-index: 1;
+    /* max-width: 80px; */
+    animation: float 4s ease-in-out infinite;
+    transition: transform 0.3s ease;
+  
 }
+
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+.img-balon {
+  top: 10%;
+  right: 5%;
+}
+
+
 .img-camera{
-    position: absolute;
     top: 15em;
    left:  3em;
 }
 .img-coffee{
-    position: absolute;
    top:29em;
   right: 15em;
-    z-index: 1;
 }
-.img-dsn{
-    position: absolute;
+.img-drn{
    top: 100px;
    right: 190px;
-   margin: 20px;
+   pointer-events: none !important;
 }
 .img-durbu{
-    position: absolute;
   top: 490px;
     left: 250px;
 }
 .img-plane{
-    position: absolute;
-    top: 100px;
+    top: 2em;
     left: 300px;
-    max-width: 200px;
 }
 
 .advantages{

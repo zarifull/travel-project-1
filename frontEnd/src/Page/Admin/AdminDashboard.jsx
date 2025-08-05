@@ -1,7 +1,9 @@
-// src/pages/Admin/AdminDashboard.jsx
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../api/axiosInstance';
 import { Link } from 'react-router-dom';
+import '../../styles/AdminDashboard.css';
+import { FaArrowRightLong } from "react-icons/fa6";
+
 
 function AdminDashboard() {
   const [message, setMessage] = useState('');
@@ -22,17 +24,28 @@ function AdminDashboard() {
   }, []);
 
   return (
-    <div style={{height:'100vh',textAlign:'center'}}>
-  <h2>Welcome, Admin!</h2>
+    <div className='admin-dashboard'>
+  <div className="admin-img"><h2>Welcome   Admin !</h2>
   {error && <p style={{ color: 'red' }}>{error}</p>}
 
   {stats ? (
-    <div>
-      <p>Total Users: {stats.totalUsers}</p>
-      <p>Total Bookings: {stats.totalBookings}</p>
-      <p>Total Tours: {stats.totalTours}</p>
-
-      <div style={{ marginTop: '20px' }}>
+    <div className='product-total'>
+      <p>Total Users: <span style={{color: 'black', fontSize: '1.6rem'}}>{stats.totalUsers}</span></p>
+      <Link to="/admin/users">
+          <button>Manage Users <FaArrowRightLong /></button>
+        </Link>
+      <p>Total Bookings:  <span style={{color: 'black', fontSize: '1.6rem'}}>  
+        {stats.totalBookings}</span></p>
+        <Link to="/admin/tours">
+          <button>Manage Tours <FaArrowRightLong /></button>
+        </Link>
+      <p>Total Tours: <span style={{color: 'black', fontSize: '1.6rem'}}>
+        {stats.totalTours}</span></p>
+        <Link to="/admin/bookings">
+          <button>Manage Bookings  <FaArrowRightLong  /></button> 
+        </Link>
+{/* 
+      <div className='manage-btn' style={{ marginTop: '20px' }}>
         <Link to="/admin/users">
           <button>Manage Users</button>
         </Link>
@@ -42,11 +55,12 @@ function AdminDashboard() {
         <Link to="/admin/bookings">
           <button>Manage Bookings</button>
         </Link>
-      </div>
+      </div> */}
     </div>
   ) : (
     <p>Loading stats...</p>
   )}
+</div>
 </div>
   );
 }

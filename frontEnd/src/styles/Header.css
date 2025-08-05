@@ -2,18 +2,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
-nav{
-    width: 100%;
-   position: fixed;
-   z-index: 1;
-
+nav {
+  width: 100%;                 /* Full width */
+  position: fixed;             /* Sticks to top */
+  top: 0.1em;  
+  left: 1em;
+  z-index: 1;
+ font-family: "Poppins";
 }
-.nav-block{
- display: flex;
- justify-content: center;
- align-items: center;
 
+.nav-block {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;                /* Take full height of the nav */
 }
+
 .logo-block{
     display: flex;
     justify-content: start;
@@ -47,22 +51,34 @@ font-size: 1.2rem;
 
 .nav-box{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    margin-right: 2em;
+}
+.admin{
+font-size: 2.1rem;
+margin-top: 0.3rem;
+padding: 0.5rem;
+}
+.admin-btn{
+  color: black;
 }
 .addTour-icon{
     font-size: 1.4rem;
     padding: 0.5em;
     color: #000;
 }
-.menu {
-    position: relative;
+.menu-icon {
+ cursor: pointer;
+ font-size: 1.5rem;
+ margin-left: 0.5rem;
   }
   
   .menu-dropdown {
     position: absolute;
-    top: 50px;
-    right: 0;
+    top: 5em;
+    right: 3em;
+    padding: 1rem;
     background-color: white;
     border-radius: 10px;
     box-shadow: hsla(28, 76%, 55%, 0.35) 0px 5px 15px;
@@ -70,20 +86,17 @@ font-size: 1.2rem;
     z-index: 100;
     display: flex;
     flex-direction: column;
-   
-   
-    
+    gap: 0.5rem;
   }
   
   .menu-links {
     display: block;
-    padding: 10px 30px;
+    padding: 0.5rem 2rem;
     text-decoration: none;
-    color: #333;
     transition: background 0.3s;
     color: #f08c00;
-  font-weight: 500;
-    font-family: "Poppins";
+    font-weight: 500;
+    font-family: 1.7rem;
   }
   
   .menu-links:hover {
@@ -91,4 +104,3 @@ font-size: 1.2rem;
    color: #fff;
    border-radius: 10px;
   }
-  

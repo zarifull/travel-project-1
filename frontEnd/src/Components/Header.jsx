@@ -6,17 +6,19 @@ import { FiMenu, FiUser,} from "react-icons/fi";
 import { TbCopyPlusFilled } from "react-icons/tb";
 import UserIcon from './UserIcon';
 import { useAuth } from '../Context/AuthContext';
+import { MdAdminPanelSettings, MdMenuOpen } from "react-icons/md";
 
 function Header() {
   const navRef = useRef();
 
   const { user } = useAuth();
 
-  const [openModal,setOpenModal] = useState(false)
-
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
+  const toggleMenu = () =>{
+    setIsOpen((prev)=> !prev)
+  }
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -42,28 +44,27 @@ function Header() {
               <span className='logo-theme'>Batken Travels</span>
             </Link>
           </div>
-        <div className="add-tours">
-          {/* <Link to='/Add-tour' className='addTour-icon'>
+        {/* <div className="add-tours">
+          <Link to='/Add-tour' className='addTour-icon'>
           <TbCopyPlusFilled />
-          </Link> */}
-
-            {user?.role === 'admin' && (
-              <Link to='/admin/dashboard' className='menu-links'>Admin dashboard</Link>
-            )}
-
-
-        </div>
+          </Link>
+        </div> */}
 
         <div className="nav-box">
-  
+          <div className="admin">
+        {user?.role === 'admin' && (
+              <Link to='/admin/dashboard' className='admin-btn'><MdAdminPanelSettings /></Link>
+            )}
+          </div>
             <div className="nav-user">
               <UserIcon />
             </div>
 
             <menu className="menu">
-              <button className='nav-btn'>
-                <FiMenu className="text-xl cursor-pointer" onClick={() => setIsOpen(!isOpen)} />
-                {isOpen && (
+              <div className='menu-icon' onClick={()=> setIsOpen(!isOpen)}>
+                {isOpen ? 'X' : <FiMenu />} 
+              </div>
+             {isOpen && (
             <div className="menu-dropdown">
                   <Link to='/contacts' className='menu-links'>Contacts</Link>
                   <Link to='/tour-list' className='menu-links'>Tours</Link>
@@ -72,11 +73,11 @@ function Header() {
                   <Link to='/my-bookings' className='menu-links'>my bookings</Link>
                   <Link to='/admin/dashboard' className='menu-links'>Admin dashboard</Link>
             </div>
-                    )}
-              </button>
+               )}
+          
             </menu>
             
-        </div>
+            </div>
         </div>
         </nav>
 
