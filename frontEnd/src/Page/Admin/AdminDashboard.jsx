@@ -36,13 +36,13 @@ function AdminDashboard() {
         </Link>
       <p>Total Bookings:  <span style={{color: 'black', fontSize: '1.6rem'}}>  
         {stats.totalBookings}</span></p>
-        <Link to="/admin/tours">
-          <button>Manage Tours <FaArrowRightLong /></button>
+        <Link to="/admin/bookings">
+          <button>Manage Bookings <FaArrowRightLong /></button>
         </Link>
       <p>Total Tours: <span style={{color: 'black', fontSize: '1.6rem'}}>
         {stats.totalTours}</span></p>
-        <Link to="/admin/bookings">
-          <button>Manage Bookings  <FaArrowRightLong  /></button> 
+        <Link to="/admin/tours">
+          <button>Manage Tours  <FaArrowRightLong  /></button> 
         </Link>
 {/* 
       <div className='manage-btn' style={{ marginTop: '20px' }}>

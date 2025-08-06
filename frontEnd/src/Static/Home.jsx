@@ -12,7 +12,6 @@ import Advertisment from './Advertisment';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaArrowRightLong } from "react-icons/fa6";
-import RatingResult from '../Components/RatingResult';
 import TourCard from '../Components/TourCard';
 import { useNavigate } from 'react-router-dom';
 
@@ -164,27 +163,30 @@ const handleBooking = async () => {
             <div className="pagination-cards">
               {tours?.map(tour => {
                 return (
-                  <div key={tour._id} className="pagination-card">
-                    <div className="pagination-imgs">
-                      <img
-                        className="pagination-img1"
-                        src={tour.imageUrls?.[0] || "/placeholder.jpg"}
-                        alt={`Main ${tour.title}`}
-                      />
-                      <img
-                        className="pagination-img2"
-                        src={tour.imageUrls?.[1] || "/placeholder.jpg"}
-                        alt={`Second ${tour.title}`}
-                      />
-                    </div>
-                    <div className="pagination-card-infor">
-                    <p className='pagination-tour-name'>{tour.title}</p>
-                    <RatingResult ratings={tour.ratings} />
+                <div className="pagination-card-container" key={tour._id}>
+                  <div className="flip-card">
+                    <div className="flip-card-inner">
+                    <div className="flip-card-front">
+                        <img
+                          className="card-image"
+                          src={tour.imageUrls?.[0] || "/placeholder.jpg"}
+                          alt={`Main ${tour.title}`}
+                        />
+                        <div className="dark-overlay"></div> 
+                        <div className="card-front-text">
+                          <h3>{tour.title}</h3>
+                          <hr />
+                          <p>{tour.subtitle || `$ ${tour.price}`}</p>
+                        </div>
+                      </div>
+                      <div className="flip-card-back">
                       <Link to={`/tour-details/${tour._id}`} className="pagination-link">
                         MORE <FaArrowRightLong />
                       </Link>
+                      </div>
                     </div>
                   </div>
+                </div>
                 );
               })}
             </div>

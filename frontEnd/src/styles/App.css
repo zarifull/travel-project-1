@@ -22,3 +22,8 @@ html, body {
   max-width: 1200px;
   padding: 0 1rem;
 }
+@media (min-width: 1400px) {
+  .container {
+    padding: 0; /* Remove padding only for wide screens */
+  }
+}
