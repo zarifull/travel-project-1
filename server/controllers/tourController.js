@@ -112,9 +112,6 @@ export const getAllTours = async (req, res) => {
   }
 };
 
-
-
-
 export const getTourById = async (req, res) => {
   try {
     const tour = await Tour.findById(req.params.id);
@@ -152,12 +149,13 @@ export const deleteTour = async (req, res) => {
   }
 };
 
-
-
 export const rateTour = async (req, res) => {
   try {
     const { id } = req.params;
     const { rating } = req.body;
+
+    console.log('REQ.PARAMS:', req.params);
+    console.log('REQ.BODY:', req.body);
 
     if (!rating || typeof rating !== 'number') {
       return res.status(400).json({ message: 'Rating must be a number' });
@@ -168,6 +166,8 @@ export const rateTour = async (req, res) => {
       return res.status(404).json({ message: 'Tour not found' });
     }
 
+    console.log('FOUND TOUR:', tour);
+
     // Ensure tour.ratings is an array
     tour.ratings = tour.ratings || [];
 
@@ -176,14 +176,14 @@ export const rateTour = async (req, res) => {
 
     res.status(200).json({ message: 'Rating added', ratings: tour.ratings });
   } catch (error) {
-    console.error('Rating error:', error);  // Check terminal for full stack trace
+    console.error('❌ Rating error:', error);  // This will show you the actual 500 error
     res.status(500).json({ message: 'Server error' });
   }
-  console.log('REQ.PARAMS:', req.params);
-console.log('REQ.BODY:', req.body);
-console.log('FOUND TOUR:', tour);
+  console.log("req.params:", req.params);
+console.log("req.body:", req.body);
 
 };
+
 
 
 

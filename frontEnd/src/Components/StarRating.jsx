@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import axios from '../api/axiosInstance';
 import '../styles/SearchBox.css';
+import axiosInstance from '../api/axiosInstance';
 
 const StarRating = ({ tourId, tour }) => {
   const [rating, setRating] = useState(0);
@@ -9,10 +10,10 @@ const StarRating = ({ tourId, tour }) => {
   const [submitted, setSubmitted] = useState(false);
   const [ratings, setRatings] = useState(tour.ratings || []);
 
-  const handleRating = async (value) => {
+  const handleRating = async (value,response) => {
     setRating(value); // визуалдык үчүн
     try {
-      const response = await axios.post(`/tours/${tourId}/rate`, { rating: value });
+      await axiosInstance.post(`/tours/${tourId}/rate`, { rating: Number(value) });
       setRatings(response.data.ratings);
       setSubmitted(true);
     } catch (err) {

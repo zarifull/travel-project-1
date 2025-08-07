@@ -14,10 +14,12 @@ import { Link } from 'react-router-dom';
 import { FaArrowRightLong } from "react-icons/fa6";
 import TourCard from '../Components/TourCard';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../Context/AuthContext"; // Adjust path if different
 
 
 
-function Home({tour,tourId, pricePerGuest}) {
+function Home() {
+  const { user } = useAuth();
   const [tours, setTours] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -27,7 +29,15 @@ function Home({tour,tourId, pricePerGuest}) {
   const [showResults, setShowResults] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [visible, setVisible] = useState(false);
+  const [selectedTourId, setSelectedTourId] = useState(null);
 
+  const userId = user?._id; // ✅ Safe access even if user is null
+
+  const handleCardClick = (tourId) => {
+    setSelectedTourId(tourId);
+    setVisible(true);
+  };
 
   const fetchTours = useCallback(async () => {
     try {
@@ -43,6 +53,7 @@ function Home({tour,tourId, pricePerGuest}) {
     fetchTours();
   }, [fetchTours]);
 
+  if (!user) return <div>Loading...</div>; 
 
 const handleBooking = async () => {
   setLoading(true);
@@ -65,7 +76,6 @@ const handleBooking = async () => {
       return matchesDestination && matchesDate;
     });
 
-    // Navigate to the tour list page and send filtered tours as state
     navigate('/tour-list', { state: { tours: filtered } });
 
   } catch (err) {
@@ -73,7 +83,12 @@ const handleBooking = async () => {
   } finally {
     setLoading(false);
   }
+ 
 };
+
+// tours.forEach(tour => {
+//   console.log("Tour ID:", tour._id);
+// });
 
   return (
     <div className="home">
@@ -141,9 +156,7 @@ const handleBooking = async () => {
           </div>
         )}
 
-    </div>
-
-          
+    </div>    
 
           <div className="home-floating">
             <img src={balon} alt="balon" className='floating-imges img-balon'  />
@@ -153,49 +166,78 @@ const handleBooking = async () => {
             <img src={directionBoard} alt="direction board" className='floating-imges img-drn' />
             <img src={durbu} alt="durbu"className='floating-imges img-durbu' />
           </div>
-
+          
           <section className="tour-pagination">
-          <span className='pagination-theme'>Available Tours</span>
-          <div className="tour-pagination-block">
-            <button className='tour-pagination-next' onClick={() => setPage(p => Math.max(p - 1, 1))} disabled={page === 1}>
-              ⬅ Previous
-            </button>
-            <div className="pagination-cards">
-              {tours?.map(tour => {
-                return (
-                <div className="pagination-card-container" key={tour._id}>
-                  <div className="flip-card">
-                    <div className="flip-card-inner">
-                    <div className="flip-card-front">
-                        <img
-                          className="card-image"
-                          src={tour.imageUrls?.[0] || "/placeholder.jpg"}
-                          alt={`Main ${tour.title}`}
-                        />
-                        <div className="dark-overlay"></div> 
-                        <div className="card-front-text">
-                          <h3>{tour.title}</h3>
-                          <hr />
-                          <p>{tour.subtitle || `$ ${tour.price}`}</p>
-                        </div>
-                      </div>
-                      <div className="flip-card-back">
-                      <Link to={`/tour-details/${tour._id}`} className="pagination-link">
-                        MORE <FaArrowRightLong />
-                      </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                );
-              })}
-            </div>
-            <button className='tour-pagination-next' onClick={() => setPage(p => Math.min(p + 1, totalPages))} disabled={page === totalPages}>
-              Next ➡
-            </button>
+  <span className="pagination-theme">Available Tours</span>
+  <div className="tour-pagination-block">
+    <button
+      className="tour-pagination-next"
+      onClick={() => setPage(p => Math.max(p - 1, 1))}
+      disabled={page === 1}
+    >
+      ⬅ Previous
+    </button>
+
+    <div className="pagination-cards">
+    {Array.isArray(tours) && tours.map(tour => {
+      // console.log("Tours in Home:", tours);
+
+  if (!tour) return null; // skip undefined/null tours
+  return (
+    <div className="pagination-card-container" key={tour._id}>
+    <div className="flip-card">
+      <div className="flip-card-inner">
+        <div className="flip-card-front">
+          <img
+            src={tour.imageUrls?.[0] || "/placeholder.jpg"}
+            alt={`Main ${tour.title}`}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "8px",
+            }}
+          />
+          <div className="dark-overlay"></div>
+          <div className="card-front-text">
+            <h3>{tour.title}</h3>
+            <hr />
+            <p>{tour.subtitle || `$ ${tour.price}`}</p>
           </div>
-          <span className='pagination-quantity'> Page {page} of {totalPages} </span>
-        </section>
+        </div>
+  
+        <div className="flip-card-back">
+          <Link
+            to={`/tour-details/${tour._id}`}
+            className="pagination-link"
+            onClick={(e) => e.stopPropagation()}
+          >
+            MORE <FaArrowRightLong />
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  );
+})}
+
+    </div>
+
+    <button
+      className="tour-pagination-next"
+      onClick={() => setPage(p => Math.min(p + 1, totalPages))}
+      disabled={page === totalPages}
+    >
+      Next ➡
+    </button>
+  </div>
+
+  <span className="pagination-quantity">
+    Page {page} of {totalPages}
+  </span>
+</section>
+
 
 
     <section className="advantages">

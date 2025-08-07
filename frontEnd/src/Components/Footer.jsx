@@ -6,7 +6,7 @@ function Footer() {
   return (
    <footer>
      <div className='footer-block'>
-      <div className="container">
+      <div className="container" style={{maxWidth:'90%'}}>
     <div className="footer-parts">
       <div className='footer-part footer-part1'>
        <span className='part1-prg'>Batken </span>  Travels

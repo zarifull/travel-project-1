@@ -95,7 +95,7 @@ const TourDetails = ({ tours }) => {
             
           </div>
 
-          <menu className="detail-crud">
+          {/* <menu className="detail-crud">
             <div className="crud-btn">
             <MdOutlineSettings  onClick={()=> setOpenMenu(!openMenu)} />
             {openMenu && (
@@ -112,7 +112,7 @@ const TourDetails = ({ tours }) => {
               </div>
             )}
             </div>
-          </menu>
+          </menu> */}
 
           <div className="rate-result">
           <RatingResult ratings={tour.ratings} />

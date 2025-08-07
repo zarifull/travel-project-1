@@ -8,6 +8,7 @@
 /* Ensure full height for layout */
 html, body {
   height: 100%;
+  line-height: 1.6;
 }
 
 /* Application container */
@@ -22,7 +23,7 @@ html, body {
   max-width: 1200px;
   padding: 0 1rem;
 }
-@media (min-width: 1400px) {
+@media (min-width: 1200px) {
   .container {
     padding: 0; /* Remove padding only for wide screens */
   }

@@ -3,6 +3,7 @@
     height: 270%;
     color: blue;
     text-align: center;
+    overflow: hidden;
 }
 .aboutUs-theme {
     color: #74c0fc;
