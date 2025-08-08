@@ -157,8 +157,8 @@ const handleBooking = async () => {
         )}
 
     </div>    
-
-          <div className="home-floating">
+        
+          <div className="home-floating-container">
             <img src={balon} alt="balon" className='floating-imges img-balon'  />
             <img src={camera} alt="camera" className='floating-imges img-camera' />
             <img src={plane} alt="plane"  className='floating-imges img-plane'/>
@@ -167,7 +167,7 @@ const handleBooking = async () => {
             <img src={durbu} alt="durbu"className='floating-imges img-durbu' />
           </div>
           
-          <section className="tour-pagination">
+  <section className="tour-pagination">
   <span className="pagination-theme">Available Tours</span>
   <div className="tour-pagination-block">
     <button
@@ -223,7 +223,6 @@ const handleBooking = async () => {
 })}
 
     </div>
-
     <button
       className="tour-pagination-next"
       onClick={() => setPage(p => Math.min(p + 1, totalPages))}
@@ -232,7 +231,6 @@ const handleBooking = async () => {
       Next ➡
     </button>
   </div>
-
   <span className="pagination-quantity">
     Page {page} of {totalPages}
   </span>

@@ -161,53 +161,36 @@
 .booking-date[type="date"]{
     font-size: 1rem;
     max-width: 80%;
-}
-.home-floating{
-  display: block;
-}
-.floating-imges{
-    position: absolute;
-    z-index: 1;
-    /* max-width: 80px; */
-    animation: float 4s ease-in-out infinite;
-    transition: transform 0.3s ease;
-  
+}/* Container to keep all floating images together */
+.floating-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px; /* Limit container width */
+  margin: 0 auto;
+  height: 600px; /* Height of floating area */
+  overflow: hidden;
 }
 
-
+/* Base floating image settings */
+.floating-imges {
+  position: absolute;
+  z-index: 1;
+  animation: float 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
 @keyframes float {
   0%   { transform: translateY(0); }
   50%  { transform: translateY(-10px); }
   100% { transform: translateY(0); }
 }
-.img-balon {
-  top: 10%;
-  right: 5%;
-}
 
-
-.img-camera{
-    top: 15em;
-   left:  3em;
-}
-.img-coffee{
-   top:29em;
-  right: 15em;
-}
-.img-drn{
-   top: 100px;
-   right: 100px;
-   z-index: -1;
-   pointer-events: none !important;
-}
-.img-durbu{
-  top: 490px;
-    left: 250px;
-}
-.img-plane{
-    top: 2em;
-    left: 300px;
-}
+/* Sizes for individual images */
+.img-balon  { max-width: 15%; top: 9%; right: 5%; }
+.img-camera { max-width: 10%; top: 15%; left: 5%; }
+.img-coffee { max-width: 8%; top: 21%; right: 17%; }
+.img-drn    { max-width: 25%; top: 5%; right: 10%; z-index: -1; pointer-events: none !important; }
+.img-durbu  { max-width: 9%; top: 22%; left: 17%; }
+.img-plane  { max-width: 14%; top: 5%; left: 23%; }
 
 .advantages{
     width: 100%; 
