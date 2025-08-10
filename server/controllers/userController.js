@@ -20,6 +20,12 @@ export const signupUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid email domain" });
     }
 
+    // const token = jwt.sign(
+    //   { id: user._id, role: user.role },
+    //   process.env.JWT_SECRET,
+    //   { expiresIn: process.env.JWT_EXPIRES_IN }
+    // );
+    
     const newUser = new User({ name, email, password }); // ← raw password
     await newUser.save(); // ← Mongoose hashes it here
 
@@ -41,17 +47,17 @@ export const loginUser = async (req, res) => {
     if (!isMatch)
       return res.status(401).json({ message: "Invalid email or password" });
 
-    // ✅ Include role and isAdmin in the token
-    const token = jwt.sign(
-      {
-        id: user._id,
-        email: user.email,
-        role: user.role,         // ✅ important
-        isAdmin: user.isAdmin,   // optional but helpful
-      },
-      process.env.JWT_SECRET || "your_secret_key",
-      { expiresIn: "7d" }
-    );
+      const token = jwt.sign(
+        {
+          id: user._id,
+          email: user.email,
+          role: user.role,
+          isAdmin: user.isAdmin,
+        },
+        process.env.JWT_SECRET || "your_secret_key",
+        { expiresIn: process.env.JWT_EXPIRES_IN || "7d" }
+      );
+      
 
     await user.save();
 

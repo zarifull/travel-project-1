@@ -37,6 +37,7 @@ export const createTour = async (req, res) => {
       imageUrls, // save array of Cloudinary URLs
     });
 
+    
     await newTour.save();
 
     res.status(201).json({

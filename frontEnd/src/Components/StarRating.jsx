@@ -10,12 +10,12 @@ const StarRating = ({ tourId, tour }) => {
   const [submitted, setSubmitted] = useState(false);
   const [ratings, setRatings] = useState(tour.ratings || []);
 
-  const handleRating = async (value,response) => {
+  const handleRating = async (value) => {
     setRating(value); // визуалдык үчүн
     try {
-      await axiosInstance.post(`/tours/${tourId}/rate`, { rating: Number(value) });
+      const response = await axiosInstance.post(`/tours/${tourId}/rate`, { rating: Number(value) });
       setRatings(response.data.ratings);
-      setSubmitted(true);
+      setSubmitted(true);   
     } catch (err) {
       console.error('Submit failed:', err.response?.data || err.message);
       alert('Rating failed. Please try again later.');
