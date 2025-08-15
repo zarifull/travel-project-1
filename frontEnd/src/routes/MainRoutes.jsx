@@ -23,7 +23,7 @@ import UserBookings from '../Page/User/UserBookings';
 import BookingPage from '../Static/BookinPage';
 import SearchForm from '../Components/SearchForm';
 import AdminDashboard from '../Page/Admin/AdminDashboard';
-import AdminUsers from '../Page/Admin/AdminUsers';
+import TotalUsers from '../Page/Admin/TotalUsers';
 
 function Main({ user, setUser }) {
   const [tours, setTours] = useState([]);
@@ -62,7 +62,7 @@ function Main({ user, setUser }) {
         <Route path="/booking-page/:tourId" element={<BookingPage/>} />
         <Route path="/search-form" element={<SearchForm/>} />
         <Route path="/admin/dashboard" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
-        <Route path="/admin/users" element={<PrivateRoute><AdminUsers /></PrivateRoute>} />
+        <Route path="/total-users" element={<PrivateRoute><TotalUsers /></PrivateRoute>} />
         
 
 

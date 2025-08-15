@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get('/dashboard', protect, isAdmin, getAdminStats);
 router.get('/users', protect, isAdmin, getAllUsers);
-router.post('/users/promote', protect, isAdmin, promoteToAdmin);
+router.put('/promote', protect, isAdmin, promoteToAdmin);
 router.delete('/users/:id', protect, isAdmin, deleteUser);
 
 export default router;

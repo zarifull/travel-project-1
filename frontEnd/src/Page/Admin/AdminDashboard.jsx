@@ -31,7 +31,7 @@ function AdminDashboard() {
   {stats ? (
     <div className='product-total'>
       <p>Total Users: <span style={{color: 'black', fontSize: '1.6rem'}}>{stats.totalUsers}</span></p>
-      <Link to="/admin/users">
+      <Link to="/total-users">
           <button>Manage Users <FaArrowRightLong /></button>
         </Link>
       <p>Total Bookings:  <span style={{color: 'black', fontSize: '1.6rem'}}>  

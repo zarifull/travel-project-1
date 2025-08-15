@@ -1,0 +1,73 @@
+.total-users-page {
+    padding: 25px;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .users-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .total-users-page h1{
+    text-align: center;
+    padding: 0 0 1em 0;
+  }
+  .bottom-line{
+    border-bottom: 50px solid #f7f7f7;
+  }
+  .users-table th,
+  .users-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .users-table th {
+    background: #f7f7f7;
+    font-weight: 600;
+  }
+  
+  .role-badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: white;
+    font-size: 0.8rem;
+  }
+  .role-badge.admin {
+    background: #4caf50;
+    content: "admin!";
+  }
+  /* .role-badge.user {
+    background: #2196f3;
+    padding: 0.5em 1em 0.5em 1em;
+  } */
+  
+  .btn-delete {
+    background: #f59f00;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    margin-right: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-promote {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-delete:hover {
+    background: #e67700;
+  }
+  
+  .btn-promote:hover {
+    background: #388e3c;
+  }
+  
