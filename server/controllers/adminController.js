@@ -29,11 +29,6 @@ export const getAdminStats = async (req, res) => {
   }
 };
 
-/**
- * @desc   Get all users (excluding passwords)
- * @route  GET /api/admin/users
- * @access Private/Admin
- */
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find().select("-password"); // ✅ correct way
@@ -72,12 +67,22 @@ export const promoteToAdmin = async (req, res) => {
   }
 };
 
+export const demoteToUser = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-/**
- * @desc   Delete a user by ID
- * @route  DELETE /api/admin/users/:id
- * @access Private/Admin
- */
+    user.isAdmin = false;
+    await user.save();
+
+    res.json({ updatedUser: user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Demotion failed" });
+  }
+};
+
 export const deleteUser = async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);

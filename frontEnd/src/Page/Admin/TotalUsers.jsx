@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 function TotalUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [processing, setProcessing] = useState({});
 
   // Fetch users
   useEffect(() => {
@@ -50,8 +51,30 @@ function TotalUsers() {
       toast.error("❌ Failed to promote user");
     }
   };
+
+
+  const handleDemote = async (email) => {
+    if (!window.confirm(`Are you sure you want to demote ${email}?`)) return;
   
-  toast.success("User promoted to admin!");  
+    setProcessing((prev) => ({ ...prev, [email]: true }));
+  
+    try {
+      const res = await axiosInstance.put("/admin/demote", { email });
+  
+      setUsers((prevUsers) =>
+        prevUsers.map((u) => (u.email === email ? res.data.updatedUser : u))
+      );
+  
+      toast.success(`✅ ${email} has been demoted to user`);
+    } catch (err) {
+      console.error("Demote failed:", err);
+      toast.error("❌ Failed to demote user");
+    } finally {
+      setProcessing((prev) => ({ ...prev, [email]: false }));
+    }
+  };
+  
+  
 
   if (loading) return <p>Loading users...</p>;
 
@@ -88,19 +111,26 @@ function TotalUsers() {
 
                 <td>{new Date(user.createdAt).toLocaleDateString()}</td>
                 <td>
-                  <button
-                    className="btn-delete"
-                    onClick={() => handleDelete(user._id)}
-                  >
+                  <button className="btn-delete" onClick={() => handleDelete(user._id)}>
                     Delete
                   </button>
-                  {!user.isAdmin && (
+
+                  {!user.isAdmin ? (
                     <button
                       className="btn-promote"
                       onClick={() => handlePromote(user.email)}
                     >
                       Promote
                     </button>
+                  ) : (
+                    <button
+                    className="btn-demote"
+                    onClick={() => handleDemote(user.email)}
+                    disabled={processing[user.email]}
+                  >
+                    Demote
+                  </button>
+                  
                   )}
                 </td>
               </tr>

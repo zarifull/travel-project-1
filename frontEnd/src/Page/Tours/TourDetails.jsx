@@ -17,7 +17,7 @@ import RatingResult from '../../Components/RatingResult';
 
 const TourDetails = ({ tours }) => {
   const detailRef = useRef();
-  const ratings = tours?.ratings || [];
+  const ratings = tour?.ratings || [];
 
   const { id } = useParams();
   const [openMenu,setOpenMenu]=useState(false);
@@ -72,7 +72,7 @@ const TourDetails = ({ tours }) => {
             navigation
             pagination={{ clickable: true }}
             autoplay={{ delay: 3000 }}
-            loop={tour.imageUrls?.length > 2}
+            loop={tour.imageUrls?.length > 1}
             spaceBetween={20}
             slidesPerView={1}
             className='slider-prev'

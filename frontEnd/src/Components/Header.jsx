@@ -30,7 +30,7 @@ function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  console.log("User from context:", user);
+  // console.log("User from context:", user);
 
   return (
  

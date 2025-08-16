@@ -62,12 +62,22 @@
     border-radius: 4px;
     cursor: pointer;
   }
+  .btn-demote{
+    background: #339af0;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
   
+  }
   .btn-delete:hover {
     background: #e67700;
   }
-  
   .btn-promote:hover {
     background: #388e3c;
+  }
+  .btn-demote:hover {
+    background: #1c7ed6;
   }
   

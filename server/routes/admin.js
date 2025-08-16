@@ -4,7 +4,7 @@ import {
   getAdminStats,
   getAllUsers,
   deleteUser,
-  promoteToAdmin,
+  promoteToAdmin,demoteToUser
 } from '../controllers/adminController.js';
 
 const router = express.Router();
@@ -12,6 +12,7 @@ const router = express.Router();
 router.get('/dashboard', protect, isAdmin, getAdminStats);
 router.get('/users', protect, isAdmin, getAllUsers);
 router.put('/promote', protect, isAdmin, promoteToAdmin);
+router.put('/demote',protect,isAdmin,demoteToUser);
 router.delete('/users/:id', protect, isAdmin, deleteUser);
 
 export default router;

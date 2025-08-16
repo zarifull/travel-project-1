@@ -47,19 +47,16 @@ export const loginUser = async (req, res) => {
     if (!isMatch)
       return res.status(401).json({ message: "Invalid email or password" });
 
-      const token = jwt.sign(
-        {
-          id: user._id,
-          email: user.email,
-          role: user.role,
-          isAdmin: user.isAdmin,
-        },
-        process.env.JWT_SECRET || "your_secret_key",
-        { expiresIn: process.env.JWT_EXPIRES_IN || "7d" }
-      );
-      
-
-    await user.save();
+    // ✅ Add role into JWT
+    const token = jwt.sign(
+      {
+        id: user._id,
+        email: user.email,
+        role: user.role, // role is now always defined
+      },
+      process.env.JWT_SECRET || "your_secret_key",
+      { expiresIn: process.env.JWT_EXPIRES_IN || "7d" }
+    );
 
     return res.status(200).json({
       user: {
@@ -67,7 +64,6 @@ export const loginUser = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        isAdmin: user.isAdmin,
       },
       token,
     });
@@ -76,6 +72,7 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ message: "Login failed", error });
   }
 };
+
 
 
 export const getProfile = async (req, res) => {

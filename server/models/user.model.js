@@ -15,15 +15,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please add a password'],
   },
-  isAdmin: {
-    type: Boolean,
-    default: false,
+  role: {
+    type: String,
+    enum: ['user', 'admin'],  // easy to extend later
+    default: 'user',
   },
   otp: String,
   otpExpires: Date,
 }, { timestamps: true });
 
-// Hash password before saving (e.g., on signup)
+// Hash password before saving
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 10);
