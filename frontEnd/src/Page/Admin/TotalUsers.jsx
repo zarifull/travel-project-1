@@ -37,7 +37,17 @@ function TotalUsers() {
 
   const handlePromote = async (email) => {
     try {
-      const res = await axiosInstance.put("/admin/promote", { email }); // match backend POST
+      const token = localStorage.getItem("token"); // where you saved JWT on login
+  
+      const res = await axiosInstance.put(
+        "/admin/promote",
+        { email },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
   
       setUsers((prevUsers) =>
         prevUsers.map((u) =>
@@ -51,6 +61,7 @@ function TotalUsers() {
       toast.error("❌ Failed to promote user");
     }
   };
+  
 
 
   const handleDemote = async (email) => {
@@ -104,8 +115,8 @@ function TotalUsers() {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
-                <span className={`role-badge ${user.isAdmin ? "admin" : "user"}`}>
-                    {user.isAdmin ? "admin" : "user"}
+                <span className={`role-badge ${user.role === "admin" ? "admin" : "user"}`}>
+                  {user.role}
                 </span>
                 </td>
 
@@ -115,23 +126,23 @@ function TotalUsers() {
                     Delete
                   </button>
 
-                  {!user.isAdmin ? (
-                    <button
-                      className="btn-promote"
-                      onClick={() => handlePromote(user.email)}
-                    >
-                      Promote
-                    </button>
-                  ) : (
-                    <button
-                    className="btn-demote"
-                    onClick={() => handleDemote(user.email)}
-                    disabled={processing[user.email]}
-                  >
-                    Demote
-                  </button>
-                  
-                  )}
+                  {user.role === "admin" ? (
+                      <button
+                        className="btn-demote"
+                        onClick={() => handleDemote(user.email)}
+                        disabled={processing[user.email]}
+                      >
+                        Demote
+                      </button>
+                    ) : (
+                      <button
+                        className="btn-promote"
+                        onClick={() => handlePromote(user.email)}
+                      >
+                        Promote
+                      </button>
+                    )}
+
                 </td>
               </tr>
             ))

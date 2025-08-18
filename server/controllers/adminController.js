@@ -39,49 +39,50 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-/**
- * @desc   Promote a user to admin
- * @route  PUT /api/admin/promote
- * @access Private/Admin
- */
 export const promoteToAdmin = async (req, res) => {
   try {
     const { email } = req.body;
-    if (!email) return res.status(400).json({ message: "Email is required" });
 
     const user = await User.findOneAndUpdate(
       { email },
-      { role: "admin", isAdmin: true },
-      { new: true, select: "-password" } // return updated user without password
+      { role: "admin" },   // 👈 only update role
+      { new: true }
     );
 
-    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-    res.status(200).json({
-      message: "User promoted to admin",
-      updatedUser: user,
-    });
+    res.json({ updatedUser: user });
   } catch (err) {
     console.error("Promote error:", err);
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
 export const demoteToUser = async (req, res) => {
-  const { email } = req.body;
   try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const { email } = req.body;
 
-    user.isAdmin = false;
-    await user.save();
+    const user = await User.findOneAndUpdate(
+      { email },
+      { role: "user" },  // ✅ remove isAdmin
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
     res.json({ updatedUser: user });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Demotion failed" });
+    console.error("Demote error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
+
+
+
 
 export const deleteUser = async (req, res) => {
   try {
