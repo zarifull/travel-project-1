@@ -1,0 +1,51 @@
+.manage-tours {
+    padding: 20px;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .tours-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .tours-table th,
+  .tours-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .tours-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .edit-btn,
+  .delete-btn,
+  .detail-btn {
+    margin: 0 5px;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .detail-btn{
+    background-color: #339af0;
+    color:white ;
+  }
+  .edit-btn {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+  }  
+  .edit-btn:hover {
+    background: #388e3c;
+  }
+  .detail-btn:hover {
+    background-color: #1c7ed6;
+    }
+  

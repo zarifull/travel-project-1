@@ -1,7 +1,7 @@
 // src/pages/Admin/TotalUsers.jsx
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
-import "../../styles/TotalUsers.css";
+import "../../styles/ManageUsers.css";
 import { toast } from "react-toastify";
 
 
@@ -91,7 +91,7 @@ function TotalUsers() {
 
   return (
     <div className="total-users-page">
-      <h1>Total Users</h1>
+      <h1>Manage  Users</h1>
       <table className="users-table">
         <thead>
           <tr>

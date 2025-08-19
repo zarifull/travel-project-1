@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../styles/EditTour.css";
+import axiosInstance from "../../api/axiosInstance";
 
 const EditTour = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -22,20 +25,18 @@ const EditTour = () => {
     imageUrls: [""],
   });
 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
+  
 
   useEffect(() => {
     const fetchTour = async () => {
       try {
-        const res = await axios.get(`http://localhost:7070/api/tours/${id}`);
+        const res = await axiosInstance.get(`/tours/${id}`);
         const tour = res.data;
 
         setFormData({
           ...tour,
           includes: tour.includes || [""],
-          startDates: tour.startDates?.map((date) => date.slice(0, 10)) || [""], // format for input[type="date"]
+          startDates: tour.startDates?.map((date) => date.slice(0, 10)) || [""], 
           imageUrls: tour.imageUrls || [""],
         });
 
@@ -90,24 +91,27 @@ const removeArrayItem = (field, index) => {
 };
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSuccess(false);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setSuccess(false);
 
-    try {
-      await axios.put(`/api/tours/${id}`, {
-        ...formData,
-        startDates: formData.startDates.map((date) => new Date(date)),
-      });
-      alert("Your Tour was Updated")
-      setSuccess(true);
-      navigate("/tour-list");
-    } catch (err) {
-      alert("your Tour was not Updated")
-      setError("Failed to update tour.");
-    }
-  };
+  try {
+    await axiosInstance.put(`/tours/${id}`, {
+      ...formData,
+      startDates: formData.startDates.map((date) => new Date(date)),
+    });
+
+    alert("Tour was updated successfully!");
+    setSuccess(true);
+    navigate("/total-tours"); // make sure this matches your route name
+  } catch (err) {
+    console.error("Update error:", err);
+    alert("Tour was not updated");
+    setError("Failed to update tour.");
+  }
+};
+
 
   if (loading) return <p className="loading">Loading tour...</p>;
   if (error) return <p className="error">{error}</p>;

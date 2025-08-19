@@ -41,7 +41,7 @@ function AdminDashboard() {
         </Link>
       <p>Total Tours: <span style={{color: 'black', fontSize: '1.6rem'}}>
         {stats.totalTours}</span></p>
-        <Link to="/admin/tours">
+        <Link to="/total-tours">
           <button>Manage Tours  <FaArrowRightLong  /></button> 
         </Link>
 {/* 

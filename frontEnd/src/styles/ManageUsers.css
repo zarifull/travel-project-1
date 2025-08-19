@@ -2,26 +2,28 @@
     padding: 25px;
     font-family: "Poppins", sans-serif;
   }
-  
   .users-table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
+    /* background: white; */
+    /* border-radius: 8px;
+    overflow: hidden; */
   }
   .total-users-page h1{
     text-align: center;
     padding: 0 0 1em 0;
   }
   .bottom-line{
-    border-bottom: 50px solid #f7f7f7;
+    /* border-bottom: 50px solid #f7f7f7; */
+    padding-bottom: 2em;
   }
   .users-table th,
   .users-table td {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #eee;
+    border: 1px solid #ddd;
+    text-align: center;
   }
   
   .users-table th {

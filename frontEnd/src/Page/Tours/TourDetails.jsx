@@ -47,19 +47,6 @@ const TourDetails = ({ tours }) => {
 
   const ratings = tour.ratings || [];
 
-  const handleDelete = async () => {
-    const confirmed = window.confirm('Are you sure you want to delete this tour?');
-    if (!confirmed) return;
-
-    try {
-      const response = await axios.delete(`http://localhost:7070/api/tours/${tour._id}`);
-      alert(response.data.message);
-      navigate('/tours');
-    } catch (error) {
-      alert('Delete failed: ' + (error.response?.data?.message || error.message));
-    }
-  };
-
   const handleBookNow = () => {
     navigate(`/booking-page/${tour._id}`);
   };
