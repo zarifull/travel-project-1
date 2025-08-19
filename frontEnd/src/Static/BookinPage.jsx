@@ -64,6 +64,7 @@ function BookingPage() {
   };
 
   return (
+    <div className="booking-page">
     <div className="booking-area">
         <div className="booking-img">
       <img src={bookingBackground} alt="" />
@@ -134,6 +135,7 @@ function BookingPage() {
       </form>
     </div>
   
+    </div>
     </div>
   );
 }
