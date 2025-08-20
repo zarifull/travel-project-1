@@ -44,24 +44,28 @@ function BookingPage() {
   // ✅ Submit via WhatsApp
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const adminPhoneNumber = process.env.REACT_APP_ADMIN_PHONE;
-
-    const text = `
-      📩 *New Booking Request*:
-      🧭 *Tour*: ${tour ? tour.title : "N/A"}
-      👤 *Name*: ${formData.name}
-      📞 *Phone*: ${formData.phone}
-      📧 *Email*: ${formData.email}
-      🏡 *Address*: ${formData.address}
-      👥 *Guests*: ${formData.guests}
-      📅 *Date*: ${formData.date}
-      📝 *Message*: ${formData.message}
-    `.trim();
-
+  
+    const adminPhoneNumber = process.env.REACT_APP_ADMIN_PHONE || "996700123456";
+  
+    const text =
+      `✅ New Booking Request:\n` +
+      `✈️ Tour: ${tour ? tour.title : "N/A"}\n` +
+      `👤 Name: ${formData.name}\n` +
+      `📞 Phone: ${formData.phone}\n` +
+      `📧 Email: ${formData.email}\n` +
+      `🏠 Address: ${formData.address}\n` +
+      `👥 Guests: ${formData.guests}\n` +
+      `📅 Date: ${formData.date}\n` +
+      `📝 Message: ${formData.message}`;
+  
     const url = `https://wa.me/${adminPhoneNumber}?text=${encodeURIComponent(text)}`;
+  
+    // ✅ always opens WhatsApp in a new tab
     window.open(url, "_blank");
   };
+  
+  console.log("Admin Phone:", process.env.REACT_APP_ADMIN_PHONE);
+  
 
   return (
     <div className="booking-page">
