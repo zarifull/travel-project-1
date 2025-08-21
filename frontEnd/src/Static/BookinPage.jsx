@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from '../api/axiosInstance';
 import "../styles/BookingPage.css";
 import bookingBackground from '../Assets/bookingBgn.png';
 
@@ -31,7 +31,7 @@ function BookingPage() {
   useEffect(() => {
     const fetchTour = async () => {
       try {
-        const res = await axios.get(`/api/tours/${tourId}`);
+        const res = await axiosInstance.get(`/tours/${tourId}`);
         setTour(res.data); // Assumes { title, description, ... }
       } catch (err) {
         console.error("Failed to fetch tour:", err);
@@ -41,30 +41,39 @@ function BookingPage() {
     fetchTour();
   }, [tourId]);
 
-  // ✅ Submit via WhatsApp
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const adminPhoneNumber = process.env.REACT_APP_ADMIN_PHONE;
   
-    const adminPhoneNumber = process.env.REACT_APP_ADMIN_PHONE || "996700123456";
+    try {
+      // 1️⃣ Save booking in backend
+      await axiosInstance.post("/bookings", {
+        tourId,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        date: formData.date,
+        guests: Number(formData.guests),
+        message: formData.message,
+      });
+      
   
-    const text =
-      `✅ New Booking Request:\n` +
-      `✈️ Tour: ${tour ? tour.title : "N/A"}\n` +
-      `👤 Name: ${formData.name}\n` +
-      `📞 Phone: ${formData.phone}\n` +
-      `📧 Email: ${formData.email}\n` +
-      `🏠 Address: ${formData.address}\n` +
-      `👥 Guests: ${formData.guests}\n` +
-      `📅 Date: ${formData.date}\n` +
-      `📝 Message: ${formData.message}`;
+      // 2️⃣ Send WhatsApp to admin
+      const text = `✅ New Booking Request:\n...`; // same as before
+      window.open(`https://wa.me/${adminPhoneNumber}?text=${encodeURIComponent(text)}`, "_blank");
   
-    const url = `https://wa.me/${adminPhoneNumber}?text=${encodeURIComponent(text)}`;
+      // 3️⃣ Show confirmation to user
+      alert("✅ Your booking request has been sent! Check 'My Bookings' for updates.");
   
-    // ✅ always opens WhatsApp in a new tab
-    window.open(url, "_blank");
+    } catch (err) {
+      console.error("Booking failed:", err);
+      alert("❌ Something went wrong, please try again.");
+    }
   };
   
-  console.log("Admin Phone:", process.env.REACT_APP_ADMIN_PHONE);
+  
+  // console.log("Admin Phone:", process.env.REACT_APP_ADMIN_PHONE);
   
 
   return (

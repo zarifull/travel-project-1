@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../Context/AuthContext';
 import '../../styles/MyBookings.css';
+import axiosInstance from '../../api/axiosInstance';
 
 function MyBookings() {
   const [bookings, setBookings] = useState([]);
@@ -17,7 +18,7 @@ function MyBookings() {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get('http://localhost:7070/api/bookings/my', {
+      const res = await axiosInstance.get('/bookings/my', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBookings(res.data.bookings);
@@ -33,7 +34,7 @@ function MyBookings() {
 
   const cancelBooking = async (bookingId) => {
     try {
-      await axios.delete(`http://localhost:7070/api/bookings/${bookingId}`, {
+      await axiosInstance.delete(`/bookings/${bookingId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchBookings(); // Refresh
@@ -52,14 +53,19 @@ function MyBookings() {
           <div className="bookings-grid">
             {bookings.map((b) => (
               <div key={b._id} className="booking-card">
-                <h3>{b.tour.title}</h3>
-                <p><strong>Location:</strong> {b.tour.location}</p>
-                <p><strong>Date:</strong> {new Date(b.date).toLocaleDateString()}</p>
-                <p><strong>Total:</strong> ${b.totalPrice}</p>
+              <h3>{b.tour.title}</h3>
+              <p><strong>Location:</strong> {b.tour.location}</p>
+              <p><strong>Date:</strong> {new Date(b.date).toLocaleDateString()}</p>
+              <p><strong>Total:</strong> ${b.totalPrice}</p>
+              <p><strong>Status:</strong> {b.status}</p>
+            
+              {b.status === 'pending' && (
                 <button onClick={() => cancelBooking(b._id)} className="cancel-btn">
                   Cancel
                 </button>
-              </div>
+              )}
+            </div>
+            
             ))}
           </div>
         )}
