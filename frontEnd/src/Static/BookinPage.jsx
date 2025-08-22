@@ -58,9 +58,15 @@ function BookingPage() {
         message: formData.message,
       });
       
-  
-      // 2️⃣ Send WhatsApp to admin
-      const text = `✅ New Booking Request:\n...`; // same as before
+      const text = `✅ New Booking Request:
+      🏞 Tour: ${tour?.title || "N/A"}
+      👤 Name: ${formData.name}
+      📞 Phone: ${formData.phone}
+      📧 Email: ${formData.email}
+      🏠 Address: ${formData.address}
+      👥 Guests: ${formData.guests}
+      📅 Date: ${formData.date}
+      💬 Message: ${formData.message || "No message"}`;
       window.open(`https://wa.me/${adminPhoneNumber}?text=${encodeURIComponent(text)}`, "_blank");
   
       // 3️⃣ Show confirmation to user

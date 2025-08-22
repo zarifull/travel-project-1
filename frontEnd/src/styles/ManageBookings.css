@@ -1,0 +1,50 @@
+/* ✅ Shared styles for Admin tables */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .admin-table th {
+    background-color: #f4f4f4;
+  }
+  
+  /* ✅ Action buttons */
+  .approve-btn,
+  .reject-btn,
+  .booking-approved{
+    margin: 0 5px;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 500;
+    color: white;
+  }
+
+  
+  .approve-btn {
+    background-color: #2f9e44;
+  }
+  .approve-btn:hover {
+    background-color: #22863a;
+  }
+  
+  .reject-btn {
+    background-color: #f59f00;
+  }
+  .reject-btn:hover {
+    background-color: #e67700;
+  }
+ .booking-approved{
+    background-color: #339af0;
+ }
+  

@@ -1,43 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useAuth } from '../../Context/AuthContext';
 import '../../styles/MyBookings.css';
 import axiosInstance from '../../api/axiosInstance';
 
 function MyBookings() {
   const [bookings, setBookings] = useState([]);
-  const { token } = useAuth();
+  const { token, user } = useAuth();
 
-  useEffect(() => {
-    console.log("Token in MyBookings:", token); // add this line
-    if (token) {
-      fetchBookings();
-    }
-  }, [token]);
-  
-
+  // Define fetchBookings at component level
   const fetchBookings = async () => {
+    if (!user || !token) return; // safety check
     try {
-      const res = await axiosInstance.get('/bookings/my', {
+      const res = await axiosInstance.get("/bookings/my", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setBookings(res.data.bookings);
+      setBookings(res.data);
     } catch (err) {
-      console.error('Error fetching bookings:', err);
+      console.error(err);
     }
-    console.log('Token:', token);
   };
 
+  // Fetch bookings when user or token changes
   useEffect(() => {
     fetchBookings();
-  }, [token]);
+  }, [user, token]);
 
+  // Cancel booking
   const cancelBooking = async (bookingId) => {
     try {
       await axiosInstance.delete(`/bookings/${bookingId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      fetchBookings(); // Refresh
+      fetchBookings(); // refresh list
     } catch (err) {
       console.error('Cancel failed:', err);
     }
@@ -53,19 +47,21 @@ function MyBookings() {
           <div className="bookings-grid">
             {bookings.map((b) => (
               <div key={b._id} className="booking-card">
-              <h3>{b.tour.title}</h3>
-              <p><strong>Location:</strong> {b.tour.location}</p>
-              <p><strong>Date:</strong> {new Date(b.date).toLocaleDateString()}</p>
-              <p><strong>Total:</strong> ${b.totalPrice}</p>
-              <p><strong>Status:</strong> {b.status}</p>
-            
-              {b.status === 'pending' && (
-                <button onClick={() => cancelBooking(b._id)} className="cancel-btn">
-                  Cancel
-                </button>
-              )}
-            </div>
-            
+                <h3>{b.tourId?.title || "Unknown Tour"}</h3>
+                <p><strong>Name:</strong> {b.name}</p>
+                <p><strong>Guests:</strong> {b.guests}</p>
+                <p><strong>Date:</strong> {new Date(b.date).toLocaleDateString()}</p>
+                <p><strong>Status:</strong> {b.status}</p>
+
+                {b.status === 'pending' && (
+                  <button 
+                    onClick={() => cancelBooking(b._id)} 
+                    className="cancel-btn"
+                  >
+                    Cancel
+                  </button>
+                )}
+              </div>
             ))}
           </div>
         )}

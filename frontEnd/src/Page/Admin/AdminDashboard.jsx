@@ -36,7 +36,7 @@ function AdminDashboard() {
         </Link>
       <p>Total Bookings:  <span style={{color: 'black', fontSize: '1.6rem'}}>  
         {stats.totalBookings}</span></p>
-        <Link to="/admin/bookings">
+        <Link to="/total-bookings">
           <button>Manage Bookings <FaArrowRightLong /></button>
         </Link>
       <p>Total Tours: <span style={{color: 'black', fontSize: '1.6rem'}}>

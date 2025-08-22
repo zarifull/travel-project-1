@@ -25,6 +25,7 @@ import SearchForm from '../Components/SearchForm';
 import AdminDashboard from '../Page/Admin/AdminDashboard';
 import TotalUsers from '../Page/Admin/ManageUsers';
 import TotalTours from '../Page/Admin/ManageTours';
+import TotalBookings from '../Page/Admin/ManageBookings';
 
 function Main({ user, setUser }) {
   const [tours, setTours] = useState([]);
@@ -64,8 +65,9 @@ function Main({ user, setUser }) {
         <Route path="/admin/dashboard" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
         <Route path="/total-users" element={<PrivateRoute><TotalUsers /></PrivateRoute>} />
         <Route path="/total-tours"element={<PrivateRoute><TotalTours /></PrivateRoute>}/>
+        <Route path="/total-bookings"element={<PrivateRoute><TotalBookings /></PrivateRoute>}/>
         <Route path="/edit-tour/:id"element={<PrivateRoute><EditTour /></PrivateRoute>}/>
- 
+       
 
 
         <Route
