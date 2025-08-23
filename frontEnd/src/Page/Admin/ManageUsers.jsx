@@ -90,8 +90,8 @@ function TotalUsers() {
   if (loading) return <p>Loading users...</p>;
 
   return (
-    <div className="total-users-page">
-      <h1>Manage  Users</h1>
+    <div className="admin-dashboard">
+      <p className="manage-theme">Manage  Users</p>
       <table className="users-table">
         <thead>
           <tr>

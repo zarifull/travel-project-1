@@ -1,7 +1,4 @@
-.manage-tours {
-    padding: 20px;
-    font-family: "Poppins", sans-serif;
-  }
+
   
   .tours-table {
     width: 100%;
@@ -11,7 +8,7 @@
   .tours-table th,
   .tours-table td {
     border: 1px solid #ddd;
-    padding: 12px;
+    padding: 0.8em 2em;
     text-align: center;
   }
   
@@ -21,7 +18,8 @@
   
   .edit-btn,
   .delete-btn,
-  .detail-btn {
+  .detail-btn,
+  .add-btn {
     margin: 0 5px;
     padding: 6px 12px;
     border: none;
@@ -33,19 +31,31 @@
     background-color: #339af0;
     color:white ;
   }
+  a.add-btn {
+    display: inline-block;
+    padding: 0.5em 1.5em;
+    background-color: #339af0;
+    color: white !important;
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: none !important;
+    border-radius: 6px;
+  
+    /* ✅ Add spacing below */
+    margin-bottom: 2em;
+  }
+  
+  
   .edit-btn {
     background-color: #4caf50;
     color: white;
   }
-  
-  .delete-btn {
-    background-color: #dc3545;
-    color: white;
-  }  
+    
   .edit-btn:hover {
     background: #388e3c;
   }
-  .detail-btn:hover {
+  .detail-btn:hover,
+  .add-btn:hover {
     background-color: #1c7ed6;
     }
   

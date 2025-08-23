@@ -2,10 +2,19 @@
 .admin-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
     font-family: "Poppins", sans-serif;
   }
-  
+  .manage-bookings {
+    padding: 1em 3em 2em 3em;
+    font-family: "Poppins";
+  }
+  .manage-theme,
+  .theme{
+    text-align: center;
+    padding: 2em 0 2em 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
   .admin-table th,
   .admin-table td {
     border: 1px solid #ddd;
@@ -47,4 +56,12 @@
  .booking-approved{
     background-color: #339af0;
  }
-  
+ .status-pending {
+  color: #f03e3e;
+  font-weight: bold;
+}
+
+.done-text {
+  color: #444;
+  font-weight: 600;
+}

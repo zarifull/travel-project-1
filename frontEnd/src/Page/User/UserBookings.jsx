@@ -38,35 +38,47 @@ function MyBookings() {
   };
 
   return (
-    <div className="auth-block">
-      <div className="profile-container">
-        <h2>My Bookings</h2>
-        {bookings.length === 0 ? (
-          <p>No bookings found.</p>
-        ) : (
-          <div className="bookings-grid">
-            {bookings.map((b) => (
-              <div key={b._id} className="booking-card">
-                <h3>{b.tourId?.title || "Unknown Tour"}</h3>
-                <p><strong>Name:</strong> {b.name}</p>
-                <p><strong>Guests:</strong> {b.guests}</p>
-                <p><strong>Date:</strong> {new Date(b.date).toLocaleDateString()}</p>
-                <p><strong>Status:</strong> {b.status}</p>
+    <div className="mybooking-page">
+    <div className="mybooking-container">
+      <p className='theme'>My Bookings</p>
+      
+      {bookings.length === 0 ? (
+        <p>No bookings found.</p>
+      ) : (
+        <div className="bookings-grid">
+        {bookings.map((b) => (
+  <div key={b._id} className="booking-card">
+    <div className="booking-img">
+    <img
+        src={b.tourId?.imageUrls?.[0] || "/placeholder.jpg"}
+        alt={`Main ${b.tourId?.title || "Tour"}`}
+      />
 
-                {b.status === 'pending' && (
-                  <button 
-                    onClick={() => cancelBooking(b._id)} 
-                    className="cancel-btn"
-                  >
-                    Cancel
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
     </div>
+    <div className="booking-info">
+      <h3>{b.tourId?.title || "Unknown Tour"}</h3>
+      <p><strong>Name:</strong> {b.name}</p>
+      <p><strong>Guests:</strong> {b.guests}</p>
+      <p><strong>Date:</strong> {new Date(b.date).toLocaleDateString()}</p>
+      <p><strong>Status:</strong> {b.status}</p>
+
+      {b.status === 'pending' && (
+        <button 
+          onClick={() => cancelBooking(b._id)} 
+          className="cancel-btn"
+        >
+          Cancel
+        </button>
+      )}
+    </div>
+  </div>
+))}
+
+        </div>
+      )}
+    </div>
+  </div>
+  
   );
 }
 

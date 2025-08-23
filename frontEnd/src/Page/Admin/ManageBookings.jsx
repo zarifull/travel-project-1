@@ -46,12 +46,12 @@ function ManageBookings() {
   if (loading) return <p>Loading bookings...</p>;
 
   return (
-    <div className="manage-tours">
-      <h2>Manage Bookings</h2>
+    <div className="admin-dashboard">
+      <p className="manage-theme">Manage Bookings</p>
       {bookings.length === 0 ? (
         <p>No bookings available.</p>
       ) : (
-        <table className="tours-table">
+        <table className="admin-table">
           <thead>
             <tr>
               <th>#</th>
@@ -73,27 +73,33 @@ function ManageBookings() {
                 <td>{b.userId?.email}</td>
                 <td>{b.guests}</td>
                 <td>{new Date(b.date).toLocaleDateString()}</td>
-                <td>{b.status}</td>
                 <td>
-                  {b.status === "pending" ? (
-                    <>
-                      <button
-                        className="approve-btn"
-                        onClick={() => updateStatus(b._id, "approved")}
-                      >
-                        Approve
-                      </button>
-                      <button
-                        className="reject-btn"
-                        onClick={() => updateStatus(b._id, "rejected")}
-                      >
-                        Reject
-                      </button>
-                    </>
-                  ) : (
-                    <span className="booking-approved" style={{fontWeight:'bold'}}>{b.status}</span>
-                  )}
-                </td>
+                    {b.status === "pending" && (
+                      <span className="status-pending">{b.status}</span>
+                    )}
+                    {b.status === "approved" && <span></span>}
+                  </td>
+                  <td>
+                    {b.status === "pending" ? (
+                      <>
+                        <button
+                          className="approve-btn"
+                          onClick={() => updateStatus(b._id, "approved")}
+                        >
+                          Approve
+                        </button>
+                        <button
+                          className="reject-btn"
+                          onClick={() => updateStatus(b._id, "rejected")}
+                        >
+                          Reject
+                        </button>
+                      </>
+                    ) : (
+                      <span className="booking-approved">approved</span>
+                    )}
+                  </td>
+
               </tr>
             ))}
           </tbody>

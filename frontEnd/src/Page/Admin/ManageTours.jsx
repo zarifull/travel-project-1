@@ -43,7 +43,11 @@ function ManageTours() {
 
   return (
     <div className="admin-dashboard">
-      <h2>Manage Tours</h2>
+      <p className="manage-theme" style={{paddingBottom:"0.5em"}}>Manage Tours</p>
+        <Link to={`/add-tour`} className="add-btn">
+            + Add tour
+        </Link>
+
       {tours.length === 0 ? (
         <p>No tours found</p>
       ) : (
@@ -78,7 +82,7 @@ function ManageTours() {
                   <Link to={`/edit-tour/${tour._id}`}>
                   <button
                     className="edit-btn"
-                    onClick={() => toast.info("Edit feature coming soon")}
+                    onClick={() => toast.info("Delete feature coming soon")}
                   >
                     Edit
                   </button>
