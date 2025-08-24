@@ -9,12 +9,12 @@ import plane from '../Assets/plane.png';
 import balloon from '../Assets/balloon.png';
 import ship from '../Assets/ship.png';
 import Advertisment from './Advertisment';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaArrowRightLong } from "react-icons/fa6";
 import TourCard from '../Components/TourCard';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../Context/AuthContext"; // Adjust path if different
+import axiosInstance from '../api/axiosInstance';
 
 
 
@@ -41,7 +41,7 @@ function Home() {
 
   const fetchTours = useCallback(async () => {
     try {
-      const res = await axios.get(`http://localhost:7070/api/tours?page=${page}&limit=4`);
+      const res = await axiosInstance.get(`/tours?page=${page}&limit=4`);
       setTours(res.data.data);
       setTotalPages(res.data.totalPages);
     } catch (err) {

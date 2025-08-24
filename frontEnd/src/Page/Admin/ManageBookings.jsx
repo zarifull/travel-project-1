@@ -96,7 +96,15 @@ function ManageBookings() {
                         </button>
                       </>
                     ) : (
+                      <>
                       <span className="booking-approved">approved</span>
+                      <button
+                          className="reject-btn"
+                          onClick={() => updateStatus(b._id, "rejected")}
+                        >
+                          Reject
+                        </button>
+                        </>
                     )}
                   </td>
 

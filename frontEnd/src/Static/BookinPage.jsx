@@ -3,11 +3,13 @@ import { useParams } from "react-router-dom";
 import axiosInstance from '../api/axiosInstance';
 import "../styles/BookingPage.css";
 import bookingBackground from '../Assets/bookingBgn.png';
+import { useNavigate } from 'react-router-dom';
+
 
 function BookingPage() {
   const { tourId } = useParams();
   const [tour, setTour] = useState(null);
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -71,7 +73,7 @@ function BookingPage() {
   
       // 3️⃣ Show confirmation to user
       alert("✅ Your booking request has been sent! Check 'My Bookings' for updates.");
-  
+      navigate('/my-bookings')
     } catch (err) {
       console.error("Booking failed:", err);
       alert("❌ Something went wrong, please try again.");

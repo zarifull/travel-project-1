@@ -3,6 +3,7 @@ import { useAuth } from '../../Context/AuthContext';
 import '../../styles/MyBookings.css';
 import axiosInstance from '../../api/axiosInstance';
 
+
 function MyBookings() {
   const [bookings, setBookings] = useState([]);
   const { token, user } = useAuth();
@@ -48,7 +49,7 @@ function MyBookings() {
         <div className="bookings-grid">
         {bookings.map((b) => (
   <div key={b._id} className="booking-card">
-    <div className="booking-img">
+    <div className="mybooking-img">
     <img
         src={b.tourId?.imageUrls?.[0] || "/placeholder.jpg"}
         alt={`Main ${b.tourId?.title || "Tour"}`}

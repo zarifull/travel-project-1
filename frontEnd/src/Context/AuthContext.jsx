@@ -48,14 +48,11 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  // ✅ If token exists but no user, fetch user data from backend
   useEffect(() => {
     if (!user && token) {
       axiosInstance
         .get("/users/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
           setUser(res.data);
@@ -63,9 +60,11 @@ export function AuthProvider({ children }) {
         })
         .catch((err) => {
           console.error("❌ Failed to fetch user profile:", err);
+          logout(); // ✅ THIS logs out automatically if token is invalid
         });
     }
   }, [token, user]);
+  
 
   // ✅ Login: store user & token
   const login = (userData, authToken) => {

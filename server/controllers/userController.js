@@ -8,57 +8,79 @@ import isEmailDomainValid from '../utils/validateEmailDomain.js'; // Email check
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_fallback_secret";
 
+// Generate JWT
+const generateToken = (user) => {
+  return jwt.sign(
+    { id: user._id, role: user.role },
+    process.env.JWT_SECRET || "your_secret_key",
+    { expiresIn: "7d" }
+  );
+};
+
+// ================== SIGNUP ==================
 export const signupUser = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
+    // 1. Check if user already exists
     const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: "Email already exists" });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already exists" });
+    }
 
+    // 2. (Optional) Validate email domain
     const isValidDomain = await isEmailDomainValid(email);
     if (!isValidDomain) {
       return res.status(400).json({ message: "Invalid email domain" });
     }
 
-    // const token = jwt.sign(
-    //   { id: user._id, role: user.role },
-    //   process.env.JWT_SECRET,
-    //   { expiresIn: process.env.JWT_EXPIRES_IN }
-    // );
-    
-    const newUser = new User({ name, email, password }); // ← raw password
-    await newUser.save(); // ← Mongoose hashes it here
+    // 3. Create new user (password is hashed automatically in pre-save)
+    const newUser = new User({ name, email, password });
+    await newUser.save();
 
-    res.status(201).json({ message: 'Signup successful' });
+    // 4. Generate token
+    const token = generateToken(newUser);
+
+    // 5. Respond
+    res.status(201).json({
+      message: "Signup successful",
+      user: {
+        _id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        role: newUser.role,
+      },
+      token,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Signup failed", error });
+    console.error("Signup error:", error);
+    res.status(500).json({ message: "Signup failed", error: error.message });
   }
 };
 
+// ================== LOGIN ==================
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    // 1. Find user
     const user = await User.findOne({ email });
-    if (!user)
+    if (!user) {
       return res.status(401).json({ message: "Invalid email or password" });
+    }
 
+    // 2. Compare password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
+    if (!isMatch) {
       return res.status(401).json({ message: "Invalid email or password" });
+    }
 
-    // ✅ Add role into JWT
-    const token = jwt.sign(
-      {
-        id: user._id,
-        email: user.email,
-        role: user.role, // role is now always defined
-      },
-      process.env.JWT_SECRET || "your_secret_key",
-      { expiresIn: process.env.JWT_EXPIRES_IN || "7d" }
-    );
+    // 3. Generate token
+    const token = generateToken(user);
 
-    return res.status(200).json({
+    // 4. Respond
+    res.status(200).json({
+      message: "Login successful",
       user: {
         _id: user._id,
         name: user.name,
@@ -67,12 +89,11 @@ export const loginUser = async (req, res) => {
       },
       token,
     });
-
   } catch (error) {
-    res.status(500).json({ message: "Login failed", error });
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Login failed", error: error.message });
   }
 };
-
 
 
 export const getProfile = async (req, res) => {
@@ -82,6 +103,20 @@ export const getProfile = async (req, res) => {
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ message: "Server error" });
+  }
+};
+export const getMe = async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1]; // get token
+    if (!token) return res.status(401).json({ message: "No token" });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // verify token
+    const user = await User.findById(decoded.id); // check if user exists
+    if (!user) return res.status(401).json({ message: "User not found" });
+
+    res.json(user); // send user data
+  } catch (err) {
+    res.status(401).json({ message: "Unauthorized" });
   }
 };
 export const updateUser = async (req, res) => {
