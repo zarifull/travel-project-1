@@ -38,6 +38,21 @@ function MyBookings() {
     }
   };
 
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure?")) return;
+    try {
+      await axiosInstance.delete(`/bookings/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setBookings(bookings.filter(b => b._id !== id));
+      alert("Booking deleted successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete booking");
+    }
+  };
+  
+
   return (
     <div className="mybooking-page">
     <div className="mybooking-container">
@@ -66,11 +81,13 @@ function MyBookings() {
       {b.status === 'pending' && (
         <button 
           onClick={() => cancelBooking(b._id)} 
-          className="cancel-btn"
+          className="reject-btn"
         >
           Cancel
         </button>
+        
       )}
+       <span className='delete-btn' onClick={()=>handleDelete(b._id)} style={{fontWeight:'500'}}>delete</span>
     </div>
   </div>
 ))}

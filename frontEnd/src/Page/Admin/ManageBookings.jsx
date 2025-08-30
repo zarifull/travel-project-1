@@ -43,6 +43,20 @@ function ManageBookings() {
     fetchBookings();
   }, [token]);
 
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this booking?")) return;
+    try {
+      await axiosInstance.delete(`/admin/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setBookings(bookings.filter(b => b._id !== id));
+      alert("Booking deleted successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete booking");
+    }
+  };
+  
   if (loading) return <p>Loading bookings...</p>;
 
   return (
@@ -104,6 +118,7 @@ function ManageBookings() {
                         >
                           Reject
                         </button>
+                        <button onClick={()=>handleDelete(b._id)} className="delete-btn">X</button>
                         </>
                     )}
                   </td>

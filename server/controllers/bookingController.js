@@ -83,26 +83,28 @@ export const updateBooking = async (req, res) => {
   }
 };
 
-// 5️⃣ Delete booking (same rules as update)
+// controllers/booking.controller.js
 export const deleteBooking = async (req, res) => {
+  const { id } = req.params;
+
   try {
-    const booking = await Booking.findById(req.params.id);
+    const booking = await Booking.findById(id);
     if (!booking) return res.status(404).json({ message: "Booking not found" });
 
-    if (!req.user.isAdmin) {
-      if (String(booking.userId) !== String(req.user._id)) {
-        return res.status(403).json({ message: "Not authorized" });
-      }
-      if (booking.status !== "pending") {
-        return res.status(400).json({ message: "Booking cannot be canceled after confirmation" });
-      }
+    // Only allow the user who owns it
+    if (booking.userId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Not allowed to delete this booking" });
     }
-    
 
     await booking.deleteOne();
-    res.status(200).json({ message: "Booking canceled" });
+    res.status(200).json({ message: "Booking deleted successfully" });
   } catch (err) {
-    res.status(500).json({ message: "Cancel failed" });
+    console.error("User delete error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
+
+
+
+
 

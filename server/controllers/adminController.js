@@ -143,3 +143,18 @@ export const confirmBooking = async (req, res) => {
     res.status(500).json({ message: 'Error confirming booking' });
   }
 };
+
+export const deleteBookingAdmin = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const booking = await Booking.findById(id);
+    if (!booking) return res.status(404).json({ message: "Booking not found" });
+
+    await booking.deleteOne();
+    res.status(200).json({ message: "Booking deleted by admin successfully" });
+  } catch (err) {
+    console.error("Admin delete error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+

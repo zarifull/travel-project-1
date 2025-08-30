@@ -14,7 +14,7 @@ router.post('/', protect, createBooking);
 router.get('/my', protect, getMyBookings);
 router.get('/:id', protect, getBookingById);
 router.put('/:id', protect, updateBooking);
-router.delete('/:id', protect, deleteBooking);
+router.delete('/bookings/:id', protect, deleteBooking);
 
 
 

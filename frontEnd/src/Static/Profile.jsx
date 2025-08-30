@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import axiosInstance from '../api/axiosInstance';
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -8,7 +9,7 @@ function Profile() {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem('token');
-        const { data } = await axios.get('/api/users/profile', {
+        const { data } = await axiosInstance.get('/users/profile', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

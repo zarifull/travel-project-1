@@ -8,7 +8,8 @@ import {
   demoteToUser,
   getAllBookings,
   updateBookingStatus,
-  confirmBooking
+  confirmBooking,
+  deleteBookingAdmin
 } from '../controllers/adminController.js';
 
 const router = express.Router();
@@ -28,5 +29,6 @@ router.delete('/users/:id', protect, isAdmin, deleteUser);
 router.get('/bookings', protect, isAdmin, getAllBookings);
 router.put('/:id/status', protect, isAdmin, updateBookingStatus);
 router.patch('/:id/confirm', protect, isAdmin, confirmBooking);
+router.delete("/admin/:id", protect, isAdmin, deleteBookingAdmin);
 
 export default router;

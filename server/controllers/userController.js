@@ -105,6 +105,7 @@ export const getProfile = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
 export const getMe = async (req, res) => {
   try {
     const token = req.headers.authorization?.split(" ")[1]; // get token

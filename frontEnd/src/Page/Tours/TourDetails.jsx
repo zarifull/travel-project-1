@@ -142,7 +142,7 @@ const TourDetails = ({ tours }) => {
             </div>
             <div className="tour-booking">
               <button onClick={handleBookNow}>
-                <i className="fa-solid fa-suitcase-rolling"></i> Book Now
+                <i className="fa-solid fa-suitcase-rolling"> </i> Book Now
               </button>
             </div>
           </div>
