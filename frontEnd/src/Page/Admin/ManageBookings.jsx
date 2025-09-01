@@ -89,38 +89,65 @@ function ManageBookings() {
                 <td>{new Date(b.date).toLocaleDateString()}</td>
                 <td>
                     {b.status === "pending" && (
-                      <span className="status-pending">{b.status}</span>
+                      <span style={{color:'#2f9e44', textDecoration:'underLine',fontWeight:'bold'}}>Pending</span>
                     )}
-                    {b.status === "approved" && <span></span>}
+                    {b.status === "approved" && (
+                      <span className="booking-approved">Approved</span>
+                    )}
+                    {b.status === "rejected" && (
+                      <span style={{color:'#f03e3e',fontWeight:'bold'}}>Rejected</span>
+                    )}
                   </td>
+
                   <td>
-                    {b.status === "pending" ? (
+                    <div className="booking-action">
+                    {b.status === "pending" && (
                       <>
-                        <button
-                          className="approve-btn"
+                        <button 
+                          className="approve-btn" 
                           onClick={() => updateStatus(b._id, "approved")}
                         >
                           Approve
                         </button>
-                        <button
-                          className="reject-btn"
+                        <button 
+                          className="reject-btn" 
                           onClick={() => updateStatus(b._id, "rejected")}
                         >
                           Reject
                         </button>
                       </>
-                    ) : (
+                    )}
+
+                    {b.status === "approved" && (
                       <>
-                      <span className="booking-approved">approved</span>
-                      <button
-                          className="reject-btn"
+                        {/* <span className="booking-approved">Approved</span> */}
+                        <button 
+                          className="reject-btn" 
                           onClick={() => updateStatus(b._id, "rejected")}
                         >
                           Reject
                         </button>
-                        <button onClick={()=>handleDelete(b._id)} className="delete-btn">X</button>
-                        </>
+                        <button 
+                          onClick={() => handleDelete(b._id)} 
+                          className="delete-btn"
+                        >
+                          Delete
+                        </button>
+                      </>
                     )}
+
+                    {b.status === "rejected" && (
+                      <>
+                        <span className="booking-rejected"></span>
+                        <button 
+                          onClick={() => handleDelete(b._id)} 
+                          className="delete-btn"
+                        >
+                          Delete
+                        </button>
+                      </>
+                    )}
+                    </div>
                   </td>
 
               </tr>

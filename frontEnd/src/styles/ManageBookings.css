@@ -39,7 +39,8 @@
     color: white;
   }
 
-  
+  .booking-action{
+  }
   .approve-btn {
     background-color: #2f9e44;
   }
@@ -56,6 +57,7 @@
  .booking-approved{
     color: #339af0;
     font-weight: bold;
+    text-decoration-line: overline;
  }
  .status-pending{
   color: #f03e3e;
@@ -64,6 +66,7 @@
 .delete-btn {
   background-color: #f03e3e;
   font-weight: bold;
+  text-align: left;
 }
 .delete-btn:hover{
   background-color: #c92a2a;

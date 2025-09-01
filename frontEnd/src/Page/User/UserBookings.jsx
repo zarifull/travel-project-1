@@ -69,15 +69,14 @@ function MyBookings() {
         src={b.tourId?.imageUrls?.[0] || "/placeholder.jpg"}
         alt={`Main ${b.tourId?.title || "Tour"}`}
       />
-
     </div>
     <div className="booking-info">
       <h3>{b.tourId?.title || "Unknown Tour"}</h3>
       <p><strong>Name:</strong> {b.name}</p>
       <p><strong>Guests:</strong> {b.guests}</p>
       <p><strong>Date:</strong> {new Date(b.date).toLocaleDateString()}</p>
-      <p><strong>Status:</strong> {b.status}</p>
-
+      <p><strong>Status:</strong> <span style={{color:'#1c7ed6',textDecoration:'underline'}}> {b.status}</span></p>
+        <div className="booking-btns">
       {b.status === 'pending' && (
         <button 
           onClick={() => cancelBooking(b._id)} 
@@ -87,7 +86,8 @@ function MyBookings() {
         </button>
         
       )}
-       <span className='delete-btn' onClick={()=>handleDelete(b._id)} style={{fontWeight:'500'}}>delete</span>
+       <span className='delete-btn' onClick={()=>handleDelete(b._id)} style={{fontWeight:'500',textAlign:'left'}}>delete</span>
+       </div>
     </div>
   </div>
 ))}
