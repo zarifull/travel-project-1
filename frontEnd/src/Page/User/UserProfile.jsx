@@ -1,16 +1,15 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../Context/AuthContext';
 import '../../styles/MyProfile.css';
 import axiosInstance from '../../api/axiosInstance';
 
 function MyProfile() {
-  const { user, setUser,token } = useAuth();
-  const [showPassword,setShowPassword] = useState(false);
-
+  const { user, setUser, token } = useAuth();
 
   const [formData, setFormData] = useState({
     username: user?.name || '',
-    email: user?.email || ''
+    email: user?.email || '',
+    phone: user?.phone || ''
   });
 
   const [passwordData, setPasswordData] = useState({
@@ -20,6 +19,18 @@ function MyProfile() {
 
   const [message, setMessage] = useState('');
 
+  // ✅ Prefill data when user changes
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        username: user.name || '',
+        email: user.email || '',
+        phone: user.phone || ''
+      });
+    }
+  }, [user]);
+
+  // ✅ Handle form changes
   const handleChange = (e) => {
     setFormData(prev => ({
       ...prev,
@@ -27,28 +38,6 @@ function MyProfile() {
     }));
   };
 
-  useEffect(() => {
-    if (user) {
-      setFormData({
-        username: user.name || '',
-        email: user.email || '',
-      });
-    }
-  }, [user]);
-    
-  if (!user || !user._id) {
-    return (
-      <div className="auth-block">
-        <div className="profile-container">
-          <h2>My Profile</h2>
-          <p className="message">{message}</p>
-        </div>
-      </div>
-    );
-  }
-  
-  // console.log("token:",token);
-  
   const handlePasswordChange = (e) => {
     setPasswordData(prev => ({
       ...prev,
@@ -56,57 +45,56 @@ function MyProfile() {
     }));
   };
 
+  // ✅ Submit update
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
-  
+
     if (!user || !user._id) {
       setMessage("❌ Cannot update profile. User not found.");
       return;
     }
-  
+
     try {
       console.log("➡️ Sending profile update for:", user._id);
-  
-      // ✅ Update name/email
+
+      // ✅ Update name/email/phone
       const userUpdateRes = await axiosInstance.put(`/users/profile/${user._id}`, {
         username: formData.username,
         email: formData.email,
+        phone: formData.phone
       });
-      
-  
+
       setUser(userUpdateRes.data.updatedUser);
-  
-      // ✅ Update password only if fields are filled
+
+      // ✅ Update password only if filled
       if (passwordData.newPassword || passwordData.confirmPassword) {
         if (passwordData.newPassword !== passwordData.confirmPassword) {
           return setMessage('❌ Passwords do not match');
         }
-  
+
         await axiosInstance.put(`/users/password/${user._id}`, {
           password: passwordData.newPassword
-        });        
+        });
       }
-  
+
       setMessage('✅ Profile updated successfully!');
     } catch (error) {
       console.error("❌ Profile update failed:", error);
       setMessage('❌ Update failed. Please try again.');
     }
   };
-  
-  
-    
-  
+
   if (!user || !user._id) {
-    setMessage("❌ You must be logged in to update your profile.");
-    return;
+    return (
+      <div className="auth-block">
+        <div className="profile-container">
+          <h2>My Profile</h2>
+          <p className="message">❌ You must be logged in to update your profile.</p>
+        </div>
+      </div>
+    );
   }
-  
-//   console.log("✅ AuthContext user:", user);
-// console.log("✅ AuthContext token:", token);
-
-
 
   return (
     <div className="auth-block">
@@ -134,6 +122,17 @@ function MyProfile() {
           </label>
 
           <label>
+            <strong>Phone (WhatsApp):</strong>
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="+996 500 123 456"
+            />
+          </label>
+
+          <label>
             <strong>New Password:</strong>
             <input
               type="password"
@@ -154,10 +153,6 @@ function MyProfile() {
           </label>
 
           <button type="submit">Save Changes</button>
-          {/* <p><strong>ID:</strong> {user?._id}</p>
-          <p><strong>Name:</strong> {user?.name}</p>
-          <p><strong>Email:</strong> {user?.email}</p> */}
-
         </form>
         {message && <p className="message">{message}</p>}
       </div>

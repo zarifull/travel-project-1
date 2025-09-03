@@ -120,7 +120,8 @@ function TotalUsers() {
                 </span>
                 </td>
 
-                <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                {/* <td>{new Date(user.createdAt).toLocaleDateString()}</td> */}
+                <td>{user.phone}</td>
                 <td>
                   <button className="btn-delete" onClick={() => handleDelete(user._id)}>
                     Delete

@@ -120,23 +120,31 @@ export const getMe = async (req, res) => {
     res.status(401).json({ message: "Unauthorized" });
   }
 };
-export const updateUser = async (req, res) => {
-  try {
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        name: req.body.username, // ✅ map 'username' from frontend to 'name' in DB
-        email: req.body.email,
-      },
-      { new: true }
-    );
 
-    res.status(200).json({ updatedUser });
+export const updateProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    // Update fields
+    user.name = req.body.username || req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.phone = req.body.phone || user.phone;
+
+    // Update password only if provided
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    // Save updated user
+    const updatedUser = await user.save();
+
+    res.json({ updatedUser });
   } catch (error) {
-    console.error("❌ Failed to update user:", error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: error.message });
   }
 };
+
 
 export const updatePassword = async (req, res) => {
   try {

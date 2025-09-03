@@ -21,6 +21,9 @@ const userSchema = new mongoose.Schema({
     enum: ["user", "admin"],
     default: "user",
   },
+  phone :{
+    type : String,
+  },
   otp: String,
   otpExpires: Date,
 }, { timestamps: true });
@@ -39,5 +42,16 @@ userSchema.pre("findOneAndDelete", async function (next) {
   next();
 });
 
+
+const admins = await User.find({ role: "admin" });
+const adminPhones = admins.map(a => a.phone).filter(Boolean);
+
+// Example: Loop through and send WhatsApp message
+for (const phone of adminPhones) {
+  // sendMessageToWhatsApp(phone, bookingDetails);
+}
+
+
 const User = mongoose.model("User", userSchema);
 export default User;
+

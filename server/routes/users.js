@@ -2,7 +2,7 @@ import express from 'express';
 import {
   signupUser, loginUser, resetPassword,
   verifyOtp, sendOtpToEmail, getProfile,
-  updateUser, updatePassword,getMe
+  updateProfile, updatePassword,
 } from '../controllers/userController.js';
 import { protect,isAdmin } from '../middleware/authMiddleware.js';
 
@@ -16,7 +16,7 @@ router.post('/reset-password', resetPassword);
 
 // Profile (GET + PUT)
 router.get('/me', protect, getProfile);
-router.put('/profile/:id', protect, updateUser);      // 🔒 secure update
+router.put('/profile/:id', protect, updateProfile);      // 🔒 secure update
 router.put('/password/:id', protect, updatePassword); // 🔒 secure password update
 
 
