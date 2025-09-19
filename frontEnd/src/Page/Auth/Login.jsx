@@ -29,7 +29,7 @@ function Login() {
       alert("Login successful!");
       navigate("/");
     } catch (error) {
-      console.log("Login failed:", error.response?.data?.message || "Server error.");
+      alert("Login failed:", error.response?.data?.message || "Server error.");
     }
   };
   
