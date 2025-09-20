@@ -3,6 +3,7 @@ import axiosInstance from '../../api/axiosInstance';
 import { Link } from 'react-router-dom';
 import '../../styles/AdminDashboard.css';
 import { FaArrowRightLong } from "react-icons/fa6";
+import { IoIosSettings } from "react-icons/io";
 
 
 function AdminDashboard() {
@@ -44,18 +45,12 @@ function AdminDashboard() {
         <Link to="/total-tours">
           <button>Manage Tours  <FaArrowRightLong  /></button> 
         </Link>
-{/* 
-      <div className='manage-btn' style={{ marginTop: '20px' }}>
-        <Link to="/admin/users">
-          <button>Manage Users</button>
+        <p>Admin settings</p>
+        <Link to='/admin-settings' style={{
+          padding:'0'
+        }}>
+          <button><IoIosSettings style={{fontSize:'1.5em'}} /></button>
         </Link>
-        <Link to="/admin/tours">
-          <button>Manage Tours</button>
-        </Link>
-        <Link to="/admin/bookings">
-          <button>Manage Bookings</button>
-        </Link>
-      </div> */}
     </div>
   ) : (
     <p>Loading stats...</p>

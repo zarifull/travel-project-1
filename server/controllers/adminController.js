@@ -2,6 +2,8 @@
 import User from "../models/user.model.js";
 import Booking from "../models/booking.model.js";
 import Tour from "../models/tour.model.js";
+import AdminSettings from '../models/admin.model.js'
+import { json } from "express";
 
 
 export const getAdminStats = async (req, res) => {
@@ -113,7 +115,6 @@ export const updateBookingStatus = async (req, res) => {
   if (!["approved", "rejected"].includes(status)) {
     return res.status(400).json({ message: "Invalid status" });
   }
-
   try {
     const booking = await Booking.findByIdAndUpdate(
       id,
@@ -158,3 +159,27 @@ export const deleteBookingAdmin = async (req, res) => {
   }
 };
 
+export const getAdminSettings = async (req,res)=>{
+  try{
+    const settings = await AdminSettings.findOne();
+    res.json(settings)
+  } catch(err){
+    res.status(500).json({message: "Failed to fetch"})
+  }
+}
+
+export const updateAdminSettings = async (req,res)=>{
+  const {whatssappNumber} = req.body;
+  try{
+    let settings = await AdminSettings.findOne();
+    if(!settings){
+      settings = new AdminSettings({whatsappNumber})
+    }else{
+      settings.whatsappNumber = whatssappNumber;
+    }
+      await settings.save();
+      res.json(settings);
+    } catch (err){
+      res.status(500).json({message:"Failed to update settings"})
+  }
+}

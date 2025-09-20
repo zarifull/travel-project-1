@@ -9,7 +9,9 @@ import {
   getAllBookings,
   updateBookingStatus,
   confirmBooking,
-  deleteBookingAdmin
+  deleteBookingAdmin,
+  getAdminSettings,
+  updateAdminSettings
 } from '../controllers/adminController.js';
 
 const router = express.Router();
@@ -18,7 +20,8 @@ const router = express.Router();
 // Admin dashboard
 // ====================
 router.get('/dashboard', protect, isAdmin, getAdminStats);
-
+router.get('/',protect,isAdmin,getAdminSettings)
+router.put('/',protect,isAdmin,updateAdminSettings)
 // ====================
 // User management
 // ====================
