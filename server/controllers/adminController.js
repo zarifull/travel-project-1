@@ -159,27 +159,46 @@ export const deleteBookingAdmin = async (req, res) => {
   }
 };
 
-export const getAdminSettings = async (req,res)=>{
-  try{
-    const settings = await AdminSettings.findOne();
-    res.json(settings)
-  } catch(err){
-    res.status(500).json({message: "Failed to fetch"})
-  }
-}
-
-export const updateAdminSettings = async (req,res)=>{
-  const {whatssappNumber} = req.body;
-  try{
+export const getAdminSettings = async (req, res) => {
+  try {
     let settings = await AdminSettings.findOne();
-    if(!settings){
-      settings = new AdminSettings({whatsappNumber})
-    }else{
-      settings.whatsappNumber = whatssappNumber;
+
+    // If no settings, create default
+    if (!settings) {
+      settings = await AdminSettings.create({ whatsappNumber: "" });
     }
-      await settings.save();
-      res.json(settings);
-    } catch (err){
-      res.status(500).json({message:"Failed to update settings"})
+
+    res.json(settings);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch settings" });
   }
-}
+};
+
+
+export const updateAdminSettings = async (req, res) => {
+  try {
+    const { whatsappNumber } = req.body;
+
+    // ✅ ensure it's not empty
+    if (!whatsappNumber || whatsappNumber.trim() === "") {
+      return res.status(400).json({ message: "WhatsApp number is required" });
+    }
+
+    let settings = await AdminSettings.findOne();
+
+    if (!settings) {
+      // Create new settings if none exist
+      settings = new AdminSettings({ whatsappNumber });
+    } else {
+      // Update existing settings
+      settings.whatsappNumber = whatsappNumber;
+    }
+
+    await settings.save();
+    res.json(settings);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update settings" });
+  }
+};
+

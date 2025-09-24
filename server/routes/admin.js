@@ -20,8 +20,8 @@ const router = express.Router();
 // Admin dashboard
 // ====================
 router.get('/dashboard', protect, isAdmin, getAdminStats);
-router.get('/',protect,isAdmin,getAdminSettings)
-router.put('/',protect,isAdmin,updateAdminSettings)
+router.get('/settings',protect,isAdmin,getAdminSettings)
+router.put('/settings',protect,isAdmin,updateAdminSettings)
 // ====================
 // User management
 // ====================
@@ -33,5 +33,8 @@ router.get('/bookings', protect, isAdmin, getAllBookings);
 router.put('/:id/status', protect, isAdmin, updateBookingStatus);
 router.patch('/:id/confirm', protect, isAdmin, confirmBooking);
 router.delete("/:id", protect, isAdmin, deleteBookingAdmin);
+
+
+
 
 export default router;

@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 
 const adminSettingsSchema = new mongoose.Schema({
-  whatsappNumber: { type: String, required: true },
+  whatsappNumber: { type: String,
+     required: true ,
+    trim : true
+    },
   // you can add more settings later
 }, { timestamps: true });
 

@@ -7,9 +7,11 @@ import { useAuth } from "../Context/AuthContext";
 import axiosInstance from "../api/axiosInstance";
 
 const BookingPage = () => {
-  const { id: tourId } = useParams(); // Get tour ID from URL
+  const { id: tourId } = useParams(); 
   const navigate = useNavigate();
-  const { token } = useAuth(); // Get logged-in user token
+  const { token } = useAuth(); 
+  const [phone,setPhone] = useState("+996")
+
 
   const [tour, setTour] = useState(null);
   const [formData, setFormData] = useState({
@@ -73,14 +75,14 @@ const BookingPage = () => {
 
       // Send WhatsApp notification
       const text = `✅ New Booking Request:
-🏞 Tour: ${tour?.title || "N/A"}
-👤 Name: ${formData.name}
-📞 Phone: ${formData.phone}
-📧 Email: ${formData.email}
-🏠 Address: ${formData.address}
-👥 Guests: ${formData.guests}
-📅 Date: ${formData.date}
-💬 Message: ${formData.message || "No message"}`;
+      🏞 Tour: ${tour?.title || "N/A"}
+      👤 Name: ${formData.name}
+      📞 Phone: ${formData.phone}
+      📧 Email: ${formData.email}
+      🏠 Address: ${formData.address}
+      👥 Guests: ${formData.guests}
+      📅 Date: ${formData.date}
+      💬 Message: ${formData.message || "No message"}`;
 
       window.open(
         `https://wa.me/${adminPhoneNumber}?text=${encodeURIComponent(text)}`,
@@ -120,8 +122,9 @@ const BookingPage = () => {
               type="text"
               name="phone"
               placeholder="Phone Number"
-              value={formData.phone}
-              onChange={handleChange}
+              value={phone}
+              onChange={(e)=>setPhone(e.target.value)}
+              
               required
               style={{ background: "none" }}
             />

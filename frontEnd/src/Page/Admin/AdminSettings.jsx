@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../../api/axiosInstance"; 
-import { useAuth } from "../../Context/AuthContext"; 
-import "../../styles/AdminSettings.css"; // optional css file
+import axiosInstance from '../../api/axiosInstance'
+import "../../styles/AdminSettings.css";
 
 function AdminSettings() {
   // ✅ state for WhatsApp number
@@ -9,32 +8,25 @@ function AdminSettings() {
   // ✅ state for showing success/error messages
   const [message, setMessage] = useState("");
 
-  // ✅ get token from AuthContext (for Authorization header)
-  const { token } = useAuth();
-
   // 🔹 Fetch current WhatsApp number when page loads
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await axiosInstance.get("/settings", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axiosInstance.get("/admin/settings");
         setWhatsappNumber(res.data?.whatsappNumber || ""); 
       } catch (err) {
         setMessage("❌ Failed to fetch settings");
       }
     };
     fetchSettings();
-  }, [token]);
+  }, []);
 
   // 🔹 Handle Save button
   const handleSave = async () => {
     try {
-      const res = await axiosInstance.put(
-        "/admin/settings",
-        { whatsappNumber }, // sending new number
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await axiosInstance.put("/admin/settings", {
+        whatsappNumber,
+      });
       setMessage("✅ WhatsApp number updated successfully!");
       setWhatsappNumber(res.data.whatsappNumber); 
     } catch (err) {
@@ -43,6 +35,7 @@ function AdminSettings() {
   };
 
   return (
+    <div className="settings-container">
     <div className="admin-settings">
       <h2>⚙️ Admin Settings</h2>
 
@@ -58,6 +51,7 @@ function AdminSettings() {
 
       {/* ✅ Show feedback message */}
       {message && <p className="message">{message}</p>}
+    </div>
     </div>
   );
 }

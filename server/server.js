@@ -7,7 +7,9 @@ import users from './routes/users.js';
 import helmet from 'helmet';
 import sanitizeRequest from './middleware/sanitize.js';
 import bookings from './routes/bookings.js';
-import admin from './routes/admin.js'
+import admin from './routes/admin.js';
+import AdminSettings from './models/admin.model.js';
+
 
 dotenv.config();
 const app = express();
@@ -26,19 +28,13 @@ app.use('/api/users', users);
 app.use('/api/bookings',bookings);
 app.use('/api/admin', admin); 
 
+
+
 mongoose.connect(process.env.MONGODB)
   .then(() => {
     console.log('MongoDB connected');
     app.listen(process.env.PORT, () => {
-      console.log(`Server running on port ${process.env.PORT} , ${process.env.JWT_SECRET}`);
-      console.log('MONGO_URL:', process.env.MONGODB);
+      console.log(`Server running on port ${process.env.PORT}`);
     });
   })
   .catch(err => console.error(err));
-
-
-
-  // Continue coding and repeat the process (git add, git commit, git push).
-//   git add .
-// git commit -m "Added feature X / Fixed bug Y"
-// git push origin main
