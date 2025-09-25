@@ -44,11 +44,7 @@ function Header() {
               <span className='logo-theme'>Batken Travels</span>
             </Link>
           </div>
-        {/* <div className="add-tours">
-          <Link to='/Add-tour' className='addTour-icon'>
-          <TbCopyPlusFilled />
-          </Link>
-        </div> */}
+       
 
         <div className="nav-box">
           <div className="admin">
