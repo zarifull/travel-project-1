@@ -1,7 +1,62 @@
 {
-    "welcome": "Биздин брондоо системасына кош келиңиз",
-    "login": "Кирүү",
+  "common":{
+    "save": "Сактоо",
+    "cancel": "Жокко чыгаруу",
+    "delete": "Өчүрүү",
+    "edit": "Түзөтүү",
+    "update": "Жаңылоо",
+    "yes": "Ооба",
+    "no": "Жок",
+    "close": "Жабуу",
+    "loading": "Жүктөлүүдө...",
+    "search": "Издөө",
+    "submit": "Жөнөтүү",
+    "back": "Артка",
+    "next": "Кийинки",
+    "previous": "Мурунку",
+    "confirm": "Ырастоо"
+  },
+  "header": {
+    "home": "Башкы бет",
+    "tours": "Турлар",
+    "aboutUs": "Биз жөнүндө",
+    "contact": "Байланыш",
+    "dashboard": "Админ Панель"
+  },
+  "homePage": {
+    "welcome": "Биздин веб-сайтка кош келиңиз!"
+  },  "menu": {
+    "myProfile": "Менин профилим",
+    "myBookings": "Менин брондоолорум"
+  },
+  "registration":{
+    "register": "Катталуу",
     "signup": "Катталуу",
-    "logout": "Чыгуу"
+    "signin": "Кирүү",
+    "login": "Кирүү",
+    "logout": "Чыгуу",
+    "name": "Атыңыз",
+    "email": "Электрондук почта",
+    "password": "Сырсөз",
+    "confirmPassword": "Сырсөздү кайра киргизүү",
+    "forgotPassword": "Сырсөздү унуттуңузбу?",
+    "resetPassword": "Сырсөздү жаңылоо",
+    "newPassword": "Жаңы сырсөз",
+    "createAccount": "Жаңы аккаунт түзүү",
+    "alreadyHaveAccount": "Сизде аккаунт барбы?",
+    "dontHaveAccount": "Аккаунт жокпу?",
+    "rememberMe": "Мени эстеп кал",
+    "sendOtp": "Код жөнөтүү",
+    "verifyOtp": "Кодду текшерүү",
+    "verificationCode": "Текшерүү коду",
+    "successRegistration": "Сиз ийгиликтүү катталдыңыз!",
+    "successLogin": "Сиз ийгиликтүү кирдиңиз!"
+  },  
+  "footer": {
+    "home": "Башкы бет",
+    "tours": "Турлар",
+    "aboutUs": "Биз жөнүндө",
+    "contact": "Байланыш",
+    "copyright": "© 2025 Автордук укук Зарина Момунбайга таандык & Дизайн — RH Agency"
   }
-  
+}

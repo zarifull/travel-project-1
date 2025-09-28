@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import React from 'react';
-import Home from '../Static/Home';
 import AboutUs from '../Static/AboutUs';
 import Contacts from '../Static/Contacts';
 import ToursList from '../Page/Tours/ToursList';
@@ -27,6 +26,7 @@ import TotalUsers from '../Page/Admin/ManageUsers';
 import TotalTours from '../Page/Admin/ManageTours';
 import TotalBookings from '../Page/Admin/ManageBookings';
 import AdminSettings from '../Page/Admin/AdminSettings';
+import LandingPage from '../Static/LandingPage';
 
 function Main({ user, setUser }) {
   const [tours, setTours] = useState([]);
@@ -41,10 +41,8 @@ function Main({ user, setUser }) {
 
   return (
     <>
-      {/* {user && <Navbar user={user} setUser={setUser} />} */}
-      {/* <Navbar /> */}
       <Routes>
-        <Route path="/" element={<Home  tours={tours} />} />
+        <Route path="/" element={<LandingPage  tours={tours} />} />
         <Route path="/search-bar" element={<SearchBox />} />
         <Route path="/tour-list" element={<ToursList tours={tours} />} />
         <Route path="/advertisment" element={<Advertisment />} />

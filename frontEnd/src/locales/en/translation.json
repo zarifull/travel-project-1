@@ -1,7 +1,64 @@
 {
-    "welcome": "Welcome to our Booking System",
-    "login": "Login",
+  "common":{
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "update": "Update",
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close",
+    "loading": "Loading...",
+    "search": "Search",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "confirm": "Confirm"
+  },
+  "header": {
+    "home": "Home",
+    "tours": "Tours",
+    "aboutUs": "About us",
+    "contact": "Contact",
+    "dashboard": "Admin Dashboard"
+  },
+  "homePage": {
+    "welcome": "Welcome to our website !"
+  },
+  "menu": {
+    "myProfile": "My Profile",
+    "myBookings": "My Bookings"
+  },
+  "registration":{
+    "register": "Register",
     "signup": "Sign Up",
-    "logout": "Logout"
+    "signin": "Sign In",
+    "login": "Login",
+    "logout": "Logout",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "resetPassword": "Reset Password",
+    "newPassword": "New Password",
+    "createAccount": "Create an account",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "rememberMe": "Remember me",
+    "sendOtp": "Send OTP",
+    "verifyOtp": "Verify OTP",
+    "verificationCode": "Verification Code",
+    "successRegistration": "You have successfully registered!",
+    "successLogin": "Login successful!"
+  },  
+  "footer": {
+    "home": "Home",
+    "tours": "Tours",
+    "aboutUs": "About us",
+    "contact": "Contact",
+    "copyright": "© 2025 Copyright by Zarina Momunbai & Design by RH Agency"
   }
   
+}

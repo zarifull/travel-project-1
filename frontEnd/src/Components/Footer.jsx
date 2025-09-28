@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Footer.css'
+import '../styles/Footer.css';
+import {useTranslation } from 'react-i18next';
 
 function Footer() {
+  const {t} = useTranslation()
   return (
    <footer>
      <div className='footer-block'>
@@ -15,13 +17,13 @@ function Footer() {
       <div className='footer-part footer-part2'>
         <ul className='part2-ul'>
           <li className='part-li'>
-            <Link className='part2-link' to='/about-us'>About Us</Link>
+            <Link className='part2-link' to='/about-us'>{t("footer.aboutUs")}</Link>
           </li>
           <li className='part-li'>
-             <Link className='part2-link' to='/contacts'>Contact</Link>
+             <Link className='part2-link' to='/contacts'>{t("footer.contact")}</Link>
           </li>
-          <li className='part-li'><Link className='part2-link' to='/tour-list'>Tours</Link> </li>
-          <li className='part-li'><Link className='part2-link' to='/' >Home </Link> </li>
+          <li className='part-li'><Link className='part2-link' to='/tour-list'>{t("footer.tours")}</Link> </li>
+          <li className='part-li'><Link className='part2-link' to='/' >{t("footer.home")} </Link> </li>
           
         </ul>
       </div>
@@ -35,7 +37,7 @@ function Footer() {
 
     <hr />
     <div className="footer-last">
-      <p> © 2025 Copyright  By Zarina Momunbai & Design by  RH Agency </p>
+      <p>{t("footer.copyright")}</p>
     </div>
     </div>
     </div>

@@ -1,5 +1,5 @@
 import {React, useState , useEffect,useCallback} from 'react';
-import '../styles/Home.css';
+import '../styles/LandingPage.css';
 import balon from '../Assets/balon.png';
 import camera from '../Assets/camera.png';
 import coffee from '../Assets/coffee.png';
@@ -18,7 +18,7 @@ import axiosInstance from '../api/axiosInstance';
 
 
 
-function Home() {
+function LandingPage() {
   const { user } = useAuth();
   const [tours, setTours] = useState([]);
   const [page, setPage] = useState(1);
@@ -32,7 +32,7 @@ function Home() {
   const [visible, setVisible] = useState(false);
   const [selectedTourId, setSelectedTourId] = useState(null);
 
-  const userId = user?._id; // ✅ Safe access even if user is null
+  const userId = user?._id; 
 
   const handleCardClick = (tourId) => {
     setSelectedTourId(tourId);
@@ -53,7 +53,8 @@ function Home() {
     fetchTours();
   }, [fetchTours]);
 
-  if (!user) return <div>Loading...</div>; 
+  // if (!user) return <div>Loading...</div>; 
+
 
 const handleBooking = async () => {
   setLoading(true);
@@ -289,4 +290,4 @@ const handleBooking = async () => {
   )
 }
 
-export default Home
+export default LandingPage;

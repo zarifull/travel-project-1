@@ -1,7 +1,64 @@
 {
-    "welcome": "Добро пожаловать в нашу систему бронирования",
-    "login": "Войти",
-    "signup": "Зарегистрироваться",
-    "logout": "Выйти"
-  }
-  
+  "common":{
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "update": "Обновить",
+    "yes": "Да",
+    "no": "Нет",
+    "close": "Закрыть",
+    "loading": "Загрузка...",
+    "search": "Поиск",
+    "submit": "Отправить",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Предыдущий",
+    "confirm": "Подтвердить"
+  },
+    "header": {
+      "home": "Главная",
+      "tours": "Туры",
+      "aboutUs": "О нас",
+      "contact": "Контакты",
+      "dashboard": "Админ Панель"
+    },
+    "homePage": {
+      "welcome": "Добро пожаловать на наш сайт!"
+    },
+    "menu": {
+      "myProfile": "Мой профиль",
+      "myBookings": "Мои бронирования"
+    },
+    "registration":{
+      "register": "Регистрация",
+      "signup": "Зарегистрироваться",
+      "signin": "Войти",
+      "login": "Вход",
+      "logout": "Выйти",
+      "name": "Имя",
+      "email": "Эл. почта",
+      "password": "Пароль",
+      "confirmPassword": "Подтвердите пароль",
+      "forgotPassword": "Забыли пароль?",
+      "resetPassword": "Сбросить пароль",
+      "newPassword": "Новый пароль",
+      "createAccount": "Создать аккаунт",
+      "alreadyHaveAccount": "Уже есть аккаунт?",
+      "dontHaveAccount": "Нет аккаунта?",
+      "rememberMe": "Запомнить меня",
+      "sendOtp": "Отправить код",
+      "verifyOtp": "Подтвердить код",
+      "verificationCode": "Код подтверждения",
+      "successRegistration": "Вы успешно зарегистрировались!",
+      "successLogin": "Вход выполнен успешно!"
+    },
+      "footer": {
+      "home": "Главная",
+      "tours": "Туры",
+      "aboutUs": "О нас",
+      "contact": "Контакты",
+      "copyright": "© 2025 Авторские права принадлежат Зарине Момунбай & Дизайн — RH Agency"
+    }
+
+}
