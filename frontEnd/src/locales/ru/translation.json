@@ -53,6 +53,29 @@
       "successRegistration": "Вы успешно зарегистрировались!",
       "successLogin": "Вход выполнен успешно!"
     },
+      "booking": {
+        "title": "Бронирование",
+        "destination": "Направление",
+        "destination_placeholder": "Куда поедем?",
+        "date": "Дата",
+        "guests": "Гости",
+        "guests_placeholder": "2 взрослых",
+        "searching": "Поиск туров..."
+      },
+      "pagination": {
+        "title": "Доступные туры",
+        "previous": "⬅ Назад",
+        "next": "Далее ➡",
+        "more": "ПОДРОБНЕЕ",
+        "page": "Страница {current} из {total}"
+      },
+      "advantages": {
+        "title": "Наши преимущества",
+        "ticket": "Страховка билета",
+        "activities": "Развлечения",
+        "travel": "Варианты путешествий",
+        "sightseeing": "Достопримечательности"
+      },   
       "footer": {
       "home": "Главная",
       "tours": "Туры",

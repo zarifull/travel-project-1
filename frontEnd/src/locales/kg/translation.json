@@ -52,6 +52,29 @@
     "successRegistration": "Сиз ийгиликтүү катталдыңыз!",
     "successLogin": "Сиз ийгиликтүү кирдиңиз!"
   },  
+    "booking": {
+      "title": "Брондоо",
+      "destination": "Багыт",
+      "destination_placeholder": "Каякка барабыз?",
+      "date": "Дата",
+      "guests": "Коноктор",
+      "guests_placeholder": "2 чоң киши",
+      "searching": "Турлар изденүүдө..."
+    },
+    "pagination": {
+      "title": "Бар турлар",
+      "previous": "⬅ Артка",
+      "next": "Кийинки ➡",
+      "more": "КӨБҮРӨӨК",
+      "page": "Барак {current} / {total}"
+    },
+    "advantages": {
+      "title": "Биздин артыкчылыктар",
+      "ticket": "Билет камсыздандыруу",
+      "activities": "Иш-чаралар",
+      "travel": "Саякат тандоолору",
+      "sightseeing": "Көрө турган жерлер"
+    }, 
   "footer": {
     "home": "Башкы бет",
     "tours": "Турлар",

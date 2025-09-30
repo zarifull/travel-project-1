@@ -14,9 +14,7 @@ function Advertisment() {
           <p className="main-item">
             Do you have any Question
           </p>
-          <button className='main-btn' >
-            <Link to='/contacts' >Contuct Us</Link>
-            </button>
+            <Link to='/contacts' className='contacts-link' >Contuct Us</Link>
         </div>
         <div className="mc-photo">
           <img src={huppyWoman} 

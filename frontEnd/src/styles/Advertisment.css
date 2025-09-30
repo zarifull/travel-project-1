@@ -1,26 +1,27 @@
 
 .main-contact{
-    /* background-color: red; */
-    min-height: 50vh;
+
+    min-height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5em;
+    padding: 0  5em 5em;
    
   
 }
 .mc-block{
     background: hsla(0, 0%, 98%, 1);
-    width: 60%;
-    height: 378px;
+    width: 85%;
+    min-width: 700px;
+    /* height: 100%; */
+    /* min-height: fit-content; */
     border-radius: 40px;
     text-align: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 2em;
-    gap: 3em;
-
+    gap: 1em;
 }
 .mc-theme{
     font-family: "Poppins";
@@ -35,19 +36,28 @@
     
 }
 .main-item{
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 3rem;
+    padding: 0 1em 1em 1em;
 }
-.main-btn{
-    padding: 12px;
+
+.contacts-link{
+    text-decoration: none;
+    color:hsla(0, 0%, 98%, 1) ;
+    padding: 10px;
+    margin-top: 2em;
     background-color: #f08c00;
-    color: #fff;
     border: none;
     border-radius: 10px;
     margin-top: 2em;
     font-weight: 700;
-
+}
+.contacts-link:hover,
+.contacts-link:active{
+    color: #f08c00;
+    background-color: hsla(0, 0%, 98%, 1);
+    border: 1px solid #f08c00;
 }
 .mc-img{
-   max-width: 403px;
+width: 100%;
 }

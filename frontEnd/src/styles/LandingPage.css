@@ -5,28 +5,24 @@
   overflow-x: hidden;
   font-family: "Poppins",;
   position: relative;
-  /* background-color: #1976d2; */
 }
 
-
-.home-image{
-    background-image: url(../Assets/mainPhoto.png);
-  background-repeat: no-repeat;
-  background-position: center top;
-  /* background-size: auto; */
+  .home-image{
+    text-align: center;
     width: 100%;
-  height: 100vh;
-  /* background-color: #1976d2; */
-}
-.booking{
-  max-width: 65%;
-  margin: auto; 
-  position: absolute; 
- top: 19em;
- right: 13em;
-   z-index: 1;
-}
-
+  }
+  .home-mainimg{
+    width: 60%;
+  }
+  .booking {
+    width:65%;             
+    margin: auto; 
+    position: absolute; 
+    top: 300px;             
+    left: 53%;               
+    transform: translateX(-50%); 
+    z-index: 1;
+  }
 .booking-theme{
     max-width: 200px;
     padding: 5px;
@@ -36,7 +32,6 @@
     text-align: center;
     font-weight: 400;
   font-family: "Poppins";
-    
 }
 .booking-block{
     width: 90%;
@@ -64,7 +59,8 @@
     min-width: 70%;
     background: rgba(255, 255, 255, 0.929);
     display: grid;
-    grid-template-columns: 1.1fr 1.2fr 1.1fr 0.7fr;
+    grid-template-columns: 1fr 1.1fr 1fr 0.3fr;
+   
     border-radius: 20px;
 }
 .booking-box label {
@@ -79,19 +75,18 @@
     border: none;
     font-weight: 500;
     font-size: 1.3rem;
-    color: black;
+    color: #495057;
+    text-align: center; 
+      min-width: 60%;
 }
-.bValue::placeholder{
-    color: black;
-    text-decoration: none;
-}
+
 .selects  {
  display: grid;
-  grid-template-columns: 25% 1fr;
+  grid-template-columns: 35% 1fr;
   grid-template-rows: 35% 35%;
   align-items:center;
   margin: 20px 0 0 20px; 
-  backdrop-filter: blur(10px);
+  line-height: 6;
 }
   .booking-icons {
     grid-row: 1/3;
@@ -108,7 +103,7 @@
     border-radius: 17px;
     border: none;
     cursor: pointer;
-    margin: 30% 0;
+    margin: 50% 0;
     box-shadow: 0px 0px 0px 0px hsla(260, 7%, 33%, 0.15),
 
     0px 12px 27px 0px hsla(260, 7%, 33%, 0.15),
@@ -121,14 +116,7 @@
    
    0px 304px 85px 0px hsla(260, 7%, 33%, 0);
 }
-.booking-search{
-    text-align: center;
-}
-.bValue{
-    min-width: 60%;
-    color: hsla(260, 7%, 33%, 1);
 
-}
 .booking-line1{
     width: 1px;
   height: 35%;
@@ -152,16 +140,20 @@
   
 }
 .booking-inp[type="text"]{
-    width: 80%;
+    width: 100%;
+    text-align: center;
+    color: black;
 }
 .booking-guests[type="text"]{
-    width: 70%;
+    width: 30%;
 }
 
 .booking-date[type="date"]{
     font-size: 1rem;
-    max-width: 80%;
-}/* Container to keep all floating images together */
+    max-width: 100%;
+    text-align: center;
+}
+
 .floating-container {
   position: relative;
   width: 100%;
@@ -194,13 +186,14 @@
 
 .advantages{
     width: 100%; 
-    padding: 5em 2em;
-    height: 45vh;
+    padding: 5em 0;
+    min-height: 45vh; 
+    height: auto; 
 }
 .adv-block{
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    padding: 0 2em 5em 2em;
+    padding: 0 2em;
 }
 .adv-theme{
     text-align: center;
@@ -215,6 +208,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding-bottom: 1em;
 }
 .adv-img3{
     width: 60px;
@@ -446,6 +440,58 @@
   text-align: center;
     z-index: 3;
     pointer-events: auto;
+}
+.resours-block{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 90px;
+}
+.resours-mainTheme{
+  /* color: #3bc9db; */
+  color:  #868e96;
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: "Poppins";
+ padding: 1em;
+ text-align: center;
+}
+.resours-box{
+  /* background-color:#f1f3f5; */
+  background: #f8f9fa;
+  width: 370px;
+  height: 250px;
+  border-radius: 20px;
+  padding: 20px;
+  /* box-shadow: 1px 0  3px   #3bc9db; */
+  line-height: 2;
+  text-align: center;
+}
+.resours-box1{
+  
+  line-height: 30px;
+}
+.resours-img {
+  width: 40%;
+}
+
+.resours-theme{
+  /* color:#3bc9db; */
+  color:  #868e96;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Poppins";
+}
+.resours-box a{
+  color: #66d9e8;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: "Poppins";
+  line-height: 2;
+  text-decoration: none;
 }
 @media (max-width: 768px) {
   .booking-form {

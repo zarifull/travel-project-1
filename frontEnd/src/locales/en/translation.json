@@ -53,6 +53,30 @@
     "successRegistration": "You have successfully registered!",
     "successLogin": "Login successful!"
   },  
+  
+    "booking": {
+      "title": "Booking",
+      "destination": "Destination",
+      "destination_placeholder": "Where to ?",
+      "date": "Date",
+      "guests": "Guests",
+      "guests_placeholder": "2 adults",
+      "searching": "Searching tours..."
+    },
+    "pagination": {
+      "title": "Available Tours",
+      "previous": "⬅ Previous",
+      "next": "Next ➡",
+      "more": "MORE",
+      "page": "Page {current} of {total}"
+    },
+    "advantages": {
+      "title": "We got the Goods",
+      "ticket": "Ticket insurance",
+      "activities": "Activities",
+      "travel": "Travel options",
+      "sightseeing": "Sightseeing"
+    },  
   "footer": {
     "home": "Home",
     "tours": "Tours",

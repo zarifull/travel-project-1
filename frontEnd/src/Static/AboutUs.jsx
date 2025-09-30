@@ -76,7 +76,7 @@ function AboutUs() {
             <img src={ourStory}  alt="" />
             </div>
           </section>
-          <section className="our-resours">
+          {/* <section className="our-resours">
             <p className="resours-mainTheme">
               HubSpot By the Numbers
             </p>
@@ -103,7 +103,7 @@ function AboutUs() {
                   <a href="/">Learn more </a>
               </div>
             </div>
-          </section>
+          </section> */}
         </div>
       </div>
     </div>

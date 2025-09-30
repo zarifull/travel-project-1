@@ -4,8 +4,7 @@
     min-height: auto;
     text-align: center;
     font-family: "Poppins";
-    padding: 0;
-    /* border-top:  2px solid #099268; */
+    padding: 2.9em 0;
 }
 .contacts-block{
    display: flex;
