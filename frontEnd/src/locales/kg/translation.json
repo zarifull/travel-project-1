@@ -75,6 +75,11 @@
       "travel": "Саякат тандоолору",
       "sightseeing": "Көрө турган жерлер"
     }, 
+    "resources":{
+      "hubspotByNumbers": "HubSpot сандар менен",
+      "learnMore": "Көбүрөөк билүү",
+      "loading": "Жүктөлүүдө"
+    },    
   "footer": {
     "home": "Башкы бет",
     "tours": "Турлар",

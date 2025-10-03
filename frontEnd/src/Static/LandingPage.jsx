@@ -17,10 +17,8 @@ import { useAuth } from "../Context/AuthContext";
 import axiosInstance from '../api/axiosInstance';
 import { useTranslation } from 'react-i18next';
 import mainimg from '../Assets/mainPhoto.png';
-import partners from '../Assets/partners.png';
-import customer from '../Assets/customer.png';
-import employees from '../Assets/emplyees.png';
-import { FaArrowRight } from "react-icons/fa";
+import ResourcesList from '../Components/Resources/ResourcesList';
+
 
 function LandingPage() {
   const { user } = useAuth();
@@ -282,32 +280,7 @@ const handleBooking = async () => {
        </section>
 
        <section className="our-resours">
-            <p className="resours-mainTheme">
-              HubSpot By the Numbers
-            </p>
-            <div className="resours-block">
-            <div className="resours-box">
-                <img className='resours-img' src={employees} alt="" />
-                <p className="resours-theme">
-                  + 20 Employers
-                  </p>
-                  <Link to='/'>Learn more <FaArrowRight /></Link>
-              </div>
-              <div className="resours-box resours-box2">
-                <img className='resours-img resours-img2 ' src={partners} alt="" />
-                <p className="resours-theme">
-                  + 20 Partners
-                  </p>
-                  <Link to='/'>Learn more <FaArrowRight /></Link>
-              </div>
-              <div className="resours-box">
-                <img className='resours-img' src={customer} alt="" />
-                <p className="resours-theme">
-                  + 200 Customees
-                  </p>
-                  <Link to='/'>Learn more <FaArrowRight /></Link>
-              </div>
-            </div>
+           <ResourcesList />
           </section>
 
       </div>

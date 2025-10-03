@@ -8,7 +8,7 @@ import helmet from 'helmet';
 import sanitizeRequest from './middleware/sanitize.js';
 import bookings from './routes/bookings.js';
 import admin from './routes/admin.js';
-import AdminSettings from './models/admin.model.js';
+import resource from './routes/resource.js';
 
 
 dotenv.config();
@@ -27,6 +27,7 @@ app.use('/api/tours', tours);
 app.use('/api/users', users);
 app.use('/api/bookings',bookings);
 app.use('/api/admin', admin); 
+app.use('/api/resources',resource);
 
 
 
@@ -38,3 +39,5 @@ mongoose.connect(process.env.MONGODB)
     });
   })
   .catch(err => console.error(err));
+
+  

@@ -76,7 +76,12 @@
       "activities": "Activities",
       "travel": "Travel options",
       "sightseeing": "Sightseeing"
-    },  
+    }, 
+    "resources":{
+        "hubspotByNumbers": "HubSpot By the Numbers",
+        "learnMore": "Learn more",
+        "loading": "Loading"
+    },     
   "footer": {
     "home": "Home",
     "tours": "Tours",

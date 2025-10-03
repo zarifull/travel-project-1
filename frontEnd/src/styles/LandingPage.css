@@ -493,6 +493,7 @@
   line-height: 2;
   text-decoration: none;
 }
+
 @media (max-width: 768px) {
   .booking-form {
     flex-direction: column;

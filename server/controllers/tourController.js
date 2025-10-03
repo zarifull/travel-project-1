@@ -21,7 +21,7 @@ export const createTour = async (req, res) => {
       return res.status(400).json({ error: 'Сүрөттөр жүктөлгөн жок' });
     }
 
-    // If using Cloudinary, req.files[i].path has the Cloudinary URL
+   
     const imageUrls = req.files.map(file => file.path); // path is from Cloudinary
 
     const newTour = new Tour({
