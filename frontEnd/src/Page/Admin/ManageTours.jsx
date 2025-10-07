@@ -9,12 +9,10 @@ function ManageTours() {
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Fetch tours when component mounts
   useEffect(() => {
     const fetchTours = async () => {
       try {
         const res = await axiosInstance.get("/tours");
-        // ⚡ use res.data.data if backend returns { data: [...] }
         setTours(res.data.data || res.data);
       } catch (err) {
         console.error("Failed to fetch tours:", err);
@@ -26,7 +24,6 @@ function ManageTours() {
     fetchTours();
   }, []);
 
-  // ✅ Delete a tour
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this tour?")) return;
     try {

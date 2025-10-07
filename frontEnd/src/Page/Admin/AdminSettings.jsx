@@ -3,12 +3,9 @@ import axiosInstance from '../../api/axiosInstance'
 import "../../styles/AdminSettings.css";
 
 function AdminSettings() {
-  // ✅ state for WhatsApp number
   const [whatsappNumber, setWhatsappNumber] = useState("");
-  // ✅ state for showing success/error messages
   const [message, setMessage] = useState("");
 
-  // 🔹 Fetch current WhatsApp number when page loads
   useEffect(() => {
     const fetchSettings = async () => {
       try {
@@ -21,7 +18,6 @@ function AdminSettings() {
     fetchSettings();
   }, []);
 
-  // 🔹 Handle Save button
   const handleSave = async () => {
     try {
       const res = await axiosInstance.put("/admin/settings", {
@@ -49,7 +45,6 @@ function AdminSettings() {
 
       <button onClick={handleSave}>Save</button>
 
-      {/* ✅ Show feedback message */}
       {message && <p className="message">{message}</p>}
     </div>
     </div>

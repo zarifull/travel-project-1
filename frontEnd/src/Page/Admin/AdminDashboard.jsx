@@ -51,6 +51,7 @@ function AdminDashboard() {
         }}>
           <button><IoIosSettings style={{fontSize:'1.5em'}} /></button>
         </Link>
+        <Link to='/resources'><button>RESOURCES</button></Link>
     </div>
   ) : (
     <p>Loading stats...</p>

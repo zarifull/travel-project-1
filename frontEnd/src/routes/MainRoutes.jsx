@@ -27,6 +27,7 @@ import TotalTours from '../Page/Admin/ManageTours';
 import TotalBookings from '../Page/Admin/ManageBookings';
 import AdminSettings from '../Page/Admin/AdminSettings';
 import LandingPage from '../Static/LandingPage';
+import Resources from '../Page/Admin/Resources';
 
 function Main({ user, setUser }) {
   const [tours, setTours] = useState([]);
@@ -67,6 +68,7 @@ function Main({ user, setUser }) {
         <Route path="/total-bookings"element={<PrivateRoute><TotalBookings /></PrivateRoute>}/>
         <Route path="/edit-tour/:id"element={<PrivateRoute><EditTour /></PrivateRoute>}/>
         <Route path="/admin-settings" element={<PrivateRoute><AdminSettings/></PrivateRoute>} /> 
+        <Route path="/resources" element={<PrivateRoute><Resources/></PrivateRoute>} /> 
 
 
         <Route

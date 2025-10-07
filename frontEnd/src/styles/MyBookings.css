@@ -1,12 +1,11 @@
 .mybooking-page{
     width: 100%;
-    min-height: 90vh; /* fills screen at least */
-    height: auto;      /* allows content to grow */
+    min-height: 90vh; 
+    height: auto;     
     font-family: "Poppins";
     text-align: center;
-    overflow-y: auto;  /* allows scrolling when window is short */
-    padding: 20px;     /* some breathing space */
-    /* background: #f8f9fa; */
+    overflow-y: auto; 
+    padding: 20px;     
 }
 
 .mybooking-container {
@@ -18,7 +17,7 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2em;
     margin-top: 1.5em;
-    justify-items: center; /* centers cards in their cells */
+    justify-items: center; 
   }
   
   
@@ -28,17 +27,12 @@
     border-radius: 12px;
     text-align: left;
   }
-  
-  
   .booking-card {
     background: white;
     padding: 20px;
     border-radius: 12px;
-    width: 100%;         /* all cards same width */
-    height: 55vh;        /* all cards same height */
-    /* display: flex;
-    flex-direction: column;
-    justify-content: space-between; */
+    width: 100%;        
+    height: 55vh;        
     overflow: auto;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   }
@@ -47,7 +41,7 @@
     border-radius: 3%;
     border: 1px solid #fff;
     width: 100%;
-    height: 180px;        /* fixed image height */
+    height: 180px;       
     object-fit: cover;
   }
   .booking-btns{

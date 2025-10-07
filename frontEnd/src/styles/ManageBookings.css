@@ -1,4 +1,3 @@
-/* ✅ Shared styles for Admin tables */
 .admin-table {
     width: 100%;
     border-collapse: collapse;
@@ -26,7 +25,6 @@
     background-color: #f4f4f4;
   }
   
-  /* ✅ Action buttons */
   .approve-btn,
   .reject-btn,
   .delete-btn {
@@ -39,8 +37,6 @@
     color: white;
   }
 
-  .booking-action{
-  }
   .approve-btn {
     background-color: #2f9e44;
   }

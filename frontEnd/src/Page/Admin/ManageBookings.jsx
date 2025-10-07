@@ -9,7 +9,6 @@ function ManageBookings() {
   const [loading, setLoading] = useState(true);
   const { token } = useAuth();
 
-  // Fetch all bookings
   const fetchBookings = async () => {
     if (!token) return;
     try {
@@ -28,7 +27,7 @@ function ManageBookings() {
   const updateStatus = async (id, status) => {
     try {
       await axiosInstance.put(
-        `/admin/${id}/status`,   // ✅ correct path
+        `/admin/${id}/status`, 
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );

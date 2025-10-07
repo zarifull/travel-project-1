@@ -1,4 +1,3 @@
-// src/pages/Admin/TotalUsers.jsx
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import "../../styles/ManageUsers.css";
@@ -10,7 +9,6 @@ function TotalUsers() {
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState({});
 
-  // Fetch users
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -37,7 +35,7 @@ function TotalUsers() {
 
   const handlePromote = async (email) => {
     try {
-      const token = localStorage.getItem("token"); // where you saved JWT on login
+      const token = localStorage.getItem("token");
   
       const res = await axiosInstance.put(
         "/admin/promote",
@@ -100,6 +98,7 @@ function TotalUsers() {
             <th>Email</th>
             <th>Role</th>
             <th>Joined</th>
+            <th>Phone</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -120,7 +119,7 @@ function TotalUsers() {
                 </span>
                 </td>
 
-                {/* <td>{new Date(user.createdAt).toLocaleDateString()}</td> */}
+                <td>{new Date(user.createdAt).toLocaleDateString()}</td>
                 <td>{user.phone}</td>
                 <td>
                   <button className="btn-delete" onClick={() => handleDelete(user._id)}>
