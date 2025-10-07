@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getResources } from "../../api/resourceApi";
-import ResourceCard from "./ResourceCard";
+import ResourceCard from "../../Components/ResourceCard";
 import { useTranslation } from "react-i18next";
 
 

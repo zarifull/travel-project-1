@@ -1,6 +1,5 @@
 import Resource from "../models/resource.model.js";
 
-// GET all resources
 export const getResources = async (req, res) => {
   try {
     const resources = await Resource.find();
@@ -10,24 +9,20 @@ export const getResources = async (req, res) => {
   }
 };
 
-// CREATE a resource safely
 export const createResource = async (req, res) => {
   try {
     const { key, count, translations, link } = req.body;
     const image = req.file?.path; 
 
-    // 1️⃣ Check if key is provided
     if (!key) {
       return res.status(400).json({ message: "Resource key is required" });
     }
 
-    // 2️⃣ Check for duplicate key
     const existing = await Resource.findOne({ key });
     if (existing) {
       return res.status(400).json({ message: `Resource with key "${key}" already exists` });
     }
 
-    // 3️⃣ Parse translations safely
     let parsedTranslations = {};
     if (translations) {
       try {
@@ -37,7 +32,6 @@ export const createResource = async (req, res) => {
       }
     }
 
-    // 4️⃣ Create and save resource
     const resource = new Resource({
       key,
       count,
@@ -54,14 +48,13 @@ export const createResource = async (req, res) => {
   }
 };
 
-// UPDATE a resource
 export const updateResource = async (req, res) => {
   try {
     const { id } = req.params;
     const updates = req.body;
 
     if (req.file) {
-      updates.image = req.file.path; // replace Cloudinary image if uploaded
+      updates.image = req.file.path;
     }
 
     if (updates.translations) {
@@ -72,7 +65,6 @@ export const updateResource = async (req, res) => {
       }
     }
 
-    // Optional: prevent changing key to a duplicate
     if (updates.key) {
       const duplicate = await Resource.findOne({ key: updates.key, _id: { $ne: id } });
       if (duplicate) {
@@ -89,7 +81,6 @@ export const updateResource = async (req, res) => {
   }
 };
 
-// DELETE a resource
 export const deleteResource = async (req, res) => {
   try {
     const resource = await Resource.findByIdAndDelete(req.params.id);

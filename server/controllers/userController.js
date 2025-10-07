@@ -3,7 +3,6 @@ import User from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import transporter from '../utils/mailer.js';
-import sendOtp from '../utils/sendOtp.js';
 import isEmailDomainValid from '../utils/validateEmailDomain.js'; // Email checker (if you use it)
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_fallback_secret";

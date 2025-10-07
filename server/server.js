@@ -9,6 +9,7 @@ import sanitizeRequest from './middleware/sanitize.js';
 import bookings from './routes/bookings.js';
 import admin from './routes/admin.js';
 import resource from './routes/resource.js';
+import resourceDetail from './routes/resourceDetail.js';
 
 
 dotenv.config();
@@ -28,7 +29,7 @@ app.use('/api/users', users);
 app.use('/api/bookings',bookings);
 app.use('/api/admin', admin); 
 app.use('/api/resources',resource);
-
+app.use('/api/resource-detail',resourceDetail)
 
 
 mongoose.connect(process.env.MONGODB)

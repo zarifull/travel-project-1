@@ -16,13 +16,11 @@ export const createTour = async (req, res) => {
       isPopular,
     } = req.body;
 
-    // Validate
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: 'Сүрөттөр жүктөлгөн жок' });
     }
 
-   
-    const imageUrls = req.files.map(file => file.path); // path is from Cloudinary
+    const imageUrls = req.files.map(file => file.path); 
 
     const newTour = new Tour({
       title,
@@ -138,7 +136,6 @@ export const updateTour = async (req, res) => {
     res.status(500).json({ message: 'Update failed', error: err.message });
   }
 };
-
 
 export const deleteTour = async (req, res) => {
   try {

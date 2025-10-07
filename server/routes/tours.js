@@ -1,5 +1,5 @@
 import express from 'express';
-import upload from '../utils/storage.js'; // Your multer cloudinary setup
+import upload from '../utils/storage.js'; 
 import { getAllTours, createTour, updateTour, getTourById, deleteTour, rateTour } from '../controllers/tourController.js';
 
 const router = express.Router();

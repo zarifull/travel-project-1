@@ -17,7 +17,7 @@ import { useAuth } from "../Context/AuthContext";
 import axiosInstance from '../api/axiosInstance';
 import { useTranslation } from 'react-i18next';
 import mainimg from '../Assets/mainPhoto.png';
-import ResourcesList from '../Components/Resources/ResourcesList';
+import ResourcesList from '../Page/Resources/ResourcesList';
 
 
 function LandingPage() {
