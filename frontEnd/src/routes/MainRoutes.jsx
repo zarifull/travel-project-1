@@ -28,8 +28,10 @@ import TotalBookings from '../Page/Admin/ManageBookings';
 import AdminSettings from '../Page/Admin/AdminSettings';
 import LandingPage from '../Static/LandingPage';
 import Resources from '../Page/Admin/Resources';
+import Customer from '../Page/Resources/Customer';
+import Partner from '../Page/Resources/Partner';
 
-function Main({ user, setUser }) {
+const  Main = ({ user, setUser })=> {
   const [tours, setTours] = useState([]);
 
   useEffect(() => {
@@ -69,6 +71,8 @@ function Main({ user, setUser }) {
         <Route path="/edit-tour/:id"element={<PrivateRoute><EditTour /></PrivateRoute>}/>
         <Route path="/admin-settings" element={<PrivateRoute><AdminSettings/></PrivateRoute>} /> 
         <Route path="/resources" element={<PrivateRoute><Resources/></PrivateRoute>} /> 
+        <Route path="/resources/partners" element={<Partner />} />
+        <Route path="/resources/customers" element={<Customer />} />
 
 
         <Route

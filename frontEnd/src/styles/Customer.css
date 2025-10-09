@@ -1,0 +1,63 @@
+.customer-page {
+    font-family: "Poppins", sans-serif;
+    color: #333;
+    padding: 2em;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .customer-hero {
+    text-align: center;
+    margin-bottom: 3em;
+  }
+  
+  .customer-title {
+    font-size: 2.5em;
+    color: #e67300;
+    margin-bottom: 0.5em;
+  }
+  
+  .customer-subtitle {
+    color: #666;
+    font-size: 1.1em;
+  }
+  
+  .customer-testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2em;
+  }
+  
+  .customer-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 2em;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .customer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  }
+  
+  .customer-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1em;
+  }
+  
+  .customer-card h3 {
+    color: #e67300;
+    margin-bottom: 0.5em;
+  }
+  
+  .customer-card p {
+    color: #555;
+    font-style: italic;
+    line-height: 1.5;
+  }
+  

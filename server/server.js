@@ -11,14 +11,14 @@ import admin from './routes/admin.js';
 import resource from './routes/resource.js';
 import resourceDetail from './routes/resourceDetail.js';
 
-
 dotenv.config();
 const app = express();
 
 app.use(helmet());
 app.use(cors());
-app.use(express.json());
-app.use(sanitizeRequest); // ✅ safe custom sanitizer
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); 
+app.use(sanitizeRequest); 
 
 app.get('/', (req, res) => {
   res.send('Server is running');
@@ -26,13 +26,13 @@ app.get('/', (req, res) => {
 
 app.use('/api/tours', tours);
 app.use('/api/users', users);
-app.use('/api/bookings',bookings);
-app.use('/api/admin', admin); 
-app.use('/api/resources',resource);
-app.use('/api/resource-detail',resourceDetail)
+app.use('/api/bookings', bookings);
+app.use('/api/admin', admin);
+app.use('/api/resources', resource);
+app.use('/api/resource-detail', resourceDetail);
 
-
-mongoose.connect(process.env.MONGODB)
+mongoose
+  .connect(process.env.MONGODB)
   .then(() => {
     console.log('MongoDB connected');
     app.listen(process.env.PORT, () => {
@@ -40,5 +40,3 @@ mongoose.connect(process.env.MONGODB)
     });
   })
   .catch(err => console.error(err));
-
-  

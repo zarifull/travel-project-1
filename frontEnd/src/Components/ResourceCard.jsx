@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-const ResourceCard = ({image,count,translations}) => {
+const ResourceCard = ({image,count,translations,link}) => {
     const { i18n } = useTranslation();
     const currentLang = i18n.language; 
   return (
@@ -11,7 +11,7 @@ const ResourceCard = ({image,count,translations}) => {
     <div className="resours-box">
       <img className="resours-img" src={image} alt={translations[currentLang]} />
       <p className="resours-theme">+ {count} {translations[currentLang]} </p>
-      <Link to="/">
+      <Link to={link}>
         Learn more <FaArrowRight className="link-icon" />
       </Link>
     </div>
