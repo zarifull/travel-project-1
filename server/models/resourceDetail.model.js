@@ -29,7 +29,7 @@ const resourceDetailSchema = new mongoose.Schema(
       default: [],
     },
     logo: {
-      url: { type: String, default: "" },
+      url: { type: [String], default: "" },
       alt: {
         en: { type: String, default: "" },
         ru: { type: String, default: "" },

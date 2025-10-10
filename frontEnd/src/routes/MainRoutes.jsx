@@ -27,9 +27,10 @@ import TotalTours from '../Page/Admin/ManageTours';
 import TotalBookings from '../Page/Admin/ManageBookings';
 import AdminSettings from '../Page/Admin/AdminSettings';
 import LandingPage from '../Static/LandingPage';
-import Resources from '../Page/Admin/Resources';
-import Customer from '../Page/Resources/Customer';
+import ManageResources from '../Page/Admin/ManageResources';
+import CustomerList from '../Page/Resources/CustomerList';
 import Partner from '../Page/Resources/Partner';
+import CustomerDetails from '../Page/Resources/CustomerDetails';
 
 const  Main = ({ user, setUser })=> {
   const [tours, setTours] = useState([]);
@@ -70,10 +71,10 @@ const  Main = ({ user, setUser })=> {
         <Route path="/total-bookings"element={<PrivateRoute><TotalBookings /></PrivateRoute>}/>
         <Route path="/edit-tour/:id"element={<PrivateRoute><EditTour /></PrivateRoute>}/>
         <Route path="/admin-settings" element={<PrivateRoute><AdminSettings/></PrivateRoute>} /> 
-        <Route path="/resources" element={<PrivateRoute><Resources/></PrivateRoute>} /> 
+        <Route path="/manage-resources" element={<PrivateRoute><ManageResources/></PrivateRoute>} /> 
         <Route path="/resources/partners" element={<Partner />} />
-        <Route path="/resources/customers" element={<Customer />} />
-
+        <Route path="/resources/customers-list" element={<CustomerList />} />
+        <Route path="/customer-detail/:id" element={<CustomerDetails  />} />
 
         <Route
         path="/profile"

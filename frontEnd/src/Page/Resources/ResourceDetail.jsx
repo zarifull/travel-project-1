@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getResourceDetails } from "../../api/resourceDetailAPI";
+import { getResourceDetails } from "../../api/resourceDetailApi";
 import "../../styles/resourceDetails.css";
 import { useTranslation } from "react-i18next";
 

@@ -1,0 +1,110 @@
+
+.customer-card {
+    padding: 2em;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .customer-card:hover {
+    transform: translateY(-5px);
+    border: 1px solid hsl(0, 5%, 82%);
+    border-radius: 20px;
+  }
+  .photo-gallery {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .photo {
+    width: 150px;
+    height: 170px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+    padding: 0.3em;
+    cursor: pointer;
+  }
+  .photo:nth-of-type(2){
+    position: absolute;
+    margin-top: -10px;
+    width: 170px;
+    height: 190px;
+  }
+  .photo:hover {
+    transform: scale(1.1);
+    z-index: 2;
+  }
+  
+  .customer-subtitle {
+    color: #666;
+    font-size: 1.1em;
+  }
+  
+  .customer-testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2em;
+  }
+  .comment-section{
+    padding: 1em;
+    width: 90%;
+    text-align: center;
+  }
+  
+  .comment {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 8px 0;
+    border-radius: 70px 70px 70px 0;
+    padding: 10px;
+  }
+  
+  .comment-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    margin-right: 10px;
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+  
+  .comment-body strong {
+    font-size: 15px;
+    color: #333;
+  }
+  
+  .comment-body p {
+    margin: 3px 0 0;
+    font-size: 14px;
+    color: #555;
+  }
+  .comment-body{
+    border-radius: 70px 70px 70px 0;
+    padding: 0.8em;
+    background-color: #f1f3f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .more-btn{
+    border: none;
+    background: none;
+  }
+  .more-btn-detail{
+    background-color: #ffa94d;
+    padding: 0.2em 1em;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+  }

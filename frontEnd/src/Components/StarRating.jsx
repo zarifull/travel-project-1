@@ -11,7 +11,7 @@ const StarRating = ({ tourId, tour }) => {
   const [ratings, setRatings] = useState(tour.ratings || []);
 
   const handleRating = async (value) => {
-    setRating(value); // визуалдык үчүн
+    setRating(value); 
     try {
       const response = await axiosInstance.post(`/tours/${tourId}/rate`, { rating: Number(value) });
       setRatings(response.data.ratings);

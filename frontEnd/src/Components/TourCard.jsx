@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/TourCard.css';
 import { Link } from 'react-router-dom';
-import { FaArrowRightLong } from "react-icons/fa6";
 import RatingResult from '../Components/RatingResult';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,7 +35,7 @@ const TourCard = ({ tour }) => {
           </div>
           <div className="link-detail">
             <Link to={`/tour-details/${tour._id}`} className="parts-link">
-           MORE  <FaArrowRightLong />
+           MORE <span>➔</span>
           </Link>
           </div>
           

@@ -11,7 +11,7 @@
  padding-bottom: 4em;
 }
 .tourList-theme {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins";
   font-size: 2rem;
   padding: 1em  1em 0 1em;
   background: linear-gradient(90deg, rgba(24, 100, 171, 1) 0%, rgba(230, 119, 0, 1) 100%);

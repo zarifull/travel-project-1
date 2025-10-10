@@ -211,7 +211,7 @@ const handleBooking = async () => {
             className="pagination-link"
             onClick={(e) => e.stopPropagation()}
           >
-            {t("pagination.more")} <FaArrowRightLong />
+            {t("pagination.more")} <span>➔</span>
           </Link>
         </div>
       </div>

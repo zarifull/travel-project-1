@@ -1,5 +1,5 @@
 import ResourceDetail from "../models/resourceDetail.model.js";
-
+import Resource from '../models/resource.model.js'
 export const createResourceDetail = async (req, res) => {
   try {
     const { resourceId, name, comment, logoAlt } = req.body;
@@ -10,7 +10,7 @@ export const createResourceDetail = async (req, res) => {
     console.log("FILES RECEIVED:", req.files);
 
     const photoUrls = req.files.photo ? req.files.photo.map(file => file.path) : [];
-    const logoUrl = req.files.logo ? req.files.logo[0].path : "";
+    const logoUrl = req.files.logo ? req.files.logo.map(file=>file.path):[];
 
     const videoUrls = req.files.video ? req.files.video.map(file => file.path) : [];
 
@@ -33,8 +33,11 @@ export const createResourceDetail = async (req, res) => {
       resourceDetail: newResourceDetail,
     });
   } catch (error) {
-    console.error("Error creating ResourceDetail:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    console.error("❌ Error creating ResourceDetail:", error);
+    res.status(500).json({
+      message: "Server error",
+      error: error.message || error.toString(),
+    })
   }
 };
 
@@ -60,10 +63,24 @@ export const getResourceDetailById = async (req, res) => {
   }
 };
 
+export const getResourceDetailByResourceId = async (req, res) => {
+  try {
+    const resourceDetail = await ResourceDetail.findOne({ resourceId: req.params.resourceId });
+    if (!resourceDetail)
+      return res.status(404).json({ message: "ResourceDetail not found" });
+    res.status(200).json(resourceDetail);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const updateResourceDetail = async (req, res) => {
   try {
-    const detail = await ResourceDetail.findById(req.params.id);
-    if (!detail) return res.status(404).json({ message: "ResourceDetail not found" });
+    const { id } = req.params;
+    const detail = await ResourceDetail.findById(id);
+
+    if (!detail)
+      return res.status(404).json({ message: "ResourceDetail not found" });
 
     const { name, comment, logoAlt } = req.body;
 
@@ -71,19 +88,19 @@ export const updateResourceDetail = async (req, res) => {
     if (comment) detail.comment = JSON.parse(comment);
     if (logoAlt) detail.logo.alt = JSON.parse(logoAlt);
 
-    if (req.files.photo) {
+    if (req.files && req.files.photo) {
       const newPhotoUrls = req.files.photo.map(file => file.path);
-      detail.photo = [...detail.photo, ...newPhotoUrls];
+      detail.photo = [...(detail.photo || []), ...newPhotoUrls];
     }
 
-    if (req.files.logo) {
-      detail.logo.url = req.files.logo[0].path;
+    if (req.files && req.files.logo) {
+      const newLogoUrls = req.files.logo.map(file => file.path);
+      detail.logo.url = newLogoUrls; 
     }
 
- 
-    if (req.files.video) {
+    if (req.files && req.files.video) {
       const newVideoUrls = req.files.video.map(file => file.path);
-      detail.video = [...detail.video, ...newVideoUrls];
+      detail.video = [...(detail.video || []), ...newVideoUrls];
     }
 
     await detail.save();
@@ -94,9 +111,13 @@ export const updateResourceDetail = async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating ResourceDetail:", error);
-    res.status(500).json({ message: "Failed to update ResourceDetail", error: error.message });
+    res.status(500).json({
+      message: "Failed to update ResourceDetail",
+      error: error.message,
+    });
   }
 };
+
 export const deleteResourceDetail = async (req, res) => {
   try {
     const deleted = await ResourceDetail.findByIdAndDelete(req.params.id);
@@ -107,6 +128,32 @@ export const deleteResourceDetail = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+export const getAllCustomerDetails = async (req, res) => {
+  try {
+    const lang = req.query.lang || "en";
+    const value = 
+      lang === "ru" ? "Клиенты" : 
+      lang === "kg" ? "Кардарлар" : "Customers";
+
+    const customerResource = await Resource.findOne({
+      [`translations.${lang}`]: value,
+    });
+
+    if (!customerResource)
+      return res.status(404).json({ message: "Customer resource not found" });
+
+    const customerDetails = await ResourceDetail.find({
+      resourceId: customerResource._id,
+    });
+
+    res.status(200).json(customerDetails);
+  } catch (error) {
+    console.error("Error fetching customer details:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 
 export const addCommentToResourceDetail = async (req, res) => {
   try {

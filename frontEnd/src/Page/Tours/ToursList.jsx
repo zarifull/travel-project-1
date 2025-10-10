@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 const ToursList = ({ tours }) => {
   const [filteredTours, setFilteredTours] = useState([]);
   const location = useLocation();
-const initialTours = location.state?.tours || tours; // read from state if available
+const initialTours = location.state?.tours || tours; 
 
 
   useEffect(() => {

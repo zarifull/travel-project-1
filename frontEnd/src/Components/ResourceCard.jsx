@@ -12,7 +12,7 @@ const ResourceCard = ({image,count,translations,link}) => {
       <img className="resours-img" src={image} alt={translations[currentLang]} />
       <p className="resours-theme">+ {count} {translations[currentLang]} </p>
       <Link to={link}>
-        Learn more <FaArrowRight className="link-icon" />
+        Learn more <span>➔</span>
       </Link>
     </div>
     </>

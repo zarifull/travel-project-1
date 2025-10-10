@@ -1,25 +1,33 @@
 .partner-page {
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins";
     color: #333;
-    padding: 2em;
+    padding: 2em 0 5em 0;
     max-width: 1200px;
     margin: 0 auto;
   }
   
   .partner-hero {
     text-align: center;
-    margin-bottom: 3em;
   }
-  
+  .partners-img{
+    width: 70%;
+  }
   .partner-title {
     font-size: 2.5em;
-    color: #0073e6;
-    margin-bottom: 0.5em;
+    /* color: hsl(206, 96%, 72%); */
+    color: #495057;
+    text-align: center;
+    padding: 0.2em 0;
   }
   
   .partner-subtitle {
+    /* color: #868e96; */
     color: #555;
-    font-size: 1.1em;
+    font-size: 1.4em;
+    font-weight: 500;
+    /* color: hsl(206, 96%, 72%); */
+    margin-bottom: 2em;
+    text-align: center;
   }
   
   .partner-logos {
@@ -28,24 +36,24 @@
     justify-content: center;
     gap: 2em;
     margin-bottom: 3em;
+    padding: 2em 0;
   }
   
   .partner-card {
-    background: #f9f9f9;
-    border-radius: 15px;
-    padding: 1.5em;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
   }
   
   .partner-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
   }
   
   .partner-image {
-    width: 150px;
+    width: 80%;
     height: auto;
     object-fit: contain;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px hsl(206, 33%, 74%);
+
   }
   
   .partner-info {
@@ -55,7 +63,7 @@
   }
   
   .partner-info h2 {
-    color: #0073e6;
+    color:#495057 ;
     margin-bottom: 0.5em;
   }
   

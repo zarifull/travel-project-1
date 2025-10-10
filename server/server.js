@@ -29,7 +29,7 @@ app.use('/api/users', users);
 app.use('/api/bookings', bookings);
 app.use('/api/admin', admin);
 app.use('/api/resources', resource);
-app.use('/api/resource-detail', resourceDetail);
+app.use('/api/resource-details', resourceDetail);
 
 mongoose
   .connect(process.env.MONGODB)

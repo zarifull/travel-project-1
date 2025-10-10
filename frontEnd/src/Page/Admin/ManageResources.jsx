@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../../styles/Resources.css'
+import '../../styles/ManageResources.css'
 
 const Resources = () => {
   const [resources, setResources] = useState([]);

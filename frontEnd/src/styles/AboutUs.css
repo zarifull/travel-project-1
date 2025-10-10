@@ -14,66 +14,20 @@
     
 }
 .aboutUs-img1{
-    width: 50%;
+    width: 70%;
     
-}
-.aboutUs-team{
-    text-align: center;
-    line-height: 40px;
-}
-.part2-theme{
-    color: #74c0fc;
-    font-size: 2rem;
-    font-weight: 600;
-    font-family: "Poppins";
-}
-.part2-prg{
-    font-size: 1rem;
-    color: #339af0;
-    font-weight: 600;
-    font-family: "Poppins";
-}
-.team-carts{
-    /* display: grid;
-    grid-template-columns: repeat(4,1fr); */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content:center;
-    align-items: center;
-    margin-top: 1.5em;
-    text-align: center;
-    gap: 3em;
-    
-}
-.member-img{
-    border-radius: 50%;
-    box-shadow: 1px 2px 5px 1px #339af0;
-}
-.member-name{
-    color: #74c0fc;
-    font-size: 1.3rem;
-    font-weight: 600;
-    font-family: "Poppins";
-    line-height: 2;
-
-}
-.member-role{
-    color: #339af0;
-    font-size: 1rem;
-    font-weight: 600;
-    font-family: "Poppins";
 }
 .ourStory{
    display: grid;
    grid-template-columns: repeat(2,1fr);
-   padding: 0 30px;
+   padding: 80px 30px 50px;
 }
 .ourStory-theme{
     width: 100%;
     height: 400px;
     margin-top: 20px;
 }
-.ourStory-img img{
+.ourStory-img{
     width: 85%;
 }
 .ourStory-mainTheme{
@@ -83,6 +37,10 @@
     font-family: "Poppins";
     margin-top: 20px;
 }
+.video-player{
+    border-radius: 20px;
+    box-shadow: 0 4px 10px #339af0;
+}  
 .ourStory-about{
     font-family: "Poppins";
     font-size: 1rem;
@@ -91,48 +49,3 @@
     line-height: 30px;
     padding: 20px 0 0 30px;
 }
-/* .resours-block{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 90px;
-}
-.resours-mainTheme{
-    color: #3bc9db;
-    font-size: 2rem;
-    font-weight: 600;
-    font-family: "Poppins";
-   padding: 1em;
-}
-.resours-box{
-    background-color:#f1f3f5;
-    width: 370px;
-    height: 250px;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 1px 0  3px   #3bc9db;
-    line-height: 2;
-
-}
-.resours-box1{
-    
-    line-height: 30px;
-}
-.resours-img {
-    width: 40%;
-}
-
-.resours-theme{
-    color:#3bc9db;
-    font-size: 1rem;
-    font-weight: 600;
-    font-family: "Poppins";
-}
-.resours-box a{
-    color: #66d9e8;
-    font-size: 1.1rem;
-    font-weight: 600;
-    font-family: "Poppins";
-    line-height: 2;
-} */
