@@ -1,13 +1,11 @@
-// controllers/userController.js
 import User from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import transporter from '../utils/mailer.js';
-import isEmailDomainValid from '../utils/validateEmailDomain.js'; // Email checker (if you use it)
+import isEmailDomainValid from '../utils/validateEmailDomain.js'; 
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_fallback_secret";
 
-// Generate JWT
 const generateToken = (user) => {
   return jwt.sign(
     { id: user._id, role: user.role },
@@ -16,31 +14,25 @@ const generateToken = (user) => {
   );
 };
 
-// ================== SIGNUP ==================
 export const signupUser = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    // 1. Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Email already exists" });
     }
 
-    // 2. (Optional) Validate email domain
     const isValidDomain = await isEmailDomainValid(email);
     if (!isValidDomain) {
       return res.status(400).json({ message: "Invalid email domain" });
     }
 
-    // 3. Create new user (password is hashed automatically in pre-save)
     const newUser = new User({ name, email, password });
     await newUser.save();
 
-    // 4. Generate token
     const token = generateToken(newUser);
 
-    // 5. Respond
     res.status(201).json({
       message: "Signup successful",
       user: {
@@ -57,27 +49,22 @@ export const signupUser = async (req, res) => {
   }
 };
 
-// ================== LOGIN ==================
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // 1. Find user
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    // 2. Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    // 3. Generate token
     const token = generateToken(user);
 
-    // 4. Respond
     res.status(200).json({
       message: "Login successful",
       user: {
@@ -107,14 +94,14 @@ export const getProfile = async (req, res) => {
 
 export const getMe = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1]; // get token
+    const token = req.headers.authorization?.split(" ")[1]; 
     if (!token) return res.status(401).json({ message: "No token" });
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // verify token
-    const user = await User.findById(decoded.id); // check if user exists
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); 
+    const user = await User.findById(decoded.id); 
     if (!user) return res.status(401).json({ message: "User not found" });
 
-    res.json(user); // send user data
+    res.json(user); 
   } catch (err) {
     res.status(401).json({ message: "Unauthorized" });
   }
@@ -125,17 +112,14 @@ export const updateProfile = async (req, res) => {
     const user = await User.findById(req.user._id);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    // Update fields
     user.name = req.body.username || req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.phone = req.body.phone || user.phone;
 
-    // Update password only if provided
     if (req.body.password) {
       user.password = req.body.password;
     }
 
-    // Save updated user
     const updatedUser = await user.save();
 
     res.json({ updatedUser });
@@ -159,8 +143,8 @@ export const updatePassword = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    user.password = password; // ✅ plain text is okay here, because save() will hash it
-    await user.save();        // ✅ triggers your pre-save hook
+    user.password = password; 
+    await user.save();        
 
     res.json({ message: "✅ Password updated successfully" });
   } catch (err) {

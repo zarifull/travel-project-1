@@ -1,5 +1,6 @@
 
 .customer-card {
+  width: 30%;
     padding: 2em;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -45,35 +46,35 @@
   
   .customer-testimonials {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2em;
   }
   .comment-section{
     padding: 1em;
-    width: 90%;
     text-align: center;
+    margin: 8px 0;
   }
   
-  .comment {
+  .comment-card {
     display: flex;
-    justify-content: start;
-    align-items: center;
-    margin: 8px 0;
+    justify-content: center;
+    align-items: start;
     border-radius: 70px 70px 70px 0;
-    padding: 10px;
+    padding: 10px 10px 0 10px ;
   }
   
   .comment-avatar {
-    width: 42px;
-    height: 42px;
+    padding: 10px;
+    width: 30px;
+    height: 25px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     color: white;
-    margin-right: 10px;
-    font-size: 1rem;
+    margin: 5px 10px 0 0;
+    font-size: 0.8rem;
     text-transform: uppercase;
   }
   
@@ -86,15 +87,24 @@
     margin: 3px 0 0;
     font-size: 14px;
     color: #555;
+   
   }
   .comment-body{
-    border-radius: 70px 70px 70px 0;
-    padding: 0.8em;
-    background-color: #f1f3f5;
+    padding: 0.5em;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-  }
+    align-items: start;
+    text-align: start;
+    display: -webkit-box;         
+  -webkit-box-orient: vertical; 
+  -webkit-line-clamp: 2;        
+  overflow: scroll;             
+  text-overflow: ellipsis; 
+  line-height: 1.5;
+  min-height: 2.4rem;
+  margin: 0;
+  padding: 0;
+    }
   .more-btn{
     border: none;
     background: none;
@@ -107,4 +117,12 @@
     font-weight: 500;
     text-decoration: none;
     color: #fff;
+  }
+  .more-btn-detail:hover{
+    background-color: #fff;
+    color: #ffa94d;
+    box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(255, 169, 77, 0.3);
+  
   }

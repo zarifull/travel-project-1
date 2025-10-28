@@ -4,7 +4,6 @@ import User from '../models/user.model.js';
 
 export const protect = async (req, res, next) => {
   let token;
-
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -18,7 +17,7 @@ export const protect = async (req, res, next) => {
         return res.status(401).json({ message: 'User not found' });
       }
 
-      req.user = user; // ✅ attaches full user including role
+      req.user = user; 
       next();
 
     } catch (error) {

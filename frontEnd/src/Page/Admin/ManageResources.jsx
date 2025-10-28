@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import {getResources,updateResource,deleteResource,createResource} from "../../api/resourceApi";
 import '../../styles/ManageResources.css'
 
-const Resources = () => {
+const ManageResources = () => {
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [editingResource, setEditingResource] = useState(null);
   const [formData, setFormData] = useState({
+    
     key: "",
     count: 0,
     translations: "{}",
     link: "",
     image: null,
   });
+  const [previewImage, setPreviewImage] = useState(null);
+  const [existingImages, setExistingImages] = useState([]);
+  const [previewImages, setPreviewImages] = useState([]);
+
 
   const fetchResources = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("/api/resources");
-      setResources(res.data);
-      setLoading(false);
+      const data = await getResources(); 
+      setResources(data);
     } catch (err) {
       setError("Failed to load resources");
+    } finally {
       setLoading(false);
     }
   };
@@ -32,15 +37,29 @@ const Resources = () => {
     fetchResources();
   }, []);
 
+
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, files } = e.target;
     if (name === "image") {
-      setFormData({ ...formData, image: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
+      const newPreviews = Array.from(files).map(file => ({
+        file,
+        preview: URL.createObjectURL(file)
+      }));
+      setPreviewImages(newPreviews);
+      setFormData({ ...formData, image: files[0] }); 
     }
   };
-
+  
+  const handleRemoveExistingImage = async (imageUrl) => {
+    if (!window.confirm("Delete this image?")) return;
+    try {
+      const updatedImages = existingImages.filter((img) => img !== imageUrl);
+      setExistingImages(updatedImages);
+    } catch (err) {
+      console.error("Error removing image:", err);
+    }
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -50,13 +69,9 @@ const Resources = () => {
       });
 
       if (editingResource) {
-        await axios.put(`/api/resources/${editingResource._id}`, data, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+        await updateResource(editingResource._id, data);
       } else {
-        await axios.post("/api/resources", data, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+        await createResource(data);
       }
 
       setShowModal(false);
@@ -77,15 +92,16 @@ const Resources = () => {
       link: resource.link || "",
       image: null,
     });
+    setExistingImages(resource.image ? [resource.image] : []);
     setShowModal(true);
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this resource?")) return;
     try {
-      await axios.delete(`/api/resources/${id}`);
+      await deleteResource(id);
       fetchResources();
-    } catch (err) {
+    } catch {
       setError("Failed to delete resource");
     }
   };
@@ -117,7 +133,7 @@ const Resources = () => {
                 <td>{res.count}</td>
                 <td>{res.link || "-"}</td>
                 <td>
-                  {res.image && <img src={`/${res.image}`} alt={res.key} width={50} />}
+                {res.image && <img src={res.image} alt={res.key} width={50} />}
                 </td>
                 <td>
                   <button onClick={() => handleEdit(res)}
@@ -165,6 +181,29 @@ const Resources = () => {
                 Image:
                 <input type="file" name="image" onChange={handleChange} />
               </label>
+                {existingImages.length > 0 && (
+                  <div className="existing-images">
+                    <h4>Existing Images</h4>
+                    <div className="image-list">
+                      {existingImages.map((img, i) => (
+                        <div key={i} className="image-item">
+                          <img src={img} alt="existing" className="preview" />
+                          <button type="button" onClick={() => handleRemoveExistingImage(img)}>
+                            🗑
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {previewImage && (
+                  <div className="new-preview">
+                    <h4>New Image Preview</h4>
+                    <img src={previewImage} alt="preview" className="preview" />
+                  </div>
+                )}
+
               <button type="submit">{editingResource ? "Update" : "Create"}</button>
               <button type="button" onClick={() => setShowModal(false)}>
                 Cancel
@@ -178,4 +217,4 @@ const Resources = () => {
   );
 };
 
-export default Resources;
+export default ManageResources;

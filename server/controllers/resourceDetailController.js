@@ -1,5 +1,5 @@
 import ResourceDetail from "../models/resourceDetail.model.js";
-import Resource from '../models/resource.model.js'
+
 export const createResourceDetail = async (req, res) => {
   try {
     const { resourceId, name, comment, logoAlt } = req.body;
@@ -126,87 +126,5 @@ export const deleteResourceDetail = async (req, res) => {
   } catch (error) {
     console.error("Error deleting ResourceDetail:", error);
     res.status(400).json({ message: error.message });
-  }
-};
-
-export const getAllCustomerDetails = async (req, res) => {
-  try {
-    const lang = req.query.lang || "en";
-    const value = 
-      lang === "ru" ? "Клиенты" : 
-      lang === "kg" ? "Кардарлар" : "Customers";
-
-    const customerResource = await Resource.findOne({
-      [`translations.${lang}`]: value,
-    });
-
-    if (!customerResource)
-      return res.status(404).json({ message: "Customer resource not found" });
-
-    const customerDetails = await ResourceDetail.find({
-      resourceId: customerResource._id,
-    });
-
-    res.status(200).json(customerDetails);
-  } catch (error) {
-    console.error("Error fetching customer details:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-};
-
-
-export const addCommentToResourceDetail = async (req, res) => {
-  try {
-    const { id } = req.params; 
-    const { user, text } = req.body; // text can be string or object
-
-    const resourceDetail = await ResourceDetail.findById(id);
-    if (!resourceDetail) {
-      return res.status(404).json({ message: "ResourceDetail not found" });
-    }
-
-    // Ensure text is always an object with en/ru/kg strings
-    let parsedText = { en: "", ru: "", kg: "" };
-
-    if (typeof text === "string") {
-      parsedText.en = text;
-    } else if (typeof text === "object" && text !== null) {
-      parsedText.en = text.en || "";
-      parsedText.ru = text.ru || "";
-      parsedText.kg = text.kg || "";
-    }
-
-    resourceDetail.comments.push({ user, text: parsedText });
-    await resourceDetail.save();
-
-    res.status(201).json({
-      message: "✅ Comment added successfully",
-      comments: resourceDetail.comments,
-    });
-  } catch (error) {
-    console.error("❌ Error adding comment:", error);
-    res.status(500).json({
-      message: "Failed to add comment",
-      error: error.message,
-    });
-  }
-};
-
-export const getCommentsForResourceDetail = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const resourceDetail = await ResourceDetail.findById(id).select("comments");
-
-    if (!resourceDetail) {
-      return res.status(404).json({ message: "ResourceDetail not found" });
-    }
-
-    res.status(200).json(resourceDetail.comments);
-  } catch (error) {
-    console.error("❌ Error fetching comments:", error);
-    res.status(500).json({
-      message: "Failed to fetch comments",
-      error: error.message,
-    });
   }
 };

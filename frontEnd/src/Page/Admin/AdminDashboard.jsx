@@ -3,6 +3,7 @@ import axiosInstance from '../../api/axiosInstance';
 import { Link } from 'react-router-dom';
 import '../../styles/AdminDashboard.css';
 import { IoIosSettings } from "react-icons/io";
+import Managecustomers from './ManageCustomers';
 
 
 function AdminDashboard() {
@@ -50,7 +51,10 @@ function AdminDashboard() {
         }}>
           <button><IoIosSettings style={{fontSize:'1.5em'}} /></button>
         </Link>
-        <Link to='/resources'><button>RESOURCES <span>➔</span></button></Link>
+        <Link to='/manage-resources'><button>RESOURCES <span>➔</span></button></Link>
+        <Link to='/manage-resourcedetails'><button>RESOURCE-DETAILS <span>➔</span></button></Link>
+        <Link to='/manage-resourcedetails'><button>RESOURCE-DETAILS <span>➔</span></button></Link>
+        <Link to='/manage-customers'><button>CUSTOMERS <span>➔</span></button></Link>
     </div>
   ) : (
     <p>Loading stats...</p>

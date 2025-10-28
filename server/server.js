@@ -10,6 +10,7 @@ import bookings from './routes/bookings.js';
 import admin from './routes/admin.js';
 import resource from './routes/resource.js';
 import resourceDetail from './routes/resourceDetail.js';
+import customersDetail from './routes/customersDetail.js'
 
 dotenv.config();
 const app = express();
@@ -30,6 +31,7 @@ app.use('/api/bookings', bookings);
 app.use('/api/admin', admin);
 app.use('/api/resources', resource);
 app.use('/api/resource-details', resourceDetail);
+app.use('/api/customers',customersDetail)
 
 mongoose
   .connect(process.env.MONGODB)

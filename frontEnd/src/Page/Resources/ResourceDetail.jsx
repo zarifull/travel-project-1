@@ -12,8 +12,12 @@ const ResourceDetailPage = () => {
 
   useEffect(() => {
     const fetchDetails = async () => {
-      const data = await getResourceDetails(id);
-      setDetails(data);
+      try {
+        const data = await getResourceDetails(id);
+        setDetails(data);
+      } catch (error) {
+        console.error("Error fetching resource details:", error);
+      }
     };
     fetchDetails();
   }, [id]);
@@ -25,7 +29,20 @@ const ResourceDetailPage = () => {
       ) : (
         details.map((detail) => (
           <div key={detail._id} className="resource-detail-card">
-            {detail.photo && <img src={detail.photo} alt={detail.name?.[lang]} />}
+            <div className="photo-gallery">
+              {detail.photo?.map((img, index) => (
+                <img key={index} src={img} alt={detail.name?.[lang] || "Resource"} />
+              ))}
+            </div>
+
+            {detail.logo?.url?.length > 0 && (
+              <img
+                src={Array.isArray(detail.logo.url) ? detail.logo.url[0] : detail.logo.url}
+                alt={detail.logo?.alt?.[lang] || "Logo"}
+                className="resource-logo"
+              />
+            )}
+
             <h3>{detail.name?.[lang]}</h3>
             <p>{detail.comment?.[lang]}</p>
           </div>

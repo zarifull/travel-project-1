@@ -1,4 +1,5 @@
 .customer-detail-page {
+  font-family: "Poppins";
     max-width: 1100px;
     margin: 0 auto;
     padding: 20px 0 40px 0;
@@ -33,25 +34,127 @@
     grid-row: auto;
     height: 100px;
   }
-  
+  .comment-block {
+    padding: 2em 2em 0 2em;
+    width: 100%;
+  }
+  .comment-box{
+    padding-bottom: 2em;
+  }
   .customer-comments {
     margin: 20px;
+    padding-left: 3em;
+  }
+  .comment-header{
+    padding: 0.7em 1em 0.7em 0;
+    display: flex;
+    flex-direction: column;
+   
+  }
+  .comment-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333; 
+    margin: 0 10em 0 3em;
+    border-radius: 10px;
+    white-space: pre-wrap; 
+    word-break: break-word; 
+    font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+    transition: background-color 0.3s ease;
   }
   
-  .comment {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 12px;
+  .comment-text:hover {
+    background-color: #f1f1f1;
   }
 
+  .comment-btn-block{
+    display: flex;
+    justify-content: left ;
+    align-items: center;
+    margin-left: 2.3em;
+    /* margin-top: -1em; */
+  }
+ 
+.comment-delete,
+.reply-toggle-btn,
+.send-btn,
+.comment-date,
+.delete-reply-btn{
+    cursor: pointer;
+    color: #888;
+    background: transparent;
+    text-align: left;
+    border: none;
+    padding: 8px;
+}
+.reply-toggle-btn{
+  font-size: 1rem;
+  margin-left: -7px;
+}
+.send-btn{
+  font-size: 1.3rem;
+  margin-top: 1em;
+}
+.comment-delete{
+  font-size: 0.9rem;
+  padding-right: 1em;
+ 
+}
+.comment-delete:hover,
+.reply-toggle-btn:hover,
+.delete-reply-btn:hover,
+.send-btn:hover{
+ transform: scale(1.3);
+ color: #000;
+}
+.reply-section {
+  padding: 0.5em 1.5em;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10em;
+}
+.comment-user-name{
+display: flex;
+justify-content: start;
+align-items: center;
+}
+.reply-box {
+ display: grid;
+ grid-template-columns: repeat(auto-fit,)minmax(300px, 1fr);
+}
+
+
+.reply-date{
+  color: #777;
+  font-size: 0.9rem;
+  margin: 0.4em ;
+  text-align: right;
+}
+.reply-form-togle{
+  background: none;
+  color: #888;
+  text-align: start;
+}
+.reply-form{
+  text-align: end;
+  padding-right: 5em;
   
+}
+.reply-form input{
+  width: 70%;
+  flex: 1;
+  padding: 1em;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
   .comment-form {
     display: flex;
     margin-top: 25px;
     align-items: center;
     justify-content: center;
   }
-  
+ 
   .comment-form input {
     flex: 1;
     padding: 1em;
@@ -59,18 +162,20 @@
     border: 1px solid #ccc;
     margin-right: 10px;
   }
-  
-  .comment-form button {
-    padding: 8px 16px;
-    border-radius: 20px;
+  .comment-send{
+    font-size: 1rem;
     background-color: #0077ff;
-    color: white;
+    color: #fff ;
+    border-radius: 50%;
+    padding: 0.6em;
+    text-align: center;
     border: none;
     cursor: pointer;
-    padding: 0.8em;
   }
+
   
   .comment-form button:hover {
     background-color: #005ecc;
+    color: #fff;
   }
   

@@ -1,12 +1,12 @@
 .customer-page {
-  width: 100%;
+  max-width: 1400px;
   min-height: 100vh; 
   height: auto;     
-  font-family: "Poppins", sans-serif;
-  text-align: center;
+  font-family: "Poppins";
   overflow-y: auto;  
   box-sizing: border-box;
-  padding: 2em 0;
+  padding: 2em  0;
+ margin: 0 auto;
   }
   .customer-title{
     text-align: center;
@@ -16,10 +16,11 @@
     font-weight: bolder;
   }
   .customer-grid{
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 2em;
-    padding: 2em 1.6em ;
+    padding: 2em 0 ;
   }

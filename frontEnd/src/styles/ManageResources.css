@@ -13,14 +13,14 @@
     justify-content: center;
     align-items: center;
   }
-  button {
+  /* button {
     cursor: pointer;
     border: none;
     border-radius: 4px;
     padding: 8px 14px;
     margin-bottom: 10px;
     font-size: 14px;
-  }
+  } */
   
   button:hover {
     opacity: 0.9;
@@ -107,8 +107,47 @@
     color: white;
   }
   
-  .modal form button[type="button"] {
+  /* .modal form button[type="button"] {
     background-color: #f03e3e;;
     color: white;
-  }
-  
+  } */
+  .existing-images,
+.new-preview {
+  margin-top: 10px;
+}
+
+.image-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.image-item {
+  position: relative;
+}
+
+.image-item img.preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.image-item button {
+  position: absolute;
+  top: -45px;
+  left: 0;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #111;
+}
+
+.new-preview img.preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  margin-top: 5px;
+  object-fit: cover;
+}

@@ -4,7 +4,7 @@ import "../../styles/ManageUsers.css";
 import { toast } from "react-toastify";
 
 
-function TotalUsers() {
+function ManageUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState({});
@@ -154,4 +154,4 @@ function TotalUsers() {
   );
 }
 
-export default TotalUsers;
+export default ManageUsers;

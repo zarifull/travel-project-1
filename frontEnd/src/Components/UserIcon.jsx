@@ -17,7 +17,7 @@ const UserIcon = () => {
   const { t } = useTranslation();
 
 
-  const { user, logout,token } = useAuth(); // ✅ use `logout` from context
+  const { user, logout,token } = useAuth(); 
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -77,7 +77,6 @@ const UserIcon = () => {
 
       {isRegister && (
         <div className="registerModal-window">
-          {/* ✅ Close register modal */}
           <button className="close-btn" onClick={() => setRegister(false)}>×</button>
 
           <div className="register-img">

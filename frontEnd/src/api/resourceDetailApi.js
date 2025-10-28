@@ -20,10 +20,22 @@ export const deleteResourceDetail = async (id) => {
   return res.data;
 };
 
-export const getAllCustomerDetails = async () => {
-  const res = await axiosInstance.get("/resource-details/customers");
+export const deleteResourceDetailPhoto = async (id, photoUrl) => {
+  return axiosInstance.delete(`/api/resource-details/${id}/photo`, { data: { photoUrl } });
+};
+
+export const updateResourceDetail = async (id, data) => {
+  const res = await axiosInstance.put(`/resource-details/${id}`, data);
   return res.data;
 };
+
+export const deletePhotoFromResourceDetail = async (id, photoUrl) => {
+  const res = await axiosInstance.delete(`/resource-details/${id}/photos`, {
+    data: { photoUrl },
+  });
+  return res.data;
+};
+
 
 export const getResourceDetailById = async (id) => {
   const res = await axiosInstance.get(`/resource-details/${id}`);

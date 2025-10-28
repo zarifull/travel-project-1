@@ -1,0 +1,99 @@
+.manage-resource {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.resource-form {
+  width: 70%;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+.resource-form input[type="text"],
+.resource-form input[type="file"] {
+  display: block;
+  width: 70%;
+  margin: 0.8rem 0;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.toTrush{
+  margin-top: 1em;
+}
+.resource-form button {
+  margin-top: 1rem;
+  background: #2b6cb0;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.resource-form button:hover {
+  background: #1a4978;
+}
+
+.resource-list {
+  margin: 2em 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.resource-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+}
+
+.image-row, .photo-row, .logo-row{
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.logo-preview, .photo-preview{
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+.preview-row{
+  display: flex;
+  gap: 1em;
+  margin-top: 3em;
+}
+.preview-row button{
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.resource-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.8rem;
+}
+
+.resource-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2b6cb0;
+  font-weight: bold;
+}
+.resource-actions button:hover {
+  color: #e53e3e;
+}

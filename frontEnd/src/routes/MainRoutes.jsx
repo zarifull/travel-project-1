@@ -31,6 +31,8 @@ import ManageResources from '../Page/Admin/ManageResources';
 import CustomerList from '../Page/Resources/CustomerList';
 import Partner from '../Page/Resources/Partner';
 import CustomerDetails from '../Page/Resources/CustomerDetails';
+import ManageResourceDetails from '../Page/Admin/ManageResourceDetails';
+import ManageCustomers from '../Page/Admin/ManageCustomers';
 
 const  Main = ({ user, setUser })=> {
   const [tours, setTours] = useState([]);
@@ -75,6 +77,9 @@ const  Main = ({ user, setUser })=> {
         <Route path="/resources/partners" element={<Partner />} />
         <Route path="/resources/customers-list" element={<CustomerList />} />
         <Route path="/customer-detail/:id" element={<CustomerDetails  />} />
+        <Route path="/manage-resourceDetails" element={<ManageResourceDetails  />} />
+        <Route path="/manage-customers" element={<ManageCustomers  />} />
+
 
         <Route
         path="/profile"

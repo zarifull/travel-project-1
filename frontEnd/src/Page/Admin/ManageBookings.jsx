@@ -1,10 +1,9 @@
-// src/Page/Admin/AdminBookings.jsx
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import axiosInstance from "../../api/axiosInstance";
 import '../../styles/ManageBookings.css';
 
-function ManageBookings() {
+const  ManageBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const { token } = useAuth();

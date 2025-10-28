@@ -1,15 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axiosInstance from "../api/axiosInstance"; // ✅ Your custom axios instance
 
-// Create context
 const AuthContext = createContext();
 
-// AuthProvider component
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
-  // ✅ Load from localStorage on mount
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedToken = localStorage.getItem("token");
@@ -18,13 +15,12 @@ export function AuthProvider({ children }) {
       if (storedUser && storedUser !== "undefined") {
         const parsedUser = JSON.parse(storedUser);
 
-        // ✅ Make sure required fields are present
         if (
           parsedUser &&
           parsedUser._id &&
           parsedUser.name &&
           parsedUser.email &&
-          parsedUser.role // ✅ Required for admin check
+          parsedUser.role 
         ) {
           setUser(parsedUser);
         } else {
@@ -35,7 +31,6 @@ export function AuthProvider({ children }) {
         setUser(null);
       }
 
-      // ✅ Load token if it exists
       if (storedToken) {
         setToken(storedToken);
       } else {
@@ -60,7 +55,7 @@ export function AuthProvider({ children }) {
         })
         .catch((err) => {
           console.error("❌ Failed to fetch user profile:", err);
-          logout(); // ✅ THIS logs out automatically if token is invalid
+          logout(); 
         });
     }
   }, [token, user]);
@@ -74,7 +69,6 @@ export function AuthProvider({ children }) {
     setToken(authToken);
   };
 
-  // ✅ Logout: clear storage & state
   const logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
@@ -82,7 +76,6 @@ export function AuthProvider({ children }) {
     setToken(null);
   };
 
-  // ✅ Debug log (optional, remove in production)
   useEffect(() => {
     console.log("👤 Current user in context:", user);
   }, [user]);
@@ -94,7 +87,6 @@ export function AuthProvider({ children }) {
   );
 }
 
-// Custom hook to access auth context
 export function useAuth() {
   return useContext(AuthContext);
 }

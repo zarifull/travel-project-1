@@ -2,7 +2,6 @@
 .navbar {
   font-family: "Poppins";
     padding: 10px 10px;
-    /* background-color: #1976d2; */
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -39,7 +38,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      min-width: 400px;      /* ✅ ensures consistent shape */
+      min-width: 400px;     
       max-width: 800px; 
       text-align: center;
   }
@@ -53,7 +52,7 @@
     border-radius: 8px;
     padding: 10px;
     z-index: 100;
-    min-width: 400px;      /* ✅ ensures consistent shape */
+    min-width: 400px;     
     max-width: 800px;
     text-align: center;
   }
@@ -89,8 +88,11 @@
     cursor: pointer;
     text-decoration: none;
     font-weight: 500;
+    font-size: 1rem;
   }
- 
+  .logout-button{
+    font-weight: 700;
+  }
   .users-links{
     display: flex;
     justify-content: space-around;

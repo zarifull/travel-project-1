@@ -3,8 +3,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 nav {
-  width: 100%;                 /* Full width */
-  position: fixed;             /* Sticks to top */
+  width: 100%;                
+  position: fixed;          
   top: 0.1em;  
   left: 1em;
   z-index: 10;
@@ -15,7 +15,7 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 100%;                /* Take full height of the nav */
+  height: 100%;                
 }
 
 .logo-block{
@@ -29,6 +29,7 @@ nav {
     height: 0 auto;
     border-radius: 50%;
     margin-top: 0.5% ;
+    object-fit: cover;
 }
 .logo-theme{
     color: #f08c00;

@@ -19,7 +19,6 @@ function MyProfile() {
 
   const [message, setMessage] = useState('');
 
-  // ✅ Prefill data when user changes
   useEffect(() => {
     if (user) {
       setFormData({
@@ -30,7 +29,6 @@ function MyProfile() {
     }
   }, [user]);
 
-  // ✅ Handle form changes
   const handleChange = (e) => {
     setFormData(prev => ({
       ...prev,
@@ -45,7 +43,6 @@ function MyProfile() {
     }));
   };
 
-  // ✅ Submit update
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
@@ -58,7 +55,6 @@ function MyProfile() {
     try {
       console.log("➡️ Sending profile update for:", user._id);
 
-      // ✅ Update name/email/phone
       const userUpdateRes = await axiosInstance.put(`/users/profile/${user._id}`, {
         username: formData.username,
         email: formData.email,
@@ -67,7 +63,6 @@ function MyProfile() {
 
       setUser(userUpdateRes.data.updatedUser);
 
-      // ✅ Update password only if filled
       if (passwordData.newPassword || passwordData.confirmPassword) {
         if (passwordData.newPassword !== passwordData.confirmPassword) {
           return setMessage('❌ Passwords do not match');

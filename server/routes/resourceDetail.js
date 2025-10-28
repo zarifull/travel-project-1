@@ -6,9 +6,6 @@ import {
   getResourceDetailById,
   updateResourceDetail,
   deleteResourceDetail,
-  getAllCustomerDetails,
-  addCommentToResourceDetail,
-  getCommentsForResourceDetail,
   getResourceDetailByResourceId,
 } from "../controllers/resourceDetailController.js";
 
@@ -25,7 +22,6 @@ router.post("/", cpUpload, createResourceDetail);
 
 router.get("/", getAllResourceDetails);
 
-router.get("/customers", getAllCustomerDetails);
 
 router.get("/by-resource/:resourceId", getResourceDetailByResourceId);
 
@@ -35,8 +31,5 @@ router.put("/:id", cpUpload, updateResourceDetail);
 
 router.delete("/:id", deleteResourceDetail);
 
-router.post("/:id/comments", addCommentToResourceDetail);
-
-router.get("/:id/comments", getCommentsForResourceDetail);
 
 export default router;

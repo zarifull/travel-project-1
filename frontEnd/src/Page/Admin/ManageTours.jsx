@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import '../../styles/ManageTours.css';
 import { Link } from "react-router-dom";
 
-function ManageTours() {
+const ManageTours = () => {
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(true);
 
