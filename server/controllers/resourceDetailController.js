@@ -2,7 +2,7 @@ import ResourceDetail from "../models/resourceDetail.model.js";
 
 export const createResourceDetail = async (req, res) => {
   try {
-    const { resourceId, name, comment, logoAlt } = req.body;
+    const { resourceId, name} = req.body;
 
     if (!resourceId)
       return res.status(400).json({ message: "resourceId is required" });
@@ -10,19 +10,12 @@ export const createResourceDetail = async (req, res) => {
     console.log("FILES RECEIVED:", req.files);
 
     const photoUrls = req.files.photo ? req.files.photo.map(file => file.path) : [];
-    const logoUrl = req.files.logo ? req.files.logo.map(file=>file.path):[];
-
     const videoUrls = req.files.video ? req.files.video.map(file => file.path) : [];
 
     const newResourceDetail = new ResourceDetail({
       resourceId,
       name: JSON.parse(name),
-      comment: JSON.parse(comment),
       photo: photoUrls,
-      logo: {
-        url: logoUrl,
-        alt: logoAlt ? JSON.parse(logoAlt) : { en: "", ru: "", kg: "" },
-      },
       video: videoUrls, 
     });
 
@@ -40,8 +33,6 @@ export const createResourceDetail = async (req, res) => {
     })
   }
 };
-
-
 export const getAllResourceDetails = async (req, res) => {
   try {
     const resourceDetails = await ResourceDetail.find().populate("resourceId");
@@ -76,26 +67,20 @@ export const getResourceDetailByResourceId = async (req, res) => {
 
 export const updateResourceDetail = async (req, res) => {
   try {
+    console.log("📦 FILES RECEIVED:", req.files);
+console.log("📝 BODY RECEIVED:", req.body);
+
     const { id } = req.params;
     const detail = await ResourceDetail.findById(id);
-
     if (!detail)
       return res.status(404).json({ message: "ResourceDetail not found" });
 
-    const { name, comment, logoAlt } = req.body;
-
+    const { name } = req.body;
     if (name) detail.name = JSON.parse(name);
-    if (comment) detail.comment = JSON.parse(comment);
-    if (logoAlt) detail.logo.alt = JSON.parse(logoAlt);
 
     if (req.files && req.files.photo) {
       const newPhotoUrls = req.files.photo.map(file => file.path);
       detail.photo = [...(detail.photo || []), ...newPhotoUrls];
-    }
-
-    if (req.files && req.files.logo) {
-      const newLogoUrls = req.files.logo.map(file => file.path);
-      detail.logo.url = newLogoUrls; 
     }
 
     if (req.files && req.files.video) {
@@ -116,7 +101,9 @@ export const updateResourceDetail = async (req, res) => {
       error: error.message,
     });
   }
+  
 };
+
 
 export const deleteResourceDetail = async (req, res) => {
   try {
@@ -128,3 +115,22 @@ export const deleteResourceDetail = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+export const deleteResourceDetailPhoto = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { photoUrl } = req.body;
+
+    const detail = await ResourceDetail.findById(id);
+    if (!detail) return res.status(404).json({ message: "ResourceDetail not found" });
+
+    detail.photo = detail.photo.filter((url) => url !== photoUrl);
+    await detail.save();
+
+    res.json({ message: "Photo deleted successfully", photo: photoUrl });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to delete photo" });
+  }
+};
+

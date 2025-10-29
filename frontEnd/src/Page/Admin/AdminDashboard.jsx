@@ -53,7 +53,6 @@ function AdminDashboard() {
         </Link>
         <Link to='/manage-resources'><button>RESOURCES <span>➔</span></button></Link>
         <Link to='/manage-resourcedetails'><button>RESOURCE-DETAILS <span>➔</span></button></Link>
-        <Link to='/manage-resourcedetails'><button>RESOURCE-DETAILS <span>➔</span></button></Link>
         <Link to='/manage-customers'><button>CUSTOMERS <span>➔</span></button></Link>
     </div>
   ) : (

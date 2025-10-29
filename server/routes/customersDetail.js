@@ -21,9 +21,7 @@ import { verifyToken } from "../middleware/verifyToken.js";
 const router = express.Router();
 
 const cpUpload = upload.fields([
-  { name: "photo", maxCount: 10 },
-  { name: "logo", maxCount: 1 },
-  { name: "video", maxCount: 3 },
+  { name: "photo", maxCount: 10 }
 ]);
 
 router.post("/", cpUpload, createCustomer);

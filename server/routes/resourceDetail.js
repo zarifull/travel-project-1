@@ -7,29 +7,30 @@ import {
   updateResourceDetail,
   deleteResourceDetail,
   getResourceDetailByResourceId,
+  deleteResourceDetailPhoto
 } from "../controllers/resourceDetailController.js";
+import {protect,isAdmin} from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
 const cpUpload = upload.fields([
   { name: "photo", maxCount: 10 },
-  { name: "logo", maxCount: 10 },
   { name: "video", maxCount: 3 },
 ]);
 
 
-router.post("/", cpUpload, createResourceDetail);
+router.post("/",protect,isAdmin, cpUpload, createResourceDetail);
 
-router.get("/", getAllResourceDetails);
+router.get("/", protect, getAllResourceDetails);
 
 
-router.get("/by-resource/:resourceId", getResourceDetailByResourceId);
+router.get("/by-resource/:resourceId",protect, getResourceDetailByResourceId);
 
-router.get("/:id", getResourceDetailById);
+router.get("/:id", protect, getResourceDetailById);
 
-router.put("/:id", cpUpload, updateResourceDetail);
+router.put("/:id", protect,isAdmin, cpUpload, updateResourceDetail);
 
-router.delete("/:id", deleteResourceDetail);
-
+router.delete("/:id",protect,isAdmin, deleteResourceDetail);
+router.delete("/:id/photo",protect,isAdmin,deleteResourceDetailPhoto)
 
 export default router;

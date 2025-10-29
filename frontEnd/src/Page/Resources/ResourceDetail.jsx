@@ -35,7 +35,7 @@ const ResourceDetailPage = () => {
               ))}
             </div>
 
-            {detail.logo?.url?.length > 0 && (
+            {detail.photo?.url?.length > 0 && (
               <img
                 src={Array.isArray(detail.logo.url) ? detail.logo.url[0] : detail.logo.url}
                 alt={detail.logo?.alt?.[lang] || "Logo"}

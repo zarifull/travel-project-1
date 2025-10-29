@@ -16,14 +16,6 @@ const resourceDetailSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
-    logo: {
-      url: { type: [String], default: "" },
-      alt: {
-        en: { type: String, default: "" },
-        ru: { type: String, default: "" },
-        kg: { type: String, default: "" },
-      },
-    },
     video: {
       type: [String],
       default: [],

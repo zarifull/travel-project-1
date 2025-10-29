@@ -18,7 +18,7 @@
 .resource-form input[type="text"],
 .resource-form input[type="file"] {
   display: block;
-  width: 70%;
+  width: 100%;
   margin: 0.8rem 0;
   padding: 0.5rem;
   border: 1px solid #ddd;
@@ -27,8 +27,8 @@
 .toTrush{
   margin-top: 1em;
 }
-.resource-form button {
-  margin-top: 1rem;
+.form-btns button {
+  margin: 0.5rem;
   background: #2b6cb0;
   color: #fff;
   border: none;
@@ -37,7 +37,7 @@
   cursor: pointer;
   transition: 0.3s;
 }
-.resource-form button:hover {
+.form-btns button:hover {
   background: #1a4978;
 }
 
@@ -86,14 +86,6 @@
   justify-content: space-between;
   margin-top: 0.8rem;
 }
-
-.resource-actions button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #2b6cb0;
-  font-weight: bold;
-}
-.resource-actions button:hover {
-  color: #e53e3e;
+.actions{
+  padding-top: 1em;
 }

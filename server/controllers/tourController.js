@@ -63,7 +63,6 @@ export const getAllTours = async (req, res) => {
     const limit = parseInt(rawLimit) || 100;
     const skip = (parseInt(page) - 1) * limit;
 
-    // Build dynamic filter object
     const searchFilter = {};
 
     if (keyword) {

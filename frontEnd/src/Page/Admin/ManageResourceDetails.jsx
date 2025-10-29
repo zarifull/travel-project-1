@@ -4,6 +4,7 @@ import {
   deleteResourceDetail,
   createResourceDetail,
   updateResourceDetail,
+  deletePhotoFromResourceDetail,
 } from "../../api/resourceDetailApi";
 import "../../styles/ManageResourceDetails.css";
 
@@ -15,17 +16,12 @@ const ManageResourceDetail = () => {
   const [formData, setFormData] = useState({
     resourceId: "",
     name: { en: "", ru: "", kg: "" },
-    comment: { en: "", ru: "", kg: "" },
-    logoAlt: { en: "", ru: "", kg: "" },
     photo: [],
-    logo: [],
     video: [],
   });
 
   const [previewPhoto, setPreviewPhoto] = useState([]);
-  const [previewLogo, setPreviewLogo] = useState([]);
   const [existingPhoto, setExistingPhoto] = useState([]);
-  const [existingLogo, setExistingLogo] = useState([]);
 
   useEffect(() => {
     fetchResourceDetails();
@@ -47,10 +43,8 @@ const ManageResourceDetail = () => {
   const handleFileChange = (e) => {
     const { name, files } = e.target;
     const filesArray = Array.from(files);
-    setFormData((prev) => ({ ...prev, [name]: filesArray }));
-
-    if (name === "photo") setPreviewPhoto(filesArray.map((f) => URL.createObjectURL(f)));
-    if (name === "logo") setPreviewLogo(filesArray.map((f) => URL.createObjectURL(f)));
+    setFormData((prev) => ({ ...prev, [name]: [...prev[name], ...filesArray] }));
+    if (name === "photo") setPreviewPhoto((prev) => [...prev, ...filesArray.map(f => URL.createObjectURL(f))]);
   };
 
   const handleTextChange = (lang, field, value) => {
@@ -60,14 +54,16 @@ const ManageResourceDetail = () => {
     }));
   };
 
-  const handleRemoveExistingPhoto = (url) => {
-    if (!window.confirm("Delete this existing photo?")) return;
-    setExistingPhoto((prev) => prev.filter((img) => img !== url));
-  };
-
-  const handleRemoveExistingLogo = (url) => {
-    if (!window.confirm("Delete this existing logo?")) return;
-    setExistingLogo((prev) => prev.filter((img) => img !== url));
+  const handleRemoveExistingPhoto = async (url) => {
+    if (!window.confirm("Delete this photo?")) return;
+    try {
+      await deletePhotoFromResourceDetail(editingDetail._id, url);
+      setExistingPhoto((prev) => prev.filter((img) => img !== url));
+      alert("Photo deleted successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete photo");
+    }
   };
 
   const handleEdit = (detail) => {
@@ -75,17 +71,12 @@ const ManageResourceDetail = () => {
     setFormData({
       resourceId: detail.resourceId || "",
       name: detail.name || { en: "", ru: "", kg: "" },
-      comment: detail.comment || { en: "", ru: "", kg: "" },
-      logoAlt: detail.logoAlt || { en: "", ru: "", kg: "" },
       photo: [],
-      logo: [],
       video: [],
     });
 
     setPreviewPhoto([]);
-    setPreviewLogo([]);
     setExistingPhoto(detail.photo || []);
-    setExistingLogo(detail.logo?.url || []);
 
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -104,52 +95,58 @@ const ManageResourceDetail = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
       const submitData = new FormData();
-      submitData.append("resourceId", formData.resourceId);
+  
+      // ✅ Ensure resourceId is always a string
+      const resourceIdValue =
+        typeof formData.resourceId === "object"
+          ? formData.resourceId._id || ""
+          : formData.resourceId;
+  
+      submitData.append("resourceId", resourceIdValue);
       submitData.append("name", JSON.stringify(formData.name));
-      submitData.append("comment", JSON.stringify(formData.comment));
-      submitData.append("logoAlt", JSON.stringify(formData.logoAlt));
-
-      formData.photo.forEach((file) => submitData.append("photo", file));
-      formData.logo.forEach((file) => submitData.append("logo", file));
-      formData.video.forEach((file) => submitData.append("video", file));
-
-      existingPhoto.forEach((url) => submitData.append("existingPhoto", url));
-      existingLogo.forEach((url) => submitData.append("existingLogo", url));
-
+  
+      // ✅ Append photos & videos if any
+      if (formData.photo && formData.photo.length > 0) {
+        formData.photo.forEach((file) => submitData.append("photo", file));
+      }
+      if (formData.video && formData.video.length > 0) {
+        formData.video.forEach((file) => submitData.append("video", file));
+      }
+  
+      let response;
       if (editingDetail) {
-        await updateResourceDetail(editingDetail._id, submitData);
-        alert("Resource detail updated successfully!");
+        response = await updateResourceDetail(editingDetail._id, submitData);
+        alert("✅ Resource detail updated successfully!");
         setEditingDetail(null);
       } else {
-        await createResourceDetail(submitData);
-        alert("Resource detail created successfully!");
+        response = await createResourceDetail(submitData);
+        alert("✅ Resource detail created successfully!");
       }
-
+  
+      console.log("✅ Server response:", response);
+  
+      // Reset form
       setFormData({
         resourceId: "",
         name: { en: "", ru: "", kg: "" },
-        comment: { en: "", ru: "", kg: "" },
-        logoAlt: { en: "", ru: "", kg: "" },
         photo: [],
-        logo: [],
         video: [],
       });
-
       setPreviewPhoto([]);
-      setPreviewLogo([]);
       setExistingPhoto([]);
-      setExistingLogo([]);
       fetchResourceDetails();
     } catch (err) {
-      console.error("Error saving resource detail:", err);
+      console.error("❌ Error saving resource detail:", err);
       setError(err.response?.data?.message || "Error saving resource detail");
     } finally {
       setLoading(false);
     }
   };
+  
+  
 
   return (
     <div className="manage-resource">
@@ -177,32 +174,6 @@ const ManageResourceDetail = () => {
           ))}
         </div>
 
-        <div className="form-langs">
-          <label>Comments:</label>
-          {["en", "ru", "kg"].map((lang) => (
-            <input
-              key={lang}
-              type="text"
-              placeholder={`Comment (${lang})`}
-              value={formData.comment[lang]}
-              onChange={(e) => handleTextChange(lang, "comment", e.target.value)}
-            />
-          ))}
-        </div>
-
-        <div className="form-langs">
-          <label>Logo Alt:</label>
-          {["en", "ru", "kg"].map((lang) => (
-            <input
-              key={lang}
-              type="text"
-              placeholder={`Alt (${lang})`}
-              value={formData.logoAlt[lang]}
-              onChange={(e) => handleTextChange(lang, "logoAlt", e.target.value)}
-            />
-          ))}
-        </div>
-
         <label>Photos:</label>
         <input type="file" name="photo" multiple onChange={handleFileChange} />
         {existingPhoto.length > 0 && (
@@ -225,34 +196,34 @@ const ManageResourceDetail = () => {
           </div>
         )}
 
-        <label>Logos:</label>
-        <input type="file" name="logo" multiple onChange={handleFileChange} />
-        {existingLogo.length > 0 && (
-          <div className="preview-row">
-            {existingLogo.map((img, i) => (
-              <div key={i} className="image-item">
-                <img src={img} alt="existing logo" width={80} />
-                <button type="button" onClick={() => handleRemoveExistingLogo(img)}>
-                  🗑
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-        {previewLogo.length > 0 && (
-          <div className="preview-row">
-            {previewLogo.map((img, i) => (
-              <img key={i} src={img} alt="preview logo" width={80} />
-            ))}
-          </div>
-        )}
-
         <label>Videos:</label>
         <input type="file" name="video" multiple onChange={handleFileChange} />
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Uploading..." : editingDetail ? "Update Resource Detail" : "Add Resource Detail"}
-        </button>
+        <div className="form-btns">
+          <button type="submit" className="save-btn">
+            {editingDetail ? "Update" : "Add"}
+          </button>
+
+          {editingDetail && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditingDetail(null);
+                setFormData({
+                  resourceId: "",
+                  name: { en: "", ru: "", kg: "" },
+                  photo: [],
+                  video: [],
+                });
+                setPreviewPhoto([]);
+                setExistingPhoto([]);
+              }}
+            >
+              Cancel
+            </button>
+          )}
+        </div>
+
       </form>
 
       <h2>Existing Resource Details</h2>
@@ -267,14 +238,9 @@ const ManageResourceDetail = () => {
                 <img key={i} src={photo} alt="photo" width={80} />
               ))}
             </div>
-            <div className="logo-row">
-              {detail.logo?.url?.map((logo, i) => (
-                <img key={i} src={logo} alt="logo" width={80} />
-              ))}
-            </div>
             <div className="actions">
-              <button onClick={() => handleEdit(detail)}>✏️ Edit</button>
-              <button onClick={() => handleDelete(detail._id)}>🗑 Delete</button>
+              <button onClick={() => handleEdit(detail)} className="edit-btn">✏️ Edit</button>
+              <button onClick={() => handleDelete(detail._id)} className="delete-btn">🗑 Delete</button>
             </div>
           </div>
         ))}

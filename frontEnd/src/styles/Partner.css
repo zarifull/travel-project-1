@@ -9,23 +9,17 @@
   .partner-hero {
     text-align: center;
   }
-  .partners-img{
-    width: 70%;
-  }
   .partner-title {
     font-size: 2.5em;
-    /* color: hsl(206, 96%, 72%); */
     color: #495057;
     text-align: center;
     padding: 0.2em 0;
   }
   
   .partner-subtitle {
-    /* color: #868e96; */
     color: #555;
     font-size: 1.4em;
     font-weight: 500;
-    /* color: hsl(206, 96%, 72%); */
     margin-bottom: 2em;
     text-align: center;
   }
@@ -34,27 +28,34 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2em;
+    gap: 3em;
     margin-bottom: 3em;
-    padding: 2em 0;
+    padding: 3em 0;
   }
+
   
   .partner-card {
+    width: 210px;
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 4px 8px hsl(206, 33%, 74%);
     transition: transform 0.3s ease;
   }
-  
   .partner-card:hover {
     transform: translateY(-10px);
   }
-  
-  .partner-image {
-    width: 80%;
-    height: auto;
-    object-fit: contain;
+  .partner-logo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
     border-radius: 50%;
-    box-shadow: 0 4px 8px hsl(206, 33%, 74%);
-
+    /* border: 3px solid #fff; */
   }
+  
   
   .partner-info {
     text-align: center;
