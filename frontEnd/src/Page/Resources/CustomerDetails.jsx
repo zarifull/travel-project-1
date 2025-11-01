@@ -109,7 +109,9 @@ const tempComment = {
 
   return (
     <div className="customer-detail-page">
-      <h1 className="customer-title">Our Happy Customers</h1>
+      {/* <h1 className="customer-title">Our Happy Customers</h1> */}
+      {/* <h1 className="customer-title"> {customer.name?.en} / {customer.name?.ru} / {customer.name?.kg}</h1> */}
+      <h3 className="customer-title">{customer.name?.en || "No Name"}</h3>
 
       <div className="customer-photos">
         {(customer.photo || []).map((imgObj, i) => (

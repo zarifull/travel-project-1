@@ -100,21 +100,49 @@ export const getCustomerById = async (req, res) => {
 
 export const updateCustomer = async (req, res) => {
   try {
-    const updateData = { ...req.body };
+    const { id } = req.params;
+    const { resourceDetailId } = req.body;
 
-    if (req.files && req.files.photo) {
-      const photos = req.files.photo.map(file => file.path);
-      updateData.photo = photos;
+    let name = {};
+    if (req.body.name) {
+      try {
+        name = JSON.parse(req.body.name);
+      } catch {
+        name = req.body.name; 
+      }
     }
 
-    const updated = await CustomerDetail.findByIdAndUpdate(req.params.id, updateData, { new: true });
-    if (!updated) return res.status(404).json({ message: "Customer not found" });
+    const newPhotos = req.files?.photo ? req.files.photo.map(f => f.path) : [];
 
-    res.status(200).json({ message: "Customer updated successfully", customer: updated });
+    const existingPhotos = req.body.existingPhoto
+      ? Array.isArray(req.body.existingPhoto)
+        ? req.body.existingPhoto
+        : [req.body.existingPhoto]
+      : [];
+
+    const customer = await CustomerDetail.findById(id);
+    if (!customer) {
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    customer.resourceDetailId = resourceDetailId || customer.resourceDetailId;
+    customer.name = name || customer.name;
+    customer.photo = [...existingPhotos, ...newPhotos];
+
+    const updated = await customer.save();
+
+    res.status(200).json({
+      message: "✅ Customer updated successfully",
+      customer: updated,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Error updating customer", error: error.message });
+    console.error("Error updating customer:", error);
+    res
+      .status(500)
+      .json({ message: "❌ Error updating customer", error: error.message });
   }
 };
+
 
 export const deleteCustomer = async (req, res) => {
   try {

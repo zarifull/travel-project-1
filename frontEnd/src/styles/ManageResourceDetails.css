@@ -74,12 +74,22 @@
 }
 .preview-row{
   display: flex;
+  flex-wrap: wrap;
+  margin-top: 1em;
   gap: 1em;
-  margin-top: 3em;
+}
+.preview-row img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
 }
 .preview-row button{
-  background-color: #fff;
-  border: 1px solid #ddd;
+  margin-top: 1.5em;
+  font-size: 1.5rem;
+  border: none;
+  background: #fff;
 }
 .resource-actions {
   display: flex;

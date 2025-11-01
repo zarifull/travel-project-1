@@ -1,0 +1,50 @@
+.add-customer {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: "Poppnis";
+    
+  }
+  
+  .manage-customer h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+  }
+  
+  .customer-form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .customer-form input[type="text"],
+  .customer-form input[type="file"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  
+
+  
+  /* Form Actions */
+  .form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  /* Error message */
+  .manage-customer p {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  

@@ -1,0 +1,27 @@
+.manage-customer{
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 1em ;
+    background-color: #fff;
+    font-family: "Poppins";
+    text-align: center;
+}
+.customer-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3em;
+    margin-top: 2em;
+}
+.customer-box{
+    width: 30%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding-bottom: 3em;
+}
+.customer-box:hover {
+    transform: translateY(-10px);
+    border: 1px solid hsl(0, 5%, 82%);
+    border-radius: 20px;
+}
+.customer-theme{
+   font-size: 1.5rem;
+}

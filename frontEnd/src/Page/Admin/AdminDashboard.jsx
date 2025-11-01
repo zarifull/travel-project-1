@@ -3,7 +3,6 @@ import axiosInstance from '../../api/axiosInstance';
 import { Link } from 'react-router-dom';
 import '../../styles/AdminDashboard.css';
 import { IoIosSettings } from "react-icons/io";
-import Managecustomers from './ManageCustomers';
 
 
 function AdminDashboard() {

@@ -7,6 +7,7 @@ import {
   deletePhotoFromResourceDetail,
 } from "../../api/resourceDetailApi";
 import "../../styles/ManageResourceDetails.css";
+import { getResources } from "../../api/resourceApi";
 
 const ManageResourceDetail = () => {
   const [resourceDetails, setResourceDetails] = useState([]);
@@ -22,6 +23,7 @@ const ManageResourceDetail = () => {
 
   const [previewPhoto, setPreviewPhoto] = useState([]);
   const [existingPhoto, setExistingPhoto] = useState([]);
+  const [resouces,setResources] = useState([]);
 
   useEffect(() => {
     fetchResourceDetails();
@@ -146,7 +148,23 @@ const ManageResourceDetail = () => {
     }
   };
   
+  useEffect(() => {
+    const fetchResources = async () => {
+      try {
+        const res = await getResources();
+        setResources(res);
+      } catch (error) {
+        console.error("Failed to load resources", error);
+      }
+    };
+    fetchResources();
+  }, []); 
   
+  console.log("Submitting customer data:");
+console.log("resourceDetailId:", formData.resourceId);
+console.log("name:", formData.name);
+console.log("photos:", formData.photo);
+
 
   return (
     <div className="manage-resource">
@@ -154,12 +172,16 @@ const ManageResourceDetail = () => {
 
       <form className="resource-form" onSubmit={handleSubmit}>
         <label>Resource ID:</label>
-        <input
-          type="text"
-          value={formData.resourceId}
-          onChange={(e) => setFormData({ ...formData, resourceId: e.target.value })}
-          required
-        />
+        <select value={formData.resourceId}
+          onChange={(e) => setFormData({...formData, resourceId: e.target.value})} required>
+          <option value="" disabled>Select a resource</option>
+          {resouces.map((res) => (
+            <option key={res._id} value={res._id}>
+            {res.name?.en || "No Name"}
+            </option>
+          ))}
+        </select>
+
 
         <div className="form-langs">
           <label>Names:</label>

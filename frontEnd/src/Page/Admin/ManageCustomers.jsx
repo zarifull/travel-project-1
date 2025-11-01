@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   getAllCustomers,
   createCustomer,
   updateCustomer,
   deleteCustomer,
 } from "../../api/customersDetailApi.js"; 
+import '../../styles/ManageCustomers.css';
 
 const ManageCustomer = () => {
   const [customers, setCustomers] = useState([]);
@@ -82,23 +84,30 @@ const ManageCustomer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    console.log("📤 Sending data:", {
+      resourceDetailId: formData.resourceDetailId,
+      name: formData.name,
+      newPhotos: formData.photo.map((f) => f.name),
+      existingPhotos,
+    });
+  
     try {
-      const data = new FormData();
-      data.append("resourceDetailId", formData.resourceDetailId);
-      data.append("name", JSON.stringify(formData.name));
-
-      formData.photo.forEach((file) => data.append("photo", file));
-      existingPhotos.forEach((url) => data.append("existingPhoto", url));
-
+      const submitData = new FormData();
+      submitData.append("resourceDetailId", formData.resourceDetailId);
+      submitData.append("name", JSON.stringify(formData.name));
+  
+      formData.photo.forEach((file) => submitData.append("photo", file));
+      existingPhotos.forEach((url) => submitData.append("existingPhoto", url));
+  
       if (editingCustomer) {
-        await updateCustomer(editingCustomer._id, data);
-        alert("Customer updated successfully!");
+        await updateCustomer(editingCustomer._id, submitData);
+        alert("✅ Customer updated successfully!");
         setEditingCustomer(null);
       } else {
-        await createCustomer(data);
-        alert("Customer added successfully!");
+        await createCustomer(submitData);
+        alert("✅ Customer created successfully!");
       }
-
+  
       setFormData({
         resourceDetailId: "",
         name: { en: "", ru: "", kg: "" },
@@ -110,32 +119,36 @@ const ManageCustomer = () => {
       setShowModal(false);
       fetchCustomers();
     } catch (err) {
-      console.error(err);
-      setError("Error saving customer");
+      console.error("Error saving customer:", err);
+      setError(err.response?.data?.message || "❌ Error saving customer");
     } finally {
       setLoading(false);
     }
   };
+  
+  
 
   return (
     <div className="manage-customer">
       <h1>Manage Customers</h1>
-      <button className="add-btn" onClick={() => setShowModal(true)}>+ Add Customer</button>
+      <Link className="add-btn" to='/add-customer-detail'>+ Add Customer</Link>
 
       {loading ? <p>Loading...</p> : error ? <p style={{ color: "red" }}>{error}</p> : null}
 
       <div className="customer-list">
         {customers.map((c) => (
-          <div key={c._id} className="customer-card">
-            <h3>{c.name?.en || "No Name"}</h3>
-            <div className="photo-row">
+          <div key={c._id} className="customer-box">
+            <h3 className="customer-theme">{c.name?.en || "No Name"}</h3>
+            <div className="customer-photos">
               {c.photo?.map((p, i) => (
                 <img key={i} src={p} alt="customer" width={80} />
               ))}
             </div>
             <div className="customer-actions">
-              <button onClick={() => handleEdit(c)}>✏️ Edit</button>
-              <button onClick={() => handleDelete(c._id)}>🗑 Delete</button>
+              <button onClick={() => handleEdit(c)}
+              className="edit-btn">✏️ Edit</button>
+              <button onClick={() => handleDelete(c._id)}
+              className="delete-btn">🗑 Delete</button>
             </div>
           </div>
         ))}
@@ -156,14 +169,15 @@ const ManageCustomer = () => {
 
               <label>Names:</label>
               {["en", "ru", "kg"].map((lang) => (
-                <input
-                  key={lang}
-                  type="text"
-                  placeholder={`Name (${lang})`}
-                  value={formData.name[lang]}
-                  onChange={(e) => handleTextChange(lang, "name", e.target.value)}
-                />
-              ))}
+              <input
+                key={lang}
+                type="text"
+                placeholder={`Name (${lang})`}
+                value={formData.name?.[lang] || ""}
+                onChange={(e) => handleTextChange(lang, "name", e.target.value)}
+              />
+            ))}
+
 
               <label>Photos:</label>
               <input type="file" multiple onChange={handleFileChange} />
@@ -187,8 +201,30 @@ const ManageCustomer = () => {
                 </div>
               )}
 
-              <button type="submit">{loading ? "Saving..." : editingCustomer ? "Update" : "Create"}</button>
-              <button type="button" onClick={() => setShowModal(false)}>Cancel</button>
+              <div className="form-actions">
+                <button type="submit" className="edit-btn">
+                  {loading ? "Saving..." : editingCustomer ? "Update" : "Create"}
+                </button>
+                <button
+                  type="button"
+                  className="delete-btn"
+                  onClick={() => {
+                    setShowModal(false);
+                    setEditingCustomer(null);
+                    setFormData({
+                      resourceDetailId: "",
+                      name: { en: "", ru: "", kg: "" },
+                      photo: [],
+                      comments: [],
+                    });
+                    setPreviewPhotos([]);
+                    setExistingPhotos([]);
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+
             </form>
           </div>
         </div>
