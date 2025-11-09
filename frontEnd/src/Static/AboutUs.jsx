@@ -3,10 +3,12 @@ import '../styles/AboutUs.css';
 import aboutUs from '../Assets/aboutUs.png';
 import ourStory from '../Assets/ourStory.png';
 import { getResourceDetails } from '../api/resourceDetailApi';
+import { useTranslation } from 'react-i18next';
 
 function AboutUs() {
   const [videoUrl, setVideoUrl] = useState('');
   const resourceId = '68df2fee32660943bbb4e748';
+  const {t} = useTranslation();
 
   useEffect(() => {
     const fetchVideo = async () => {
@@ -26,8 +28,14 @@ function AboutUs() {
       <div className="container">
         <p className="aboutUs-theme">About Us</p>
         <div className="aboutUs-block">
-          <section className="aboutUs-part1">
+
+          <section className="aboutUs-section">
+          
             <img className='aboutUs-img1' src={aboutUs} alt="About Us" />
+            <div className="our-aim">
+              <p className='our-theme'>{t("aboutUs.missionTitle")}</p>
+              <p className="our-text">{t("aboutUs.mission")}</p>
+            </div>
           </section>
 
           <section className='aboutUs-video'>
@@ -41,19 +49,13 @@ function AboutUs() {
             )}
           </section>
 
-          <section className='ourStory'>
-            <div className="ourStory-theme">
-              <p className="ourStory-mainTheme">Our Story</p>
-              <p className='ourStory-about'>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                Fugit, minus aliquam rerum repellendus sequi magnam incidunt nam! 
-                Aperiam aliquid reprehenderit error amet magni quasi exercitationem 
-                illum sed consectetur maiores temporibus, vel velit provident deserunt 
-                molestias fuga iste repellat delectus laborum? Delectus, quas eaque? 
-                Tenetur reprehenderit esse laudantium magnam at molestias!
+          <section className='aboutUs-section'>
+            <div className="our-aim">
+              <p className="our-theme">{t("aboutUs.ourStoryTitle")}</p>
+              <p className='our-text'>{t("aboutUs.ourStory")}
               </p>
             </div>
-            <img src={ourStory} style={{width:'100%', paddingTop:'2em'}} alt="Our Story" />
+            <img src={ourStory} style={{width:'45%', paddingTop:'2em'}} alt="Our Story" />
           </section>
         </div>
       </div>

@@ -15,7 +15,7 @@ export const createBooking = async (req, res) => {
       email,
       phone,
       address,
-      guests: Number(guests), // ensure number
+      guests: Number(guests), 
       date,
       message,
       status: "pending",
@@ -83,7 +83,6 @@ export const updateBooking = async (req, res) => {
   }
 };
 
-// controllers/booking.controller.js
 export const deleteBooking = async (req, res) => {
   const { id } = req.params;
 
@@ -91,7 +90,6 @@ export const deleteBooking = async (req, res) => {
     const booking = await Booking.findById(id);
     if (!booking) return res.status(404).json({ message: "Booking not found" });
 
-    // Only allow the user who owns it
     if (booking.userId.toString() !== req.user._id.toString()) {
       return res.status(403).json({ message: "Not allowed to delete this booking" });
     }

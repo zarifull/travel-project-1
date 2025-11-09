@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../Context/AuthContext';
 import '../../styles/MyBookings.css';
 import axiosInstance from '../../api/axiosInstance';
-
+import {useTranslation} from "react-i18next"
 
 function MyBookings() {
   const [bookings, setBookings] = useState([]);
   const { token, user } = useAuth();
+  const {t} =useTranslation();
 
-  // Define fetchBookings at component level
   const fetchBookings = async () => {
-    if (!user || !token) return; // safety check
+    if (!user || !token) return; 
     try {
       const res = await axiosInstance.get("/bookings/my", {
         headers: { Authorization: `Bearer ${token}` },
@@ -21,18 +21,16 @@ function MyBookings() {
     }
   };
 
-  // Fetch bookings when user or token changes
   useEffect(() => {
     fetchBookings();
   }, [user, token]);
 
-  // Cancel booking
   const cancelBooking = async (bookingId) => {
     try {
       await axiosInstance.delete(`/bookings/${bookingId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      fetchBookings(); // refresh list
+      fetchBookings(); 
     } catch (err) {
       console.error('Cancel failed:', err);
     }
@@ -56,7 +54,7 @@ function MyBookings() {
   return (
     <div className="mybooking-page">
     <div className="mybooking-container">
-      <p className='theme'>My Bookings</p>
+      <p className='theme'>{t("booking.myBookings")}</p>
       
       {bookings.length === 0 ? (
         <p>No bookings found.</p>
@@ -72,21 +70,27 @@ function MyBookings() {
     </div>
     <div className="booking-info">
       <h3>{b.tourId?.title || "Unknown Tour"}</h3>
-      <p><strong>Name:</strong> {b.name}</p>
-      <p><strong>Guests:</strong> {b.guests}</p>
-      <p><strong>Date:</strong> {new Date(b.date).toLocaleDateString()}</p>
-      <p><strong>Status:</strong> <span style={{color:'#1c7ed6',textDecoration:'underline'}}> {b.status}</span></p>
+      <p><strong>{t("tour.name")} :</strong> {b.name}</p>
+      <p><strong>{t("booking.form.guests")} :</strong> {b.guests}</p>
+      <p><strong>{t("booking.form.date")} :</strong> {new Date(b.date).toLocaleDateString()}</p>
+      <p>
+        <strong>{t("manage.status")} :</strong>{" "}
+        <span style={{ color: "#1c7ed6", textDecoration: "underline" }}>
+          {t(`booking.status.${b.status}`)}
+        </span>
+      </p>
+
         <div className="booking-btns">
       {b.status === 'pending' && (
         <button 
           onClick={() => cancelBooking(b._id)} 
           className="reject-btn"
         >
-          Cancel
+          {t("common.cancel")}
         </button>
         
       )}
-       <span className='delete-btn' onClick={()=>handleDelete(b._id)} style={{fontWeight:'500',textAlign:'left'}}>delete</span>
+       <span className='delete-btn' onClick={()=>handleDelete(b._id)} style={{fontWeight:'500',textAlign:'left'}}>{t("common.delete")}</span>
        </div>
     </div>
   </div>

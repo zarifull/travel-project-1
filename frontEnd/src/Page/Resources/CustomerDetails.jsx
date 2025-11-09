@@ -12,6 +12,7 @@ import "../../styles/CustomerDetails.css";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaReply } from "react-icons/fa6";
 import { IoSend } from "react-icons/io5";
+import {useTranslation} from "react-i18next";
 
 const CustomerDetail = ({ currentLang = "en" }) => {
   const { user: currentUser } = useAuth();
@@ -23,6 +24,7 @@ const CustomerDetail = ({ currentLang = "en" }) => {
   const [loading, setLoading] = useState(true);
   const [customer, setCustomer] = useState({ photo: [], comments: [] });
   const [comments, setComments] = useState([]);
+  const {t} = useTranslation()
 
   const colors = ["#4dabf7", "#ffa94d", "#da77f2", "#63e6be", "#f783ac", "#f48fb1"];
 
@@ -104,14 +106,12 @@ const tempComment = {
     }
   };
 
-  if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
-  if (!customer) return <p>Customer not found</p>;
+  if (loading) return <p style={{ textAlign: "center" }}>{t("common.loading")}</p>;
+  if (!customer) return <p>{t("customers.customerNotFound")}</p>;
 
   return (
     <div className="customer-detail-page">
-      {/* <h1 className="customer-title">Our Happy Customers</h1> */}
-      {/* <h1 className="customer-title"> {customer.name?.en} / {customer.name?.ru} / {customer.name?.kg}</h1> */}
-      <h3 className="customer-title">{customer.name?.en || "No Name"}</h3>
+      <h3 className="customer-title">{customer.name?.en || "Our trip was nice"}</h3>
 
       <div className="customer-photos">
         {(customer.photo || []).map((imgObj, i) => (
@@ -126,7 +126,7 @@ const tempComment = {
       </div>
 
       <div className="customer-comments">
-        <h2>Comments ({comments.length})</h2>
+        <h2>{t("customers.comments")} ({comments.length})</h2>
 
         {comments.map((comment, i) => {
           const bgColor = colors[i % colors.length];
@@ -245,7 +245,7 @@ const tempComment = {
         <form onSubmit={handleCommentSubmit} className="comment-form">
           <input
             type="text"
-            placeholder="Write a comment..."
+            placeholder={t("customers.writeComment")}
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           />

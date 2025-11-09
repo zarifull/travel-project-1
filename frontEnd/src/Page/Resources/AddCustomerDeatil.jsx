@@ -3,6 +3,8 @@ import { createCustomer,getCustomersByResource } from "../../api/customersDetail
 import { useNavigate } from "react-router-dom";
 import "../../styles/AddCustomer-detail.css";
 import { getAllResourceDetails } from "../../api/resourceDetailApi.js";
+import { useTranslation } from "react-i18next";
+
 const AddCustomerDetail = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -15,6 +17,7 @@ const AddCustomerDetail = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [resourceDetails, setResourceDetails] = useState([]);
+  const {t} = useTranslation();
 
   const handleTextChange = (lang, field, value) => {
     setFormData((prev) => ({
@@ -65,10 +68,10 @@ const AddCustomerDetail = () => {
   return (
     <div className="auth-block">
     <div className="add-customer">
-      <h1>Add Customer Detail</h1>
+      <h1>{t("manage.addCustomerDetail")}</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit} className="customer-form">
-      <label>Resource Detail:</label>
+      <label>{t("manage.resourceDetail")}:</label>
       <select
           value={formData.resourceDetailId}
           onChange={(e) =>
@@ -86,7 +89,7 @@ const AddCustomerDetail = () => {
 
 
 
-        <label>Names:</label>
+        <label>{t("manage.names")}</label>
         {["en", "ru", "kg"].map((lang) => (
           <input
             key={lang}
@@ -97,7 +100,7 @@ const AddCustomerDetail = () => {
           />
         ))}
 
-        <label>Photos:</label>
+        <label>{t("manage.photos")}</label>
         <input type="file" multiple onChange={handleFileChange} />
         {previewPhotos.length > 0 && (
           <div className="preview-row">
@@ -109,14 +112,14 @@ const AddCustomerDetail = () => {
 
         <div className="form-actions">
           <button type="submit" className="edit-btn">
-            {loading ? "Saving..." : "Add Customer"}
+            {loading ? t("common.saving") : t("common.add")}
           </button>
           <button
             type="button"
             className="delete-btn"
             onClick={() => navigate("/manage-customers")}
           >
-            Cancel
+            {t("common.cancel")}
           </button>
         </div>
       </form>

@@ -30,7 +30,7 @@ const ResourcesList = () => {
 
   return (
     <div className="">
-    <p className="resours-mainTheme">{t("hubspotByNumbers")}</p>
+    <p className="resours-mainTheme">{t("resources.hubspotByNumbers")}</p>
     <div className="resours-block">
     {resources.map((res) => (
         <ResourceCard

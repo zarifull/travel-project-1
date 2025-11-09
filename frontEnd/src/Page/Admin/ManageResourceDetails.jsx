@@ -8,6 +8,7 @@ import {
 } from "../../api/resourceDetailApi";
 import "../../styles/ManageResourceDetails.css";
 import { getResources } from "../../api/resourceApi";
+import { useTranslation } from "react-i18next";
 
 const ManageResourceDetail = () => {
   const [resourceDetails, setResourceDetails] = useState([]);
@@ -24,7 +25,7 @@ const ManageResourceDetail = () => {
   const [previewPhoto, setPreviewPhoto] = useState([]);
   const [existingPhoto, setExistingPhoto] = useState([]);
   const [resouces,setResources] = useState([]);
-
+  const { t } = useTranslation();
   useEffect(() => {
     fetchResourceDetails();
   }, []);
@@ -101,7 +102,6 @@ const ManageResourceDetail = () => {
     try {
       const submitData = new FormData();
   
-      // ✅ Ensure resourceId is always a string
       const resourceIdValue =
         typeof formData.resourceId === "object"
           ? formData.resourceId._id || ""
@@ -110,7 +110,6 @@ const ManageResourceDetail = () => {
       submitData.append("resourceId", resourceIdValue);
       submitData.append("name", JSON.stringify(formData.name));
   
-      // ✅ Append photos & videos if any
       if (formData.photo && formData.photo.length > 0) {
         formData.photo.forEach((file) => submitData.append("photo", file));
       }
@@ -130,7 +129,6 @@ const ManageResourceDetail = () => {
   
       console.log("✅ Server response:", response);
   
-      // Reset form
       setFormData({
         resourceId: "",
         name: { en: "", ru: "", kg: "" },
@@ -159,22 +157,16 @@ const ManageResourceDetail = () => {
     };
     fetchResources();
   }, []); 
-  
-  console.log("Submitting customer data:");
-console.log("resourceDetailId:", formData.resourceId);
-console.log("name:", formData.name);
-console.log("photos:", formData.photo);
-
 
   return (
     <div className="manage-resource">
-      <h1>Manage Resource Details</h1>
+      <h1>{t("admin.manageResourceDetails")}</h1>
 
       <form className="resource-form" onSubmit={handleSubmit}>
-        <label>Resource ID:</label>
+        <label>{t("manage.resourceId")}</label>
         <select value={formData.resourceId}
           onChange={(e) => setFormData({...formData, resourceId: e.target.value})} required>
-          <option value="" disabled>Select a resource</option>
+          <option value="" disabled>{t("manage.selectResource")}</option>
           {resouces.map((res) => (
             <option key={res._id} value={res._id}>
             {res.name?.en || "No Name"}
@@ -184,7 +176,7 @@ console.log("photos:", formData.photo);
 
 
         <div className="form-langs">
-          <label>Names:</label>
+          <label>{t("manage.names")}</label>
           {["en", "ru", "kg"].map((lang) => (
             <input
               key={lang}
@@ -196,7 +188,7 @@ console.log("photos:", formData.photo);
           ))}
         </div>
 
-        <label>Photos:</label>
+        <label>{t("manage.photos")}</label>
         <input type="file" name="photo" multiple onChange={handleFileChange} />
         {existingPhoto.length > 0 && (
           <div className="preview-row">
@@ -218,7 +210,7 @@ console.log("photos:", formData.photo);
           </div>
         )}
 
-        <label>Videos:</label>
+        <label>{t("manage.videos")}</label>
         <input type="file" name="video" multiple onChange={handleFileChange} />
 
         <div className="form-btns">
@@ -241,14 +233,14 @@ console.log("photos:", formData.photo);
                 setExistingPhoto([]);
               }}
             >
-              Cancel
+              {t("common.cencel")}
             </button>
           )}
         </div>
 
       </form>
 
-      <h2>Existing Resource Details</h2>
+      <h2>{t("admin.existingResourceDetails")}</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <div className="resource-list">
@@ -261,8 +253,8 @@ console.log("photos:", formData.photo);
               ))}
             </div>
             <div className="actions">
-              <button onClick={() => handleEdit(detail)} className="edit-btn">✏️ Edit</button>
-              <button onClick={() => handleDelete(detail._id)} className="delete-btn">🗑 Delete</button>
+              <button onClick={() => handleEdit(detail)} className="edit-btn">✏️ {t("common.edit")}</button>
+              <button onClick={() => handleDelete(detail._id)} className="delete-btn">🗑 {t("common.delete")}</button>
             </div>
           </div>
         ))}

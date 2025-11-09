@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import CustomersCard from "../../Components/CustomersCard.jsx";
 import '../../styles/CustomerList.css';
 import { getAllCustomers } from "../../api/customersDetailApi.js";
+import { useTranslation } from "react-i18next";
 
 const CustomerList = ({ resourceDetailId = "68ea452fc31cd4050611a3ea", currentLang = "en" }) => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
+  
 
   useEffect(() => {
     const fetchCustomers = async () => {
@@ -23,12 +26,12 @@ const CustomerList = ({ resourceDetailId = "68ea452fc31cd4050611a3ea", currentLa
     fetchCustomers();
   }, [resourceDetailId]);
 
-  if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
+  if (loading) return <p style={{ textAlign: "center" }}>{t("common.loading")}</p>;
   if (!customers.length) return <p style={{ textAlign: "center" }}>No customers found</p>;
 
   return (
     <div className="customer-page">
-      <h1 className="customer-title">Our Happy Customers</h1>
+      <h1 className="customer-title">{t("customers.title")}</h1>
 
       <div className="customer-grid">
         {customers.map((customer) => (

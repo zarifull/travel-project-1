@@ -1,13 +1,15 @@
-// src/Page/Admin/ManageTours.jsx
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { toast } from "react-toastify";
 import '../../styles/ManageTours.css';
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ManageTours = () => {
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
 
   useEffect(() => {
     const fetchTours = async () => {
@@ -36,67 +38,55 @@ const ManageTours = () => {
     }
   };
 
-  if (loading) return <p>Loading tours...</p>;
+  if (loading) return <p>{t("common.loading")}...</p>;
 
   return (
     <div className="admin-dashboard">
-      <p className="manage-theme" style={{paddingBottom:"0.5em"}}>Manage Tours</p>
-        <Link to={`/add-tour`} className="add-btn">
-            + Add tour
-        </Link>
+    <p className="manage-theme" style={{paddingBottom:"0.5em"}}>{t("admin.manageTours")}</p>
+    <Link to={`/add-tour`} className="add-btn">
+      + {t("manage.addTours")}
+    </Link>
 
-      {tours.length === 0 ? (
-        <p>No tours found</p>
-      ) : (
-        <table className="tours-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Location</th>
-              <th>Price</th>
-              {/* <th>Max Guests</th> */}
-              <th>Actions</th>
+    {tours.length === 0 ? (
+      <p>No tours found</p>
+    ) : (
+      <table className="tours-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>{t("tour.name")}</th>
+            <th>{t("tour.location")}</th>
+            <th>{t("tour.price")}</th>
+            <th>{t("manage.actions")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tours.map((tour,index) => (
+            <tr key={tour._id}>
+               <td>{index + 1}</td>
+               <td>{tour.title?.[currentLang] || "-"}</td>
+               <td>{tour.location?.[currentLang] || "-"}</td>
+               <td>${tour.price}</td>
+               <td>
+                <Link to={`/tour-details/${tour._id}`}>
+                  <button className="detail-btn">{t("tour.details")}</button>
+                </Link>
+                <Link to={`/edit-tour/${tour._id}`}>
+                  <button className="edit-btn">{t("common.edit")}</button>
+                </Link>
+                <button
+                  className="btn-delete"
+                  onClick={() => handleDelete(tour._id)}
+                >
+                  {t("common.delete")}
+                </button>
+               </td>
             </tr>
-          </thead>
-          <tbody>
-            {tours.map((tour,index) => (
-              <tr key={tour._id}>
-                 <td>{index + 1}</td>
-                <td>{tour.title}</td>
-                <td>{tour.location}</td>
-                <td>${tour.price}</td>
-                {/* <td>{tour.maxGuests}</td> */}
-                <td>
-                  <Link to={`/tour-details/${tour._id}`}>
-                  <button
-                    className="detail-btn"
-                    onClick={() => toast.info("Edit feature coming soon")}
-                  >
-                    Details
-                  </button>
-                  </Link>
-                  <Link to={`/edit-tour/${tour._id}`}>
-                  <button
-                    className="edit-btn"
-                    onClick={() => toast.info("Delete feature coming soon")}
-                  >
-                    Edit
-                  </button>
-                  </Link>
-                  <button
-                    className="btn-delete"
-                    onClick={() => handleDelete(tour._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
+          ))}
+        </tbody>
+      </table>
+    )}
+  </div>
   );
 }
 

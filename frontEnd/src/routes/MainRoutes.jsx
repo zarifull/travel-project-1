@@ -4,7 +4,7 @@ import React from 'react';
 import AboutUs from '../Static/AboutUs';
 import Contacts from '../Static/Contacts';
 import ToursList from '../Page/Tours/ToursList';
-import Advertisment from '../Static/Advertisment';
+import Advertisment from '../Components/Advertisment';
 import AddTour from '../Page/Tours/AddTour';
 import TourDetails from '../Page/Tours/TourDetails';
 import EditTour from '../Page/Tours/EditTour';
@@ -34,6 +34,7 @@ import CustomerDetails from '../Page/Resources/CustomerDetails';
 import ManageResourceDetails from '../Page/Admin/ManageResourceDetails';
 import ManageCustomers from '../Page/Admin/ManageCustomers';
 import AddCustomerDetail from '../Page/Resources/AddCustomerDeatil';
+import ResourceDetails from '../Page/Resources/ResourceDetail';
 
 const  Main = ({ user, setUser })=> {
   const [tours, setTours] = useState([]);
@@ -81,7 +82,7 @@ const  Main = ({ user, setUser })=> {
         <Route path="/manage-resourceDetails" element={<ManageResourceDetails  />} />
         <Route path="/manage-customers" element={<ManageCustomers  />} />
         <Route path="/add-customer-detail" element={<AddCustomerDetail />} />
-
+        <Route path="/resource-details" element={<ResourceDetails />} />
 
         <Route
         path="/profile"

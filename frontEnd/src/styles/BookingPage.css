@@ -58,7 +58,25 @@
     border-color: hsl(179, 66%, 52%);
     outline: none;
   }
-  
+  .booking-guests-select,
+  .booking-date-inp{
+   width: 100%;
+   margin-bottom: 15px;
+   padding: 12px;
+   border-radius: 8px;
+   border: 1px solid #ccc;
+   font-size: 16px;
+   transition: border 0.3s;
+   text-align: center;
+   color: #7e8285;
+  }
+  .booking-guests-select:focus,
+  .booking-date-inp:focus{
+    color: hsl(31, 91%, 44%);
+    font-weight: 500;
+    border-color: hsl(179, 66%, 52%);
+    outline: none;
+  }
   .booking-form textarea {
     min-height: 100px;
     resize: vertical;
@@ -77,6 +95,8 @@
   
   .booking-form button:hover {
     background-color: hsl(174, 100%, 74%);
+    color: #fff;
+    font-weight: bold;
   }
   .booking-img img{
     width: 70%;

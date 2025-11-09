@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from '../../api/axiosInstance'
 import "../../styles/AdminSettings.css";
-
+import { useTranslation } from "react-i18next";
 function AdminSettings() {
   const [whatsappNumber, setWhatsappNumber] = useState("");
   const [message, setMessage] = useState("");
+  const {t} = useTranslation();
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -33,9 +34,9 @@ function AdminSettings() {
   return (
     <div className="settings-container">
     <div className="admin-settings">
-      <h2>⚙️ Admin Settings</h2>
+      <h2>⚙️ {t("admin.adminSettings")}</h2>
 
-      <label>WhatsApp Number:</label>
+      <label>{t("admin.whatsAppNumber")}:</label>
       <input
         type="text"
         value={whatsappNumber}
@@ -43,7 +44,7 @@ function AdminSettings() {
         placeholder="Enter WhatsApp number"
       />
 
-      <button onClick={handleSave}>Save</button>
+      <button onClick={handleSave}>{t("common.save")}</button>
 
       {message && <p className="message">{message}</p>}
     </div>

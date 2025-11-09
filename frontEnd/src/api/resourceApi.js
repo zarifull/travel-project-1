@@ -8,14 +8,23 @@ export const getResources = async () => {
 };
 
 export const createResource = async (data) => {
-  const response = await axiosInstance.post(API_URL, data);
+  const response = await axiosInstance.post("/resources", data, {
+    headers: {
+      "Content-Type": "multipart/form-data", 
+    },
+  });
   return response.data;
 };
 
 export const updateResource = async (id, data) => {
-  const response = await axiosInstance.put(`${API_URL}/${id}`, data);
+  const response = await axiosInstance.put(`/resources/${id}`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return response.data;
 };
+
 
 export const deleteResource = async (id) => {
   const response = await axiosInstance.delete(`${API_URL}/${id}`);

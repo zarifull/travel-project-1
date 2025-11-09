@@ -1,59 +1,95 @@
 import Tour from "../models/tour.model.js";
 
-
 export const createTour = async (req, res) => {
   try {
-
     const {
       title,
       description,
       price,
       duration,
+      maxGuests,
       location,
       category,
       includes,
       startDates,
-      isPopular,
+      hotel,
     } = req.body;
 
     if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ error: 'Сүрөттөр жүктөлгөн жок' });
+      return res.status(400).json({ error: "Сүрөттөр жүктөлгөн жок" });
     }
 
-    const imageUrls = req.files.map(file => file.path); 
+    const imageUrls = req.files.map((file) => file.path);
 
-    const newTour = new Tour({
-      title,
-      description,
-      price: Number(price),
-      duration: Number(duration),
-      location,
-      category,
-      includes: JSON.parse(includes),  // expect JSON string from frontend
-      startDates: JSON.parse(startDates), // same here
-      isPopular: isPopular === 'true',
-      imageUrls, // save array of Cloudinary URLs
+    let parsedTitle = {};
+    let parsedDescription = {};
+    let parsedLocation = {};
+
+    try {
+      parsedTitle = title ? JSON.parse(title) : {};
+      parsedDescription = description ? JSON.parse(description) : {};
+      parsedLocation = location ? JSON.parse(location) : {};
+    } catch (err) {
+      return res.status(400).json({ error: "Multilingual fields are not valid JSON" });
+    }
+
+    const parsedIncludes = includes ? JSON.parse(includes) : [];
+    const parsedStartDates = startDates ? JSON.parse(startDates) : [];
+
+    if (!parsedTitle.en || !parsedTitle.ru || !parsedTitle.kg) {
+      return res.status(400).json({ error: "Please fill all title fields" });
+    }
+    if (!parsedDescription.en || !parsedDescription.ru || !parsedDescription.kg) {
+      return res.status(400).json({ error: "Please fill all description fields" });
+    }
+    if (!parsedLocation.en || !parsedLocation.ru || !parsedLocation.kg) {
+      return res.status(400).json({ error: "Please fill all location fields" });
+    }
+    if (parsedIncludes.length === 0) {
+      return res.status(400).json({ error: "Кеминде бир 'includes' кошуңуз" });
+    }
+    parsedIncludes.forEach((item) => {
+      if (!item.en || !item.ru || !item.kg) {
+        return res
+          .status(400)
+          .json({ error: "Ар бир includes үчүн бардык тилдер толтурулушу керек" });
+      }
     });
 
-    
+    const newTour = new Tour({
+      title: parsedTitle,
+      description: parsedDescription,
+      location: parsedLocation,
+      price: Number(price),
+      duration: Number(duration),
+      maxGuests: Number(maxGuests),
+      category,
+      includes: parsedIncludes,
+      startDates: parsedStartDates,
+      hotel,
+      imageUrls,
+    });
+
     await newTour.save();
 
     res.status(201).json({
-      message: 'Тур ийгиликтүү кошулду!',
+      message: "Тур ийгиликтүү кошулду!",
       tour: newTour,
     });
-
   } catch (error) {
-    console.error('Ката:', error);
-    res.status(500).json({ error: 'Ички сервер катасы', details: error.message });
+    console.error("❌ Ката:", error);
+    res
+      .status(500)
+      .json({ error: "Ички сервер катасы", details: error.message });
   }
 };
+
 
 export const getAllTours = async (req, res) => {
   try {
     const {
-      keyword = '',
-      destination = '',
+      keyword = "",
+      destination = "",
       guests,
       date,
       page = 1,
@@ -67,26 +103,37 @@ export const getAllTours = async (req, res) => {
 
     if (keyword) {
       searchFilter.$or = [
-        { title: { $regex: keyword, $options: 'i' } },
-        { location: { $regex: keyword, $options: 'i' } },
-        { description: { $regex: keyword, $options: 'i' } },
-        { includes: { $regex: keyword, $options: 'i' } },
-        { highlights: { $regex: keyword, $options: 'i' } },
-        { category: { $regex: keyword, $options: 'i' } },
+        { "title.en": { $regex: keyword, $options: "i" } },
+        { "title.ru": { $regex: keyword, $options: "i" } },
+        { "title.kg": { $regex: keyword, $options: "i" } },
+        { "location.en": { $regex: keyword, $options: "i" } },
+        { "location.ru": { $regex: keyword, $options: "i" } },
+        { "location.kg": { $regex: keyword, $options: "i" } },
+        { "description.en": { $regex: keyword, $options: "i" } },
+        { "description.ru": { $regex: keyword, $options: "i" } },
+        { "description.kg": { $regex: keyword, $options: "i" } },
+        { "includes.en": { $regex: keyword, $options: "i" } },
+        { "includes.ru": { $regex: keyword, $options: "i" } },
+        { "includes.kg": { $regex: keyword, $options: "i" } },
+        { category: { $regex: keyword, $options: "i" } },
+        { hotel: { $regex: keyword, $options: "i" } },
       ];
     }
 
     if (destination) {
-      searchFilter.location = { $regex: destination, $options: 'i' };
+      searchFilter.$or = [
+        { "location.en": { $regex: destination, $options: "i" } },
+        { "location.ru": { $regex: destination, $options: "i" } },
+        { "location.kg": { $regex: destination, $options: "i" } },
+      ];
     }
 
     if (guests) {
-      searchFilter.maxGroupSize = { $gte: parseInt(guests) };
+      searchFilter.maxGuests = { $gte: parseInt(guests) };
     }
 
-    // Optional: handle filtering by tour date
     if (date) {
-      searchFilter.date = date; // or more advanced date range filtering
+      searchFilter.startDates = { $elemMatch: { $gte: new Date(date) } };
     }
 
     const total = await Tour.countDocuments(searchFilter);
@@ -103,10 +150,11 @@ export const getAllTours = async (req, res) => {
       totalPages: Math.ceil(total / limit),
       data: tours,
     });
-
   } catch (err) {
     console.error("❌ Error in getAllTours:", err.message);
-    res.status(500).json({ success: false, message: 'Server error', error: err.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: err.message });
   }
 };
 
@@ -128,11 +176,11 @@ export const updateTour = async (req, res) => {
       { new: true, runValidators: true }
     );
     if (!updatedTour) {
-      return res.status(404).json({ message: 'Tour not found' });
+      return res.status(404).json({ message: "Tour not found" });
     }
     res.status(200).json(updatedTour);
   } catch (err) {
-    res.status(500).json({ message: 'Update failed', error: err.message });
+    res.status(500).json({ message: "Update failed", error: err.message });
   }
 };
 
@@ -145,44 +193,27 @@ export const deleteTour = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 };
-
 export const rateTour = async (req, res) => {
   try {
     const { id } = req.params;
     const { rating } = req.body;
 
-    console.log('REQ.PARAMS:', req.params);
-    console.log('REQ.BODY:', req.body);
-
-    if (!rating || typeof rating !== 'number') {
-      return res.status(400).json({ message: 'Rating must be a number' });
+    if (!rating || typeof rating !== "number") {
+      return res.status(400).json({ message: "Rating must be a number" });
     }
 
     const tour = await Tour.findById(id);
     if (!tour) {
-      return res.status(404).json({ message: 'Tour not found' });
+      return res.status(404).json({ message: "Tour not found" });
     }
 
-    console.log('FOUND TOUR:', tour);
-
-    // Ensure tour.ratings is an array
     tour.ratings = tour.ratings || [];
-
     tour.ratings.push(rating);
     await tour.save();
 
-    res.status(200).json({ message: 'Rating added', ratings: tour.ratings });
+    res.status(200).json({ message: "Rating added", ratings: tour.ratings });
   } catch (error) {
-    console.error('❌ Rating error:', error);  // This will show you the actual 500 error
-    res.status(500).json({ message: 'Server error' });
+    console.error("❌ Rating error:", error);
+    res.status(500).json({ message: "Server error" });
   }
-  console.log("req.params:", req.params);
-console.log("req.body:", req.body);
-
 };
-
-
-
-
-
-

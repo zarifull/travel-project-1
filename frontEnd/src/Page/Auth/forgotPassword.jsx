@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Login.css";
+import { useTranslation } from "react-i18next";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   const handleSendOtp = async () => {
     if (!email) return alert("Please enter your email.");
   
     try {
       await axiosInstance.post("/users/forgot-password", { email });
-      localStorage.setItem("resetEmail", email); // ✅ Save for later steps
+      localStorage.setItem("resetEmail", email); 
       alert("OTP sent to your email.");
       navigate("/auth/verify-otp");
     } catch (error) {
@@ -25,16 +27,16 @@ function ForgotPassword() {
   return (
     <div className="auth-block">
     <div className="auth-page">
-      <h2>Forgot Password</h2>
+      <h2>{t("registration.forgotPassword")}</h2>
       <input
         type="email"
-        placeholder="Enter your email"
+        placeholder={t("registration.emailPlaceholder")}
         onChange={(e) => setEmail(e.target.value)}
         value={email}
         name="email"
         className="auth-inp"
       />
-      <button onClick={handleSendOtp}>Send OTP</button>
+      <button onClick={handleSendOtp}>{t("registration.sendOtp")}</button>
     </div>
     </div>
   );

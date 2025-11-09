@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getResourceDetails } from "../../api/resourceDetailApi";
-import "../../styles/resourceDetails.css";
+import "../../styles/ResourceDetail.css";
 import { useTranslation } from "react-i18next";
 
 const ResourceDetailPage = () => {

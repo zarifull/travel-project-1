@@ -7,6 +7,7 @@ import {
   deleteCustomer,
 } from "../../api/customersDetailApi.js"; 
 import '../../styles/ManageCustomers.css';
+import {useTranslation} from 'react-i18next';
 
 const ManageCustomer = () => {
   const [customers, setCustomers] = useState([]);
@@ -22,6 +23,7 @@ const ManageCustomer = () => {
   });
   const [previewPhotos, setPreviewPhotos] = useState([]);
   const [existingPhotos, setExistingPhotos] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchCustomers();
@@ -130,10 +132,10 @@ const ManageCustomer = () => {
 
   return (
     <div className="manage-customer">
-      <h1>Manage Customers</h1>
-      <Link className="add-btn" to='/add-customer-detail'>+ Add Customer</Link>
+      <h1>{t("admin.manageCustomers")}</h1>
+      <Link className="add-btn" to='/add-customer-detail'>+ {t("admin.addCustomer")}</Link>
 
-      {loading ? <p>Loading...</p> : error ? <p style={{ color: "red" }}>{error}</p> : null}
+      {loading ? <p>{t("common.loading")}</p> : error ? <p style={{ color: "red" }}>{error}</p> : null}
 
       <div className="customer-list">
         {customers.map((c) => (
@@ -146,9 +148,9 @@ const ManageCustomer = () => {
             </div>
             <div className="customer-actions">
               <button onClick={() => handleEdit(c)}
-              className="edit-btn">✏️ Edit</button>
+              className="edit-btn">✏️ {t("common.edit")}</button>
               <button onClick={() => handleDelete(c._id)}
-              className="delete-btn">🗑 Delete</button>
+              className="delete-btn">🗑 {t("common.delete")}</button>
             </div>
           </div>
         ))}
@@ -159,7 +161,7 @@ const ManageCustomer = () => {
           <div className="modal">
             <h2>{editingCustomer ? "Edit Customer" : "Add Customer"}</h2>
             <form onSubmit={handleSubmit}>
-              <label>Resource Detail ID:</label>
+              <label>{t("manage.resourceDetailId")} </label>
               <input
                 type="text"
                 value={formData.resourceDetailId}
@@ -167,7 +169,7 @@ const ManageCustomer = () => {
                 required
               />
 
-              <label>Names:</label>
+              <label>{t("manage.names")}</label>
               {["en", "ru", "kg"].map((lang) => (
               <input
                 key={lang}
@@ -179,7 +181,7 @@ const ManageCustomer = () => {
             ))}
 
 
-              <label>Photos:</label>
+              <label>{t("manage.photos")}</label>
               <input type="file" multiple onChange={handleFileChange} />
               
               {existingPhotos.length > 0 && (
@@ -221,7 +223,7 @@ const ManageCustomer = () => {
                     setExistingPhotos([]);
                   }}
                 >
-                  Cancel
+                  {t("common.cancel")}
                 </button>
               </div>
 

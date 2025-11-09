@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios"; // Using plain axios here for this request
 import "../styles/BookingPage.css";
 import bookingBackground from "../Assets/bookingBgn.png";
 import { useAuth } from "../Context/AuthContext";
 import axiosInstance from "../api/axiosInstance";
+import { useTranslation } from "react-i18next";
 
 const BookingPage = () => {
-  const { id: tourId } = useParams(); 
+  const { id: tourId } = useParams();
   const navigate = useNavigate();
-  const { token } = useAuth(); 
-  const [phone,setPhone] = useState("+996")
-
+  const { token } = useAuth();
+  const { t,i18n } = useTranslation();
+  const [phone, setPhone] = useState("+996");
+  const lang = i18n.language;
 
   const [tour, setTour] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
     address: "",
     date: "",
     guests: 1,
     message: "",
   });
 
-  // Fetch tour details by ID
   useEffect(() => {
     const fetchTour = async () => {
       if (!tourId) return;
@@ -38,65 +37,49 @@ const BookingPage = () => {
     fetchTour();
   }, [tourId]);
 
-  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle booking submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!token) {
-      alert("❌ You must be logged in to make a booking.");
+      alert(t("booking.alert.loginRequired"));
       return;
     }
 
     const adminPhoneNumber = process.env.REACT_APP_ADMIN_PHONE;
 
     try {
-      // Send booking to backend with explicit Authorization header
       const response = await axiosInstance.post(
         "/bookings",
-        {
-          tourId,
-          ...formData,
-          guests: Number(formData.guests),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
+        { tourId, ...formData, guests: Number(formData.guests) },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      console.log("Booking response:", response.data);
-
-      // Send WhatsApp notification
       const text = `✅ New Booking Request:
-      🏞 Tour: ${tour?.title || "N/A"}
-      👤 Name: ${formData.name}
-      📞 Phone: ${formData.phone}
-      📧 Email: ${formData.email}
-      🏠 Address: ${formData.address}
-      👥 Guests: ${formData.guests}
-      📅 Date: ${formData.date}
-      💬 Message: ${formData.message || "No message"}`;
+🏞 Tour: ${tour?.title || "N/A"}
+👤 Name: ${formData.name}
+📞 Phone: ${phone}
+📧 Email: ${formData.email}
+🏠 Address: ${formData.address}
+👥 Guests: ${formData.guests}
+📅 Date: ${formData.date}
+💬 Message: ${formData.message || "No message"}`;
 
       window.open(
         `https://wa.me/${adminPhoneNumber}?text=${encodeURIComponent(text)}`,
         "_blank"
       );
 
-      alert("✅ Your booking request has been sent! Check 'My Bookings' for updates.");
+      alert(t("booking.alert.success"));
       navigate("/my-bookings");
     } catch (err) {
       console.error("Booking failed:", err.response || err);
-      alert("❌ Booking failed. Please try again.");
+      alert(t("booking.alert.failed"));
     }
   };
-
 
   return (
     <div className="booking-page">
@@ -106,55 +89,53 @@ const BookingPage = () => {
         </div>
         <div className="booking-container">
           <h2 className="booking-title">
-            {tour ? `${tour.title} - Your dream trip starts here!` : "Loading..."}
+            {tour
+              ? `${tour.title[lang]} - ${t("booking.title")}`
+              : t("booking.loading")}
           </h2>
+
           <form onSubmit={handleSubmit} className="booking-form">
             <input
               type="text"
               name="name"
-              placeholder="Full Name"
+              placeholder={t("booking.form.name")}
               value={formData.name}
               onChange={handleChange}
               required
-              style={{ background: "none" }}
             />
             <input
               type="text"
               name="phone"
-              placeholder="Phone Number"
+              placeholder={t("booking.form.phone")}
               value={phone}
-              onChange={(e)=>setPhone(e.target.value)}
-              
+              onChange={(e) => setPhone(e.target.value)}
               required
-              style={{ background: "none" }}
             />
             <input
               type="email"
               name="email"
-              placeholder="Email Address"
+              placeholder={t("booking.form.email")}
               value={formData.email}
               onChange={handleChange}
               required
-              style={{ background: "none" }}
             />
             <input
               type="text"
               name="address"
-              placeholder="Your Address, city, village, street, home address"
+              placeholder={t("booking.form.address")}
               value={formData.address}
               onChange={handleChange}
               required
-              style={{ background: "none" }}
             />
             <select
               name="guests"
               value={formData.guests}
               onChange={handleChange}
-              style={{ color: "#495057" }}
+              className="booking-guests-select"
             >
               {[...Array(10)].map((_, i) => (
                 <option key={i} value={i + 1}>
-                  {i + 1} Guest(s)
+                  {t("booking.form.selectGuests", { count: i + 1 })}
                 </option>
               ))}
             </select>
@@ -164,15 +145,15 @@ const BookingPage = () => {
               value={formData.date}
               onChange={handleChange}
               required
-              style={{ color: "#495057" }}
+              className="booking-date-inp"
             />
             <textarea
               name="message"
-              placeholder="Special Requests / Message"
+              placeholder={t("booking.form.message")}
               value={formData.message}
               onChange={handleChange}
             />
-            <button type="submit">Send Booking via WhatsApp</button>
+            <button type="submit">{t("booking.form.send")}</button>
           </form>
         </div>
       </div>

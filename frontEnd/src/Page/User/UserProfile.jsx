@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../Context/AuthContext';
 import '../../styles/MyProfile.css';
 import axiosInstance from '../../api/axiosInstance';
+import { useTranslation } from 'react-i18next';
 
 function MyProfile() {
   const { user, setUser, token } = useAuth();
-
+  const {t} = useTranslation();
   const [formData, setFormData] = useState({
     username: user?.name || '',
     email: user?.email || '',
@@ -84,7 +85,7 @@ function MyProfile() {
     return (
       <div className="auth-block">
         <div className="profile-container">
-          <h2>My Profile</h2>
+          <h2>{t("registration.myProfile")}</h2>
           <p className="message">❌ You must be logged in to update your profile.</p>
         </div>
       </div>
@@ -94,10 +95,10 @@ function MyProfile() {
   return (
     <div className="auth-block">
       <div className="profile-container">
-        <h2>My Profile</h2>
+        <h2>{t("registration.myProfile")}</h2>
         <form onSubmit={handleSubmit} className="profile-card">
           <label>
-            <strong>Name:</strong>
+            <strong>{t("registration.name")} :</strong>
             <input
               type="text"
               name="username"
@@ -107,7 +108,7 @@ function MyProfile() {
           </label>
 
           <label>
-            <strong>Email:</strong>
+            <strong>{t("registration.email")} :</strong>
             <input
               type="email"
               name="email"
@@ -117,7 +118,7 @@ function MyProfile() {
           </label>
 
           <label>
-            <strong>Phone (WhatsApp):</strong>
+            <strong>{t("registration.phone")} (WhatsApp):</strong>
             <input
               type="text"
               name="phone"
@@ -128,7 +129,7 @@ function MyProfile() {
           </label>
 
           <label>
-            <strong>New Password:</strong>
+            <strong>{t("registration.newPassword")} :</strong>
             <input
               type="password"
               name="newPassword"
@@ -138,7 +139,7 @@ function MyProfile() {
           </label>
 
           <label>
-            <strong>Confirm Password:</strong>
+            <strong> {t("registration.confirmPassword")} :</strong>
             <input
               type="password"
               name="confirmPassword"
@@ -147,7 +148,7 @@ function MyProfile() {
             />
           </label>
 
-          <button type="submit">Save Changes</button>
+          <button type="submit">{t("registration.saveChanges")}</button>
         </form>
         {message && <p className="message">{message}</p>}
       </div>

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/CustomersCard.css";
-import { getCommentsForCustomer } from "../api/customersDetailApi"; 
+import { getCommentsForCustomer } from "../api/customersDetailApi";
+import { useTranslation } from "react-i18next"; 
 
 const CustomerCard = ({ customer, currentLang }) => {
   const [showAll, setShowAll] = useState(false);
   const [comments, setComments] = useState(customer.comments || []);
-
+  const { t } = useTranslation();
   const initialCount = 3;
   const commentsToShow = showAll ? comments : comments.slice(0, initialCount);
 
@@ -25,12 +26,12 @@ const CustomerCard = ({ customer, currentLang }) => {
   
   return (
     <div className="customer-card">
-      <div className="photo-gallery">
+      <div className="customer-gallery">
         {customer.photo?.slice(0, 3).map((img, i) => (
           <img key={i} src={img} alt="Customer" className="photo" />
         ))}
       </div>
-
+      <h3 className="trip-title">{customer.name?.en || "No Name"}</h3>
       <div className="comment-section">
         {commentsToShow.map((comment, index) => {
           const firstLetter = comment.username
@@ -77,7 +78,7 @@ const CustomerCard = ({ customer, currentLang }) => {
       </div>
 
       <Link to={`/customer-detail/${customer._id}`} className="more-btn-detail">
-        more →
+        {t("common.more")} →
       </Link>
     </div>
   );

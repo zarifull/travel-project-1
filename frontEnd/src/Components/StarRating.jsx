@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import axios from '../api/axiosInstance';
 import '../styles/SearchBox.css';
 import axiosInstance from '../api/axiosInstance';
+import { useTranslation } from 'react-i18next';
 
 const StarRating = ({ tourId, tour }) => {
+  const {t} =useTranslation();
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [ratings, setRatings] = useState(tour.ratings || []);
+
 
   const handleRating = async (value) => {
     setRating(value); 
@@ -29,7 +31,7 @@ const StarRating = ({ tourId, tour }) => {
 
   return (
     <div className='star-rating' >
-      <h4>Rate this tour:</h4>
+      <h4>{t("ratings.rateThisTour")}</h4>
       <div>
         {[...Array(5)].map((_, index) => {
           const value = index + 1;
@@ -60,18 +62,20 @@ const StarRating = ({ tourId, tour }) => {
           display: 'inline-block',
          
         }}>
-          ✅ Thanks!
+          ✅ {t("ratings.thanks")}
         </span>
       )}
 
 
       <div style={{ marginTop: '15px', display: 'flex', flexDirection: 'column', }}>
+      <span>
+        <strong>{t("ratings.averageRating")}:</strong>{' '}
+        {averageRating !== null
+          ? averageRating
+          : t("ratings.noRatingsYet")}
+      </span>
         <span>
-          <strong>Average Rating:</strong>{' '}
-          {averageRating !== null ? averageRating : 'Not rated yet'}
-        </span>
-        <span>
-          <strong>Total Ratings:</strong> {ratings.length}
+          <strong>{t("ratings.totalRatings")}:</strong> {ratings.length}
         </span>
       </div>
     </div>

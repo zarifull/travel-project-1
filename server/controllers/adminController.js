@@ -1,4 +1,3 @@
-// controllers/admin.controller.js
 import User from "../models/user.model.js";
 import Booking from "../models/booking.model.js";
 import Tour from "../models/tour.model.js";
@@ -8,7 +7,6 @@ import { json } from "express";
 
 export const getAdminStats = async (req, res) => {
   try {
-    // Use Promise.all for parallel execution → faster
     const [totalUsers, totalBookings, totalTours] = await Promise.all([
       User.countDocuments(),
       Booking.countDocuments(),
@@ -29,7 +27,7 @@ export const getAdminStats = async (req, res) => {
 
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password"); // ✅ correct way
+    const users = await User.find().select("-password"); 
     res.status(200).json(users);
   } catch (err) {
     console.error("Get users error:", err);
@@ -64,7 +62,7 @@ export const demoteToUser = async (req, res) => {
 
     const user = await User.findOneAndUpdate(
       { email },
-      { role: "user" },  // ✅ remove isAdmin
+      { role: "user" },  
       { new: true }
     );
 
@@ -86,7 +84,6 @@ export const deleteUser = async (req, res) => {
     
     await Booking.deleteMany({ userId: user._id });
 
-    // Delete user
     await User.findByIdAndDelete(user._id);
 
     res.status(200).json({ message: "User deleted successfully" });
@@ -98,7 +95,6 @@ export const deleteUser = async (req, res) => {
 
 export const getAllBookings = async (req, res) => {
   try {
-    // Populate tourId and userId for admin visibility
     const bookings = await Booking.find()
       .populate("tourId", "title price") 
       .populate("userId", "name email");
@@ -163,7 +159,6 @@ export const getAdminSettings = async (req, res) => {
   try {
     let settings = await AdminSettings.findOne();
 
-    // If no settings, create default
     if (!settings) {
       settings = await AdminSettings.create({ whatsappNumber: "" });
     }
@@ -180,7 +175,6 @@ export const updateAdminSettings = async (req, res) => {
   try {
     const { whatsappNumber } = req.body;
 
-    // ✅ ensure it's not empty
     if (!whatsappNumber || whatsappNumber.trim() === "") {
       return res.status(400).json({ message: "WhatsApp number is required" });
     }
@@ -188,10 +182,8 @@ export const updateAdminSettings = async (req, res) => {
     let settings = await AdminSettings.findOne();
 
     if (!settings) {
-      // Create new settings if none exist
       settings = new AdminSettings({ whatsappNumber });
     } else {
-      // Update existing settings
       settings.whatsappNumber = whatsappNumber;
     }
 

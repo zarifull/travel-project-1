@@ -8,7 +8,7 @@
 }
 
 .edit-tour .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   background: white;
   padding: 30px;
@@ -39,7 +39,7 @@
 .edit-form textarea {
   padding: 10px;
   font-size: 16px;
-  border: 0.5px solid #f08c00;
+  border: 0.5px solid #ffd8a8;
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s;
@@ -50,7 +50,15 @@
 .edit-form textarea:focus {
   border-color: #007bff;
 }
-
+.editTour-select{
+  padding: 10px;
+  font-size: 16px;
+  border: 0.5px solid #f08c00;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+  color: #0056b3;
+}
 .edit-form button {
   margin-top: 20px;
   padding: 12px;
@@ -88,7 +96,6 @@
 .array-item{
   width: 100%;
 }
-/* ðŸ“± Responsive styles */
 @media (max-width: 768px) {
   .edit-tour .container {
     padding: 20px;

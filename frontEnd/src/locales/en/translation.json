@@ -1,10 +1,18 @@
 {
   "common":{
+    "add": "Add",
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
+    "create":"Create",
     "update": "Update",
+    "approved": "Approved",
+    "approve": "Approve",
+    "rejected": "Rejected",
+    "reject": "Reject",
+    "pending": "Pending",
+    "saving": "Saving...",
     "yes": "Yes",
     "no": "No",
     "close": "Close",
@@ -14,7 +22,8 @@
     "back": "Back",
     "next": "Next",
     "previous": "Previous",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "more": "More"
   },
   "header": {
     "home": "Home",
@@ -38,7 +47,11 @@
     "logout": "Logout",
     "name": "Name",
     "email": "Email",
+    "phone": "Phone",
     "password": "Password",
+    "namePlaceholder":"name",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
     "confirmPassword": "Confirm Password",
     "forgotPassword": "Forgot Password?",
     "resetPassword": "Reset Password",
@@ -51,17 +64,182 @@
     "verifyOtp": "Verify OTP",
     "verificationCode": "Verification Code",
     "successRegistration": "You have successfully registered!",
-    "successLogin": "Login successful!"
-  },  
-  
+    "successLogin": "Login successful!",
+    "myProfile": "My Profile",
+    "saveChanges": "Save Changes",
+    "noAccount": "Don't have an account? Sign Up",
+    "alert": {
+      "fillFields": "Please fill in all fields.",
+      "success": "Login successful!",
+      "failed": "Login failed. Please check your credentials.",
+      "sendOtp": "Send OTP",
+      "verifyOtpTitle": "🔐 Verify OTP",
+      "resetTitle": "🔐 Reset Your Password",
+      "newPasswordLabel": "New Password",
+      "resetButton": "Reset Password",
+      "successTitle": "Password Changed Successfully",
+      "successMessage": "Your password has been updated.",
+      "backToLogin": "Back to Login"
+    }
+  },
+  "admin":{
+    "title": "Welcome Admin",
+    "dashboard": "Admin Dashboard",
+    "totalTours": "Total Tours",
+    "manageTours": "Manage Tours",
+    "totalBookings": "Total Bookings",
+    "manageBookings": "Manage Bookings",
+    "totalUsers": "Total Users",
+    "manageUsers": "Manage Users",
+    "adminSettings":"Admin settings",
+    "viewReports": "View Reports",
+    "settings": "Settings",
+    "resources": "RESOURCES",
+    "resourcesDetails": "RESOURCES-DETAILS",
+    "customers": "CUSTOMERS",
+    "loading": "Loading admin panel...",
+    "whatsAppNumber":" WhatsApp Number ",
+    "manageResources":" Manage Resources ",
+    "manageCustomers":" Manage Customers ",
+    "addCustomer":" Add Customer ",
+    "manageResourceDetails":" Manage Resource Details ",
+    "existingResourceDetails":" Existing Resource Details "
+  } ,
+  "manage": {
+    "tour":"Tour",
+    "user":"User",
+    "email":"Email",
+    "date":"Date",
+    "status":"Status",
+    "actions":"Actions",
+    "addCustomerDetail":"Add Customer Detail",
+    "addResources":"Add Resources",
+    "addTours":"Add Tours",
+    "editTour":"Edit Tour",
+    "resourceDetail":"Resource Detail",
+    "resourceId": "Resource ID:",
+    "selectResource": "Select Resource",
+    "editTitle": "Edit Customer",
+    "addTitle": "Add Customer",
+    "resourceDetailId": "Resource Detail ID:",
+    "names": "Names:",
+    "photos": "Photos:",
+    "videos": "Videos:",
+    "removePhoto": "Remove",
+    "key": "Key:",
+    "count": "Count:",
+    "link": "Link:",
+    "image": "Image:",
+    "translations": "Translations:",
+    "role": "Role:",
+    "joined": "Joined:",
+    "phone": "Phone:",
+    "noUsersFound": "No users found.",
+    "promote":"promote",
+    "demote":"demote",
+    "addInclude":"Add Include",
+    "addDate":"Add Date",
+    "addImage":"Add Image",
+    "updateTour":"Update Tour",
+    "tourUpdatedSuccessfully":"Tour updated successfully!"
+  },
+  "tour": {
+    "ourTravels": "OUR TRAVELS",
+    "searchTours": "Search Tours....",
+    "details": "Details",
+    "title": "Add a new travel",
+    "name": "Name",
+    "description": "Description",
+    "price": "Price",
+    "duration": "Duration",
+    "startDates": "Start Dates",
+    "bookNow": "Book Now",
+    "durationOptions": {
+      "select": "Select",
+      "1": "1 day",
+      "2": "2 days",
+      "3": "3 days",
+      "7": "1 week",
+      "custom": "Custom"
+    },
+    "location": "Location",
+    "maxGuests": "Max Guests",
+    "category": "Category",
+    "categoryOptions": {
+      "select": "Select",
+      "Adventure": "Adventure",
+      "Relax": "Relax",
+      "Cultural": "Cultural",
+      "City": "City",
+      "Other": "Other",
+      "Nature": "Nature"
+    },
+    "includes": "Includes",
+    "images": "Images",
+    "addButton": "Add",
+    "select": "Select",
+      "hotel": "Hotel",
+      "hotelPlaceholder": "Enter hotel name",
+    "validation": {
+      "nameRequired": "Tour name is required",
+      "descRequired": "Description is required",
+      "priceRequired": "Price is required",
+      "durationRequired": "Duration must be selected",
+      "locationRequired": "Location is required",
+      "guestsRequired": "Number of guests is required",
+      "categoryRequired": "Category must be selected",
+      "imageRequired": "At least one image is required",
+      "includesRequired": "Add at least one include",
+      "startDateRequired": "At least one start date is required"
+    },
+    "successMessage": "Tour added successfully!",
+    "errorMessage": "Failed to add tour",
+    "errors": {
+      "titleRequired": "Title is required in all languages.",
+      "descriptionRequired": "Description is required in all languages.",
+      "priceInvalid": "Price must be a valid non-negative number.",
+      "durationRequired": "Duration is required.",
+      "locationRequired": "Location is required in all languages.",
+      "categoryRequired": "Category is required.",
+      "hotelRequired": "Hotel name is required.",
+      "maxGuestsInvalid": "Maximum guests must be at least 1.",
+      "imagesRequired": "At least one image is required.",
+      "includesRequired": "Includes must be provided in all languages.",
+      "startDatesRequired": "At least one start date is required."
+    }
+  },
     "booking": {
-      "title": "Booking",
+      "myBookings":"My Bookings",
+      "booking": "Booking",
       "destination": "Destination",
       "destination_placeholder": "Where to ?",
       "date": "Date",
       "guests": "Guests",
       "guests_placeholder": "2 adults",
-      "searching": "Searching tours..."
+      "searching": "Searching tours...",
+      "title": "Your dream trip starts here!",
+      "loading": "Loading...",
+      "form": {
+        "name": "Full Name",
+        "phone": "Phone Number",
+        "email": "Email Address",
+        "address": "Your Address, city, village, street, home address",
+        "guests": "Guest(s)",
+        "selectGuests": "{{count}} Guest(s)",
+        "date": "Travel Date",
+        "message": "Special Requests / Message",
+        "send": "Send Booking via WhatsApp"
+      },
+      "status": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "cancelled": "Cancelled"
+      },
+      "alert": {
+        "loginRequired": "❌ You must be logged in to make a booking.",
+        "success": "✅ Your booking request has been sent! Check 'My Bookings' for updates.",
+        "failed": "❌ Booking failed. Please try again."
+      }
     },
     "pagination": {
       "title": "Available Tours",
@@ -75,19 +253,66 @@
       "ticket": "Ticket insurance",
       "activities": "Activities",
       "travel": "Travel options",
-      "sightseeing": "Sightseeing"
-    }, 
-    "resources":{
+      "sightseeing": "Sightseeing",
+          "tailored": "Personalised tours crafted to match your interests — from mountain trekking to yurt-camp adventures.",
+          "local_experts": "Local guides bring the region’s nature and traditions to life, showing you authentic Kyrgyz experiences.",
+          "support_safety": "Full service from transport to lodging — we handle logistics so you can relax and enjoy.",
+          "hidden_gems": "Explore off-the-beaten-path destinations in Batken region and beyond for a truly unique journey."
+    },
+    "advertisment":{
+      "mainItem": "Do you have any questions",
+      "contuctUs": "Contact us"
+    },
+    "aboutUs": {
+      "missionTitle": "Our Mission",
+      "ourStoryTitle": "Our Story",
+      "ourStory": "Founded in the heart of Batken, Kyrgyzstan, Batken Travel Service has grown from a small local agency into an international travel company connecting people to destinations across Kyrgyzstan and abroad. We organize unforgettable tours not only around Kyrgyzstan’s stunning mountains and valleys but also to countries like Uzbekistan, Dubai, Turkey, and Vietnam. Our goal is to offer authentic experiences, comfort, and personalized service for every traveler who chooses us.",
+      "mission": "Our mission is to make travel more accessible, inspiring, and meaningful — helping every guest explore new cultures while supporting responsible and sustainable tourism around the world."
+    },
+    "contact":{
+      "contacts": "Contacts",
+      "location": "Location",
+      "city": "Batken city",
+      "street": "Saydyman Ajy 2/8",
+      "floor": "2nd floor",
+      "phone": "Phone",
+      "hours": "Hours",
+      "workingHours": "8:00 - 20:00"
+    },
+      "ratings": {
+        "noRatings": "No ratings yet",
+        "reviews": "Reviews",
+        "rateThisTour": "Rate this tour:",
+        "thanks": "Thanks!",
+        "averageRating": "Average Rating",
+        "notRatedYet": "Not rated yet",
+        "totalRatings": "Total Ratings"
+      },
+      "resources":{
         "hubspotByNumbers": "HubSpot By the Numbers",
         "learnMore": "Learn more",
         "loading": "Loading"
-    },     
-  "footer": {
-    "home": "Home",
-    "tours": "Tours",
-    "aboutUs": "About us",
-    "contact": "Contact",
-    "copyright": "© 2025 Copyright by Zarina Momunbai & Design by RH Agency"
-  }
+    }, 
+    "partners" : {
+      "title": "Our Trusted Partners",
+      "loading": "Loading partners...",
+      "noPhotos": "No partner photos found.",
+      "subtitle": "We are proud to collaborate with industry-leading companies across the world.",
+      "whyTitle": "Why Our Partners Choose Us",
+      "whyText": "Our partners trust us for our dedication, innovation, and commitment to excellence. Together, we create opportunities for growth and deliver exceptional value to our clients."
+    },
+    "customers":{
+      "title": "Our Happy Customers",
+      "comments": "Comments",
+      "writeComment": "Write a Comment",
+      "customerNotFound": "No customer reviews found."
+    } ,    
+    "footer": {
+      "home": "Home",
+      "tours": "Tours",
+      "aboutUs": "About us",
+      "contact": "Contact",
+      "copyright": "© 2025 Copyright by Zarina Momunbai & Design by RH Agency"
+    }
   
 }

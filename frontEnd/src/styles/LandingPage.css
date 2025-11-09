@@ -189,9 +189,10 @@
     height: auto; 
 }
 .adv-block{
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    padding: 0 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5em;
 }
 .adv-theme{
     text-align: center;

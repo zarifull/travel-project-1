@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import "../../styles/ManageUsers.css";
 import { toast } from "react-toastify";
-
+import {useTranslation} from "react-i18next";
 
 function ManageUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState({});
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -85,21 +86,21 @@ function ManageUsers() {
   
   
 
-  if (loading) return <p>Loading users...</p>;
+  if (loading) return <p>{t("common.loading")}...</p>;
 
   return (
     <div className="admin-dashboard">
-      <p className="manage-theme">Manage  Users</p>
+      <p className="manage-theme">{t("admin.manageUsers")}</p>
       <table className="users-table">
         <thead>
           <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Joined</th>
-            <th>Phone</th>
-            <th>Actions</th>
+            <th>{t("registration.name")}</th>
+            <th>{t("manage.email")}</th>
+            <th>{t("manage.role")}</th>
+            <th>{t("manage.joined")}</th>
+            <th>{t("manage.phone")}</th>
+            <th>{t("manage.actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -123,7 +124,7 @@ function ManageUsers() {
                 <td>{user.phone}</td>
                 <td>
                   <button className="btn-delete" onClick={() => handleDelete(user._id)}>
-                    Delete
+                    {t("common.delete")}
                   </button>
 
                   {user.role === "admin" ? (
@@ -132,14 +133,14 @@ function ManageUsers() {
                         onClick={() => handleDemote(user.email)}
                         disabled={processing[user.email]}
                       >
-                        Demote
+                        {t("manage.demote")}
                       </button>
                     ) : (
                       <button
                         className="btn-promote"
                         onClick={() => handlePromote(user.email)}
                       >
-                        Promote
+                        {t("manage.promote")}
                       </button>
                     )}
 

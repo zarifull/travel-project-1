@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import axiosInstance from "../../api/axiosInstance";
 import '../../styles/ManageBookings.css';
+import {useTranslation} from 'react-i18next';
 
 const  ManageBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const { token } = useAuth();
+  const { t } = useTranslation();
 
   const fetchBookings = async () => {
     if (!token) return;
@@ -59,7 +61,7 @@ const  ManageBookings = () => {
 
   return (
     <div className="admin-dashboard">
-      <p className="manage-theme">Manage Bookings</p>
+      <p className="manage-theme">{t("admin.manageBookings")}</p>
       {bookings.length === 0 ? (
         <p>No bookings available.</p>
       ) : (
@@ -67,13 +69,12 @@ const  ManageBookings = () => {
           <thead>
             <tr>
               <th>#</th>
-              <th>Tour</th>
-              <th>User</th>
-              <th>Email</th>
-              <th>Guests</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th>{t("manage.tour")}</th>
+              <th>{t("manage.user")}</th>
+              <th>{t("manage.email")}</th>
+              <th>{t("manage.date")}</th>
+              <th>{t("manage.status")}</th>
+              <th>{t("manage.actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -83,17 +84,16 @@ const  ManageBookings = () => {
                 <td>{b.tourId?.title || "Unknown Tour"}</td>
                 <td>{b.userId?.name}</td>
                 <td>{b.userId?.email}</td>
-                <td>{b.guests}</td>
                 <td>{new Date(b.date).toLocaleDateString()}</td>
                 <td>
                     {b.status === "pending" && (
-                      <span style={{color:'#2f9e44', textDecoration:'underLine',fontWeight:'bold'}}>Pending</span>
+                      <span style={{color:'#2f9e44', textDecoration:'underLine',fontWeight:'bold'}}>{t("common.pending")}</span>
                     )}
                     {b.status === "approved" && (
-                      <span className="booking-approved">Approved</span>
+                      <span className="booking-approved">{t("common.approved")}</span>
                     )}
                     {b.status === "rejected" && (
-                      <span style={{color:'#f03e3e',fontWeight:'bold'}}>Rejected</span>
+                      <span style={{color:'#f03e3e',fontWeight:'bold'}}>{t("common.rejected")}</span>
                     )}
                   </td>
 
@@ -105,31 +105,30 @@ const  ManageBookings = () => {
                           className="approve-btn" 
                           onClick={() => updateStatus(b._id, "approved")}
                         >
-                          Approve
+                          {t("common.approve")}
                         </button>
                         <button 
                           className="reject-btn" 
                           onClick={() => updateStatus(b._id, "rejected")}
                         >
-                          Reject
+                          {t("common.reject")}
                         </button>
                       </>
                     )}
 
                     {b.status === "approved" && (
                       <>
-                        {/* <span className="booking-approved">Approved</span> */}
                         <button 
                           className="reject-btn" 
                           onClick={() => updateStatus(b._id, "rejected")}
                         >
-                          Reject
+                          {t("common.reject")}
                         </button>
                         <button 
                           onClick={() => handleDelete(b._id)} 
                           className="delete-btn"
                         >
-                          Delete
+                          {t("common.delete")}
                         </button>
                       </>
                     )}
@@ -141,7 +140,7 @@ const  ManageBookings = () => {
                           onClick={() => handleDelete(b._id)} 
                           className="delete-btn"
                         >
-                          Delete
+                          {t("common.delete")}
                         </button>
                       </>
                     )}

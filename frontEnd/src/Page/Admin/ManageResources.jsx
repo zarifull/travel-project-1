@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {getResources,updateResource,deleteResource,createResource} from "../../api/resourceApi";
-import '../../styles/ManageResources.css'
+import '../../styles/ManageResources.css';
+import { useTranslation } from "react-i18next";
 
 const ManageResources = () => {
   const [resources, setResources] = useState([]);
@@ -19,6 +20,7 @@ const ManageResources = () => {
   const [previewImage, setPreviewImage] = useState(null);
   const [existingImages, setExistingImages] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
+  const { t } = useTranslation();
 
 
   const fetchResources = async () => {
@@ -39,14 +41,14 @@ const ManageResources = () => {
 
 
   const handleChange = (e) => {
-    const { name, files } = e.target;
+    const { name, value, files } = e.target;
+  
     if (name === "image") {
-      const newPreviews = Array.from(files).map(file => ({
-        file,
-        preview: URL.createObjectURL(file)
-      }));
-      setPreviewImages(newPreviews);
-      setFormData({ ...formData, image: files[0] }); 
+      const file = files[0];
+      setPreviewImage(URL.createObjectURL(file)); 
+      setFormData({ ...formData, image: file }); 
+    } else {
+      setFormData({ ...formData, [name]: value }); 
     }
   };
   
@@ -64,24 +66,28 @@ const ManageResources = () => {
     e.preventDefault();
     try {
       const data = new FormData();
-      Object.keys(formData).forEach((key) => {
-        if (formData[key] !== null) data.append(key, formData[key]);
-      });
-
+      data.append("key", formData.key);
+      data.append("count", formData.count);
+      data.append("link", formData.link);
+      data.append("translations", formData.translations); 
+      if (formData.image) data.append("image", formData.image); 
+  
       if (editingResource) {
         await updateResource(editingResource._id, data);
       } else {
         await createResource(data);
       }
-
+  
       setShowModal(false);
       setFormData({ key: "", count: 0, translations: "{}", link: "", image: null });
+      setPreviewImage(null);
       setEditingResource(null);
       fetchResources();
     } catch (err) {
       setError(err.response?.data?.message || "Error saving resource");
     }
   };
+  
 
   const handleEdit = (resource) => {
     setEditingResource(resource);
@@ -108,22 +114,22 @@ const ManageResources = () => {
 
   return (
     <div className="admin-dashboard" style={{paddingTop:'3em'}}>
-      <h1>Resources Management</h1>
-      <button onClick={() => setShowModal(true)} className="add-btn">+ Add Resource</button>
+      <h1>{t("admin.manageResources")}</h1>
+      <button onClick={() => setShowModal(true)} className="add-btn">+ {t("manage.addResources")}</button>
       <div className="resource-table">
       {loading ? (
-        <p>Loading...</p>
+        <p>{t("common.loading")}</p>
       ) : error ? (
         <p style={{ color: "red" }}>{error}</p>
       ) : (
         <table className="resources-table">
           <thead>
             <tr>
-              <th>Key</th>
-              <th>Count</th>
-              <th>Link</th>
-              <th>Image</th>
-              <th>Actions</th>
+              <th>{t("manage.key")}</th>
+              <th>{t("manage.count")}</th>
+              <th>{t("manage.link")}</th>
+              <th>{t("manage.image")}</th>
+              <th>{t("manage.actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -137,9 +143,9 @@ const ManageResources = () => {
                 </td>
                 <td>
                   <button onClick={() => handleEdit(res)}
-                  className="edit-btn">Edit</button>
+                  className="edit-btn">{t("common.edit")}</button>
                   <button onClick={() => handleDelete(res._id)}
-                  className="delete-btn">Delete</button>
+                  className="delete-btn">{t("common.delete")}</button>
                 </td>
               </tr>
             ))}
@@ -150,14 +156,14 @@ const ManageResources = () => {
       {showModal && (
         <div className="modal-backdrop">
           <div className="modal">
-            <h2>{editingResource ? "Edit Resource" : "Add Resource"}</h2>
+            <h2>{editingResource ? t("common.edit") : t("common.add")}</h2>
             <form onSubmit={handleSubmit}>
               <label>
-                Key:
+              {t("manage.key")}
                 <input name="key" value={formData.key} onChange={handleChange} required />
               </label>
               <label>
-                Count:
+              {t("manage.count")}
                 <input
                   type="number"
                   name="count"
@@ -166,11 +172,11 @@ const ManageResources = () => {
                 />
               </label>
               <label>
-                Link:
+              {t("manage.link")}
                 <input name="link" value={formData.link} onChange={handleChange} />
               </label>
               <label>
-                Translations (JSON):
+                {t("manage.translations")} (JSON):
                 <textarea
                   name="translations"
                   value={formData.translations}
@@ -178,7 +184,7 @@ const ManageResources = () => {
                 />
               </label>
               <label>
-                Image:
+                {t("manage.image")}:
                 <input type="file" name="image" onChange={handleChange} />
               </label>
                 {existingImages.length > 0 && (
@@ -204,9 +210,9 @@ const ManageResources = () => {
                   </div>
                 )}
 
-              <button type="submit">{editingResource ? "Update" : "Create"}</button>
+              <button type="submit">{editingResource ? t("common.update") : t("common.create")}</button>
               <button type="button" onClick={() => setShowModal(false)}>
-                Cancel
+                {t("common.cancel")}
               </button>
             </form>
           </div>

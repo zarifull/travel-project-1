@@ -5,17 +5,18 @@ import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
 import axiosInstance from '../../api/axiosInstance'
 import { useAuth } from "../../Context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword,setShowPassword] = useState(false);
-
+const {t} =useTranslation();
   const navigate = useNavigate();
   const { login,user } = useAuth();
 
   const handleLogin = async () => {
-    if (!email || !password) return alert("Fill in all fields.");
+    if (!email || !password) return alert(t("registration.alert.fillFields"));
   
     try {
       const res = await axiosInstance.post("/users/login", {
@@ -23,26 +24,24 @@ function Login() {
         password: password.trim(),
       });
   
-      const userData = res.data.user; // ✅ Correctly extract
+      const userData = res.data.user;
       login(userData, res.data.token);
   
-      alert("Login successful!");
+      alert(t("registration.alert.success"));
       navigate("/");
     } catch (error) {
-      alert("Login failed:", error.response?.data?.message || "Server error.");
+      alert(t("registration.alert.failed"));
     }
   };
   
-  // console.log("📌 Current User: ", user);
-
 
   return (
     <div className="auth-block">
     <div className="auth-page auth-box">
-      <h2>Login</h2>
+      <h2>{t("registration.login")}</h2>
       <input
         type="text"
-        placeholder="Email"
+        placeholder={t("registration.emailPlaceholder")}
         onChange={(e) => setEmail(e.target.value)}
         value={email}
         className="auth-inp"
@@ -50,7 +49,7 @@ function Login() {
       <div style={{ position: "relative" }}>
       <input
         type={showPassword ? "text" : "password"}
-        placeholder="Password"
+        placeholder={t("registration.passwordPlaceholder")}
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         className="auth-inp"
@@ -72,9 +71,9 @@ function Login() {
           </span>
         </button>
       </div>
-      <button onClick={handleLogin}>Login</button>
-      <p onClick={() => navigate("/signup")}>Don't have an account? Sign Up</p>
-      <p onClick={() => navigate("/forgot-password")}>Forgot password?</p>
+      <button onClick={handleLogin}>{t("registration.login")}</button>
+      <p onClick={() => navigate("/signup")}>{t("registration.noAccount")}</p>
+      <p onClick={() => navigate("/forgot-password")}>{t("registration.forgotPassword")} ?</p>
     </div>
     </div>
   );

@@ -1,7 +1,9 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 const RatingResult = ({ ratings }) => {
+  const { t } = useTranslation();
   if (!ratings || ratings.length === 0) {
     return <p style={{ color: '#999' }}>No ratings yet</p>;
   }
@@ -17,7 +19,7 @@ const RatingResult = ({ ratings }) => {
       <FaStar color="#ffc107" />
       <span style={{ marginLeft: '5px', fontWeight: 'bold' }}>{average}</span>
       <span style={{ color: '#666', marginLeft: '5px' }}>
-        ({formatReviews(ratings.length)} Reviews)
+        ({formatReviews(ratings.length)} {t("ratings.reviews")})
       </span>
     </div>
   );

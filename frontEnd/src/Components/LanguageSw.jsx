@@ -14,10 +14,15 @@ function LanguageSwitcher() {
       value={i18n.language}
       onChange={(e) => changeLanguage(e.target.value)}
       style={{
+        width: "70px",
         border: "none",
         fontSize: "1em",
         background: "transparent",
         cursor: "pointer",
+        color: "inherit",
+        fontWeight: "600",
+        marginRight:"-15px",
+        paddingBottom:'15px'
       }}
     >
       <option value="en">🇬🇧 En</option>

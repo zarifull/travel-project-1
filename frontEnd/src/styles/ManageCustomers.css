@@ -9,7 +9,7 @@
 .customer-list{
     display: flex;
     flex-wrap: wrap;
-    gap: 3em;
+    justify-content: space-around;
     margin-top: 2em;
 }
 .customer-box{

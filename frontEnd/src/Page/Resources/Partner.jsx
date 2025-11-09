@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/Partner.css";
 import { getResourceDetails } from "../../api/resourceDetailApi";
+import { useTranslation } from "react-i18next";
 
 const Partner = () => {
   const [photos, setPhotos] = useState([]);
   const [partnerName, setPartnerName] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-
-  const resourceId = "68df34eb32660943bbb4e7be"; // Your resource ID
+  const {t} = useTranslation();
+  const resourceId = "68df34eb32660943bbb4e7be"; 
 
   useEffect(() => {
     const fetchPartners = async () => {
@@ -15,7 +16,6 @@ const Partner = () => {
         const data = await getResourceDetails(resourceId);
         console.log("Fetched partner data:", data);
 
-        // ✅ photo is already an array
         if (Array.isArray(data.photo) && data.photo.length > 0) {
           setPhotos(data.photo);
         }
@@ -37,17 +37,16 @@ const Partner = () => {
     <div className="partner-page">
       <section className="partner-hero">
         <h1 className="partner-title">
-          {partnerName.en || "Our Trusted Partners"}
+          {t("partners.title")}
         </h1>
       </section>
 
       {isLoading ? (
-        <p style={{ textAlign: "center" }}>Loading partners...</p>
+        <p style={{ textAlign: "center" }}>{t("partners.loading")}</p>
       ) : (
         <>
           <p className="partner-subtitle">
-            We are proud to collaborate with industry-leading companies across
-            the world.
+          {t("partners.subtitle")}
           </p>
 
           <section className="partner-logos">
@@ -62,16 +61,14 @@ const Partner = () => {
                 </div>
               ))
             ) : (
-              <p style={{ textAlign: "center" }}>No partner photos found.</p>
+              <p style={{ textAlign: "center" }}>{t("partners.noPhotos")}</p>
             )}
           </section>
 
           <section className="partner-info">
-            <h2>Why Our Partners Choose Us</h2>
+            <h2>{t("partners.whyTitle")}</h2>
             <p>
-              Our partners trust us for our dedication, innovation, and
-              commitment to excellence. Together, we create opportunities for
-              growth and deliver exceptional value to our clients.
+              {t("partners.whyText")}
             </p>
           </section>
         </>

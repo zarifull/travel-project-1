@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TourCard from '../../Components/TourCard';
 import '../../styles/ToursList.css';
 import SearchBox from './SearchBox';
 import { useLocation } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
 
 const ToursList = ({ tours }) => {
   const [filteredTours, setFilteredTours] = useState([]);
   const location = useLocation();
-const initialTours = location.state?.tours || tours; 
+  const { t,i18n } = useTranslation();
+  const lang = i18n.language;
 
+  const initialTours = location.state?.tours || tours;
 
   useEffect(() => {
     if (tours?.data && Array.isArray(tours.data)) {
@@ -30,22 +32,21 @@ const initialTours = location.state?.tours || tours;
       setFilteredTours([]);
     }
   }, [initialTours]);
-  
+
   const handleSearch = (query) => {
     const lowerQuery = query.toLowerCase();
     const allTours = Array.isArray(initialTours?.data) ? initialTours.data : initialTours;
-  
+
     const results = allTours.filter(tour =>
-      tour.title.toLowerCase().includes(lowerQuery)
+      tour.title[lang].toLowerCase().includes(lowerQuery)
     );
-  
+
     setFilteredTours(results);
   };
-  
 
   return (
     <section className="tour-list">
-      <p className="tourList-theme">OUR TRAVELS</p>
+      <p className="tourList-theme">{t("tour.ourTravels")}</p>
       <SearchBox onSearch={handleSearch} />
       <hr className='hr-gradient'/>
       {filteredTours.length > 0 ? (
