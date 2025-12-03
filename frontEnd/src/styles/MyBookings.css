@@ -28,6 +28,7 @@
     text-align: left;
   }
   .booking-card {
+    max-width: 500px;
     background: white;
     padding: 20px;
     border-radius: 12px;

@@ -13,7 +13,7 @@ function App() {
       if (savedUser && savedUser !== "undefined") {
         setUser(JSON.parse(savedUser));
       } else {
-        setUser(null); // fallback
+        setUser(null); 
       }
     } catch (error) {
       console.error("Failed to parse user from localStorage:", error);

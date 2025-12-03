@@ -62,7 +62,7 @@
 .delete-btn {
   background-color: #f03e3e;
   font-weight: bold;
-  text-align: left;
+  text-align: center;
 }
 .delete-btn:hover{
   background-color: #c92a2a;
@@ -70,4 +70,66 @@
 .done-text {
   color: #444;
   font-weight: 600;
+}
+@media (max-width: 1024px) {
+  .admin-table th,
+  .admin-table td {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .approve-btn,
+  .reject-btn,
+  .delete-btn {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    margin-bottom: 0.5rem;
+  }
+}
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 10px;
+  }
+
+  .manage-theme {
+    font-size: 1.3rem;
+  }
+
+  .admin-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  .approve-btn,
+  .reject-btn,
+  .delete-btn {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+}
+@media (max-width: 480px) {
+  .manage-theme {
+    font-size: 1.1rem;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    font-size: 0.75rem;
+    padding: 6px;
+  }
+.admin-table{
+  white-space: wrap;
+}
+  .booking-action button {
+    width: 100%;
+    padding: 8px 0;
+    margin: 4px 0;
+  }
 }

@@ -55,7 +55,7 @@ function AboutUs() {
               <p className='our-text'>{t("aboutUs.ourStory")}
               </p>
             </div>
-            <img src={ourStory} style={{width:'45%', paddingTop:'2em'}} alt="Our Story" />
+            <img className="aboutUs-img2" src={ourStory} alt="Our Story" />
           </section>
         </div>
       </div>

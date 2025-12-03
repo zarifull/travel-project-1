@@ -205,7 +205,7 @@ const AddTour = () => {
 
           <div className="form-group">
             <label className='name-form'>{t("tour.category")} :</label>
-            <select value={category} onChange={e => setCategory(e.target.value)}>
+            <select className='add-select' value={category} onChange={e => setCategory(e.target.value)}>
               <option value="">{t("tour.categoryOptions.select")}</option>
               <option value="Adventure">{t("tour.categoryOptions.Adventure")}</option>
               <option value="Relax">{t("tour.categoryOptions.Relax")}</option>

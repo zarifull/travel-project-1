@@ -7,7 +7,9 @@ import {useTranslation} from "react-i18next"
 function MyBookings() {
   const [bookings, setBookings] = useState([]);
   const { token, user } = useAuth();
-  const {t} =useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+  
 
   const fetchBookings = async () => {
     if (!user || !token) return; 
@@ -69,7 +71,7 @@ function MyBookings() {
       />
     </div>
     <div className="booking-info">
-      <h3>{b.tourId?.title || "Unknown Tour"}</h3>
+    <h3>{b.tourId?.title?.[lang] || "Unknown Tour"}</h3>
       <p><strong>{t("tour.name")} :</strong> {b.name}</p>
       <p><strong>{t("booking.form.guests")} :</strong> {b.guests}</p>
       <p><strong>{t("booking.form.date")} :</strong> {new Date(b.date).toLocaleDateString()}</p>

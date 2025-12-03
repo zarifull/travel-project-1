@@ -111,6 +111,7 @@ const tempComment = {
 
   return (
     <div className="customer-detail-page">
+      <div className="container">
       <h3 className="customer-title">{customer.name?.en || "Our trip was nice"}</h3>
 
       <div className="customer-photos">
@@ -252,6 +253,7 @@ const tempComment = {
           <button type="submit" className="comment-send"><IoSend /></button>
         </form>
       </div>
+    </div>
     </div>
   );
 };

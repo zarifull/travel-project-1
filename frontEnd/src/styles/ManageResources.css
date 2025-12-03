@@ -1,124 +1,170 @@
 .admin-container {
-    padding: 20px;
-    font-family: sans-serif;
-  }
-  
-  h1 {
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #333;
-  }
-  .resource-table{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  /* button {
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 14px;
-    margin-bottom: 10px;
-    font-size: 14px;
-  } */
-  
-  button:hover {
-    opacity: 0.9;
-  }
-  .resources-table {
-    width:90%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .resources-table th,
-  .resources-table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-  }
-  .resources-table th {
-    background-color: #f4f4f4;
-    font-weight: 600;
-  }
-  
-  .resources-table tr:nth-child(even) {
-    background-color: #fafafa;
-  }
-  .resources-table tr:hover {
-    background-color: #f1f1f1;
-  }
-    .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal {
-    background-color: white;
-    padding: 25px 30px;
-    border-radius: 8px;
-    width: 450px;
-    max-width: 90%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    position: relative;
-  }
-  .modal h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 22px;
-    color: #333;
-  }
-  .modal form label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 500;
-    font-size: 14px;
-    color: #555;
-  }
-  .modal form input,
-  .modal form textarea {
-    width: 100%;
-    padding: 8px 10px;
-    margin-top: 4px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  .modal form textarea {
-    resize: vertical;
-    height: 80px;
-  }
-  .modal form button {
-    margin-right: 10px;
-  }
-  
-  .modal form button[type="submit"] {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  /* .modal form button[type="button"] {
-    background-color: #f03e3e;;
-    color: white;
-  } */
-  .existing-images,
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: #1c7ed6;
+  text-align: center;
+  font-weight: 700;
+}
+
+.resource-table{
+  display: flex;
+  justify-content: center;
+}
+
+.add-btn {
+  background-color: #339af0;
+  color: white;
+  padding: 0.7em 1.6em;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-bottom: 1.5em;
+}
+
+.add-btn:hover {
+  background-color: #1c7ed6;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.resources-table {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.resources-table th,
+.resources-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.resources-table th {
+  background-color: #e7f5ff;
+  font-weight: 600;
+}
+
+.resources-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.resources-table tr:hover {
+  background-color: #f1f7ff;
+}
+
+.edit-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.delete-btn {
+  background-color: #e03131;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal {
+  background-color: white;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 450px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.modal h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #1c7ed6;
+  text-align: center;
+}
+
+.modal form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #444;
+}
+
+.modal form input,
+.modal form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 4px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.modal form textarea {
+  resize: vertical;
+  height: 90px;
+}
+
+.modal form button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.modal form button[type="submit"] {
+  background-color: #2f9e44;
+  color: white;
+}
+
+.modal form button[type="button"] {
+  background-color: #e03131;
+  color: white;
+}
+
+.existing-images,
 .new-preview {
   margin-top: 10px;
 }
 
 .image-list {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
@@ -130,18 +176,18 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .image-item button {
   position: absolute;
-  top: -45px;
+  top: -35px;
   left: 0;
   background-color: white;
-  border: none;
+  border: 1px solid #333;
   border-radius: 4px;
   cursor: pointer;
-  border: 1px solid #111;
+  padding: 2px 6px;
 }
 
 .new-preview img.preview {
@@ -150,4 +196,60 @@
   border-radius: 8px;
   margin-top: 5px;
   object-fit: cover;
+}
+@media (max-width: 992px) {
+  .resources-table {
+    width: 95%;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  .add-btn {
+    width: 50%;
+    text-align: center;
+  }
+
+  .resources-table th,
+  .resources-table td {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    padding: 5px 10px;
+    font-size: 13px;
+    margin-bottom: 0.3rem;
+  }
+
+  .modal {
+    width: 95%;
+  }
+}
+
+@media (max-width: 576px) {
+  .resources-table th:nth-child(3),
+  .resources-table td:nth-child(3),
+  .resources-table th:nth-child(4),
+  .resources-table td:nth-child(4) {
+    display: none;
+  }
+
+  .resources-table {
+    font-size: 13px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    padding: 4px 8px;
+  }
+
+  .image-item img.preview {
+    width: 80px;
+    height: 80px;
+  }
 }

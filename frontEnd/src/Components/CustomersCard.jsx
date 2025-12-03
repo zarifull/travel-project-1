@@ -31,7 +31,7 @@ const CustomerCard = ({ customer, currentLang }) => {
           <img key={i} src={img} alt="Customer" className="photo" />
         ))}
       </div>
-      <h3 className="trip-title">{customer.name?.en || "No Name"}</h3>
+      <h3 className="trip-title">{customer.name?.[currentLang] || customer.name?.en || "No Name"}</h3>
       <div className="comment-section">
         {commentsToShow.map((comment, index) => {
           const firstLetter = comment.username
@@ -50,15 +50,12 @@ const CustomerCard = ({ customer, currentLang }) => {
 
           return (
             <div key={index} className="comment-card">
-              <div
-                className="comment-avatar"
-                style={{ backgroundColor: bgColor}}
-              >
+              <div className="comment-avatar" style={{ backgroundColor: bgColor }}>
                 {firstLetter}
               </div>
               <div className="comment-body">
                 <p>
-                  <strong style={{ color: bgColor, fontWeight: "bold" }}>
+                  <strong style={{ color: bgColor }}>
                     {comment.username || "Anonymous"}
                   </strong>{" "}
                   : {comment.text?.[currentLang] || comment.text?.en || ""}
@@ -72,7 +69,7 @@ const CustomerCard = ({ customer, currentLang }) => {
           <button className="more-btn" onClick={() => setShowAll(!showAll)}>
             {showAll
               ? "Show less ↑"
-              : `...... (${comments.length - initialCount})`}
+              : `... (${comments.length - initialCount}) more`}
           </button>
         )}
       </div>

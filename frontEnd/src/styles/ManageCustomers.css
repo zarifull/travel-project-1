@@ -1,27 +1,122 @@
 .manage-customer{
     max-width: 1300px;
     margin: 40px auto;
-    padding: 1em ;
+    padding: 1em;
     background-color: #fff;
     font-family: "Poppins";
     text-align: center;
 }
+
 .customer-list{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     margin-top: 2em;
+    gap: 2em;
 }
+
 .customer-box{
     width: 30%;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding-bottom: 3em;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    padding: 1.5em;
 }
-.customer-box:hover {
-    transform: translateY(-10px);
-    border: 1px solid hsl(0, 5%, 82%);
-    border-radius: 20px;
+
+.customer-box:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
 }
+
 .customer-theme{
-   font-size: 1.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 1em;
+}
+
+.customer-photos img{
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.customer-actions{
+    margin-top: 1.2em;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+.preview-row{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.image-item{
+    position: relative;
+}
+.image-item button{
+    position: absolute;
+    top: -30px;
+    right: -10px;
+    background: white !important;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 1024px){
+    .customer-box{
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px){
+    .customer-box{
+        width: 80%;
+    }
+    .customer-theme{
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 600px){
+    .customer-box{
+        width: 95%;
+        padding: 1em;
+    }
+    .customer-theme{
+        font-size: 1.2rem;
+    }
+    .customer-actions{
+        flex-direction: column;
+        gap: 0.8em;
+    }
+}
+
+@media (max-width: 430px){
+    .customer-theme{
+        font-size: 1.1rem;
+    }
+    .preview-row img{
+        width: 65px;
+    }
+    .delete-btn,
+    .edit-btn{
+     width: 50%;
+    }
+    .customer-actions{
+        align-items: center;
+    }
+}
+@media (max-width: 375px){
+    .customer-box{
+        padding: 0.8em;
+    }
+    .customer-photos img{
+        width: 60px;
+    }
 }

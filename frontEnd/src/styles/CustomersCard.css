@@ -1,132 +1,213 @@
-
+/* ---------- Card Styles ---------- */
 .customer-card {
   width: 30%;
-    padding: 2em;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+  padding: 2em;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 1em;
+  background-color: #fff;
+}
 
-  .customer-card:hover {
-    transform: translateY(-5px);
-    border: 1px solid hsl(0, 5%, 82%);
-    border-radius: 20px;
-  }
-  .customer-gallery {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  
-  .photo {
-    width: 150px;
-    height: 170px;
-    border-radius: 20px;
-    object-fit: cover;
-    border: 2px solid #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    transition: transform 0.3s;
-    padding: 0.3em;
-    cursor: pointer;
-  }
-  .photo:nth-of-type(2){
-    position: absolute;
-    margin-top: -10px;
-    width: 170px;
-    height: 190px;
-  }
-  .photo:hover {
-    transform: scale(1.1);
-    z-index: 2;
-  }
-  
-  .customer-subtitle {
-    color: #666;
-    font-size: 1.1em;
-  }
-  .trip-title{
-    font-size: 1.5em;
-    margin: 1em 0 0 0;
-    color: #ffa94d;
-  }
-  .customer-testimonials {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2em;
-  }
-  .comment-section{
-    padding: 0 1em  1em 1em;
-    text-align: center;
-    margin: 0 0  8px 0;
-  }
-  
-  .comment-card {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    border-radius: 70px 70px 70px 0;
-    padding: 10px 10px 0 10px ;
-  }
-  
-  .comment-avatar {
-    padding: 10px;
-    width: 30px;
-    height: 25px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: white;
-    margin: 5px 10px 0 0;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-  }
-  
-  .comment-body strong {
-    font-size: 15px;
-    color: #333;
-  }
-  
-  .comment-body p {
-    margin: 3px 0 0;
-    font-size: 14px;
-    color: #555;
-   
-  }
-  .comment-body{
-    padding: 0.5em;
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    text-align: start;
-    display: -webkit-box;         
-  -webkit-box-orient: vertical; 
-  -webkit-line-clamp: 2;        
-  overflow: scroll;             
-  text-overflow: ellipsis; 
+.customer-card:hover {
+  transform: translateY(-5px);
+  border: 1px solid hsl(0, 5%, 82%);
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Gallery and Photos ---------- */
+.customer-gallery {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  position: relative;
+}
+
+.photo {
+  width: 150px;
+  height: 170px;
+  border-radius: 20px;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+  padding: 0.3em;
+  cursor: pointer;
+}
+
+.photo:nth-of-type(2){
+  position: absolute;
+  margin-top: -10px;
+  width: 170px;
+  height: 190px;
+}
+
+.photo:hover {
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+/* ---------- Text ---------- */
+.customer-subtitle {
+  color: #666;
+  font-size: 1.1em;
+}
+
+.trip-title {
+  font-size: 1.5em;
+  margin: 1em 0 0 0;
+  color: #ffa94d;
+  word-break: break-word;
+}
+
+/* ---------- Comments ---------- */
+.customer-testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2em;
+}
+
+.comment-section {
+  padding: 0 1em 1em 1em;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.comment-card {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  border-radius: 70px 70px 70px 0;
+  padding: 10px 10px 0 10px;
+  margin-bottom: 5px;
+}
+
+.comment-avatar {
+  padding: 10px;
+  width: 30px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  margin: 10px 10px 0 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.comment-body strong {
+  font-size: 15px;
+  color: #333;
+}
+
+.comment-body p {
+  margin: 3px 0 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.comment-body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
   line-height: 1.5;
   min-height: 2.4rem;
   margin: 0;
-  padding: 0;
-    }
-  .more-btn{
-    border: none;
-    background: none;
+  padding: 0.5em 0;
+  text-align: left;
+}
+
+/* ---------- Buttons ---------- */
+.more-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 5px;
+}
+
+.more-btn-detail {
+  background-color: #ffa94d;
+  padding: 0.3em 1em;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.more-btn-detail:hover {
+  background-color: #fff;
+  color: #ffa94d;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+              0 8px 16px rgba(255,169,77,0.3);
+}
+
+/* ---------- Media Queries ---------- */
+@media (max-width: 1024px) {
+  .customer-card {
+    width: 45%;
+    padding: 1.5em;
   }
-  .more-btn-detail{
-    background-color: #ffa94d;
-    padding: 0.2em 1em;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    text-decoration: none;
-    color: #fff;
+
+  .trip-title {
+    font-size: 1.3em;
   }
-  .more-btn-detail:hover{
-    background-color: #fff;
-    color: #ffa94d;
-    box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.1),
-    0 8px 16px rgba(255, 169, 77, 0.3);
-  
+
+  .comment-body {
+    -webkit-line-clamp: 3;
   }
+
+  .photo {
+    width: 120px;
+    height: 140px;
+  }
+
+  .photo:nth-of-type(2) {
+    width: 140px;
+    height: 160px;
+    margin-top: -8px;
+  }
+
+  .more-btn-detail {
+    font-size: 1rem;
+    padding: 0.25em 0.9em;
+  }
+}
+
+@media (max-width: 768px) {
+  .customer-card {
+    width: 90%;
+    padding: 1em;
+  }
+
+  .trip-title {
+    font-size: 1.2em;
+  }
+
+  .comment-body {
+    -webkit-line-clamp: 4;
+  }
+
+  .photo {
+    width: 140px;
+    height: 160px;
+  }
+
+  .photo:nth-of-type(2) {
+    width: 140px;
+    height: 160px;
+    margin-top: -5px;
+  }
+
+  .more-btn-detail {
+    font-size: 0.95rem;
+    padding: 0.2em 0.8em;
+  }
+}

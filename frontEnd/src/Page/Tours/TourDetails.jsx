@@ -91,6 +91,7 @@ const TourDetails = ({ tours }) => {
                 <strong>{t("tour.description")} : </strong> {tour.description[lang]}
               </p>
             </div>
+            <div className="info-block">
             <p className="detail-box detail-location">
               <strong><FaLocationDot /> {t("tour.location")}:</strong> {tour.location[lang]}
             </p>
@@ -123,11 +124,14 @@ const TourDetails = ({ tours }) => {
             </div>
 
             <p className="detail-box detail-ispopular">
-              <strong> {t("tour.hotel")} : </strong>
+              <strong>{t("tour.hotel")}:</strong> {tour.hotel || t("tour.noHotel")}
             </p>
+
+
             <p className="detail-box detail-category">
               <strong>{t("tour.maxGuests")}:</strong> {tour.maxGuests}
             </p>
+          </div>
           </div>
 
           <div className="detailLast-box">

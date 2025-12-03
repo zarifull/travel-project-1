@@ -7,16 +7,15 @@ const Partner = () => {
   const [photos, setPhotos] = useState([]);
   const [partnerName, setPartnerName] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const {t} = useTranslation();
-  const resourceId = "68df34eb32660943bbb4e7be"; 
+  const { t } = useTranslation();
+  const resourceId = "68df34eb32660943bbb4e7be";
 
   useEffect(() => {
     const fetchPartners = async () => {
       try {
         const data = await getResourceDetails(resourceId);
-        console.log("Fetched partner data:", data);
 
-        if (Array.isArray(data.photo) && data.photo.length > 0) {
+        if (Array.isArray(data.photo)) {
           setPhotos(data.photo);
         }
 
@@ -35,19 +34,16 @@ const Partner = () => {
 
   return (
     <div className="partner-page">
+      <div className="container">
       <section className="partner-hero">
-        <h1 className="partner-title">
-          {t("partners.title")}
-        </h1>
+        <h1 className="partner-title">{t("partners.title")}</h1>
       </section>
 
       {isLoading ? (
-        <p style={{ textAlign: "center" }}>{t("partners.loading")}</p>
+        <p className="partner-loading">{t("partners.loading")}</p>
       ) : (
         <>
-          <p className="partner-subtitle">
-          {t("partners.subtitle")}
-          </p>
+          <p className="partner-subtitle">{t("partners.subtitle")}</p>
 
           <section className="partner-logos">
             {photos.length > 0 ? (
@@ -61,18 +57,17 @@ const Partner = () => {
                 </div>
               ))
             ) : (
-              <p style={{ textAlign: "center" }}>{t("partners.noPhotos")}</p>
+              <p className="partner-no-photos">{t("partners.noPhotos")}</p>
             )}
           </section>
 
           <section className="partner-info">
             <h2>{t("partners.whyTitle")}</h2>
-            <p>
-              {t("partners.whyText")}
-            </p>
+            <p>{t("partners.whyText")}</p>
           </section>
         </>
       )}
+    </div>
     </div>
   );
 };

@@ -1,111 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-
-nav {
-  width: 100%;                
-  position: fixed;          
-  top: 0.1em;  
-  left: 1em;
-  z-index: 10;
- font-family: "Poppins";
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  /* background: rgba(255, 255, 255, 0.85); */
+  /* backdrop-filter: blur(8px); */
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); */
+  z-index: 1000;
+  font-family: "Poppins", sans-serif;
 }
 
-.nav-block {
+
+
+.navbar {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  height: 100%;                
+  justify-content: space-between;
+  position: relative;
+  margin-top: 0.2rem;
 }
 
-.logo-block{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    text-decoration: none;
-}
-.logo{
-    max-width: 7%;
-    height: 0 auto;
-    border-radius: 50%;
-    margin-top: 0.5% ;
-    object-fit: cover;
-}
-.logo-theme{
-    color: #f08c00;
-    font-family: "Poppins";
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-left: 0.5%;
-    
+.logo-block {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
 
-.nav-box .nav-btn{
- border: none;
- background: transparent;
-cursor: pointer;
-padding: 1rem; 
-font-size: 1.2rem;
-} 
+.logo-text {
+  font-weight: 600;
+  color: #f08c00;
+  font-size: 1.2rem;
+  text-shadow:  1px 1px #fff;
+  line-height: 1.6;
+}
+.right-side{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.lang-switcher{
+  color: #1864ab;
+  background: inherit;
+  font-weight: bold;
+  width: 100%;
+  padding: 0.2rem ;
+  font-size: 1rem;
+  border-radius: 8px;
+  appearance: none;
+  border: none !important;
+}
 
-.nav-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 2em;
+.admin-btn {
+  font-size: 1.8rem;
+  color: #000;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
 }
-.admin{
-font-size: 2.1rem;
-margin-top: 0.3rem;
-padding: 0.5rem;
+
+.admin-btn:hover {
+  transform: scale(1.1);
+  color: #f08c00;
 }
-.admin-btn{
-  color: black;
+
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #1864ab;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
 }
-.addTour-icon{
-    font-size: 1.4rem;
-    padding: 0.5em;
-    color: #000;
+
+.dropdown-menu {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  opacity: 0;
+  transform: scale(0.95);
+  visibility: hidden;
+  transition: all 0.25s ease;
 }
-.menu-icon {
- cursor: pointer;
- font-size: 1.5rem;
- margin-left: 0.5rem;
+
+.dropdown-menu.open {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+}
+
+.dropdown-link {
+  padding: 0.8rem 1.2rem;
+  color: #f08c00;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+
+.dropdown-link:hover {
+  background:#fab005 ;
+  color: #fff;
+  border-radius: 5px;
+}
+.mobile-extra {
+  display: none;
+  border-top: 1px solid #ddd;
+  margin-top: 12px;
+  padding-top: 12px;
+}
+.lang-desktop {
+  display: block;  
+}
+
+.lang-mobile {
+  display: none;   
+}
+@media(max-width:1024px){
+  .logo-text{
+    font-size: 1rem;
   }
-  
-  .menu-dropdown {
-    position: absolute;
-    top: 3em;
-    right: 0;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: hsla(28, 76%, 55%, 0.35) 0px 5px 15px;
-    padding: 2em 0;
-    margin: 2em;
-    z-index: 100;
+  .nav-right{
+    gap: 0.9rem;
+  }
+  .admin-btn{
+    font-size: 1.5rem;
+
+  }
+  .menu-toggle{
+    font-size: 1.5rem;
+  }
+}
+@media(max-width:768px){
+  .logo{
+    width: 40px;
+    height: 40px;
+  }
+  .logo-text{
+    font-size: 1rem;
+  }
+  .nav-right{
+    gap: 0.7rem;
+  }
+  .admin-btn{
+    font-size: 1.4rem;
+  }
+  .menu-toggle{
+    font-size: 1.3rem;
+  }
+  .lang-switcher {
+    font-size: 0.85rem;
+    padding: 4px 6px;
+  }
+  .lang-desktop{
+    display: none;
+  }
+  .lang-mobile{
+    display: block;
+  }
+  .mobile-extra {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    min-width: 400px;     
-    max-width: 800px;
+    gap: 15px;
   }
-  
-  .menu-links {
-    display: block;
+}
+@media (max-width: 480px) {
+
+  .header {
+    padding: 0.3rem 0;
+  }
+
+  .navbar {
+    justify-content: space-between;
+  }
+
+  .logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .logo-text {
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .nav-right {
+    gap: 0.4rem;
+  }
+  .desktop-only {
+    display: none; 
+  }
+
+  .mobile-extra {
     display: flex;
-    align-items: center;
-    padding: 0.5rem 2rem;
-    text-decoration: none;
-    transition: background 0.3s;
-    color: #f08c00;
-    font-weight: 500;
-    font-family: 1.7rem;
+    flex-direction: column;
+    gap: 15px;
   }
-  
-  .menu-links:hover {
-    background-color: #fab005;
-   color: #fff;
-   border-radius: 10px;
+  .menu-toggle {
+    font-size: 1.4rem;
   }
+
+  .admin-btn {
+    font-size: 1.4rem;
+  }
+  .lang-desktop {
+    display: none;  
+  }
+  .lang-mobile {
+    display: block; 
+    margin: 0.5rem 1rem;
+  }
+  .lang-switcher {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .lang-switcher {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    right: 0;
+    top: 60px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .dropdown-link {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+}
+

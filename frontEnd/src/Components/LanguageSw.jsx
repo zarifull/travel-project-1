@@ -1,7 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import '../../src/styles/Header.css';
 
-function LanguageSwitcher() {
+function LanguageSwitcher({ compact = false }) {
   const { i18n } = useTranslation();
 
   const changeLanguage = (lang) => {
@@ -13,21 +14,21 @@ function LanguageSwitcher() {
     <select
       value={i18n.language}
       onChange={(e) => changeLanguage(e.target.value)}
-      style={{
-        width: "70px",
-        border: "none",
-        fontSize: "1em",
-        background: "transparent",
-        cursor: "pointer",
-        color: "inherit",
-        fontWeight: "600",
-        marginRight:"-15px",
-        paddingBottom:'15px'
-      }}
+      className="lang-switcher"
     >
-      <option value="en">🇬🇧 En</option>
-      <option value="ru">🇷🇺 Рус</option>
-      <option value="kg">🇰🇬 Кг</option>
+      {compact ? (
+        <>
+          <option value="en">EN</option>
+          <option value="ru">RU</option>
+          <option value="kg">KG</option>
+        </>
+      ) : (
+        <>
+          <option value="en">🇬🇧 English ▾</option>
+          <option value="ru">🇷🇺 Русский ▾</option>
+          <option value="kg">🇰🇬 Кыргыз ▾</option>
+        </>
+      )}
     </select>
   );
 }

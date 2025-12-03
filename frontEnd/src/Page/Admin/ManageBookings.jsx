@@ -8,7 +8,7 @@ const  ManageBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const { token } = useAuth();
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
 
   const fetchBookings = async () => {
     if (!token) return;
@@ -81,7 +81,7 @@ const  ManageBookings = () => {
             {bookings.map((b, index) => (
               <tr key={b._id}>
                 <td>{index + 1}</td>
-                <td>{b.tourId?.title || "Unknown Tour"}</td>
+                <td>{b.tourId?.title?.[i18n.language] || "Unknown Tour"}</td>
                 <td>{b.userId?.name}</td>
                 <td>{b.userId?.email}</td>
                 <td>{new Date(b.date).toLocaleDateString()}</td>

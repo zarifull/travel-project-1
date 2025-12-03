@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { toast } from "react-toastify";
-import '../../styles/ManageTours.css';
+import "../../styles/ManageTours.css";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -28,6 +28,7 @@ const ManageTours = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this tour?")) return;
+
     try {
       await axiosInstance.delete(`/tours/${id}`);
       setTours((prev) => prev.filter((tour) => tour._id !== id));
@@ -42,52 +43,57 @@ const ManageTours = () => {
 
   return (
     <div className="admin-dashboard">
-    <p className="manage-theme" style={{paddingBottom:"0.5em"}}>{t("admin.manageTours")}</p>
-    <Link to={`/add-tour`} className="add-btn">
-      + {t("manage.addTours")}
-    </Link>
+      <p className="manage-theme" style={{ paddingBottom: "0.5em" }}>
+        {t("admin.manageTours")}
+      </p>
 
-    {tours.length === 0 ? (
-      <p>No tours found</p>
-    ) : (
-      <table className="tours-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>{t("tour.name")}</th>
-            <th>{t("tour.location")}</th>
-            <th>{t("tour.price")}</th>
-            <th>{t("manage.actions")}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tours.map((tour,index) => (
-            <tr key={tour._id}>
-               <td>{index + 1}</td>
-               <td>{tour.title?.[currentLang] || "-"}</td>
-               <td>{tour.location?.[currentLang] || "-"}</td>
-               <td>${tour.price}</td>
-               <td>
-                <Link to={`/tour-details/${tour._id}`}>
-                  <button className="detail-btn">{t("tour.details")}</button>
-                </Link>
-                <Link to={`/edit-tour/${tour._id}`}>
-                  <button className="edit-btn">{t("common.edit")}</button>
-                </Link>
-                <button
-                  className="btn-delete"
-                  onClick={() => handleDelete(tour._id)}
-                >
-                  {t("common.delete")}
-                </button>
-               </td>
+      <Link to={`/add-tour`} className="add-btn">+ {t("manage.addTours")}</Link>
+
+      {tours.length === 0 ? (
+        <p>No tours found</p>
+      ) : (
+        <table className="tours-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>{t("tour.name")}</th>
+              <th>{t("tour.location")}</th>
+              <th>{t("tour.price")}</th>
+              <th>{t("manage.actions")}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    )}
-  </div>
+          </thead>
+
+          <tbody>
+            {tours.map((tour, index) => (
+              <tr key={tour._id}>
+                <td>{index + 1}</td>
+                <td>{tour.title?.[currentLang] || "-"}</td>
+                <td>{tour.location?.[currentLang] || "-"}</td>
+                <td>${tour.price}</td>
+
+                <td>
+                  <Link to={`/tour-details/${tour._id}`}>
+                    <button className="detail-btn">{t("tour.details")}</button>
+                  </Link>
+
+                  <Link to={`/edit-tour/${tour._id}`}>
+                    <button className="edit-btn">{t("common.edit")}</button>
+                  </Link>
+
+                  <button
+                    className="btn-delete"
+                    onClick={() => handleDelete(tour._id)}
+                  >
+                    {t("common.delete")}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
   );
-}
+};
 
 export default ManageTours;

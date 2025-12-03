@@ -6,41 +6,31 @@ import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const ToursList = ({ tours }) => {
-  const [filteredTours, setFilteredTours] = useState([]);
   const location = useLocation();
-  const { t,i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
-  const initialTours = location.state?.tours || tours;
+  const [filteredTours, setFilteredTours] = useState([]);
 
   useEffect(() => {
-    if (tours?.data && Array.isArray(tours.data)) {
+    if (location.state?.tours) {
+      setFilteredTours(location.state.tours);
+    } else if (Array.isArray(tours?.data)) {
       setFilteredTours(tours.data);
     } else if (Array.isArray(tours)) {
       setFilteredTours(tours);
     } else {
       setFilteredTours([]);
     }
-  }, [tours]);
-
-  useEffect(() => {
-    if (initialTours?.data && Array.isArray(initialTours.data)) {
-      setFilteredTours(initialTours.data);
-    } else if (Array.isArray(initialTours)) {
-      setFilteredTours(initialTours);
-    } else {
-      setFilteredTours([]);
-    }
-  }, [initialTours]);
+  }, [location.state, tours]);
 
   const handleSearch = (query) => {
     const lowerQuery = query.toLowerCase();
-    const allTours = Array.isArray(initialTours?.data) ? initialTours.data : initialTours;
+    const allTours = filteredTours; 
 
     const results = allTours.filter(tour =>
-      tour.title[lang].toLowerCase().includes(lowerQuery)
+      (tour.title?.[lang] || '').toLowerCase().includes(lowerQuery)
     );
-
     setFilteredTours(results);
   };
 

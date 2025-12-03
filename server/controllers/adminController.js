@@ -41,7 +41,7 @@ export const promoteToAdmin = async (req, res) => {
 
     const user = await User.findOneAndUpdate(
       { email },
-      { role: "admin" },   // 👈 only update role
+      { role: "admin" },   
       { new: true }
     );
 

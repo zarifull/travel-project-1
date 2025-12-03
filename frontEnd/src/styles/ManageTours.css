@@ -1,57 +1,126 @@
-  .tours-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
+.tours-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Poppins", sans-serif;
+}
+
+.tours-table th,
+.tours-table td {
+  border: 1px solid #ddd;
+  padding: 0.8em 1em;
+  text-align: center;
+}
+
+.tours-table th {
+  background-color: #f4f4f4;
+  font-weight: 600;
+}
+
+.detail-btn,
+.edit-btn,
+.btn-delete,
+.add-btn {
+  margin: 0 4px;
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.detail-btn {
+  background-color: #339af0;
+  color: white;
+}
+.detail-btn:hover {
+  background-color: #1c7ed6;
+}
+
+.edit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+.edit-btn:hover {
+  background-color: #388e3c;
+}
+
+.btn-delete {
+  background-color: #f03e3e;
+  color: white;
+}
+.btn-delete:hover {
+  background-color: #c92a2a;
+}
+
+.add-btn {
+  display: inline-block;
+  padding: 0.6em 1.6em;
+  background-color: #339af0;
+  color: white !important;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-bottom: 1.5em;
+}
+.add-btn:hover {
+  background-color: #1c7ed6;
+}
+@media (max-width: 1024px) {
   .tours-table th,
   .tours-table td {
-    border: 1px solid #ddd;
-    padding: 0.8em 2em;
+    padding: 0.7em 0.8em;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 10px;
+  }
+
+  .tours-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .add-btn {
     text-align: center;
   }
-  
-  .tours-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .edit-btn,
-  .delete-btn,
+
   .detail-btn,
+  .edit-btn,
+  .btn-delete {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tours-table th,
+  .tours-table td {
+    font-size: 0.8rem;
+    padding: 0.6em;
+  }
+
   .add-btn {
-    margin: 0 5px;
-    padding: 6px 12px;
-    border: none;
-    cursor: pointer;
-    border-radius: 6px;
-    font-weight: 500;
+    width: 60%;
   }
-  .detail-btn{
-    background-color: #339af0;
-    color:white ;
+  .btn-delete{
+    width: 50%;
+      margin: 4px 0;
+      padding: 6px 0;
+      font-size: 0.75rem;
   }
-  a.add-btn {
-    display: inline-block;
-    padding: 0.5em 1.5em;
-    background-color: #339af0;
-    color: white !important;
-    font-weight: bold;
-    font-size: 1rem;
-    text-decoration: none !important;
-    border-radius: 6px;
-      margin-bottom: 2em;
+  .edit-btn{
+    margin-top: 0.5rem;
   }
-  
-  
-  .edit-btn {
-    background-color: #4caf50;
-    color: white;
+  .tours-table{
+    white-space: wrap;
   }
-    
-  .edit-btn:hover {
-    background: #388e3c;
+  td button {
+    width: 70%;
+    margin: 4px 0;
   }
-  .detail-btn:hover,
-  .add-btn:hover {
-    background-color: #1c7ed6;
-    }
-  
+}

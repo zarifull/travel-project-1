@@ -1,75 +1,126 @@
 .partner-page {
-    font-family: "Poppins";
-    color: #333;
-    padding: 2em 0 5em 0;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .partner-hero {
-    text-align: center;
-  }
+  font-family: "Poppins";
+  color: #333;
+  padding: 2em 1em 5em 1em;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.partner-hero {
+  text-align: center;
+}
+
+.partner-title {
+  font-size: 2.8em;
+  color: #343a40;
+  margin: 1em 0  0.3em 0;
+  font-weight: 600;
+}
+
+.partner-subtitle {
+  color: #6c757d;
+  font-size: 1.3em;
+  margin-bottom: 3em;
+  text-align: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.partner-loading,
+.partner-no-photos {
+  text-align: center;
+  color: #666;
+  font-size: 1.2em;
+}
+
+.partner-logos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  justify-items: center;
+  gap: 2.5em;
+  margin-bottom: 3em;
+  padding: 2em 0;
+}
+
+.partner-card {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.partner-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.partner-logo {
+  width: 85%;
+  height: 85%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.partner-info {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.partner-info h2 {
+  font-size: 2em;
+  color: #343a40;
+  margin-bottom: 0.5em;
+}
+
+.partner-info p {
+  color: #555;
+  line-height: 1.7;
+  font-size: 1.1em;
+}
+
+@media (max-width: 768px) {
   .partner-title {
-    font-size: 2.5em;
-    color: #495057;
-    text-align: center;
-    padding: 0.2em 0;
-  }
-  
-  .partner-subtitle {
-    color: #555;
-    font-size: 1.4em;
-    font-weight: 500;
-    margin-bottom: 2em;
-    text-align: center;
-  }
-  
-  .partner-logos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 3em;
-    margin-bottom: 3em;
-    padding: 3em 0;
+    font-size: 2.2em;
   }
 
-  
+  .partner-subtitle {
+    font-size: 1.1em;
+    margin-bottom: 2em;
+  }
+
   .partner-card {
-    width: 210px;
-    height: 210px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: white;
-    box-shadow: 0 4px 8px hsl(206, 33%, 74%);
-    transition: transform 0.3s ease;
+    width: 160px;
+    height: 160px;
   }
-  .partner-card:hover {
-    transform: translateY(-10px);
-  }
+
   .partner-logo {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-    /* border: 3px solid #fff; */
+    width: 80%;
+    height: 80%;
   }
-  
-  
-  .partner-info {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
+
   .partner-info h2 {
-    color:#495057 ;
-    margin-bottom: 0.5em;
+    font-size: 1.7em;
   }
-  
+
   .partner-info p {
-    color: #555;
-    line-height: 1.6;
+    font-size: 1em;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .partner-title {
+    font-size: 1.8em;
+  }
+
+  .partner-card {
+    width: 140px;
+    height: 140px;
+  }
+}

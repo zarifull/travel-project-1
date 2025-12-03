@@ -1,23 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-.navbar {
-  font-family: "Poppins";
-    padding: 10px 10px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    position: relative;
-    border-radius: 55%;
-    
-  }
   
   .avatar {
     width: 40px;
     height: 40px;
-    border-radius: 50% !important;
+    border-radius: 60% !important;
+    border-top: 0.3rem   solid #f59f00;
     border-bottom: 0.3rem  solid #f59f00;
-    border-top: 0.3rem  solid #1976d2;
+    color: #1864ab;
     background-color: #fff;    
-    color: radial-gradient(circle, #1975D1 , #F59F00 50%); 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,6 +15,14 @@
     font-weight: 600;
     font-size: 1.5rem;
   }
+  .dropdown.active {
+    background-color: #f59f00 !important;
+    color: white !important;
+    border-top-color: #1864ab;
+    border-bottom-color: #1864ab;
+    transition: 0.25s ease;
+  }
+  
   .registerModal-window{
       position: absolute;
       top: 50px;
@@ -42,20 +40,48 @@
       max-width: 800px; 
       text-align: center;
   }
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 999;
+  }
+  
+  .registerModal-window {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 300px;       
+    max-width: 70%;
+    position: relative;
+    animation: popup 0.2s ease;
+
+  }
+  
   .dropdown {
     position: absolute;
     top: 50px;
-    right: 20px;
+    right: 5%;
     background-color: white;
     border: 1px solid #ddd;
-    box-shadow: 0 2px 6px hsla(0, 0%, 0%, 0.15);
-    border-radius: 8px;
-    padding: 10px;
-    z-index: 100;
-    min-width: 400px;     
-    max-width: 800px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 400px;   
+    max-width: 90%;
     text-align: center;
   }
+  
+  .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+  
   
   .dropdown .user-info {
     margin-bottom: 10px;
@@ -127,6 +153,7 @@
   .user-icon{
     border: none;
     background: none;
+    color: #1864ab;
     font-size: 1.2rem;
   }
   .user-backImg{
@@ -139,4 +166,94 @@
     padding-top: 1em;
     
   } 
+ 
+  
+  @keyframes popup {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
+@media(max-width:1024px){
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50% !important;
+    border-top: 0.2rem   solid #f59f00;
+    border-bottom: 0.2rem  solid #f59f00;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+}
+@media(max-width:768px){
+  .user-icon{
+    font-size: 1rem;
+  }
+  /* .avatar {
+    width: 25px;
+    height: 25px;
+    border-top: 0.2rem   solid #f59f00;
+    border-bottom: 0.2rem  solid #f59f00;
+    font-weight: 600;
+    font-size: 0.9rem;
+  } */
+  .registerModal-window {
+    width: 320px;
+    padding: 18px;
+  }
+
+  .dropdown {
+    min-width: 300px;
+    padding: 12px;
+  }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  .logout-button,
+  .user-link {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  .users-links{
+    display: flex;
+    justify-content: space-around;
+    padding: 2em  0.5em;
+    gap: 1em;
+  }
+ 
+}
+@media(max-width:480px){
+  .user-icon{
+    font-size: 0.9rem;
+  }
+  .avatar{
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+  }
+  .registerModal-window {
+    width: 260px;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .dropdown {
+    min-width: 220px;
+    padding: 10px;
+  }
+
+  .users-links {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .users-links{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 0.7rem;
+  }
+}
   

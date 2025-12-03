@@ -1,51 +1,113 @@
 .add-customer {
-    max-width: 1000px;
-    margin: 40px auto;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 1.5em;
+  background-color: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  font-family: "Poppins";
+}
+
+.add-customer h1 {
+  font-family: "Poppins";
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.manage-customer h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 2rem;
+}
+
+.customer-form label {
+  display: block;
+  font-weight: 600;
+  margin-top: 18px;
+  margin-bottom: 6px;
+  color: #444;
+  font-family: "Poppins";
+  font-size: 0.95rem;
+}
+
+.customer-form input[type="text"],
+.customer-form input[type="file"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: #f8f9fa;
+  transition: border 0.25s ease;
+}
+
+.customer-form input[type="text"]:focus,
+.customer-form input[type="file"]:focus {
+  border-color: #339af0;
+  outline: none;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.manage-customer p {
+  margin-top: 10px;
+  font-size: 15px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .add-customer {
     padding: 1em;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    font-family: "Poppnis";
+    margin: 20px auto;
   }
-  .add-customer h1{
-    font-family: "Poppins";
+
+  .add-customer h1 {
+    font-size: 1.5rem;
   }
-  .manage-customer h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #333;
-  }
-  
-  .customer-form label {
-    display: block;
-    font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    color: #555;
-    font-family: "Poppins";
-  }
-  
+
   .customer-form input[type="text"],
   .customer-form input[type="file"] {
-    width: 100%;
+    font-size: 14px;
     padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 14px;
-    box-sizing: border-box;
   }
-  
 
-  
   .form-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
- 
+    flex-direction: column;
+    width: 100%;
   }
 
-  .manage-customer p {
-    margin-top: 10px;
-    font-size: 14px;
+  .form-actions button {
+    width: 50%;
+    align-items: center;
   }
   
+}
+
+@media (max-width: 480px) {
+  .add-customer {
+    padding: 0.8em;
+  }
+
+  .add-customer h1 {
+    font-size: 1.3rem;
+  }
+
+  .customer-form label {
+    font-size: 0.9rem;
+  }
+
+  .form-actions button {
+    font-size: 0.9rem;
+    padding: 0.7em 0;
+    
+  }
+}

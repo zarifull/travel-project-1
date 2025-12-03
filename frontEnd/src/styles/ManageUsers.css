@@ -5,12 +5,9 @@
   .users-table {
     width: 100%;
     border-collapse: collapse;
-    /* background: white; */
-    /* border-radius: 8px;
-    overflow: hidden; */
+
   }
   .bottom-line{
-    /* border-bottom: 50px solid #f7f7f7; */
     padding-bottom: 2em;
   }
   .users-table th,
@@ -37,10 +34,6 @@
     background: #4caf50;
     content: "admin!";
   }
-  /* .role-badge.user {
-    background: #2196f3;
-    padding: 0.5em 1em 0.5em 1em;
-  } */
   
   .btn-delete {
     background: #f59f00;
@@ -78,4 +71,71 @@
   .btn-demote:hover {
     background: #1c7ed6;
   }
- 
+  @media (max-width: 1024px) {
+    .users-table th,
+    .users-table td {
+      padding: 10px 12px;
+      font-size: 0.95rem;
+    }
+  
+    .btn-delete,
+    .btn-promote,
+    .btn-demote {
+      padding: 6px 10px;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+  @media (max-width: 768px) {
+    .admin-dashboard {
+      padding: 15px;
+    }
+  
+    .manage-theme {
+      text-align: center;
+      font-size: 1.3rem;
+    }
+  
+    .users-table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  
+    .users-table th,
+    .users-table td {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+  
+    .btn-delete,
+    .btn-promote,
+    .btn-demote {
+      padding: 5px 8px;
+      font-size: 0.8rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .manage-theme {
+      font-size: 1.1rem;
+    }
+  
+    .users-table th,
+    .users-table td {
+      padding: 8px;
+      font-size: 0.8rem;
+    }
+  .users-table{
+    white-space: wrap;
+  }
+    .btn-delete,
+    .btn-promote,
+    .btn-demote {
+      width: 100% !important;
+      margin: 4px 0;
+      padding: 6px 0;
+      font-size: 0.75rem;
+    }
+  }
+      
+  

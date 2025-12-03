@@ -27,7 +27,9 @@ function AdminDashboard() {
 
   return (
     <div className='admin-dashboard'>
-  <div className="admin-img"><h2>{t("admin.title")} !</h2>
+      <h2>{t("admin.title")} !</h2>
+  <div className="admin-img">
+  </div>
   {error && <p style={{ color: 'red' }}>{error}</p>}
 
   {stats ? (
@@ -59,7 +61,7 @@ function AdminDashboard() {
   ) : (
     <p>Loading stats...</p>
   )}
-</div>
+
 </div>
   );
 }

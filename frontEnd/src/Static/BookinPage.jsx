@@ -59,14 +59,15 @@ const BookingPage = () => {
       );
 
       const text = `✅ New Booking Request:
-🏞 Tour: ${tour?.title || "N/A"}
-👤 Name: ${formData.name}
-📞 Phone: ${phone}
-📧 Email: ${formData.email}
-🏠 Address: ${formData.address}
-👥 Guests: ${formData.guests}
-📅 Date: ${formData.date}
-💬 Message: ${formData.message || "No message"}`;
+        🏞 Tour: ${tour?.title?.[lang] || "N/A"}
+        👤 Name: ${formData.name}
+        📞 Phone: ${phone}
+        📧 Email: ${formData.email}
+        🏠 Address: ${formData.address}
+        👥 Guests: ${formData.guests}
+        📅 Date: ${formData.date}
+        💬 Message: ${formData.message || "No message"}`;
+
 
       window.open(
         `https://wa.me/${adminPhoneNumber}?text=${encodeURIComponent(text)}`,
@@ -83,6 +84,7 @@ const BookingPage = () => {
 
   return (
     <div className="booking-page">
+      <div className="container">
       <div className="booking-area">
         <div className="booking-img">
           <img src={bookingBackground} alt="Booking Background" />
@@ -156,6 +158,7 @@ const BookingPage = () => {
             <button type="submit">{t("booking.form.send")}</button>
           </form>
         </div>
+      </div>
       </div>
     </div>
   );

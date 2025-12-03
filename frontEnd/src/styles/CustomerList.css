@@ -22,3 +22,15 @@
     justify-content: space-around;
     padding: 2em 0 ;
   }
+  @media(max-width:926px){
+    .customer-title{
+      font-size: 2rem;
+    }
+  }
+  @media(max-width:768px){
+    .customer-title{
+      font-size: 1.5rem;
+      margin: 2rem 0 0 0;
+    }
+  }
+  
