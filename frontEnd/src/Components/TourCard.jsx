@@ -3,6 +3,7 @@ import "../styles/TourCard.css";
 import { Link } from "react-router-dom";
 import RatingResult from "../Components/RatingResult";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 const TourCard = ({ tour }) => {
   const { i18n } = useTranslation();
@@ -12,13 +13,21 @@ const TourCard = ({ tour }) => {
   const title = tour?.title?.[lang] || "";
   const description = tour?.description?.[lang] || "";
   const fullDescription = tour.description?.[lang] || "";
+
   const getShortDescription = (text) => {
     const words = text.split(" ");
     if (words.length <= 30) return text;
     return words.slice(0, 30).join(" ") + "...";
   };
+
   return (
-    <section className="tour-card">
+    <motion.section
+      className="tour-card"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      viewport={{ once: true }}
+    >
       <div className="tours-boxes">
 
         <div className="part1">
@@ -43,17 +52,14 @@ const TourCard = ({ tour }) => {
           <p className="parts-prg2">
             {expanded ? fullDescription : getShortDescription(fullDescription)}
             {fullDescription.split(" ").length > 30 && (
-            <button 
-              className="show-btn"
-              onClick={() => setExpanded(!expanded)}
-            >
-              {expanded ? "→" : "←"}
-            </button>
-          )}
+              <button 
+                className="show-btn"
+                onClick={() => setExpanded(!expanded)}
+              >
+                {expanded ? "→" : "←"}
+              </button>
+            )}
           </p>
-
-        
-
 
           <div className="card-part2">
             <RatingResult className="parts-prg" ratings={tour.ratings} />
@@ -70,7 +76,7 @@ const TourCard = ({ tour }) => {
         </div>
 
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -156,23 +156,16 @@
   max-width: 1200px; 
   margin: 0 auto;
   height: 600px; 
-  overflow: hidden;
+  overflow: visible;
 }
 
 .floating-imges {
   position: absolute;
-  /* animation: float 4s ease-in-out infinite; */
   transition: transform 0.3s ease;
 }
-/* @keyframes float {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
-} */
-
 .img-balon  { max-width: 15%; top: 15%; right: 0; }
 .img-camera { max-width: 8%; top: 30%; left: 0; }
-.img-coffee { max-width: 8%; top: 59%; right: 11%; z-index: 2; }
+.img-coffee { max-width: 8%; top: 59%; right: 11%; z-index: 222; }
 .img-drn    { max-width: 25%; top: 17%; right: 13%;  pointer-events: none !important; }
 .img-durbu  { max-width: 9%; top: 62%; left: 15%; }
 .img-plane  { max-width: 16%; top: 11%; left: 18%; }

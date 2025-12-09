@@ -117,12 +117,12 @@ const AddTour = () => {
       });
 
       if (response.ok) {
-        alert(t("addTour.alert.success"));
+        alert(t("tour.success"));
         navigate("/tour-list");
       } else {
         const errorData = await response.json();
         console.error(errorData);
-        alert(t("Error"));
+        alert(t("common.error"));
       }
     } catch (err) {
       console.error("Network error:", err);

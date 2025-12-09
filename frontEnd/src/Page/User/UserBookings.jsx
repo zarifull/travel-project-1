@@ -45,10 +45,10 @@ function MyBookings() {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBookings(bookings.filter(b => b._id !== id));
-      alert("Booking deleted successfully!");
+      alert(t("booking.alert.deletedSuccess"));
     } catch (err) {
       console.error(err);
-      alert("Failed to delete booking");
+      alert(t("booking.alert.deletedSuccess"));
     }
   };
   

@@ -74,7 +74,7 @@ const BookingPage = () => {
         "_blank"
       );
 
-      alert(t("booking.alert.success"));
+      alert(t("booking.alert.sentSuccess"));
       navigate("/my-bookings");
     } catch (err) {
       console.error("Booking failed:", err.response || err);

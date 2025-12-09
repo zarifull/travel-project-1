@@ -26,7 +26,7 @@ import TotalUsers from '../Page/Admin/ManageUsers';
 import TotalTours from '../Page/Admin/ManageTours';
 import TotalBookings from '../Page/Admin/ManageBookings';
 import AdminSettings from '../Page/Admin/AdminSettings';
-import LandingPage from '../Static/LandingPage';
+import LandingPage from '../Static/LandingPage/LandingPage';
 import ManageResources from '../Page/Admin/ManageResources';
 import CustomerList from '../Page/Resources/CustomerList';
 import Partner from '../Page/Resources/Partner';

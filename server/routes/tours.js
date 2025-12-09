@@ -4,19 +4,14 @@ import { getAllTours, createTour, updateTour, getTourById, deleteTour, rateTour 
 
 const router = express.Router();
 
-// POST route to create a tour with image upload
 router.post('/', upload.array('images',10), createTour);
 
-// GET all tours
 router.get('/', getAllTours);
 
-// GET a single tour by ID
 router.get('/:id', getTourById);
 
-// PUT route to update a tour by ID
 router.put('/:id', updateTour);
 
-// DELETE route to delete a tour by ID
 router.delete('/:id', deleteTour);
 
 router.post('/:id/rate', rateTour);

@@ -126,12 +126,12 @@ const EditTour = () => {
         startDates: formData.startDates.map((date) => new Date(date)),
       });
 
-      alert("Tour was updated successfully!");
+      alert(t("tour.alert.updatedSuccess"));
       setSuccess(true);
       navigate("/total-tours");
     } catch (err) {
       console.error("Update error:", err);
-      alert("Tour was not updated");
+      alert(t("tour.alert.updateFailed"));
       setError("Failed to update tour.");
     }
   };

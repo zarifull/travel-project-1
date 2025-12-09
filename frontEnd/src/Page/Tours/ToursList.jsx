@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import TourCard from '../../Components/TourCard';
 import '../../styles/ToursList.css';
 import SearchBox from './SearchBox';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import {
+  motion,
+  MotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
 const ToursList = ({ tours }) => {
   const location = useLocation();
@@ -11,6 +18,9 @@ const ToursList = ({ tours }) => {
   const lang = i18n.language;
 
   const [filteredTours, setFilteredTours] = useState([]);
+  const scrollRef = useRef(null);
+  const { scrollYProgress } = useScroll();
+  const yOffset = useTransform(scrollYProgress, [0, 1], [0, -100]); 
 
   useEffect(() => {
     if (location.state?.tours) {
@@ -27,7 +37,6 @@ const ToursList = ({ tours }) => {
   const handleSearch = (query) => {
     const lowerQuery = query.toLowerCase();
     const allTours = filteredTours; 
-
     const results = allTours.filter(tour =>
       (tour.title?.[lang] || '').toLowerCase().includes(lowerQuery)
     );
@@ -35,13 +44,22 @@ const ToursList = ({ tours }) => {
   };
 
   return (
-    <section className="tour-list">
+    <section className="tour-list" ref={scrollRef}>
       <p className="tourList-theme">{t("tour.ourTravels")}</p>
       <SearchBox onSearch={handleSearch} />
       <hr className='hr-gradient'/>
       {filteredTours.length > 0 ? (
         filteredTours.map(tour => (
-          <TourCard key={tour._id} tour={tour} />
+          <motion.div 
+            key={tour._id}
+            style={{ y: yOffset }} 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <TourCard tour={tour} />
+          </motion.div>
         ))
       ) : (
         <p>No tours available</p>

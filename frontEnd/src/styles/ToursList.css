@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-
 .tour-list{
+  position: relative;
  background: #f8f9fa;
  min-height: 0 auto;
  display: flex;
@@ -9,6 +8,7 @@
  flex-direction: column;
  gap: 5rem;
  padding-bottom: 4em;
+ width: 100%;
 }
 .tourList-theme {
   font-family: "Poppins";
@@ -30,6 +30,7 @@
 }
 @media(max-width:768px){
 .tour-list{
+  width: 100%;
   gap: 3rem;
 }
 .tourList-theme{
@@ -40,6 +41,7 @@
 @media(max-width: 480px){
   .tour-list{
     gap: 1.5rem;
+    width: 100%;
   }
   .tourList-theme{
     font-size: 1.3rem;

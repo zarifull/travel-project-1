@@ -18,7 +18,7 @@ function ResetPassword() {
     if (storedEmail) {
       setEmail(storedEmail);
     } else {
-      alert("⚠️ No email found. Please verify OTP first.");
+      alert(t("⚠️ " + t("registration.alert.noEmailFound")));
       navigate("/auth/verify-otp");
     }
   }, [navigate]);
@@ -27,7 +27,7 @@ function ResetPassword() {
     e.preventDefault();
 
     if (newPassword.length < 6) {
-      return setMessage("Password must be at least 6 characters.");
+      return setMessage(t("registration.validation.passwordTooShort"));
     }
 
     try {
@@ -41,12 +41,12 @@ function ResetPassword() {
         login(res.data.user, res.data.token); 
       }
 
-      alert("✅ Password reset successful! You can now log in.");
+      alert(t("registration.alert.passwordResetSuccess"));
       console.log("Resetting password for:", email);
       navigate("/login");
     } catch (err) {
       console.error("❌ Reset error:", err);
-      setMessage(err.response?.data?.message || "Something went wrong.");
+      setMessage(err.response?.data?.message || t("registration.alert.serverError"));
     }
     
   };
@@ -61,7 +61,7 @@ function ResetPassword() {
       <form onSubmit={handleReset} className="reset-form">
         <input type="hidden" value={email} readOnly />
 
-        <label>{t("registration.newPasswordLabel")}</label>
+        <label>{t("registration.newPassword")}</label>
         <input
           type="password"
           value={newPassword}

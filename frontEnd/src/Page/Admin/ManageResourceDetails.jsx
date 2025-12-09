@@ -62,10 +62,10 @@ const ManageResourceDetail = () => {
     try {
       await deletePhotoFromResourceDetail(editingDetail._id, url);
       setExistingPhoto((prev) => prev.filter((img) => img !== url));
-      alert("Photo deleted successfully!");
+      alert(t("common.deleteSuccess"));
     } catch (err) {
       console.error(err);
-      alert("Failed to delete photo");
+      alert(t("common.deleteFail"));
     }
   };
 
@@ -120,11 +120,11 @@ const ManageResourceDetail = () => {
       let response;
       if (editingDetail) {
         response = await updateResourceDetail(editingDetail._id, submitData);
-        alert("✅ Resource detail updated successfully!");
+        alert(t("resources.alert.updateSuccess"));
         setEditingDetail(null);
       } else {
         response = await createResourceDetail(submitData);
-        alert("✅ Resource detail created successfully!");
+        alert(t("resources.alert.createSuccess"));
       }
   
       console.log("✅ Server response:", response);

@@ -1,5 +1,5 @@
 import express from "express";
-import upload from "../utils/storage.js"; // your multer-cloudinary setup
+import upload from "../utils/storage.js"; 
 import {
   getResources,
   createResource,

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { getResources } from "../../api/resourceApi";
 import ResourceCard from "../../Components/ResourceCard";
 import { useTranslation } from "react-i18next";
-
+import { motion } from "framer-motion";
 
 const ResourcesList = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -28,22 +28,42 @@ const ResourcesList = () => {
   if (loading) return <p>{t("loading")}...</p>;
   if (error) return <p className="error">{error}</p>;
 
+  const getInitial = (index) => {
+    switch (index) {
+      case 0:
+        return { opacity: 0, x: -100 }; // from left
+      case 1:
+        return { opacity: 0, y: -50 }; // from top
+      case 2:
+        return { opacity: 0, x: 100 }; // from right
+      default:
+        return { opacity: 0, y: 20 }; // fallback
+    }
+  };
+
   return (
     <div className="">
-    <p className="resours-mainTheme">{t("resources.hubspotByNumbers")}</p>
-    <div className="resours-block">
-    {resources.map((res) => (
-        <ResourceCard
+      <p className="resours-mainTheme">{t("resources.hubspotByNumbers")}</p>
+      <div className="resours-block">
+        {resources.map((res, index) => (
+          <motion.div
             key={res._id}
-            image={res.image}
-            count={res.count}
-            translations={res.translations}
-            link={res.link}
-        />
+            initial={getInitial(index)}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+          >
+            <ResourceCard
+              image={res.image}
+              count={res.count}
+              translations={res.translations}
+              link={res.link}
+            />
+          </motion.div>
         ))}
-    </div>
       </div>
-  )
-}
+    </div>
+  );
+};
 
-export default ResourcesList
+export default ResourcesList;

@@ -26,6 +26,7 @@ const UserIcon = () => {
         setIsRegisterOpen(false);
       }
     }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -36,11 +37,11 @@ const UserIcon = () => {
   };
 
   return (
-    <div className="navbar ">
+    <div>
       {user ? (
         <div ref={dropdownRef} style={{ position: "relative" }}>
           <div
-            className="avatar "
+            className="avatar"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             {(user?.name && user.name[0]?.toUpperCase()) ||
@@ -49,45 +50,55 @@ const UserIcon = () => {
           </div>
 
           {isDropdownOpen && (
-        <div className="modal-backdrop" onClick={() => setIsDropdownOpen(false)}>
-          <div
-            className="dropdown"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button className="close-btn" onClick={() => setIsDropdownOpen(false)}>×</button>
+            <div
+              className="modal-backdrop"
+              onClick={() => setIsDropdownOpen(false)}
+            >
+              <div
+                className="dropdown"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className="close-btn"
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  ×
+                </button>
 
-            <div className="user-backImg">
-              <img src={userImg} alt="user" style={{ width: "70%" }} />
+                <div className="user-backImg">
+                  <img src={userImg} alt="user"/>
+                </div>
+
+                <div className="user-info">
+                  <strong style={{ color: "#1976d2", fontSize: "1.5rem" }}>
+                    {user.name}
+                  </strong>
+                  <br />
+                  <small>{user.email}</small>
+                </div>
+
+                <div className="users-links">
+                  <Link to="/my-profile" className="user-link">
+                    {t("menu.myProfile")}
+                  </Link>
+                  <Link to="/my-bookings" className="user-link">
+                    {t("menu.myBookings")}
+                  </Link>
+
+                  <button className="logout-button" onClick={handleLogout}>
+                    {t("registration.logout")}
+                  </button>
+                </div>
+              </div>
             </div>
-
-            <div className="user-info">
-              <strong style={{ color: "#1976d2", fontSize: "1.5rem" }}>
-                {user.name}
-              </strong>
-              <br />
-              <small>{user.email}</small>
-            </div>
-
-            <div className="users-links">
-              <Link to="/my-profile" className="user-link">
-                {t("menu.myProfile")}
-              </Link>
-              <Link to="/my-bookings" className="user-link">
-                {t("menu.myBookings")}
-              </Link>
-
-              <button className="logout-button" onClick={handleLogout}>
-                {t("registration.logout")}
-              </button>
-            </div>
-          </div>
-        </div>
-)}
-
+          )}
         </div>
       ) : (
         <div ref={dropdownRef}>
-          <button className="user-icon" onClick={() => setIsRegisterOpen(true)}>
+          <button
+            className="user-icon"
+            onClick={() => setIsRegisterOpen(true)}
+          >
             <FaUser className="user-icon" />
           </button>
 
@@ -108,7 +119,7 @@ const UserIcon = () => {
                 </button>
 
                 <div className="register-img">
-                  <img src={registerImg} alt="" style={{ width: "60%" }} />
+                  <img src={registerImg} alt="register" style={{ width: "60%" }} />
                 </div>
 
                 <p className="register-pr">{t("homePage.welcome")}</p>

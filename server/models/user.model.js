@@ -31,14 +31,12 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// ✅ Hash password before saving
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 
-// ✅ Cascade delete bookings when a user is deleted
 userSchema.pre("findOneAndDelete", async function (next) {
   const userId = this.getQuery()["_id"];
   await Booking.deleteMany({ userId });

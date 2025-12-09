@@ -14,10 +14,9 @@ router.post('/forgot-password', sendOtpToEmail);
 router.post('/verify-otp', verifyOtp);
 router.post('/reset-password', resetPassword);
 
-// Profile (GET + PUT)
 router.get('/me', protect, getProfile);
-router.put('/profile/:id', protect, updateProfile);      // 🔒 secure update
-router.put('/password/:id', protect, updatePassword); // 🔒 secure password update
+router.put('/profile/:id', protect, updateProfile);     
+router.put('/password/:id', protect, updatePassword); 
 
 
 

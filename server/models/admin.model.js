@@ -5,7 +5,6 @@ const adminSettingsSchema = new mongoose.Schema({
      required: true ,
     trim : true
     },
-  // you can add more settings later
 }, { timestamps: true });
 
 export default mongoose.model("AdminSettings", adminSettingsSchema);

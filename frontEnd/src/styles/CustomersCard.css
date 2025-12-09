@@ -1,4 +1,3 @@
-/* ---------- Card Styles ---------- */
 .customer-card {
   width: 30%;
   padding: 2em;
@@ -15,7 +14,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* ---------- Gallery and Photos ---------- */
 .customer-gallery {
   display: flex;
   justify-content: center;
@@ -47,7 +45,6 @@
   z-index: 2;
 }
 
-/* ---------- Text ---------- */
 .customer-subtitle {
   color: #666;
   font-size: 1.1em;
@@ -60,7 +57,6 @@
   word-break: break-word;
 }
 
-/* ---------- Comments ---------- */
 .customer-testimonials {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -104,8 +100,9 @@
 
 .comment-body p {
   margin: 3px 0 0;
-  font-size: 14px;
+  font-size: 0.9rem;
   color: #555;
+  line-height: 1.7;
 }
 
 .comment-body {
@@ -121,7 +118,6 @@
   text-align: left;
 }
 
-/* ---------- Buttons ---------- */
 .more-btn {
   border: none;
   background: none;
@@ -149,7 +145,6 @@
               0 8px 16px rgba(255,169,77,0.3);
 }
 
-/* ---------- Media Queries ---------- */
 @media (max-width: 1024px) {
   .customer-card {
     width: 45%;

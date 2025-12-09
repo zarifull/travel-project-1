@@ -35,7 +35,7 @@ export const createBooking = async (req, res) => {
 export const getMyBookings = async (req, res) => {
   try {
     const bookings = await Booking.find({ userId: req.user._id })
-      .populate("tourId","title imageUrls price"); // also adjust this to populate correctly
+      .populate("tourId","title imageUrls price");
     res.status(200).json(bookings);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch bookings" });
@@ -60,7 +60,6 @@ export const getBookingById = async (req, res) => {
   }
 };
 
-// 4️⃣ Update booking (User: only if pending; Admin: always)
 export const updateBooking = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);

@@ -16,7 +16,10 @@ function Signup({ setUser }) {
 
   const handleSignup = async () => {
     const { name, email, password } = formData;
-    if (!name || !email || !password) return alert("Fill in all fields.");
+  
+    if (!name || !email || !password) {
+      return alert(t("registration.validation.fillFields"));
+    }
   
     try {
       const res = await axiosInstance.post("/users/register", {
@@ -28,19 +31,18 @@ function Signup({ setUser }) {
       localStorage.setItem("user", JSON.stringify(res.data.user));
       localStorage.setItem("token", res.data.token);
       setUser(res.data.user);
-      alert("Signup successful!");
+  
+      alert(t("registration.alert.signupSuccess"));
       navigate("/");
     } catch (error) {
-      if (error.response?.status === 409) {
-        alert("User already exists. Please login or use a different email.");
-      } else {
-        alert("Signup failed: " + (error.response?.data?.message || "Server error."));
+      if (error.response?.data?.message?.toLowerCase().includes("email already exists")) {
+        return alert(t("registration.alert.userExists"));
       }
+  
+      alert(t("registration.alert.signupFailed"));
     }
-    console.log("Password", password);
-console.log("Email", email);
-
   };
+  
   
 
   return (

@@ -19,7 +19,7 @@ function VerifyOtp() {
         otp,
       });
 
-      alert("✅ OTP verified! You can now reset your password.");
+      alert(t("✅" + "registration.alert.otpVerified"));
       navigate("/auth/reset-password");
     } catch (err) {
       console.error("❌ OTP verify error:", err);
@@ -36,7 +36,7 @@ function VerifyOtp() {
     if (savedEmail) {
       setEmail(savedEmail);
     } else {
-      alert("⚠️ No email found. Please go back and enter your email.");
+      alert(t("⚠️" + "registration.alert.noEmail"));
       navigate("/auth/forgot-password");
     }
   }, []);

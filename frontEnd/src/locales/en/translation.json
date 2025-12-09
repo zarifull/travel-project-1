@@ -23,7 +23,12 @@
     "next": "Next",
     "previous": "Previous",
     "confirm": "Confirm",
-    "more": "More"
+    "more": "More",
+    "error": "❌ Error",
+    "alert": {
+      "deletedSuccess": "Photo deleted successfully!",
+      "deleteFailed": "Failed to delete photo"
+    }
   },
   "header": {
     "home": "Home",
@@ -55,13 +60,14 @@
     "confirmPassword": "Confirm Password",
     "forgotPassword": "Forgot Password?",
     "resetPassword": "Reset Password",
+    "resetTitle": "🔐 Reset Your Password",
     "newPassword": "New Password",
     "createAccount": "Create an account",
     "alreadyHaveAccount": "Already have an account?",
     "dontHaveAccount": "Don't have an account?",
     "rememberMe": "Remember me",
     "sendOtp": "Send OTP",
-    "verifyOtp": "Verify OTP",
+    "verifyOtpTitle": "🔐 Verify OTP",
     "verificationCode": "Verification Code",
     "successRegistration": "You have successfully registered!",
     "successLogin": "Login successful!",
@@ -69,17 +75,38 @@
     "saveChanges": "Save Changes",
     "noAccount": "Don't have an account? Sign Up",
     "alert": {
+      "signupSuccess": "Signup successful!",
+      "signupFailed": "Signup failed",
+      "userExists": "User already exists. Please login or use a different email.",
+      "serverError": "Server error",
       "fillFields": "Please fill in all fields.",
       "success": "Login successful!",
       "failed": "Login failed. Please check your credentials.",
       "sendOtp": "Send OTP",
-      "verifyOtpTitle": "🔐 Verify OTP",
-      "resetTitle": "🔐 Reset Your Password",
       "newPasswordLabel": "New Password",
       "resetButton": "Reset Password",
       "successTitle": "Password Changed Successfully",
       "successMessage": "Your password has been updated.",
-      "backToLogin": "Back to Login"
+      "backToLogin": "Back to Login",
+      "emailExists": "Email already exists.",
+      "otpSent": "OTP has been sent to your email.",
+      "noEmail": "No email found. Please enter your email again.",
+      "errorOccurred": "An error occurred. Please try again.",
+      "otpVerified": "OTP verified! You can now reset your password.",
+      "errorsendingOtp": "Error sending OTP:",
+      "failedToSendOtp": "Failed to send OTP email",
+      "noEmailFound": "⚠️ No email found. Please verify OTP first.",
+      "passwordResetSuccess": "✅ Password reset successful! You can now log in."
+      },
+     "validation": {
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email address",
+      "minLength": "Value is too short",
+      "maxLength": "Value is too long",
+      "fillFields": "Please fill in all fields.",
+      "passwordShort": "Password must be at least 6 characters.",
+      "otpRequired": "Please enter your OTP.",
+      "passwordTooShort": "Password must be at least 6 characters."
     }
   },
   "admin":{
@@ -144,6 +171,7 @@
     "tourUpdatedSuccessfully":"Tour updated successfully!"
   },
   "tour": {
+    "success": "✅ Tour added successfully!",
     "ourTravels": "OUR TRAVELS",
     "searchTours": "Search Tours....",
     "details": "Details",
@@ -192,6 +220,10 @@
       "includesRequired": "Add at least one include",
       "startDateRequired": "At least one start date is required"
     },
+    "alert": {
+      "updatedSuccess": "✅ Tour was updated successfully!",
+      "updatedFailed": "❌ Tour was not updated"
+    },
     "successMessage": "Tour added successfully!",
     "errorMessage": "Failed to add tour",
     "errors": {
@@ -236,9 +268,13 @@
         "cancelled": "Cancelled"
       },
       "alert": {
+        "setSuccess": "✅ Booking successful!",
+        "deletedFailed": "❌ Failed to delete booking",
         "loginRequired": "❌ You must be logged in to make a booking.",
         "success": "✅ Your booking request has been sent! Check 'My Bookings' for updates.",
-        "failed": "❌ Booking failed. Please try again."
+        "failed": "❌ Booking failed. Please try again.",
+        "deletedSuccess": "Booking deleted successfully!",
+        "deleteFailed": "Failed to delete booking"
       }
     },
     "pagination": {
@@ -291,7 +327,11 @@
       "resources":{
         "hubspotByNumbers": "HubSpot By the Numbers",
         "learnMore": "Learn more",
-        "loading": "Loading"
+        "loading": "Loading",
+        "alert": {
+          "createdSuccess": "✅ Resource detail created successfully!",
+          "updatedSuccess": "✅ Resource detail updated successfully!"
+        }
     }, 
     "partners" : {
       "title": "Our Trusted Partners",
@@ -305,7 +345,12 @@
       "title": "Our Happy Customers",
       "comments": "Comments",
       "writeComment": "Write a Comment",
-      "customerNotFound": "No customer reviews found."
+      "customerNotFound": "No customer reviews found.",
+      "alert": {
+        "addedSuccess": "✅ Customer added successfully!",
+        "updatedSuccess": "✅ Customer updated successfully!",
+        "createdSuccess": "✅ Customer created successfully!"
+      }
     } ,    
     "footer": {
       "home": "Home",

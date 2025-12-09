@@ -76,6 +76,7 @@
     min-height: auto 0;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     font-size: 1.2rem;
     padding: 2em;
     border-radius: 10px 100px / 120px;
@@ -140,9 +141,6 @@ align-items: center;
 }
 
 @media(max-width:1024px){
-  .tour-details{
-    /* background-color: salmon; */
-      }
   .swiper-button-prev,
   .swiper-button-next {
     margin: 0;
@@ -162,9 +160,7 @@ align-items: center;
 .detail-box,.detail-description{
   margin-top: 2rem;
   width: 45%;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+
   font-size: 1.1rem;
   padding: 1.5rem;
   border-radius: 0 50px 50px 50px;

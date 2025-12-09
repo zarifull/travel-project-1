@@ -23,7 +23,6 @@ router.post('/', storage.array('images', 10), async (req, res) => {
       return res.status(400).json({ error: 'Баасы туура эмес форматта' });
     }
 
-    // Map all uploaded images to URLs
     const imageUrls = req.files.map(file => file.path);
     
     console.log('Тур маалыматтары:', {

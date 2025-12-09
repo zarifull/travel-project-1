@@ -2,7 +2,6 @@ import Partner from '../models/partner.model.js';
 import cloudinary from 'cloudinary';
 import fs from 'fs';
 
-// configure cloudinary using env variables
 cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_KEY,
@@ -19,10 +18,8 @@ export const createPartner = async (req, res) => {
 
     let logoUrl = '';
     if (req.file) {
-      // upload local file saved by multer to Cloudinary
       const uploadRes = await cloudinary.v2.uploader.upload(req.file.path, { folder: 'partners' });
       logoUrl = uploadRes.secure_url;
-      // remove local file
       fs.unlink(req.file.path, () => {});
     }
 
@@ -45,7 +42,6 @@ export const getPartners = async (req, res) => {
   try {
     const lang = req.query.lang || 'en';
     const partners = await Partner.find({ active: true }).sort({ createdAt: -1 });
-    // Return both raw and localized - frontend can use whichever
     const result = partners.map(p => ({
       _id: p._id,
       name: p.name,

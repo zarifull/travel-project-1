@@ -1,4 +1,3 @@
-// server/middleware/sanitize.js
 import mongoSanitize from 'express-mongo-sanitize';
 
 const sanitizeRequest = (req, res, next) => {

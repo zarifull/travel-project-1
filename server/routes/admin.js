@@ -16,15 +16,10 @@ import {
 
 const router = express.Router();
 
-// ====================
-// Admin dashboard
-// ====================
 router.get('/dashboard', protect, isAdmin, getAdminStats);
 router.get('/settings',protect,isAdmin,getAdminSettings)
 router.put('/settings',protect,isAdmin,updateAdminSettings)
-// ====================
-// User management
-// ====================
+
 router.get('/users', protect, isAdmin, getAllUsers);
 router.put('/promote', protect, isAdmin, promoteToAdmin);
 router.put('/demote', protect, isAdmin, demoteToUser);

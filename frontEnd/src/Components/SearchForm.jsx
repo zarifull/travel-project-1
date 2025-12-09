@@ -1,4 +1,3 @@
-// components/SearchForm.jsx or similar
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -12,7 +11,6 @@ function SearchForm() {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    // Redirect to /tour-list with query parameters
     navigate(`/tour-list?destination=${destination}&date=${date}&guests=${guests}`);
   };
 

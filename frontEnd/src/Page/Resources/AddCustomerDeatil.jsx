@@ -43,7 +43,7 @@ const AddCustomerDetail = () => {
       formData.photo.forEach((file) => data.append("photo", file));
 
       await createCustomer(data);
-      alert("✅ Customer added successfully!");
+      alert(t("customer.alert.addedSuccess"));
       navigate("/manage-customers"); 
     } catch (err) {
       console.error(err);

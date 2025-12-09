@@ -10,6 +10,17 @@ import "swiper/css/pagination";
 import StarRating from '../../Components/StarRating';
 import RatingResult from '../../Components/RatingResult';
 import { useTranslation } from 'react-i18next';
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.15 } }
+};
+
+const boxVariants = {
+  hidden: { opacity: 0, y: 25 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } }
+};
 
 const TourDetails = ({ tours }) => {
   const detailRef = useRef();
@@ -53,7 +64,12 @@ const TourDetails = ({ tours }) => {
   return (
     <section className="tour-details">
       <div className="container">
-        <section className="tourDetails-container">
+        <motion.section
+          className="tourDetails-container"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="details-title">{tour.title[lang]}</h2>
 
           <div className="detail-slider">
@@ -91,60 +107,69 @@ const TourDetails = ({ tours }) => {
                 <strong>{t("tour.description")} : </strong> {tour.description[lang]}
               </p>
             </div>
-            <div className="info-block">
-            <p className="detail-box detail-location">
-              <strong><FaLocationDot /> {t("tour.location")}:</strong> {tour.location[lang]}
-            </p>
-            <p className="detail-box detail-duration">
-              <strong>{t("tour.duration")}:</strong> {tour.duration} days
-            </p>
-            <p className="detail-box detail-price">
-              <strong>{t("tour.price")}:</strong> ${tour.price}
-            </p>
-            <p className="detail-box detail-category">
-              <strong>{t("tours.category")}:</strong> {tour.category}
-            </p>
 
-            <div className="detail-box detail-startDates">
-              <strong>{t("tour.startDates")}:</strong>
-              <ul>
-                {tour.startDates?.map((date, i) => (
-                  <li key={i}>{new Date(date).toLocaleDateString()}</li>
-                ))}
-              </ul>
-            </div>
+            <motion.div
+              className="info-block"
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+            >
+              <motion.p className="detail-box detail-location" variants={boxVariants}>
+                <strong><FaLocationDot /> {t("tour.location")}:</strong> {tour.location[lang]}
+              </motion.p>
 
-            <div className="detail-box detail-includes">
-              <strong>{t("tour.includes")}:</strong>
-              <ul>
-                {tour.includes?.map((item, i) => (
-                  <li key={i}>{item[lang]}</li>
-                ))}
-              </ul>
-            </div>
+              <motion.p className="detail-box detail-duration" variants={boxVariants}>
+                <strong>{t("tour.duration")}:</strong> {tour.duration} days
+              </motion.p>
 
-            <p className="detail-box detail-ispopular">
-              <strong>{t("tour.hotel")}:</strong> {tour.hotel || t("tour.noHotel")}
-            </p>
+              <motion.p className="detail-box detail-price" variants={boxVariants}>
+                <strong>{t("tour.price")}:</strong> ${tour.price}
+              </motion.p>
 
+              <motion.p className="detail-box detail-category" variants={boxVariants}>
+                <strong>{t("tours.category")}:</strong> {tour.category}
+              </motion.p>
 
-            <p className="detail-box detail-category">
-              <strong>{t("tour.maxGuests")}:</strong> {tour.maxGuests}
-            </p>
-          </div>
+              <motion.div className="detail-box detail-startDates" variants={boxVariants}>
+                <strong>{t("tour.startDates")}:</strong>
+                <ul>
+                  {tour.startDates?.map((date, i) => (
+                    <li key={i}>{new Date(date).toLocaleDateString()}</li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              <motion.div className="detail-box detail-includes" variants={boxVariants}>
+                <strong>{t("tour.includes")}:</strong>
+                <ul>
+                  {tour.includes?.map((item, i) => (
+                    <li key={i}>{item[lang]}</li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              <motion.p className="detail-box detail-ispopular" variants={boxVariants}>
+                <strong>{t("tour.hotel")}:</strong> {tour.hotel || t("tour.noHotel")}
+              </motion.p>
+
+              <motion.p className="detail-box detail-category" variants={boxVariants}>
+                <strong>{t("tour.maxGuests")}:</strong> {tour.maxGuests}
+              </motion.p>
+            </motion.div>
           </div>
 
           <div className="detailLast-box">
             <div className="stars-rating">
               <StarRating tourId={tour._id} tour={tour} />
             </div>
+
             <div className="tour-booking">
               <button onClick={handleBookNow}>
                 <i className="fa-solid fa-suitcase-rolling"> </i> {t("tour.bookNow")}
               </button>
             </div>
           </div>
-        </section>
+        </motion.section>
       </div>
     </section>
   );

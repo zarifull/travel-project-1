@@ -10,18 +10,27 @@ function ForgotPassword() {
   const {t} = useTranslation();
 
   const handleSendOtp = async () => {
-    if (!email) return alert("Please enter your email.");
+    if (!email) return alert(t("registration.validation.invalidEmail"));
   
     try {
       await axiosInstance.post("/users/forgot-password", { email });
-      localStorage.setItem("resetEmail", email); 
-      alert("OTP sent to your email.");
+      localStorage.setItem("resetEmail", email);
+      alert(t("registration.alert.otpSent")); 
       navigate("/auth/verify-otp");
     } catch (error) {
-      const msg = error.response?.data?.message || "Server error.";
-      alert("Error sending OTP: " + msg);
+      const backendMsg = error.response?.data?.message;
+      let translatedMsg = "";
+  
+      if (backendMsg === "Failed to send OTP email") {
+        translatedMsg = t("registration.alert.failedToSendOtp");
+      } else {
+        translatedMsg = backendMsg || t("registration.alert.serverError");
+      }
+  
+      alert(t("registration.alert.errorsendingOtp") + ": " + translatedMsg);
     }
   };
+  
   
 
   return (
