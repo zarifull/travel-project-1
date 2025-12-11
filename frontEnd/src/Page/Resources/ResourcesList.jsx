@@ -31,13 +31,13 @@ const ResourcesList = () => {
   const getInitial = (index) => {
     switch (index) {
       case 0:
-        return { opacity: 0, x: -100 }; // from left
+        return { opacity: 0, x: -100 }; 
       case 1:
-        return { opacity: 0, y: -50 }; // from top
+        return { opacity: 0, y: -50 }; 
       case 2:
-        return { opacity: 0, x: 100 }; // from right
+        return { opacity: 0, x: 100 }; 
       default:
-        return { opacity: 0, y: 20 }; // fallback
+        return { opacity: 0, y: 20 }; 
     }
   };
 

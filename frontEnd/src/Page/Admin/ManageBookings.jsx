@@ -50,10 +50,10 @@ const  ManageBookings = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBookings(bookings.filter(b => b._id !== id));
-      alert(t("booking.alert.deleteSuccess"));
+      alert(t("booking.alert.deletedSuccess"));
     } catch (err) {
       console.error(err);
-      alert(t("bookinf.alert.deleteFail"));
+      alert(t("bookinf.alert.deleteFailed"));
     }
   };
   

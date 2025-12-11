@@ -275,6 +275,7 @@
         "failed": "❌ Booking failed. Please try again.",
         "deletedSuccess": "Booking deleted successfully!",
         "deleteFailed": "Failed to delete booking"
+        
       }
     },
     "pagination": {

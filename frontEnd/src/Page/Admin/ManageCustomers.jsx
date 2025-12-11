@@ -103,11 +103,11 @@ const ManageCustomer = () => {
   
       if (editingCustomer) {
         await updateCustomer(editingCustomer._id, submitData);
-        alert(t("customers.alert.updateSuccess"));
+        alert(t("customers.alert.updatedSuccess"));
         setEditingCustomer(null);
       } else {
         await createCustomer(submitData);
-        alert("✅ " + t("customers.alert.createSuccess"));  
+        alert("✅ " + t("customers.alert.createdSuccess"));  
       }
   
       setFormData({

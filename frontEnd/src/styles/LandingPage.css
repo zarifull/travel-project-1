@@ -181,8 +181,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding: 1.5em;
-    gap: 1rem;
+    padding: 1em;
 }
 .adv-theme{
     text-align: center;

@@ -21,12 +21,12 @@ const cpUpload = upload.fields([
 
 router.post("/",protect,isAdmin, cpUpload, createResourceDetail);
 
-router.get("/", protect, getAllResourceDetails);
+router.get("/", getAllResourceDetails);
 
 
-router.get("/by-resource/:resourceId",protect, getResourceDetailByResourceId);
+router.get("/by-resource/:resourceId", getResourceDetailByResourceId);
 
-router.get("/:id", protect, getResourceDetailById);
+router.get("/:id", getResourceDetailById);
 
 router.put("/:id", protect,isAdmin, cpUpload, updateResourceDetail);
 

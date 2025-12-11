@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../../styles/AddTour.css';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import axiosInstance from '../../api/axiosInstance';
 
 const AddTour = () => {
   const { t, i18n } = useTranslation();
@@ -111,7 +112,7 @@ const AddTour = () => {
     imageFile.forEach(file => formData.append("images", file));
 
     try {
-      const response = await fetch("http://localhost:7070/api/tours", {
+      const response = await axiosInstance.get("/tours", {
         method: "POST",
         body: formData,
       });

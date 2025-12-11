@@ -98,6 +98,7 @@ const UserIcon = () => {
           <button
             className="user-icon"
             onClick={() => setIsRegisterOpen(true)}
+            
           >
             <FaUser className="user-icon" />
           </button>
@@ -119,7 +120,7 @@ const UserIcon = () => {
                 </button>
 
                 <div className="register-img">
-                  <img src={registerImg} alt="register" style={{ width: "60%" }} />
+                  <img src={registerImg} alt="register"  />
                 </div>
 
                 <p className="register-pr">{t("homePage.welcome")}</p>
