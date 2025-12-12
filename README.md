@@ -1,103 +1,153 @@
-
-# 🌍 Travel Project 1
+# 🌍 **Travel Project 1**
 
 ![React](https://img.shields.io/badge/React-17.0.2-blue)
 ![Node.js](https://img.shields.io/badge/Node.js-18.0-green)
 ![Express](https://img.shields.io/badge/Express-4.18-orange)
 ![MongoDB](https://img.shields.io/badge/MongoDB-6.0-brightgreen)
 
-This project is a **full-stack web application** for travel booking with registration, tour search, and booking features. Built with **React** on the frontend and **Node.js/Express** on the backend.  
+This project is a **full-stack travel booking web application** built with **React**, **Node.js**, **Express**, and **MongoDB**.
+Users can browse tours, register/login, view details, and book trips — all fully integrated with the backend.
 
 ---
 
-## 🚀 Features
+## 🚀 **Features**
 
-- **User Registration:** With validation to ensure correct input.  
-- **Booking Form:** Integrated frontend and backend to save bookings.  
-- **Tour Search:** Users can search tours by destination and date.  
-- **Tours List:** Matching tours are displayed dynamically.  
-- **Navigation:** Smooth page navigation using React Router state.  
-- **Responsive Design:** Fully responsive layout for mobile, tablet, and desktop.  
+* **User Authentication:** Register, login, logout, and protected routes.
+* **Booking System:** Users can select dates, number of people, and book tours.
+* **Tour Search:** Search tours by destination, dates, category, or popularity.
+* **Tours List:** Dynamic filter & sort system.
+* **Tour Details Page:**
 
----
-
-## 🗂 Project Structure
-
-travel-project-1/
-
-
----
-
-## 📱 Responsive Breakpoints
-
-- **320–480px** → Mobile  
-- **480–768px** → Small tablets  
-- **769–1024px** → Tablets / iPad  
-- **1200–1440px** → Laptop  
-- **1440px+** → Large screens  
-
-All responsive styles are centralized in `media.css`.
+  * Multiple images
+  * Description
+  * Highlights
+  * Itinerary
+  * Price, rating
+* **Admin Panel:** Manage users, tours, bookings, and resources.
+* **User Dashboard:** View, edit, or cancel bookings.
+* **Notifications & Alerts:** Multilingual supported (i18n).
+* **Fully Responsive:** Mobile → desktop layout via `media.css`.
+* **SEO-friendly pages** and optimized performance.
 
 ---
 
-## ⚡ How to Run
+## 🗂 **Project Structure**
+
+```
+root((Project Structure))
+  backend
+    controllers
+      js_files("*.js")
+    middleware
+    models
+    routes
+    utils
+      storage("storage.js")
+      cloudinary("cloudinary.js")
+      mailer("mailer.js")
+      sendOtp("sendOtp.js")
+      validateEmailDomain("validateEmailDomain.js")
+    env(".env")
+    seed("seed.js")
+    server("server.js")
+    package("package.json")
+
+  frontend
+    public
+      index("index.html")
+    src
+      api("axiosInstance.js")
+      assets("images, icons")
+      components("React UI components")
+      context("AuthContext")
+      pages("Auth, Resources, Tours, etc.")
+      styles("CSS files")
+      app("App.js")
+      mainRoute("mainRoute.jsx")
+      index("index.js")
+    env(".env")
+    package("package.json")
+
+  readme("README.md")
+  gitignore(".gitignore")
+```
+
+---
+
+## 📱 **Responsive Breakpoints**
+
+| Device        | Breakpoint      |
+| ------------- | --------------- |
+| Mobile        | **320–480px**   |
+| Small tablets | **480–768px**   |
+| Tablets       | **768–1024px**  |
+| Laptop        | **1200–1440px** |
+| Large screens | **1440px+**     |
+
+All responsive styling is managed in **`media.css`**.
+
+---
+
+## ⚡ **How to Run the Project**
 
 ```bash
-# Clone the repository
+# Clone repository
 git clone https://github.com/yourusername/travel-project-1.git
 
-# Frontend
-cd frontEnd
+# --- FRONTEND ---
+cd frontend
 npm install
 npm start
 
-# Backend
-cd ../server
+# --- BACKEND ---
+cd ../backend
 npm install
 npm run dev
 
-# Open your browser at http://localhost:3000
-✨ New Features
+# Open your browser
+http://localhost:3000
+```
 
-Tour Booking Search by destination and date
+---
 
-User authentication (login/register with validation)
+## ✨ **New Features Added**
 
-Booking form enhancements (select date, number of people)
+* Tour booking system
+* Search by destination & date
+* Login & register validation
+* Tour details page with itinerary & highlights
+* Admin dashboard
+* User dashboard
+* Reviews & ratings
+* Image sliders
+* Multilingual alerts (i18n)
+* Performance improvements
+* SEO enhancements
+* Analytics & stats for admin
 
-Tour Details page with images, itinerary, and highlights
+---
 
-Smooth navigation with React Router
+## 🛠 **Technologies Used**
 
-Admin can manage users, tours, bookings, resources
+### **Frontend**
 
-Advanced search & filter (price, category, popularity)
+* React.js
+* Plain CSS
+* Cloudinary (image storage)
+* React Router
+* Axios
 
-User dashboard to view, edit, or cancel bookings
+### **Backend**
 
-Ratings and reviews for tours
+* Node.js
+* Express
+* MongoDB
+* Nodemailer
+* Cloudinary SDK
 
-Image sliders and media previews for tours
+---
 
-Notifications and alerts for users
+## 📸 **Screenshots**
+<img width="1440" height="900" alt="Screenshot 2025-12-12 at 13 41 16" src="https://github.com/user-attachments/assets/2c0395f7-f241-45a9-9e12-8e29685d46be" />
 
-Performance improvements and SEO-friendly pages
-
-Admin analytics with stats and revenue overview
-
-
-🛠 Technologies Used
-
-Frontend: React.js, Plain CSS (with global media.css for responsive design), Cloudinary for image storage
-
-Backend: Node.js, Express
-
-Database: MongoDB (optional for now)
-
-Routing: React Router
-
-Responsive Design: Media Queries centralized in media.css
-
-📸 Screenshots
-<img width="1440" height="900" alt="Screenshot 2025-12-03 at 22 41 52" src="https://github.com/user-attachments/assets/f3425ef1-d84e-4357-9da1-870e03b03bcf" />
 
