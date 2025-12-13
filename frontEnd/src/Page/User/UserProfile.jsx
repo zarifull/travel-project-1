@@ -95,7 +95,7 @@ function MyProfile() {
   return (
     <div className="auth-block">
       <div className="profile-container">
-        <h2>{t("registration.myProfile")}</h2>
+        <h2 className='profile-title'>{t("registration.myProfile")}</h2>
         <form onSubmit={handleSubmit} className="profile-card">
           <label>
             <strong>{t("registration.name")} :</strong>

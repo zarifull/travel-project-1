@@ -112,19 +112,14 @@ const AddTour = () => {
     imageFile.forEach(file => formData.append("images", file));
 
     try {
-      const response = await axiosInstance.get("/tours", {
-        method: "POST",
-        body: formData,
+      const response = await axiosInstance.post("/tours", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-
-      if (response.ok) {
-        alert(t("tour.success"));
-        navigate("/tour-list");
-      } else {
-        const errorData = await response.json();
-        console.error(errorData);
-        alert(t("common.error"));
-      }
+    
+      alert(t("tour.success"));
+      navigate("/tour-list");
     } catch (err) {
       console.error("Network error:", err);
     }
@@ -177,7 +172,11 @@ const AddTour = () => {
               <option value="1">{t("tour.durationOptions.1")}</option>
               <option value="2">{t("tour.durationOptions.2")}</option>
               <option value="3">{t("tour.durationOptions.3")}</option>
+              <option value="4">{t("tour.durationOptions.4")}</option>
+              <option value="5">{t("tour.durationOptions.5")}</option>
+              <option value="6">{t("tour.durationOptions.6")}</option>
               <option value="7">{t("tour.durationOptions.7")}</option>
+              <option value="8">{t("tour.durationOptions.8")}</option>
               <option value="custom">{t("tour.durationOptions.custom")}</option>
             </select>
             {errors.duration && <p className="error-message addTour-error">{errors.duration}</p>}

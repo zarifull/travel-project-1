@@ -133,8 +133,9 @@ const ManageCustomer = () => {
   return (
     <div className="manage-customer">
       <h1>{t("admin.manageCustomers")}</h1>
+      <button className="add-customer">
       <Link className="add-btn" to='/add-customer-detail'>+ {t("admin.addCustomer")}</Link>
-
+      </button>
       {loading ? <p>{t("common.loading")}</p> : error ? <p style={{ color: "red" }}>{error}</p> : null}
 
       <div className="customer-list">
@@ -158,7 +159,7 @@ const ManageCustomer = () => {
 
       {showModal && (
         <div className="modal-backdrop">
-          <div className="modal">
+          <div className="modal-customer">
             <h2>{editingCustomer ? "Edit Customer" : "Add Customer"}</h2>
             <form onSubmit={handleSubmit}>
               <label>{t("manage.resourceDetailId")} </label>

@@ -56,7 +56,7 @@ const TourCard = ({ tour }) => {
                 className="show-btn"
                 onClick={() => setExpanded(!expanded)}
               >
-                {expanded ? "→" : "←"}
+                {expanded ? "←" : "→"}
               </button>
             )}
           </p>

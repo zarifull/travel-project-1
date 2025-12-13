@@ -194,3 +194,15 @@ export const updateAdminSettings = async (req, res) => {
   }
 };
 
+export const getAdminWhatsApp = async (req, res) => {
+  try {
+    const settings = await AdminSettings.findOne(); 
+    res.json({
+      whatsappNumber: settings?.whatsappNumber || "",
+    });
+  } catch (err) {
+    console.error("Failed to get WhatsApp number:", err);
+    res.status(500).json({ message: "Failed to load WhatsApp number" });
+  }
+};
+

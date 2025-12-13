@@ -6,7 +6,24 @@
     font-family: "Poppins";
     text-align: center;
 }
-
+.add-customer{
+    padding: 1rem 0;
+    background: none;
+    border: none;
+}
+.add-btn {
+    background-color: #339af0;
+    color: white;
+    padding: 0.7em 1.6em;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-bottom: 1.5em;
+    text-decoration: none;
+  }
 .customer-list{
     display: flex;
     flex-wrap: wrap;
@@ -47,76 +64,140 @@
     gap: 1em;
 }
 
+.edit-btn, .delete-btn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+    transition: 0.2s ease;
+}
+
+.edit-btn { background-color: #2f9e44; }
+.edit-btn:hover { background-color: #23863e; }
+
+.delete-btn { background-color: #e03131; }
+.delete-btn:hover { background-color: #c92a2a; }
+
 .preview-row{
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    margin-top: 10px;
 }
 
 .image-item{
     position: relative;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
 }
+
+.image-item img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
 .image-item button{
     position: absolute;
-    top: -30px;
-    right: -10px;
-    background: white !important;
-    border: 1px solid #ccc;
-    border-radius: 50%;
+    top: -8px;
+    right: -8px;
+    background-color: white;
+    border: none;
+    border-radius: 30%;
     cursor: pointer;
+    padding: 2px 6px;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.modal-customer {
+    background-color: white;
+    padding: 25px 30px;
+    border-radius: 10px;
+    width: 450px;
+    max-width: 90%;
+    max-height: 80vh; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    margin: auto;
+    overflow-y: auto; 
+    overflow-x: hidden; 
+}
+
+
+.modal-customer h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #1c7ed6;
+    text-align: center;
+}
+
+.modal-customer form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #444;
+}
+
+.modal-customer form input,
+.modal-customer form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 4px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.modal-customer form textarea {
+    resize: vertical;
+    height: 90px;
+}
+
+.form-actions{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.new-preview img{
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    margin-top: 5px;
+    object-fit: cover;
 }
 
 @media (max-width: 1024px){
-    .customer-box{
-        width: 45%;
-    }
+    .customer-box{ width: 45%; }
 }
 
 @media (max-width: 768px){
-    .customer-box{
-        width: 80%;
-    }
-    .customer-theme{
-        font-size: 1.3rem;
-    }
+    .customer-box{ width: 80%; }
+    .customer-theme{ font-size: 1.3rem; }
 }
 
 @media (max-width: 600px){
-    .customer-box{
-        width: 95%;
-        padding: 1em;
-    }
-    .customer-theme{
-        font-size: 1.2rem;
-    }
-    .customer-actions{
-        flex-direction: column;
-        gap: 0.8em;
-    }
+    .customer-box{ width: 95%; padding: 1em; }
+    .customer-theme{ font-size: 1.2rem; }
+    .customer-actions{ flex-direction: column; gap: 0.8em; }
 }
 
 @media (max-width: 430px){
-    .customer-theme{
-        font-size: 1.1rem;
-    }
-    .preview-row img{
-        width: 65px;
-    }
-    .delete-btn,
-    .edit-btn{
-     width: 50%;
-    }
-    .customer-actions{
-        align-items: center;
-    }
+    .customer-theme{ font-size: 1.1rem; }
+    .preview-row img{ width: 65px; height: 65px; }
+    .edit-btn, .delete-btn{ width: 48%; }
 }
+
 @media (max-width: 375px){
-    .customer-box{
-        padding: 0.8em;
-    }
-    .customer-photos img{
-        width: 60px;
-    }
+    .customer-box{ padding: 0.8em; }
+    .customer-photos img{ width: 60px; height: 60px; }
 }

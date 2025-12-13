@@ -88,8 +88,8 @@
 }
 .selects .bValue{
   border: none;
-  font-weight: 600;
-  font-size: clamp(1.7rem, 2vw, 1.4rem);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 2vw, 1.3rem);
   color: black;
   text-align: left; 
     width: 100%;
@@ -211,6 +211,7 @@
     color: hsla(260, 7%, 33%, 1);
     line-height: 33px;
     text-align: center;
+    display: inline-block;
 }
 .advimges{
  margin-bottom: 1em;
@@ -576,7 +577,7 @@
 
   .img-balon  { max-width: 12%; top: 10%; right: 0; }
 .img-camera { max-width: 8%; top: 30%; left: 5%; }
-.img-coffee { max-width: 10%; top: 40%; right: 15%; z-index: 2; }
+.img-coffee { display: none; }
 .img-drn    { display: none; }
 .img-durbu  { max-width: 10%; top: 20%; left: 75%; }
 .img-plane  { max-width: 16%; top: 8%; left: 18%; }

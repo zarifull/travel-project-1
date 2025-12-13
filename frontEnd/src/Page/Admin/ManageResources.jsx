@@ -187,6 +187,7 @@ const ManageResources = () => {
                 {t("manage.image")}:
                 <input type="file" name="image" onChange={handleChange} />
               </label>
+              
                 {existingImages.length > 0 && (
                   <div className="existing-images">
                     <h4>Existing Images</h4>

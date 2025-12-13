@@ -57,7 +57,7 @@ const StarRating = ({ tourId, tour }) => {
 
       <div className="rating-info">
         <span>
-          <strong>{t("ratings.averageRating")}:</strong> {averageRating ?? t("ratings.noRatingsYet")}
+          <strong>{t("ratings.averageRating")}:</strong> {averageRating ?? t("ratings.noRatings")}
         </span>
         <span>
           <strong>{t("ratings.totalRatings")}:</strong> {ratings.length}

@@ -48,6 +48,10 @@ const CustomerDetail = ({ currentLang = "en" }) => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
+    if (!currentUser) {
+      alert(t("customers.alert.mustLoginComment"));
+      return;
+    }
     if (!newComment.trim()) return;
 
     const tempComment = {
@@ -71,6 +75,10 @@ const CustomerDetail = ({ currentLang = "en" }) => {
   };
 
   const handleReplySubmit = async (commentId) => {
+    if (!currentUser) {
+      alert(t("customers.alert.mustLoginReply"));
+      return;
+    }
     if (!replyText[commentId]?.trim()) return;
 
     try {
@@ -97,7 +105,7 @@ const CustomerDetail = ({ currentLang = "en" }) => {
   };
 
   const handleDeleteReply = async (commentId, replyId) => {
-    if (!window.confirm("Delete this reply?")) return;
+    if (!window.confirm(t("customers.alert.delteReplyConfirm"))) return;
     try {
       await deleteReplyFromComment(id, commentId, replyId);
       fetchCustomer();
@@ -162,7 +170,7 @@ const CustomerDetail = ({ currentLang = "en" }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          <h2>{t("customers.comments")} ({comments.length})</h2>
+          <h2 className="comments-title">{t("customers.comments")} ({comments.length})</h2>
 
           {comments.map((comment, i) => {
             const bgColor = colors[i % colors.length];

@@ -33,9 +33,15 @@ function Footer() {
             </div>
 
             <div className="footer-part footer-part3">
-              <i className="fa-brands part3-icon fa-instagram"></i>
-              <i className="fa-brands part3-icon fa-square-youtube"></i>
-              <i className="fa-brands part3-icon fa-whatsapp"></i>
+              <a href="https://www.instagram.com/batken.travels/" target="_blank" rel="noopener noreferrer">
+                <i className="fa-brands part3-icon fa-instagram"></i>
+              </a>
+              <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+                <i className="fa-brands part3-icon fa-youtube-square"></i>
+              </a>
+              <a href="https://wa.me/221515163" target="_blank" rel="noopener noreferrer">
+                <i className="fa-brands part3-icon fa-whatsapp"></i>
+              </a>
             </div>
           </div>
 

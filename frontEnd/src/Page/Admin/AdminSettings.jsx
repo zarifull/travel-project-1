@@ -2,22 +2,32 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from '../../api/axiosInstance'
 import "../../styles/AdminSettings.css";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../Context/AuthContext";
+
 function AdminSettings() {
   const [whatsappNumber, setWhatsappNumber] = useState("");
   const [message, setMessage] = useState("");
   const {t} = useTranslation();
+  const { token } = useAuth();
+
 
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await axiosInstance.get("/admin/settings");
-        setWhatsappNumber(res.data?.whatsappNumber || ""); 
+        const res = await axiosInstance.get("/admin/settings", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setWhatsappNumber(res.data?.whatsappNumber || "");
       } catch (err) {
-        setMessage("❌ Failed to fetch settings");
+        setMessage(t("admin.alert.fetchFailed"));
       }
     };
-    fetchSettings();
-  }, []);
+  
+    if (token) fetchSettings();
+  }, [token, t]);
+  
 
   const handleSave = async () => {
     try {

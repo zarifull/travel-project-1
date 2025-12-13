@@ -274,7 +274,8 @@
         "success": "✅ Your booking request has been sent! Check 'My Bookings' for updates.",
         "failed": "❌ Booking failed. Please try again.",
         "deletedSuccess": "Booking deleted successfully!",
-        "deleteFailed": "Failed to delete booking"
+        "deleteFailed": "Failed to delete booking",
+        "adminPhoneMissing": "⚠️ Booking is temporarily unavailable. Please contact the administrator."
         
       }
     },
@@ -350,7 +351,10 @@
       "alert": {
         "addedSuccess": "✅ Customer added successfully!",
         "updatedSuccess": "✅ Customer updated successfully!",
-        "createdSuccess": "✅ Customer created successfully!"
+        "createdSuccess": "✅ Customer created successfully!",
+        "mustLoginComment": "⚠️ You must log in or sign up to leave a comment.",
+        "mustLoginReply": "⚠️ You must log in or sign up to reply to comments.",
+        "deleteReplyConfirm": "Delete this reply?"
       }
     } ,    
     "footer": {

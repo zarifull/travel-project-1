@@ -13,6 +13,8 @@ const BookingPage = () => {
   const { t,i18n } = useTranslation();
   const [phone, setPhone] = useState("+996");
   const lang = i18n.language;
+  const [adminPhoneNumber, setAdminPhoneNumber] = useState("");
+
 
   const [tour, setTour] = useState(null);
   const [formData, setFormData] = useState({
@@ -24,6 +26,19 @@ const BookingPage = () => {
     message: "",
   });
 
+  useEffect(() => {
+    const fetchWhatsApp = async () => {
+      try {
+        const res = await axiosInstance.get("/admin/settings/whatsapp");
+        setAdminPhoneNumber(res.data.whatsappNumber);
+      } catch (err) {
+        console.error("Failed to fetch WhatsApp number");
+      }
+    };
+    fetchWhatsApp();
+  }, []);
+  
+  
   useEffect(() => {
     const fetchTour = async () => {
       if (!tourId) return;
@@ -43,44 +58,52 @@ const BookingPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!token) {
       alert(t("booking.alert.loginRequired"));
       return;
     }
-
-    const adminPhoneNumber = process.env.REACT_APP_ADMIN_PHONE;
-
+  
+    if (!adminPhoneNumber) {
+      alert(t("booking.alert.adminPhoneMissing"));
+      return;
+    }
+  
     try {
-      const response = await axiosInstance.post(
+      await axiosInstance.post(
         "/bookings",
-        { tourId, ...formData, guests: Number(formData.guests) },
+        {
+          tourId,
+          ...formData,
+          phone,
+          guests: Number(formData.guests),
+        },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
+  
       const text = `✅ New Booking Request:
-        🏞 Tour: ${tour?.title?.[lang] || "N/A"}
-        👤 Name: ${formData.name}
-        📞 Phone: ${phone}
-        📧 Email: ${formData.email}
-        🏠 Address: ${formData.address}
-        👥 Guests: ${formData.guests}
-        📅 Date: ${formData.date}
-        💬 Message: ${formData.message || "No message"}`;
-
-
-      window.open(
-        `https://wa.me/${adminPhoneNumber}?text=${encodeURIComponent(text)}`,
-        "_blank"
-      );
-
-      alert(t("booking.alert.sentSuccess"));
-      navigate("/my-bookings");
-    } catch (err) {
-      console.error("Booking failed:", err.response || err);
-      alert(t("booking.alert.failed"));
-    }
-  };
+          🏞 Tour: ${tour?.title?.[lang] || "N/A"}
+          👤 Name: ${formData.name}
+          📞 Phone: ${phone}
+          📧 Email: ${formData.email}
+          🏠 Address: ${formData.address}
+          👥 Guests: ${formData.guests}
+          📅 Date: ${formData.date}
+          💬 Message: ${formData.message || "No message"}`;
+          
+              window.open(
+                `https://wa.me/${adminPhoneNumber}?text=${encodeURIComponent(text)}`,
+                "_blank"
+              );
+          
+              alert(t("booking.alert.setSuccess"));
+              navigate("/my-bookings");
+            } catch (err) {
+              console.error("Booking failed:", err.response || err);
+              alert(t("booking.alert.failed"));
+            }
+          };
+          
 
   return (
     <div className="booking-page">

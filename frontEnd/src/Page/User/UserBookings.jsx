@@ -85,14 +85,15 @@ function MyBookings() {
         <div className="booking-btns">
       {b.status === 'pending' && (
         <button 
-          onClick={() => cancelBooking(b._id)} 
-          className="reject-btn"
-        >
-          {t("common.cancel")}
-        </button>
+            onClick={() => cancelBooking(b._id)} 
+            className="cancel-btn"
+          >
+            {t("common.cancel")}
+          </button>
+
         
       )}
-       <span className='delete-btn' onClick={()=>handleDelete(b._id)} style={{fontWeight:'500',textAlign:'left'}}>{t("common.delete")}</span>
+       <span className='delete-booking' onClick={()=>handleDelete(b._id)}>{t("common.delete")}</span>
        </div>
     </div>
   </div>
