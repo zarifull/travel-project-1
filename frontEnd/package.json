@@ -26,7 +26,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "react-scripts start"
+    "dev": "react-scripts start",
+    "vercel-build": "npm install --legacy-peer-deps && react-scripts build"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +49,5 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
-  },
-  "proxy": "http://localhost:7070"
+  }
 }
