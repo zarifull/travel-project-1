@@ -17,16 +17,17 @@ const app = express();
 
 app.use(helmet());
 
-app.use(cors({
-  origin: ["https://batkentravels.com", "http://localhost:3000"],
-  credentials: true
-}));
+const allowedOrigins =
+  process.env.NODE_ENV === "production"
+    ? ["https://batkentravels.com"]
+    : ["http://localhost:3000"];
 
-// app.use(cors({
-//   origin: ["http://localhost:3000", "http://localhost:3001"],
-//   credentials: true
-// }));
-
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 const PORT = process.env.PORT || 7070;
 
@@ -42,11 +43,6 @@ app.get('/api/health', async (req, res) => {
     db: dbState === 1 ? 'connected' : 'disconnected'
   });
 });
-
-// app.use((req, res, next) => {
-//   console.log("➡️ Incoming:", req.method, req.url);
-//   next();
-// });
 
 app.use('/api/tours', tours);
 app.use('/api/users', users);

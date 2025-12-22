@@ -11,12 +11,17 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter.verify(function (error, success) {
-  if (error) {
-    console.error("❌ Email server connection failed:", error);
-  } else {
-    console.log("✅ Email server is ready to send messages");
+export const sendEmail = async ({ to, subject, text }) => {
+  try {
+    await transporter.sendMail({
+      from: `"Batken Travels" <${process.env.EMAIL_USER}>`,
+      to,
+      subject,
+      text,
+    });
+  } catch (error) {
+    console.error("❌ Email sending failed:", error.message);
   }
-});
+};
 
 export default transporter;
