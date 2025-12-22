@@ -7,7 +7,8 @@ import {
   updateResourceDetail,
   deleteResourceDetail,
   getResourceDetailByResourceId,
-  deleteResourceDetailPhoto
+  deleteResourceDetailPhoto,
+  deleteVideoFromResourceDetail
 } from "../controllers/resourceDetailController.js";
 import {protect,isAdmin} from '../middleware/authMiddleware.js';
 
@@ -32,5 +33,6 @@ router.put("/:id", protect,isAdmin, cpUpload, updateResourceDetail);
 
 router.delete("/:id",protect,isAdmin, deleteResourceDetail);
 router.delete("/:id/photo",protect,isAdmin,deleteResourceDetailPhoto)
+router.delete("/:id/video",protect,isAdmin,deleteVideoFromResourceDetail)
 
 export default router;

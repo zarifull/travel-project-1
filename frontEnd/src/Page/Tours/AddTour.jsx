@@ -96,34 +96,44 @@ const AddTour = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
-    const formData = new FormData();
-    formData.append("title", JSON.stringify(title));
-    formData.append("description", JSON.stringify(description));
-    formData.append("location", JSON.stringify(location));
-    formData.append("price", Number(price));
-    formData.append("duration", duration);
-    formData.append("maxGuests", Number(maxGuests));
-    formData.append("category", category);
-    formData.append("hotel", hotel);
-    formData.append("includes", JSON.stringify(includes));
-    formData.append("startDates", JSON.stringify(startDates));
-
-    imageFile.forEach(file => formData.append("images", file));
-
+  
     try {
+      const formData = new FormData();
+  
+      formData.append("title", JSON.stringify(title));
+      formData.append("description", JSON.stringify(description));
+      formData.append("location", JSON.stringify(location));
+      formData.append("includes", JSON.stringify(includes));
+      formData.append("startDates", JSON.stringify(startDates));
+  
+      formData.append("price", price ? Number(price) : 0);
+      formData.append("duration", duration ? Number(duration) : 0);
+      formData.append("maxGuests", maxGuests ? Number(maxGuests) : 1);
+      formData.append("category", category || "");
+      formData.append("hotel", hotel || "");
+  
+      if (imageFile.length > 0) {
+        imageFile.forEach(file => formData.append("images", file));
+      }
+  
       const response = await axiosInstance.post("/tours", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
+        timeout: 60000, 
       });
-    
+      
+      
+  
       alert(t("tour.success"));
       navigate("/tour-list");
+  
     } catch (err) {
       console.error("Network error:", err);
+      alert("❌ Ошибка сети же сервер катасы! Текшерип көрүңүз.");
     }
+    console.log("CATEGORY:", category);
+
   };
+  
 
   return (
     <div className="add-tour">
@@ -177,7 +187,6 @@ const AddTour = () => {
               <option value="6">{t("tour.durationOptions.6")}</option>
               <option value="7">{t("tour.durationOptions.7")}</option>
               <option value="8">{t("tour.durationOptions.8")}</option>
-              <option value="custom">{t("tour.durationOptions.custom")}</option>
             </select>
             {errors.duration && <p className="error-message addTour-error">{errors.duration}</p>}
           </div>

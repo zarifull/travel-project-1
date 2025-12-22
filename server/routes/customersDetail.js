@@ -20,16 +20,14 @@ import { verifyToken } from "../middleware/verifyToken.js";
 
 const router = express.Router();
 
-const cpUpload = upload.fields([
-  { name: "photo", maxCount: 10 }
-]);
+const uploadPhotos = upload.array("photo", 10);
 
-router.post("/", cpUpload, createCustomer);
+router.post("/", uploadPhotos, createCustomer);
 router.get("/", getAllCustomers);
 router.get("/resource/:resourceDetailId", getCustomersByResource);
 router.get("/all/:resourceDetailId", getAllCustomerDetailsByResourceDetail);
 router.get("/:id", getCustomerById);
-router.put("/:id", cpUpload, verifyToken, updateCustomer);
+router.put("/:id", uploadPhotos, verifyToken, updateCustomer);
 router.delete("/:id", verifyToken, deleteCustomer);
 
 router.get("/:id/comments", getCommentsForCustomer);

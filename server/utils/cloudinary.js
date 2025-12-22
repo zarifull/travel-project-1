@@ -9,7 +9,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-
 export const uploadImage = async (filePath) => {
   const result = await cloudinary.uploader.upload(filePath, {
     resource_type: "image",

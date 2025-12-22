@@ -39,7 +39,7 @@ function MyBookings() {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure?")) return;
+    if (!window.confirm(t("common.confirm"))) return;
     try {
       await axiosInstance.delete(`/bookings/${id}`, {
         headers: { Authorization: `Bearer ${token}` },

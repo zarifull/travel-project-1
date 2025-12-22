@@ -8,6 +8,7 @@ import {
 } from "../../api/customersDetailApi.js"; 
 import '../../styles/ManageCustomers.css';
 import {useTranslation} from 'react-i18next';
+import Loading from "../../Components/Loading.jsx";
 
 const ManageCustomer = () => {
   const [customers, setCustomers] = useState([]);
@@ -128,7 +129,7 @@ const ManageCustomer = () => {
     }
   };
   
-  
+  if (loading) return <Loading text={t("common.fetchingData")} />;
 
   return (
     <div className="manage-customer">

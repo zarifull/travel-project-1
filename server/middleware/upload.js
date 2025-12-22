@@ -25,15 +25,9 @@ router.post('/', storage.array('images', 10), async (req, res) => {
 
     const imageUrls = req.files.map(file => file.path);
     
-    console.log('Тур маалыматтары:', {
-      title,
-      description,
-      price: numPrice,
-      duration: numDuration,
-      location,
-      isFeatured: boolIsFeatured,
-      imageUrls
-    });
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Uploaded tour data', { title, imageUrls });
+    }
     
     res.status(201).json({
       message: 'Тур ийгиликтүү кошулду!',

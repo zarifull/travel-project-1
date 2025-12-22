@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/AddCustomer-detail.css";
 import { getAllResourceDetails } from "../../api/resourceDetailApi.js";
 import { useTranslation } from "react-i18next";
+import axiosInstance from "../../api/axiosInstance.js";
 
 const AddCustomerDetail = () => {
   const navigate = useNavigate();
@@ -13,11 +14,13 @@ const AddCustomerDetail = () => {
     photo: [],
     comments: [],
   });
+  const [newPhotos, setNewPhotos] = useState([]);
   const [previewPhotos, setPreviewPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [resourceDetails, setResourceDetails] = useState([]);
   const {t} = useTranslation();
+
 
   const handleTextChange = (lang, field, value) => {
     setFormData((prev) => ({
@@ -28,26 +31,40 @@ const AddCustomerDetail = () => {
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    setFormData((prev) => ({ ...prev, photo: files }));
-    setPreviewPhotos(files.map((f) => URL.createObjectURL(f)));
+    setNewPhotos(files);
+    setPreviewPhotos(files.map((file) => URL.createObjectURL(file)));
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+  
     try {
       const data = new FormData();
+  
       data.append("resourceDetailId", formData.resourceDetailId);
       data.append("name", JSON.stringify(formData.name));
-      formData.photo.forEach((file) => data.append("photo", file));
-
-      await createCustomer(data);
-      alert(t("customerss.alert.addedSuccess"));
-      navigate("/manage-customers"); 
+  
+      newPhotos.forEach((file) => {
+        data.append("photo", file); 
+      });
+  
+      console.log("📤 Uploading files:", newPhotos);
+  
+      const res = await axiosInstance.post("/customers", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        timeout: 30000, 
+      });
+  
+      console.log("✅ Saved:", res.data);
+      alert("Customer saved successfully");
+      navigate("/manage-customers");
     } catch (err) {
-      console.error(err);
-      setError(err.response?.data?.message || "❌ Error adding customer");
+      console.error("❌ Error saving customer:", err);
+      alert("Failed to save customer");
     } finally {
       setLoading(false);
     }
@@ -58,6 +75,7 @@ const AddCustomerDetail = () => {
       try {
         const res = await getAllResourceDetails(); 
         setResourceDetails(res);
+        console.log("Fetched resource details:", res);
       } catch (err) {
         console.error("Failed to load resource details", err);
       }
@@ -101,7 +119,7 @@ const AddCustomerDetail = () => {
         ))}
 
         <label>{t("manage.photos")}</label>
-        <input type="file" multiple onChange={handleFileChange} />
+        <input type="file"  multiple onChange={handleFileChange} />
         {previewPhotos.length > 0 && (
           <div className="preview-row">
             {previewPhotos.map((url, i) => (

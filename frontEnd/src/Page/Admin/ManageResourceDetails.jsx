@@ -5,10 +5,13 @@ import {
   createResourceDetail,
   updateResourceDetail,
   deletePhotoFromResourceDetail,
+  deleteVideoFromResourceDetail
 } from "../../api/resourceDetailApi";
 import "../../styles/ManageResourceDetails.css";
 import { getResources } from "../../api/resourceApi";
 import { useTranslation } from "react-i18next";
+import axiosInstance from "../../api/axiosInstance";
+import Loading from "../../Components/Loading.jsx";
 
 const ManageResourceDetail = () => {
   const [resourceDetails, setResourceDetails] = useState([]);
@@ -24,6 +27,8 @@ const ManageResourceDetail = () => {
 
   const [previewPhoto, setPreviewPhoto] = useState([]);
   const [existingPhoto, setExistingPhoto] = useState([]);
+  const [existingVideo, setExistingVideo] = useState([]);
+
   const [resouces,setResources] = useState([]);
   const { t } = useTranslation();
   useEffect(() => {
@@ -62,10 +67,10 @@ const ManageResourceDetail = () => {
     try {
       await deletePhotoFromResourceDetail(editingDetail._id, url);
       setExistingPhoto((prev) => prev.filter((img) => img !== url));
-      alert(t("common.deletedSuccess"));
+      alert(t("common.alert.deletedSuccess"));
     } catch (err) {
       console.error(err);
-      alert(t("common.deleteFailed"));
+      alert(t("common.alert.deleteFailed"));
     }
   };
 
@@ -80,7 +85,7 @@ const ManageResourceDetail = () => {
 
     setPreviewPhoto([]);
     setExistingPhoto(detail.photo || []);
-
+    setExistingVideo(detail.video || []);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -94,7 +99,18 @@ const ManageResourceDetail = () => {
       setError("Failed to delete resource detail");
     }
   };
-
+    const handleRemoveExistingVideo = async (url) => {
+      if (!window.confirm("Delete this video?")) return;
+      try {
+        await deleteVideoFromResourceDetail(editingDetail._id, url);
+        setExistingVideo((prev) => prev.filter((v) => v !== url));
+        alert(t("common.alert.deletedSuccess"));
+      } catch (err) {
+        console.error(err);
+        alert(t("common.alert.deleteFailed"));
+      }
+    };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -128,7 +144,9 @@ const ManageResourceDetail = () => {
       }
   
       console.log("✅ Server response:", response);
-  
+
+   
+      
       setFormData({
         resourceId: "",
         name: { en: "", ru: "", kg: "" },
@@ -151,6 +169,7 @@ const ManageResourceDetail = () => {
       try {
         const res = await getResources();
         setResources(res);
+        console.log("RESOURCES:", res);
       } catch (error) {
         console.error("Failed to load resources", error);
       }
@@ -158,21 +177,31 @@ const ManageResourceDetail = () => {
     fetchResources();
   }, []); 
 
+  if (loading) return <Loading text={t("common.fetchingData")} />;
   return (
     <div className="manage-resource">
       <h1>{t("admin.manageResourceDetails")}</h1>
 
       <form className="resource-form" onSubmit={handleSubmit}>
         <label>{t("manage.resourceId")}</label>
-        <select value={formData.resourceId}
-          onChange={(e) => setFormData({...formData, resourceId: e.target.value})} required>
-          <option value="" disabled>{t("manage.selectResource")}</option>
+        <select
+          value={formData.resourceId}
+          onChange={(e) =>
+            setFormData({ ...formData, resourceId: e.target.value })
+          }
+          required
+        >
+          <option value="" disabled>
+            {t("manage.selectResource")}
+          </option>
+
           {resouces.map((res) => (
             <option key={res._id} value={res._id}>
-            {res.name?.en || "No Name"}
+              {res.translations?.en || res.key}
             </option>
           ))}
         </select>
+
 
 
         <div className="form-langs">
@@ -212,6 +241,24 @@ const ManageResourceDetail = () => {
 
         <label>{t("manage.videos")}</label>
         <input type="file" name="video" multiple onChange={handleFileChange} />
+        {existingVideo.length > 0 && (
+          <div className="preview-row">
+            {existingVideo.map((vid, i) => (
+              <div key={i} className="video-item">
+                <video width={120} controls>
+                  <source src={vid} type="video/mp4" />
+                </video>
+                <button
+                  type="button"
+                  onClick={() => handleRemoveExistingVideo(vid)}
+                  className="toTrush"
+                >
+                  🗑
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="form-btns">
           <button type="submit" className="save-btn">
@@ -233,7 +280,7 @@ const ManageResourceDetail = () => {
                 setExistingPhoto([]);
               }}
             >
-              {t("common.cencel")}
+              {t("common.cancel")}
             </button>
           )}
         </div>

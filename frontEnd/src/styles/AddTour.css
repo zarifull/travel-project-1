@@ -219,10 +219,6 @@ button[type="submit"]:hover {
   margin-bottom: 6px;
 }
 
-/* ------------------- */
-/* RESPONSIVE FIXES     */
-/* ------------------- */
-
 @media (max-width: 1024px) {
   .form-group {
     width: 70%;

@@ -191,11 +191,6 @@ export const verifyOtp = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("User found:", user.email);
-    console.log("User.otp:", user.otp);
-    console.log("User.otpExpires:", user.otpExpires);
-    console.log("Provided OTP:", otp);
-
     if (
       !user.otp ||
       user.otp !== otp ||

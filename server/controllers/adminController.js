@@ -157,18 +157,19 @@ export const deleteBookingAdmin = async (req, res) => {
 
 export const getAdminSettings = async (req, res) => {
   try {
-    let settings = await AdminSettings.findOne();
+    const settings = await AdminSettings.findOne();
 
     if (!settings) {
-      settings = await AdminSettings.create({ whatsappNumber: "" });
+      return res.status(200).json(null); 
     }
 
-    res.json(settings);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed to fetch settings" });
+    res.status(200).json(settings);
+  } catch (error) {
+    console.error("GET ADMIN SETTINGS ERROR:", error);
+    res.status(500).json({ message: error.message });
   }
 };
+
 
 
 export const updateAdminSettings = async (req, res) => {

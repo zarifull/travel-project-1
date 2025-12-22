@@ -275,7 +275,7 @@ const EditTour = () => {
               <button type="button" onClick={() => removeArrayItem("imageUrls", index)}>x</button>
             </div>
           ))}
-          <button type="button" onClick={() => addArrayItem("imageUrls")}>+ {t("manage.addImages")}</button>
+          <button type="button" onClick={() => addArrayItem("imageUrls")}>+ {t("manage.addImage")}</button>
 
           <button type="submit">{t("manage.updateTour")}</button>
           {success && <p className="success">{t("manage.tourUpdatedSuccesfully")} !</p>}

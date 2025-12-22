@@ -3,6 +3,7 @@ import axiosInstance from "../../api/axiosInstance";
 import "../../styles/ManageUsers.css";
 import { toast } from "react-toastify";
 import {useTranslation} from "react-i18next";
+import Loading from "../../Components/Loading.jsx";
 
 function ManageUsers() {
   const [users, setUsers] = useState([]);
@@ -86,7 +87,7 @@ function ManageUsers() {
   
   
 
-  if (loading) return <p>{t("common.loading")}...</p>;
+  if (loading) return <Loading text={t("common.fetchingData")} />;
 
   return (
     <div className="admin-dashboard">

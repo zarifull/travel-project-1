@@ -7,8 +7,6 @@ export const createResourceDetail = async (req, res) => {
     if (!resourceId)
       return res.status(400).json({ message: "resourceId is required" });
 
-    console.log("FILES RECEIVED:", req.files);
-
     const photoUrls = req.files.photo ? req.files.photo.map(file => file.path) : [];
     const videoUrls = req.files.video ? req.files.video.map(file => file.path) : [];
 
@@ -67,9 +65,6 @@ export const getResourceDetailByResourceId = async (req, res) => {
 
 export const updateResourceDetail = async (req, res) => {
   try {
-    console.log("📦 FILES RECEIVED:", req.files);
-console.log("📝 BODY RECEIVED:", req.body);
-
     const { id } = req.params;
     const detail = await ResourceDetail.findById(id);
     if (!detail)
@@ -133,4 +128,24 @@ export const deleteResourceDetailPhoto = async (req, res) => {
     res.status(500).json({ message: "Failed to delete photo" });
   }
 };
+
+export const deleteVideoFromResourceDetail = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { videoUrl } = req.body;
+
+    const detail = await ResourceDetail.findById(id);
+    if (!detail) return res.status(404).json({ message: "ResourceDetail not found" });
+
+    detail.video = detail.video.filter((v) => v !== videoUrl);
+    await detail.save();
+
+    res.json({ message: "Video deleted successfully", video: detail.video });
+  } catch (error) {
+    console.error("❌ Error deleting video:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+
 

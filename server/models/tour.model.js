@@ -91,7 +91,6 @@ const tourSchema = new mongoose.Schema(
           kg: { type: String, required: true, trim: true },
         },
       ],
-      required: [true, "Кеминде бир 'includes' кошуңуз"],
       default: [],
     },
 

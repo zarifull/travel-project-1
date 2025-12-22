@@ -5,8 +5,8 @@ import Tour from './models/tour.model.js'
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGODB)
-  .then(() => console.log('mongodb connected'))
+mongoose.connect(process.env.MONGO_URL)
+  .then(() => console.log('mongo atlas connected'))
   .catch((err) => console.log("error was", err)); 
 
 const tours = JSON.parse(fs.readFileSync("./data/tours.json", "utf-8"));

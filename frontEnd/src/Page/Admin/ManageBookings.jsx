@@ -3,12 +3,14 @@ import { useAuth } from "../../Context/AuthContext";
 import axiosInstance from "../../api/axiosInstance";
 import '../../styles/ManageBookings.css';
 import {useTranslation} from 'react-i18next';
+import Loading from "../../Components/Loading";
 
 const  ManageBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const { token } = useAuth();
   const { t,i18n } = useTranslation();
+  
 
   const fetchBookings = async () => {
     if (!token) return;
@@ -57,7 +59,7 @@ const  ManageBookings = () => {
     }
   };
   
-  if (loading) return <p>Loading bookings...</p>;
+  if (loading) return <Loading text={t("common.fetchingData")} />;
 
   return (
     <div className="admin-dashboard">

@@ -61,7 +61,6 @@ export function AuthProvider({ children }) {
   }, [token, user]);
   
 
-  // ✅ Login: store user & token
   const login = (userData, authToken) => {
     localStorage.setItem("user", JSON.stringify(userData));
     localStorage.setItem("token", authToken);

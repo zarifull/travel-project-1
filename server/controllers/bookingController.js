@@ -27,7 +27,6 @@ export const createBooking = async (req, res) => {
     console.error("Booking creation error:", error);
     res.status(500).json({ message: "Booking failed", error: error.message });
   }
-  console.log("req.user in booking:", req.user);
 
 };
 

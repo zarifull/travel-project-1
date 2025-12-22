@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {getResources,updateResource,deleteResource,createResource} from "../../api/resourceApi";
 import '../../styles/ManageResources.css';
 import { useTranslation } from "react-i18next";
+import Loading from "../../Components/Loading.jsx";
 
 const ManageResources = () => {
   const [resources, setResources] = useState([]);
@@ -111,6 +112,8 @@ const ManageResources = () => {
       setError("Failed to delete resource");
     }
   };
+
+  if (loading) return <Loading text={t("common.fetchingData")} />;
 
   return (
     <div className="admin-dashboard" style={{paddingTop:'3em'}}>

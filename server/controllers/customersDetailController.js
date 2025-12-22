@@ -1,42 +1,29 @@
 import CustomerDetail from "../models/customersDetail.model.js";
 import mongoose from "mongoose";
 
-
 export const createCustomer = async (req, res) => {
   try {
     const { resourceDetailId } = req.body;
-
     if (!resourceDetailId) {
       return res.status(400).json({ message: "resourceDetailId is required" });
     }
 
-    let name = {};
-    if (req.body.name) {
-      try {
-        name = JSON.parse(req.body.name);
-      } catch (err) {
-        return res.status(400).json({ message: "Invalid JSON format for name" });
-      }
-    } else {
-      return res.status(400).json({ message: "name is required" });
+    let name;
+    try {
+      name = JSON.parse(req.body.name);
+    } catch {
+      return res.status(400).json({ message: "Invalid JSON format for name" });
     }
 
-    let comments = [];
-    if (req.body.comments) {
-      try {
-        comments = JSON.parse(req.body.comments);
-      } catch (err) {
-        comments = [];
-      }
-    }
-
-    const photoUrls = req.files?.photo ? req.files.photo.map(f => f.path) : [];
+    const photoUrls = Array.isArray(req.files)
+      ? req.files.map(file => file.path)
+      : [];
 
     const newCustomer = new CustomerDetail({
-      name,
-      photo: photoUrls,
       resourceDetailId,
-      comments,
+      name,
+      photo: photoUrls, 
+      comments: [],
     });
 
     await newCustomer.save();
@@ -46,13 +33,15 @@ export const createCustomer = async (req, res) => {
       customer: newCustomer,
     });
   } catch (error) {
-    console.error(error);
+    console.error("CREATE CUSTOMER ERROR:", error);
     res.status(500).json({
-      message: "Error creating customer",
+      message: "Internal server error",
       error: error.message,
     });
   }
 };
+
+
 
 
 export const getAllCustomerDetailsByResourceDetail = async (req, res) => {
@@ -101,18 +90,19 @@ export const getCustomerById = async (req, res) => {
 export const updateCustomer = async (req, res) => {
   try {
     const { id } = req.params;
-    const { resourceDetailId } = req.body;
 
-    let name = {};
+    let name;
     if (req.body.name) {
       try {
         name = JSON.parse(req.body.name);
       } catch {
-        name = req.body.name; 
+        name = req.body.name;
       }
     }
 
-    const newPhotos = req.files?.photo ? req.files.photo.map(f => f.path) : [];
+    const newPhotos = Array.isArray(req.files)
+      ? req.files.map(f => f.path)
+      : [];
 
     const existingPhotos = req.body.existingPhoto
       ? Array.isArray(req.body.existingPhoto)
@@ -125,23 +115,24 @@ export const updateCustomer = async (req, res) => {
       return res.status(404).json({ message: "Customer not found" });
     }
 
-    customer.resourceDetailId = resourceDetailId || customer.resourceDetailId;
     customer.name = name || customer.name;
-    customer.photo = [...existingPhotos, ...newPhotos];
+    customer.photo = [...existingPhotos, ...newPhotos]; // ✅ correct
 
-    const updated = await customer.save();
+    await customer.save();
 
     res.status(200).json({
       message: "✅ Customer updated successfully",
-      customer: updated,
+      customer,
     });
   } catch (error) {
     console.error("Error updating customer:", error);
-    res
-      .status(500)
-      .json({ message: "❌ Error updating customer", error: error.message });
+    res.status(500).json({
+      message: "❌ Error updating customer",
+      error: error.message,
+    });
   }
 };
+
 
 
 export const deleteCustomer = async (req, res) => {
@@ -214,9 +205,6 @@ export const replyToComment = async (req, res) => {
     const { customerId, commentId } = req.params;
     const { text } = req.body;
 
-    // console.log("REQ.USER:", req.user);
-    // console.log("REQ.BODY:", req.body);
-
     if (!req.user) {
       return res.status(401).json({ message: "Unauthorized" });
     }
@@ -268,9 +256,6 @@ export const deleteCommentHandler = async (req, res) => {
     const comment = customer.comments.id(commentId);
     if (!comment) return res.status(404).json({ message: "Comment not found" });
 
-    // console.log("req.user:", req.user);
-    // console.log("comment.user:", comment.user);
-
     if (
       req.user.role !== "admin" && 
       req.user.id.toString() !== comment.user.toString()
@@ -299,9 +284,6 @@ export const deleteReplyHandler = async (req, res) => {
 
     const reply = comment.replies.id(replyId);
     if (!reply) return res.status(404).json({ message: "Reply not found" });
-
-    // console.log("req.user:", req.user);
-    // console.log("reply.user:", reply.user);
 
     if (
       req.user.role !== "admin" && 

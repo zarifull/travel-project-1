@@ -19,7 +19,7 @@ function VerifyOtp() {
         otp,
       });
 
-      alert(t("✅" + "registration.alert.otpVerified"));
+      alert("✅ " + t("registration.alert.otpVerified"));
       navigate("/auth/reset-password");
     } catch (err) {
       console.error("❌ OTP verify error:", err);

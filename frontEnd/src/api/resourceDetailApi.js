@@ -29,9 +29,9 @@ export const deleteResourceDetail = async (id) => {
   return res.data;
 };
 
-export const deleteResourceDetailPhoto = async (id, photoUrl) => {
-  return axiosInstance.delete(`/api/resource-details/${id}/photo`, { data: { photoUrl } });
-};
+// export const deleteResourceDetailPhoto = async (id, photoUrl) => {
+//   return axiosInstance.delete(`/api/resource-details/${id}/photo`, { data: { photoUrl } });
+// };
 
 export const deletePhotoFromResourceDetail = async (id, photoUrl) => {
   const res = await axiosInstance.delete(`/resource-details/${id}/photo`, {
@@ -45,5 +45,16 @@ export const getResourceDetailById = async (id) => {
   const res = await axiosInstance.get(`/resource-details/${id}`);
   return res.data;
 };
+
+export const deleteVideoFromResourceDetail = async (detailId, videoUrl) => {
+  const res = await axiosInstance.delete(
+    `/resource-details/${detailId}/video`,
+    {
+      data: { videoUrl },
+    }
+  );
+  return res.data;
+};
+
 
 

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "../../styles/ManageTours.css";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Loading from "../../Components/Loading.jsx";
 
 const ManageTours = () => {
   const [tours, setTours] = useState([]);
@@ -27,7 +28,8 @@ const ManageTours = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this tour?")) return;
+    if (!window.confirm(t("common.confirmDeleteTour")))
+    return;
 
     try {
       await axiosInstance.delete(`/tours/${id}`);
@@ -39,7 +41,7 @@ const ManageTours = () => {
     }
   };
 
-  if (loading) return <p>{t("common.loading")}...</p>;
+  if (loading) return <Loading text={t("common.fetchingData")} />;
 
   return (
     <div className="admin-dashboard">
