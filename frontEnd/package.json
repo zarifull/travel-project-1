@@ -22,7 +22,9 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^11.0.5",
     "swiper": "^9.4.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "ajv": "^6.12.6",
+    "ajv-keywords": "^3.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
