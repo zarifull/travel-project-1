@@ -19,15 +19,19 @@ app.use(helmet());
 
 const allowedOrigins =
   process.env.NODE_ENV === "production"
-    ? ["https://batkentravels.com"]
+    ? [
+        "https://batkentravels.com",
+        "https://batkentravels.netlify.app", 
+        "https://travel-project-1-production-589b.up.railway.app"
+      ]
     : ["http://localhost:3000"];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
+    app.use(
+      cors({
+        origin: allowedOrigins,
+        credentials: true,
+      })
+    );
 
 const PORT = process.env.PORT || 7070;
 
