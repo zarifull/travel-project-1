@@ -2,6 +2,10 @@
   "name": "project-1",
   "version": "0.1.2",
   "private": true,
+  "overrides": {
+    "ajv": "6.12.6",
+    "ajv-keywords": "3.5.2"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
