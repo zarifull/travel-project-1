@@ -2,11 +2,10 @@
   "name": "project-1",
   "version": "0.1.2",
   "private": true,
-  "overrides": {
-    "ajv": "6.12.6",
-    "ajv-keywords": "3.5.2"
-  },
   "dependencies": {
+    "ajv": "6.12.6",
+    "ajv-keywords": "3.5.2",
+    "ajv-formats": "2.1.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -24,6 +23,10 @@
     "react-toastify": "^11.0.5",
     "swiper": "^9.4.1",
     "web-vitals": "^2.1.4"
+  },
+  "resolutions": {
+    "ajv": "6.12.6",
+    "ajv-keywords": "3.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
