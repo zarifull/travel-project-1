@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
   secure: true, 
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS, 
+    pass: process.env.EMAIL_PASS,
   },
   tls: {
     rejectUnauthorized: false
@@ -18,14 +18,17 @@ const transporter = nodemailer.createTransport({
 
 export const sendEmail = async ({ to, subject, text }) => {
   try {
-    await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: `"Batken Travels" <${process.env.EMAIL_USER}>`,
       to,
       subject,
       text,
     });
+    console.log("✅ Email sent: " + info.response);
+    return info;
   } catch (error) {
     console.error("❌ Email sending failed:", error.message);
+    throw error; 
   }
 };
 
