@@ -9,8 +9,8 @@ export const sendEmail = async ({ to, subject, text }) => {
   try {
     const data = await resend.emails.send({
       from: 'Batken Travels <onboarding@resend.dev>', 
-      to: 'batkentravels@gmail.com',
-      subject: 'do not share !' + subject,
+      to: to, 
+      subject: 'do not share! ' + subject,
       text: text,
     });
     console.log("✅ Email sent via Resend:", data);
@@ -20,3 +20,5 @@ export const sendEmail = async ({ to, subject, text }) => {
     throw error;
   }
 };
+
+export default resend;
