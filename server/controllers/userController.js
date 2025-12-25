@@ -1,7 +1,7 @@
 import User from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import transporter from '../utils/mailer.js';
+import resend from '../utils/mailer.js';
 import isEmailDomainValid from '../utils/validateEmailDomain.js'; 
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_fallback_secret";
@@ -160,20 +160,19 @@ export const sendOtpToEmail = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user)
       return res.status(404).json({ message: "User not found with this email" });
-
+    
     const otp = Math.floor(1000 + Math.random() * 9000).toString();
     user.otp = otp;
     user.otpExpires = Date.now() + 10 * 60 * 1000;
     await user.save();
 
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
+    await resend.emails.send({
+      from: 'Batken Travels <onboarding@resend.dev>',
       to: email,
       subject: "🔐 Your OTP Code",
-      text: `Hi ${user.name},\n\nYour OTP code is: ${otp}\nIt expires in 10 minutes.\n\nThanks, Journey App Team`,
-    };
+      text: `Hi ${user.name},\n\nYour OTP code is: ${otp}\nIt expires in 10 minutes.\n\nThanks, Batken Travels Team`,
+    });
 
-    await transporter.sendMail(mailOptions);
     res.status(200).json({ message: "OTP sent to your email" });
   } catch (error) {
     console.error("Email sending error:", error);
