@@ -8,14 +8,18 @@ function ForgotPassword() {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const {t} = useTranslation();
+  const [loading, setLoading] = useState(false);
 
   const handleSendOtp = async () => {
     if (!email) return alert(t("registration.validation.invalidEmail"));
   
+    setLoading(true); 
     try {
       await axiosInstance.post("/users/forgot-password", { email });
       localStorage.setItem("resetEmail", email);
+      
       alert(t("registration.alert.otpSent")); 
+      
       navigate("/auth/verify-otp");
     } catch (error) {
       const backendMsg = error.response?.data?.message;
@@ -28,11 +32,11 @@ function ForgotPassword() {
       }
   
       alert(t("registration.alert.errorsendingOtp") + ": " + translatedMsg);
+    } finally {
+      setLoading(false); 
     }
   };
   
-  
-
   return (
     <div className="auth-block">
     <div className="auth-page">

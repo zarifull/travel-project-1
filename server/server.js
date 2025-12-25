@@ -22,7 +22,8 @@ const allowedOrigins =
     ? [
         "https://batkentravels.com",
         "https://batkentravels.netlify.app", 
-        "https://travel-project-1-production-589b.up.railway.app"
+        "https://travel-project-1-production-589b.up.railway.app",
+        "http://localhost:3000"
       ]
     : ["http://localhost:3000"];
 

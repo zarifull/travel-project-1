@@ -598,7 +598,8 @@
     transform: none;
     padding: 0 1rem;
     position: relative;
-    top: 50%;
+    top: 55%;
+    right: 3%;
   }
     .booking-theme {
       font-size: 0.9rem;
