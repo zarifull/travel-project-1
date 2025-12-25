@@ -4,7 +4,7 @@ const sendOtp = async (email, otp) => {
   try {
     await resend.emails.send({
       from: 'Batken Travels <onboarding@resend.dev>', 
-      to: email,
+      to: 'batkentravels@gmail.com',
       subject: "Your OTP Code",
       text: `Your OTP is: ${otp}. It will expire in 10 minutes.`,
     });
