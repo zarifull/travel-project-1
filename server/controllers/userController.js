@@ -81,7 +81,6 @@ export const loginUser = async (req, res) => {
   }
 };
 
-
 export const getProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select("-password");
@@ -128,7 +127,6 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-
 export const updatePassword = async (req, res) => {
   try {
     const { id } = req.params;
@@ -158,9 +156,8 @@ export const sendOtpToEmail = async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-    if (!user)
-      return res.status(404).json({ message: "User not found with this email" });
-    
+    if (!user) return res.status(404).json({ message: "User not found" });
+
     const otp = Math.floor(1000 + Math.random() * 9000).toString();
     user.otp = otp;
     user.otpExpires = Date.now() + 10 * 60 * 1000;
@@ -169,13 +166,13 @@ export const sendOtpToEmail = async (req, res) => {
     await resend.emails.send({
       from: 'Batken Travels <onboarding@resend.dev>',
       to: email,
-      subject: "🔐 Your OTP Code",
-      text: `Hi ${user.name},\n\nYour OTP code is: ${otp}\nIt expires in 10 minutes.\n\nThanks, Batken Travels Team`,
+      subject: "Your OTP Code",
+      text: `Your OTP is: ${otp}. It expires in 10 minutes.`,
     });
 
     res.status(200).json({ message: "OTP sent to your email" });
   } catch (error) {
-    console.error("Email sending error:", error);
+    console.error("Email sending error:", error.message); 
     res.status(500).json({ message: "Failed to send OTP email" });
   }
 };
