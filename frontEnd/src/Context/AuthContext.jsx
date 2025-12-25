@@ -76,7 +76,6 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    console.log("👤 Current user in context:", user);
   }, [user]);
 
   return (

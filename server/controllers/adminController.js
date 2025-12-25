@@ -79,12 +79,12 @@ export const demoteToUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    const userId = req.params.id; 
+
+    const deletedUser = await User.findByIdAndDelete(userId);
     if (!deletedUser) return res.status(404).json({ message: "User not found" });
     
-    await Booking.deleteMany({ userId: user._id });
-
-    await User.findByIdAndDelete(user._id);
+    await Booking.deleteMany({ userId: userId });
 
     res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
