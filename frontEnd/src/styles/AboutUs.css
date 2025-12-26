@@ -31,7 +31,7 @@
   .aboutUs-block {
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap:2rem
   }
   
   .aboutUs-section {

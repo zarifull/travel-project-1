@@ -234,11 +234,8 @@ line-height: 1.5rem;
 
 }
  @media(max-width:480px){
-  .tour-details{
- background-color: #f8f9fa;
-      }
       .details-title{
-        margin-top: 1rem;
+        padding-top: 2.5rem;
         font-size: 1.8rem;
       }
       .detail-slider{

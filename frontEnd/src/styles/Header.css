@@ -3,19 +3,21 @@
 .header {
   position: fixed;
   top: 0;
-  width: 100%;
-  z-index: 1000;
+  width: 100vw;
+  z-index: 9999;
   font-family: "Poppins", sans-serif;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  
 }
-
-
 
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
-  margin-top: 0.2rem;
+  margin: 0;
 }
 
 .logo-block {
@@ -189,6 +191,7 @@
 
   .navbar {
     justify-content: space-between;
+    padding: 0 10px;
   }
 
   .logo {
@@ -198,8 +201,9 @@
   }
 
   .logo-text {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     white-space: nowrap;
+    max-width: 150px;
   }
 
   .nav-right {
@@ -242,6 +246,7 @@
     right: 0;
     top: 60px;
     border-radius: 0 0 10px 10px;
+    width: calc(100% - 2rem);
   }
 
   .dropdown-link {

@@ -7,7 +7,7 @@
 }
 .customer-title{
   font-size: 2.5rem;
-  padding: 1em  1em 0 1em;
+  padding: 0  1em 1em 1em;
   background: linear-gradient(90deg, rgb(110, 155, 197) 0%, rgb(255, 159, 57) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -285,9 +285,22 @@
     grid-template-columns: 1fr / 1fr;
     grid-template-rows: auto;
   }
-
+  .customer-title{
+    font-size: 2.5rem;
+    padding: 1rem 1em 0.9rem 1em;
+    background: linear-gradient(90deg, rgb(110, 155, 197) 0%, rgb(255, 159, 57) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+      text-align: center;
+    font-weight: 600;
+    text-shadow: hsl(48, 100%, 50%) 1px 1px 8px;
+  }
   .customer-photos img {
     height: 150px;
+  }
+  .customer-comments {
+    margin: 20px;
+    padding-left: 0;
   }
   .comment-text {
     margin: 0 1em 0 1em;
@@ -295,15 +308,37 @@
   }
 
   .reply-section {
-    margin-left: 1em;
-    padding-left: 0.5em;
+    margin-left: 0;
+    padding-left: 0;
   }
-
+  .reply-box {
+    gap: 0.1rem;
+    margin-left: 2em;
+  }
+  
+  .reply-date {
+    color: #777;
+    font-size: 0.9rem;
+    margin: 0.4em;
+    text-align: right;
+  }
   .reply-form input {
-    width: 55%;
+    width: 80%;
+    flex: 1;
+    padding: 1em;
+    margin-right: 0;
     padding: 0.6em;
   }
-
+  .reply-form {
+    text-align: end;
+    padding: 0 0 1rem 0;
+    
+  }
+  .send-btn {
+    font-size: 1.3rem;
+    margin-top: 0;
+  
+  }
   .comment-form input {
     width: 70%;
     padding: 0.6em;

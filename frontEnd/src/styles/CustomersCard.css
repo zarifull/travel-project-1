@@ -55,6 +55,7 @@
   margin: 1em 0 0 0;
   color: #ffa94d;
   word-break: break-word;
+  text-decoration: underline;
 }
 
 .customer-testimonials {

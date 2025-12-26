@@ -1,5 +1,5 @@
 .tour-list{
-  position: relative;
+position: relative;
  background: #f8f9fa;
  min-height: 0 auto;
  display: flex;
@@ -30,7 +30,6 @@
 }
 @media(max-width:768px){
 .tour-list{
-  width: 100%;
   gap: 3rem;
 }
 .tourList-theme{
@@ -41,7 +40,6 @@
 @media(max-width: 480px){
   .tour-list{
     gap: 1.5rem;
-    width: 100%;
   }
   .tourList-theme{
     font-size: 1.3rem;
