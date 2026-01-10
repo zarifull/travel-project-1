@@ -18,12 +18,12 @@ function Contacts() {
             <p className="contacts-prg"><SiGooglestreetview /> {t("contact.location")} </p>
             <p className="address-theme">{t("contact.city")}</p>
             <p className="address-theme">{t("contact.street")} </p>
-            <p className="address-theme">{t("contact.floor")}</p>
+            {/* <p className="address-theme">{t("contact.floor")}</p> */}
           </div>
           <div className="contacts-phone">
             <p className="phone-icon"><FaPhone /> {t("contact.phone")}</p>
-            <p className="phone-number"><a href="+996700485718">0700485718</a></p>
-            <p className="phone-number"><a href="+996551989817">0551989817</a></p>
+            <p className="phone-number"><a href="+996221515163">0221 515 163</a></p>
+            <p className="phone-number"><a href="+996777505294">0777 505 294</a></p>
           </div>
           <div className="contacts-hours">
             <p className="hours-icon"><TbClockHour10 /> {t("contact.hours")}</p>

@@ -36,6 +36,8 @@ position: relative;
   font-size: 1.5rem;
   margin-top: 2rem;
 }
+.hr-gradient{
+    width: 70%;
 }
 @media(max-width: 480px){
   .tour-list{
@@ -46,3 +48,4 @@ position: relative;
   }
 }
 
+}

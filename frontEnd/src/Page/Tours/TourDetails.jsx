@@ -123,7 +123,7 @@ const TourDetails = ({ tours }) => {
               </motion.p>
 
               <motion.p className="detail-box detail-price" variants={boxVariants}>
-                <strong>{t("tour.price")}:</strong> ${tour.price}
+                <strong>{t("tour.price")}:</strong> {tour.price} сом 
               </motion.p>
 
               <motion.p className="detail-box detail-category" variants={boxVariants}>

@@ -46,7 +46,7 @@ const TourCard = ({ tour }) => {
         <div className="part2">
           <div className="card-part1">
             <p className="parts-prg">{title}</p>
-            <p className="parts-prg tour-lefts">$ {tour.price}</p>
+            <p className="parts-prg tour-lefts">{tour.price} сом</p>
           </div>
 
           <p className="parts-prg2">

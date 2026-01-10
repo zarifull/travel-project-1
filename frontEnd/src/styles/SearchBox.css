@@ -31,6 +31,9 @@ font-size: 1.5rem;
 color: #f08c00;
 }
 @media(max-width:768px){
+    .search-box{
+        width: 60%;
+    }
     .search-inp::placeholder{
         font-size: 1.1rem;
     }
@@ -39,6 +42,9 @@ color: #f08c00;
     }
 }
 @media(max-width:480px){
+    .search-box{
+        width: 70%;
+    }
 .search-inp::placeholder{
     font-size: 0.9rem;
 }

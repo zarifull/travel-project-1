@@ -215,7 +215,7 @@ function LandingPage() {
                         <div className="card-front-text">
                           <h3>{tour.title?.[i18n.language] || tour.title?.en}</h3>
                           <hr/>
-                          <p>{tour.subtitle?.[i18n.language] || `$${tour.price}`}</p>
+                          <p>{tour.subtitle?.[i18n.language] || `${tour.price} сом `}</p>
                         </div>
                       </div>
                       <div className="flip-card-back">
