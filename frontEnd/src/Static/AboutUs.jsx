@@ -26,7 +26,7 @@ function AboutUs() {
   return (
     <div className='aboutUs'>
       <div className="container">
-        <p className="aboutUs-theme">About Us</p>
+        <p className="aboutUs-theme">{t("header.aboutUs")}</p>
         <div className="aboutUs-block">
 
           <section className="aboutUs-section">

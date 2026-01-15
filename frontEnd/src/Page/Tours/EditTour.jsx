@@ -26,6 +26,9 @@ const EditTour = () => {
     imageUrls: [""],
   });
 
+  const [newImages, setNewImages] = useState([]);
+  const [previewPhotos, setPreviewPhotos] = useState([]);
+
   useEffect(() => {
     const fetchTour = async () => {
       try {
@@ -115,26 +118,67 @@ const EditTour = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSuccess(false);
-
-    try {
-      await axiosInstance.put(`/tours/${id}`, {
-        ...formData,
-        startDates: formData.startDates.map((date) => new Date(date)),
-      });
-
-      alert(t("tour.alert.updatedSuccess"));
-      setSuccess(true);
-      navigate("/total-tours");
-    } catch (err) {
-      console.error("Update error:", err);
-      alert(t("tour.alert.updateFailed"));
-      setError("Failed to update tour.");
-    }
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    setNewImages((prev) => [...prev, ...files]);
+    const previews = files.map((file) => URL.createObjectURL(file));
+    setPreviewPhotos((prev) => [...prev, ...previews]);
   };
+
+  const removeNewPhoto = (index) => {
+    setNewImages((prev) => prev.filter((_, i) => i !== index));
+    setPreviewPhotos((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const removeExistingPhoto = (url) => {
+    setFormData((prev) => ({
+      ...prev,
+      imageUrls: prev.imageUrls.filter((img) => img !== url),
+    }));
+  };
+
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  try {
+    const submitData = new FormData();
+    
+    submitData.append("title", JSON.stringify(formData.title));
+    submitData.append("description", JSON.stringify(formData.description));
+    submitData.append("location", JSON.stringify(formData.location));
+    submitData.append("includes", JSON.stringify(formData.includes));
+    submitData.append("startDates", JSON.stringify(formData.startDates));
+
+    submitData.append("price", formData.price);
+    submitData.append("duration", formData.duration);
+    submitData.append("maxGuests", formData.maxGuests);
+    submitData.append("category", formData.category);
+    submitData.append("hotel", formData.hotel);
+
+    formData.imageUrls.forEach(url => {
+      if (url && url.trim() !== "") {
+        submitData.append("existingImageUrls", url);
+      }
+    });
+
+    newImages.forEach(file => {
+      submitData.append("photo", file);
+    });
+
+    await axiosInstance.put(`/tours/${id}`, submitData, {
+      headers: { "Content-Type": "multipart/form-data" }
+    });
+
+    alert(t("tour.alert.updatedSuccess"));
+    navigate("/total-tours");
+  } catch (err) {
+    setError("Failed to update.");
+  } finally {
+    setLoading(false);
+
+  }
+};
 
   if (loading) return <p className="loading">Loading tour...</p>;
   if (error) return <p className="error">{error}</p>;
@@ -265,7 +309,7 @@ const EditTour = () => {
           <button type="button" onClick={() => addArrayItem("startDates")}>+ {t("manage.addDate")}</button>
 
           <label>{t("tour.images")} URL:</label>
-          {formData.imageUrls.map((url, index) => (
+          {/* {formData.imageUrls.map((url, index) => (
             <div key={index} className="array-item">
               <input
                 value={url}
@@ -274,8 +318,27 @@ const EditTour = () => {
               />
               <button type="button" onClick={() => removeArrayItem("imageUrls", index)}>x</button>
             </div>
-          ))}
-          <button type="button" onClick={() => addArrayItem("imageUrls")}>+ {t("manage.addImage")}</button>
+          ))} */}
+          {/* <button type="button" onClick={() => addArrayItem("imageUrls")}>+ {t("manage.addImage")}</button> */}
+          <div className="existing-photos">
+            {formData.imageUrls.map((url, i) => (
+              <div key={i} className="photo-item">
+                <img src={url} alt="tour" width="100" />
+                <button type="button" onClick={() => removeExistingPhoto(url)}>x</button>
+              </div>
+            ))}
+          </div>
+
+          <input type="file" multiple onChange={handleFileChange} accept="image/*" />
+
+          <div className="preview-photos">
+            {previewPhotos.map((url, i) => (
+              <div key={i} className="photo-item">
+                <img src={url} alt="preview" width="100" />
+                <button type="button" onClick={() => removeNewPhoto(i)}>x</button>
+              </div>
+            ))}
+          </div>
 
           <button type="submit">{t("manage.updateTour")}</button>
           {success && <p className="success">{t("manage.tourUpdatedSuccesfully")} !</p>}

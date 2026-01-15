@@ -49,9 +49,7 @@ const AddCustomerDetail = () => {
       newPhotos.forEach((file) => {
         data.append("photo", file); 
       });
-  
-      console.log("📤 Uploading files:", newPhotos);
-  
+    
       const res = await axiosInstance.post("/customers", data, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -59,7 +57,6 @@ const AddCustomerDetail = () => {
         timeout: 30000, 
       });
   
-      console.log("✅ Saved:", res.data);
       alert("Customer saved successfully");
       navigate("/manage-customers");
     } catch (err) {
@@ -75,7 +72,6 @@ const AddCustomerDetail = () => {
       try {
         const res = await getAllResourceDetails(); 
         setResourceDetails(res);
-        console.log("Fetched resource details:", res);
       } catch (err) {
         console.error("Failed to load resource details", err);
       }

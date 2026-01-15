@@ -84,7 +84,6 @@ export const createTour = async (req, res) => {
   }
 };
 
-
 export const getAllTours = async (req, res) => {
   try {
     const {
@@ -99,45 +98,51 @@ export const getAllTours = async (req, res) => {
     const limit = parseInt(rawLimit) || 100;
     const skip = (parseInt(page) - 1) * limit;
 
-    const searchFilter = {};
+    let andConditions = [];
 
     if (keyword) {
-      searchFilter.$or = [
-        { "title.en": { $regex: keyword, $options: "i" } },
-        { "title.ru": { $regex: keyword, $options: "i" } },
-        { "title.kg": { $regex: keyword, $options: "i" } },
-        { "location.en": { $regex: keyword, $options: "i" } },
-        { "location.ru": { $regex: keyword, $options: "i" } },
-        { "location.kg": { $regex: keyword, $options: "i" } },
-        { "description.en": { $regex: keyword, $options: "i" } },
-        { "description.ru": { $regex: keyword, $options: "i" } },
-        { "description.kg": { $regex: keyword, $options: "i" } },
-        { "includes.en": { $regex: keyword, $options: "i" } },
-        { "includes.ru": { $regex: keyword, $options: "i" } },
-        { "includes.kg": { $regex: keyword, $options: "i" } },
-        { category: { $regex: keyword, $options: "i" } },
-        { hotel: { $regex: keyword, $options: "i" } },
-      ];
+      andConditions.push({
+        $or: [
+          { "title.en": { $regex: keyword, $options: "i" } },
+          { "title.ru": { $regex: keyword, $options: "i" } },
+          { "title.kg": { $regex: keyword, $options: "i" } },
+          { "location.en": { $regex: keyword, $options: "i" } },
+          { "location.ru": { $regex: keyword, $options: "i" } },
+          { "location.kg": { $regex: keyword, $options: "i" } },
+          { category: { $regex: keyword, $options: "i" } }
+        ]
+      });
     }
 
     if (destination) {
-      searchFilter.$or = [
-        { "location.en": { $regex: destination, $options: "i" } },
-        { "location.ru": { $regex: destination, $options: "i" } },
-        { "location.kg": { $regex: destination, $options: "i" } },
-      ];
+      andConditions.push({
+        $or: [
+          { "location.en": { $regex: destination, $options: "i" } },
+          { "location.ru": { $regex: destination, $options: "i" } },
+          { "location.kg": { $regex: destination, $options: "i" } }
+        ]
+      });
     }
 
     if (guests) {
-      searchFilter.maxGuests = { $gte: parseInt(guests) };
+      andConditions.push({ maxGuests: { $gte: parseInt(guests) } });
     }
 
     if (date) {
-      searchFilter.startDates = { $elemMatch: { $gte: new Date(date) } };
+      const searchDate = new Date(date);
+      const endOfDay = new Date(date);
+      endOfDay.setHours(23, 59, 59, 999);
+
+      andConditions.push({
+        startDates: { 
+          $elemMatch: { $gte: searchDate, $lte: endOfDay } 
+        }
+      });
     }
 
-    const total = await Tour.countDocuments(searchFilter);
+    const searchFilter = andConditions.length > 0 ? { $and: andConditions } : {};
 
+    const total = await Tour.countDocuments(searchFilter);
     const tours = await Tour.find(searchFilter)
       .sort({ createdAt: -1 })
       .skip(skip)
@@ -152,9 +157,7 @@ export const getAllTours = async (req, res) => {
     });
   } catch (err) {
     console.error("❌ Error in getAllTours:", err.message);
-    res
-      .status(500)
-      .json({ success: false, message: "Server error", error: err.message });
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
@@ -170,16 +173,55 @@ export const getTourById = async (req, res) => {
 
 export const updateTour = async (req, res) => {
   try {
+    const { id } = req.params;
+
+    const parseField = (field) => {
+      try {
+        return typeof field === 'string' ? JSON.parse(field) : field;
+      } catch (e) { return field; }
+    };
+
+    const updateData = {
+      title: parseField(req.body.title),
+      description: parseField(req.body.description),
+      location: parseField(req.body.location),
+      includes: parseField(req.body.includes),
+      startDates: parseField(req.body.startDates),
+      price: Number(req.body.price),
+      duration: Number(req.body.duration),
+      maxGuests: Number(req.body.maxGuests),
+      category: req.body.category,
+      hotel: req.body.hotel
+    };
+
+    let imageUrls = [];
+    if (req.body.existingImageUrls) {
+      imageUrls = Array.isArray(req.body.existingImageUrls) 
+        ? req.body.existingImageUrls 
+        : [req.body.existingImageUrls];
+    }
+    
+    if (req.files && req.files.length > 0) {
+      const newPaths = req.files.map(f => f.path);
+      imageUrls = [...imageUrls, ...newPaths];
+    }
+    updateData.imageUrls = imageUrls.filter(url => url && url.trim() !== "");
+
     const updatedTour = await Tour.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
+      id, 
+      { $set: updateData }, 
       { new: true, runValidators: true }
     );
+
     if (!updatedTour) {
       return res.status(404).json({ message: "Tour not found" });
     }
+
+    console.log("✅ DATABASE UPDATED SUCCESSFULLY:", updatedTour._id);
     res.status(200).json(updatedTour);
+
   } catch (err) {
+    console.error("❌ UPDATE ERROR:", err.message);
     res.status(500).json({ message: "Update failed", error: err.message });
   }
 };

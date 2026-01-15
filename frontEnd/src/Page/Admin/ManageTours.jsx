@@ -71,7 +71,7 @@ const ManageTours = () => {
                 <td>{index + 1}</td>
                 <td>{tour.title?.[currentLang] || "-"}</td>
                 <td>{tour.location?.[currentLang] || "-"}</td>
-                <td>${tour.price}</td>
+                <td>{tour.price} coм</td>
 
                 <td>
                   <Link to={`/tour-details/${tour._id}`}>

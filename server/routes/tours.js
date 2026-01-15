@@ -10,7 +10,7 @@ router.get('/', getAllTours);
 
 router.get('/:id', getTourById);
 
-router.put('/:id', updateTour);
+router.put('/:id', upload.array('photo', 10), updateTour);
 
 router.delete('/:id', deleteTour);
 

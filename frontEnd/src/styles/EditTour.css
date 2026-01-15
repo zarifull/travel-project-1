@@ -94,6 +94,25 @@
 .array-item{
   width: 100%;
 }
+.existing-photos, .preview-photos {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.photo-item {
+  position: relative;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+.photo-item button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: red;
+  color: white;
+  border-radius: 50%;
+}
 @media (max-width: 768px) {
   .edit-tour .container {
     padding: 20px;

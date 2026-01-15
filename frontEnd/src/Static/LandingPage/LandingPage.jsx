@@ -63,46 +63,32 @@ function LandingPage() {
 
   useEffect(() => { fetchTours(); }, [fetchTours]);
 
-  const handleBooking = async () => {
-    setLoading(true);
-    setShowResults(false);
-  
-    try {
-      const res = await axiosInstance.get('/tours', { params: { limit: 1000 } });
-      const allTours = Array.isArray(res.data.data) ? res.data.data : [];
-  
-      const filtered = allTours.filter((tour) => {
-        const locationName = String(tour.location || "").toLowerCase();
-        const startDates = Array.isArray(tour.startDates) ? tour.startDates : [];
-  
-        const matchesDestination = destination
-          ? locationName.includes(destination.toLowerCase().trim())
-          : true;
-  
-        const matchesDate = date
-          ? startDates.some(start => start && new Date(start).toISOString().startsWith(date))
-          : true;
-  
-        const matchesGuests = tour.maxGuests
-          ? guests <= tour.maxGuests
-          : true;
-  
-        return matchesDestination && matchesDate && matchesGuests;
-      });
-  
-      setTours(filtered);
-      setShowResults(true);
-  
-      navigate('/tour-list', { state: { tours: filtered } });
-  
-    } catch (err) {
-      console.error('Search error:', err);
-      alert("Error fetching tours. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-  
+// Frontend: handleBooking функциясын оптималдаштыруу
+const handleBooking = async () => {
+  setLoading(true);
+  try {
+    // Параметрлерди бекендге жөнөтөбүз
+    const res = await axiosInstance.get('/tours', { 
+      params: { 
+        destination: destination.trim(),
+        guests: guests,
+        date: date,
+        limit: 100 // Бардыгын эмес, керектүүсүн гана сурайбыз
+      } 
+    });
+
+    const filteredTours = res.data.data;
+    setTours(filteredTours);
+    
+    // Натыйжалар менен баракчага өтөбүз
+    navigate('/tour-list', { state: { tours: filteredTours } });
+
+  } catch (err) {
+    console.error('Search error:', err);
+  } finally {
+    setLoading(false);
+  }
+};
   
   
   return (
